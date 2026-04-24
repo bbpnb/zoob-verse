@@ -1,0 +1,55 @@
+"""LLM 调用封装"""
+
+import json
+import os
+from typing import Any
+
+import httpx
+
+
+class LLMClient:
+    """轻量 LLM 客户端，兼容 OpenAI API 格式。"""
+
+    def __init__(
+        self,
+        api_key: str | None = None,
+        base_url: str | None = None,
+        model: str = "qwen/qwen3-32b",
+    ):
+        self.api_key = api_key or os.getenv("OPENAI_API_KEY", "")
+        self.base_url = base_url or os.getenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
+        self.model = model
+        self.client = httpx.Client(base_url=self.base_url, timeout=120)
+
+    def chat(self, system_prompt: str, user_prompt: str) -> str:
+        """调用 LLM，返回文本结果。"""
+        if not self.api_key:
+            raise ValueError("未设置 API Key。请设置 OPENAI_API_KEY 环境变量。")
+
+        response = self.client.post(
+            "/chat/completions",
+            headers={"Authorization": f"Bearer {self.api_key}"},
+            json={
+                "model": self.model,
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                "temperature": 0.1,
+            },
+        )
+        response.raise_for_status()
+        data = response.json()
+        return data["choices"][0]["message"]["content"]
+
+    def chat_json(self, system_prompt: str, user_prompt: str) -> dict:
+        """调用 LLM，返回 JSON 结果。"""
+        text = self.chat(system_prompt, user_prompt)
+        # 尝试提取 JSON（LLM 可能输出 markdown 代码块）
+        text = text.strip()
+        if text.startswith("```"):
+            text = text.split("\n", 1)[1].rsplit("```", 1)[0]
+        return json.loads(text)
+
+    def close(self):
+        self.client.close()
