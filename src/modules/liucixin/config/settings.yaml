@@ -1,0 +1,17 @@
+# 刘慈欣模块配置
+module:
+  name: liucixin
+  description: 刘慈欣科幻宇宙
+
+entity_types:
+  - 人物
+  - 科技
+  - 文明
+  - 事件
+  - 时间线
+
+relationship_types:
+  - 所属时代
+  - 技术影响
+  - 文明互动
+  - 因果

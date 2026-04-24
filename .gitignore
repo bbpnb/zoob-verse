@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data (large files)
+data/raw/
+data/processed/
+src/modules/*/data/raw/
+src/modules/*/data/processed/
+*.xlsx
+*.txt
+*.epub
+*.pdf
+
+# GraphRAG output
+.lightrag/
+graphrag_output/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.key

@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "literary-research"
+version = "0.1.0"
+description = "Literary Knowledge Graph Platform — framework for building knowledge graphs from literary works"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.0",
+    "networkx>=3.0",
+    "matplotlib>=3.5",
+    "pyvis>=0.3",
+    "pyyaml>=6.0",
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+graphrag = [
+    "lightrag-api>=1.0",
+]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.1",
+]
+
+[project.scripts]
+lr = "src.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+line-length = 100

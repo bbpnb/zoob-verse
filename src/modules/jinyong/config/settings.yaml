@@ -1,0 +1,34 @@
+# 金庸模块配置
+module:
+  name: jinyong
+  description: 金庸武侠宇宙
+
+entity_types:
+  - 人物
+  - 门派
+  - 武功
+  - 地点
+  - 事件
+
+relationship_types:
+  - 师徒
+  - 敌对
+  - 情感
+  - 所属
+  - 修炼
+  - 出没
+  - 参与
+
+# LLM 提取配置
+extraction:
+  model: gpt-4o-mini
+  max_tokens: 4096
+  # 别名合并：同一个人物的不同称呼
+  aliases:
+    郭靖: [郭大侠, 郭少侠, 郭哥哥]
+    黄蓉: [蓉儿, 黄姑娘, 黄帮主]
+
+# 数据源
+data_sources:
+  xlsx: null  # 飞书多维表格导出
+  novels: []  # 小说文本文件列表
