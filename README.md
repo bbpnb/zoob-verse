@@ -12,9 +12,13 @@ zoob-verse 是一个 **Framework + Plugin** 架构的知识图谱平台：
 ## 快速开始
 
 ```bash
-# 安装
-cd /Users/zhenboyuan/code/mine/zoob-verse
+# 创建虚拟环境（必须！不要安装到系统 Python）
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 安装依赖
 pip install -e ".[dev]"
+```
 
 # 查看帮助
 python -m src --help
