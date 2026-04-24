@@ -1,10 +1,10 @@
-# graph-lore
+# zoob-verse
 
 **Literary Knowledge Graph Platform** — 从文学作品（及其他叙事文本）中构建知识图谱，挖掘隐藏关系，发现模式，生成洞察。
 
 ## 概览
 
-graph-lore 是一个 **Framework + Plugin** 架构的知识图谱平台：
+zoob-verse 是一个 **Framework + Plugin** 架构的知识图谱平台：
 - **核心引擎**：通用的图构建、图分析、查询能力
 - **模块系统**：每个作品（金庸、古龙、刘慈欣...）独立定义自己的实体类型、关系类型、提取逻辑和分析方法
 - **CLI 接口**：统一的命令行入口，分发到具体模块
@@ -13,7 +13,7 @@ graph-lore 是一个 **Framework + Plugin** 架构的知识图谱平台：
 
 ```bash
 # 安装
-cd /Users/zhenboyuan/code/mine/graph-lore
+cd /Users/zhenboyuan/code/mine/zoob-verse
 pip install -e ".[dev]"
 
 # 查看帮助
@@ -44,7 +44,7 @@ python -m src jinyong analyze --type shortest-path --from 郭靖 --to 萧峰
 ## 项目结构
 
 ```
-graph-lore/
+zoob-verse/
 ├── .ai-skills/                    ← AI Agent Skill（方法论）
 ├── src/
 │   ├── cli.py                     ← CLI 入口

@@ -17,7 +17,7 @@ metadata:
 ## 项目路径
 
 ```
-/Users/zhenboyuan/code/mine/graph-lore/
+/Users/zhenboyuan/code/mine/zoob-verse/
 ```
 
 ## 可用模块

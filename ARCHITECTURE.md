@@ -2,7 +2,7 @@
 
 ## 设计理念
 
-graph-lore 采用 **Framework + Plugin** 架构，核心思想：
+zoob-verse 采用 **Framework + Plugin** 架构，核心思想：
 - **核心引擎通用**：图构建、图分析、LLM 调用等通用能力与具体作品无关
 - **各模块完全独立**：每个作品模块定义自己的实体/关系类型、提取逻辑、分析方法
 - **CLI 统一入口**：`python -m src <module> <command>` 分发到具体模块
@@ -29,7 +29,7 @@ graph-lore 采用 **Framework + Plugin** 架构，核心思想：
 ## 目录结构
 
 ```
-graph-lore/
+zoob-verse/
 ├── src/
 │   ├── cli.py                     ← CLI 入口（动态发现模块）
 │   ├── core/                      ← 通用核心引擎

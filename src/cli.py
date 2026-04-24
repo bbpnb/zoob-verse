@@ -1,4 +1,4 @@
-"""graph-lore CLI — Literary Knowledge Graph Platform"""
+"""zoob-verse CLI — Literary Knowledge Graph Platform"""
 
 import click
 import importlib
@@ -19,7 +19,7 @@ def _discover_modules():
 @click.group()
 @click.version_option("0.1.0")
 def main():
-    """graph-lore — Literary Knowledge Graph Platform
+    """zoob-verse — Literary Knowledge Graph Platform
 
     Build knowledge graphs from literary works for relationship mining,
     pattern discovery, and content generation.
