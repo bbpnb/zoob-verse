@@ -21,22 +21,26 @@ class LLMClient:
         self.model = model
         self.client = httpx.Client(base_url=self.base_url, timeout=120)
 
-    def chat(self, system_prompt: str, user_prompt: str) -> str:
+    def chat(self, system_prompt: str, user_prompt: str, enable_reasoning: bool = True) -> str:
         """调用 LLM，返回文本结果。"""
         if not self.api_key:
             raise ValueError("未设置 API Key。请设置 OPENAI_API_KEY 环境变量。")
 
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            "temperature": 0.1,
+        }
+        if not enable_reasoning:
+            payload["enable_reasoning"] = False
+
         response = self.client.post(
             "/chat/completions",
             headers={"Authorization": f"Bearer {self.api_key}"},
-            json={
-                "model": self.model,
-                "messages": [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt},
-                ],
-                "temperature": 0.1,
-            },
+            json=payload,
         )
         response.raise_for_status()
         data = response.json()
@@ -44,7 +48,7 @@ class LLMClient:
 
     def chat_json(self, system_prompt: str, user_prompt: str) -> dict:
         """调用 LLM，返回 JSON 结果。"""
-        text = self.chat(system_prompt, user_prompt)
+        text = self.chat(system_prompt, user_prompt, enable_reasoning=False)
         # 尝试提取 JSON（LLM 可能输出 markdown 代码块）
         text = text.strip()
         if text.startswith("```"):
