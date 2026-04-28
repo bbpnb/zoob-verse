@@ -14,12 +14,17 @@ class LLMClient:
         self,
         api_key: str | None = None,
         base_url: str | None = None,
-        model: str = "qwen/qwen3-32b",
+        model: str = "qwen3.5-plus",
     ):
-        self.api_key = api_key or os.getenv("OPENAI_API_KEY", "")
-        self.base_url = base_url or os.getenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
+        # Support both OpenRouter and DashScope
+        self.api_key = api_key or os.getenv("OPENAI_API_KEY") or os.getenv("DASHSCOPE_API_KEY", "")
+        # Default DashScope endpoint to the coding plan endpoint if key starts with sk-sp-
+        default_url = "https://openrouter.ai/api/v1"
+        if self.api_key.startswith("sk-sp-"):
+            default_url = "https://coding.dashscope.aliyuncs.com/v1"
+        self.base_url = base_url or os.getenv("OPENAI_BASE_URL") or os.getenv("DASHSCOPE_BASE_URL", default_url)
         self.model = model
-        self.client = httpx.Client(base_url=self.base_url, timeout=120)
+        self.client = httpx.Client(base_url=self.base_url, timeout=300)
 
     def chat(self, system_prompt: str, user_prompt: str, enable_reasoning: bool = True) -> str:
         """调用 LLM，返回文本结果。"""

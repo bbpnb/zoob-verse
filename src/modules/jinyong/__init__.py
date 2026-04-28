@@ -5,6 +5,7 @@ from pathlib import Path
 import click
 
 from src.core.llm import LLMClient
+from src.core.visualize import visualize_graph
 from src.modules.base import ModuleBase
 from src.modules.jinyong.extract import JinyongModule
 
@@ -28,11 +29,10 @@ def index(novel, output):
         click.echo(f"[jinyong] 索引完成: {stats}")
 
         if output:
-            # 保存图谱数据
             import json
             data = {
-                "nodes": [{"name": n, **d} for n, d in engine.graph.nodes(data=True)],
-                "edges": [{"source": s, "target": t, **d} for s, t, d in engine.graph.edges(data=True)],
+                "entities": [{"name": n, "type": d.get("type", ""), **d.get("attrs", {})} for n, d in engine.graph.nodes(data=True)],
+                "relationships": [{"source": s, "target": t, "type": d.get("type", "")} for s, t, d in engine.graph.edges(data=True)],
             }
             Path(output).parent.mkdir(parents=True, exist_ok=True)
             with open(output, "w", encoding="utf-8") as f:
@@ -42,6 +42,20 @@ def index(novel, output):
         llm.close()
 
 
+@cli.command("visualize")
+@click.option("--input", "json_path", type=click.Path(exists=True), required=True, help="图谱 JSON 文件路径")
+@click.option("--output", type=click.Path(), default=None, help="输出 HTML 文件路径")
+def visualize(json_path, output):
+    """将图谱 JSON 渲染为交互式 HTML 关系图"""
+    if output is None:
+        output = str(Path(json_path).with_suffix(".html"))
+    
+    click.echo(f"[jinyong] 开始可视化: {json_path}")
+    visualize_graph(json_path, output)
+    click.echo(f"[jinyong] 可视化完成: {output}")
+    click.echo(f"[jinyong] 请在浏览器中打开该文件查看交互图谱。")
+
+
 @cli.command("query")
 @click.argument("question")
 @click.option("--type", "query_type", type=click.Choice(["fact", "reasoning"]), default="fact",
@@ -49,7 +63,6 @@ def index(novel, output):
 def query(question, query_type):
     """查询知识图谱"""
     click.echo(f"[jinyong] 查询 ({query_type}): {question}")
-    # TODO: 实现查询逻辑
     click.echo("[jinyong] 查询功能开发中...")
 
 
@@ -63,5 +76,4 @@ def query(question, query_type):
 def analyze(method, from_entity, to_entity, graph):
     """分析知识图谱"""
     click.echo(f"[jinyong] 分析 ({method})...")
-    # TODO: 实现分析逻辑
     click.echo("[jinyong] 分析功能开发中...")

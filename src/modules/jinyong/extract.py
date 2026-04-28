@@ -75,6 +75,7 @@ class JinyongModule(ModuleBase):
 
     def extract(self, text: str, llm: LLMClient | None = None) -> tuple[list[dict], list[dict]]:
         """从文本中提取实体和关系。"""
+        external_llm = llm is not None
         if llm is None:
             llm = LLMClient()
 
@@ -87,7 +88,8 @@ class JinyongModule(ModuleBase):
             click.echo(f"[jinyong] 提取失败: {e}", err=True)
             return [], []
         finally:
-            llm.close()
+            if not external_llm:
+                llm.close()
 
     def extract_from_file(self, file_path: str | Path, llm: LLMClient | None = None) -> tuple[list[dict], list[dict]]:
         """从小说文件提取：读取 → 分块 → 逐块提取 → 合并"""
