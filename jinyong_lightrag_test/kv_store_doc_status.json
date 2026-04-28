@@ -21,115 +21,13 @@
     ],
     "content_summary": "全本全集精校小说尽在：http://www.yimuhe.com/u/anglewing2620-1.html\n更多资源下载：http://qqzone.ctdisk.com\n※声明：本电子书仅供读者预览,请在下载24小时内删除，不得用作商业用途；如果喜欢请购买正版图书！※\n------------------------------------------\n\n越女剑\n　　“请！”“请！”\n　　两名剑士各自倒转剑尖，右手握剑柄，左手搭于右手手背，躬身行礼。\n　　两人身子尚未站直，突然间白光闪动，...",
     "content_length": 17390,
-    "created_at": "2026-04-28T09:56:52.273988+00:00",
-    "updated_at": "2026-04-28T11:16:47.896101+00:00",
+    "created_at": "2026-04-28T11:29:20.296919+00:00",
+    "updated_at": "2026-04-28T11:36:14.087931+00:00",
     "file_path": "unknown_source",
-    "track_id": "insert_20260428_175652_578f065f",
+    "track_id": "insert_20260428_192920_839c263e",
     "metadata": {
-      "processing_start_time": 1777374712,
-      "processing_end_time": 1777375007
-    }
-  },
-  "dup-3ea244dc27d6aa1422a3cb6eeb349900": {
-    "status": "failed",
-    "content_summary": "[DUPLICATE] Original document: doc-b59f5189478273c150a1d091ecacea20",
-    "content_length": 17390,
-    "chunks_count": 0,
-    "chunks_list": [],
-    "created_at": "2026-04-28T10:12:48.288660+00:00",
-    "updated_at": "2026-04-28T10:12:48.288665+00:00",
-    "file_path": "unknown_source",
-    "track_id": "insert_20260428_181248_457da215",
-    "error_msg": "Content already exists. Original doc_id: doc-b59f5189478273c150a1d091ecacea20, Status: failed",
-    "metadata": {
-      "is_duplicate": true,
-      "original_doc_id": "doc-b59f5189478273c150a1d091ecacea20",
-      "original_track_id": "insert_20260428_175652_578f065f"
-    }
-  },
-  "dup-d30e2186fdf1ee6b47133adeb940b069": {
-    "status": "failed",
-    "content_summary": "[DUPLICATE] Original document: doc-b59f5189478273c150a1d091ecacea20",
-    "content_length": 17390,
-    "chunks_count": 0,
-    "chunks_list": [],
-    "created_at": "2026-04-28T10:13:20.762669+00:00",
-    "updated_at": "2026-04-28T10:13:20.762674+00:00",
-    "file_path": "unknown_source",
-    "track_id": "insert_20260428_181320_7843ea39",
-    "error_msg": "Content already exists. Original doc_id: doc-b59f5189478273c150a1d091ecacea20, Status: failed",
-    "metadata": {
-      "is_duplicate": true,
-      "original_doc_id": "doc-b59f5189478273c150a1d091ecacea20",
-      "original_track_id": "insert_20260428_175652_578f065f"
-    }
-  },
-  "dup-d814197404b49ea34938c79e85a3807f": {
-    "status": "failed",
-    "content_summary": "[DUPLICATE] Original document: doc-b59f5189478273c150a1d091ecacea20",
-    "content_length": 17390,
-    "chunks_count": 0,
-    "chunks_list": [],
-    "created_at": "2026-04-28T10:14:31.938581+00:00",
-    "updated_at": "2026-04-28T10:14:31.938586+00:00",
-    "file_path": "unknown_source",
-    "track_id": "insert_20260428_181431_e4237d75",
-    "error_msg": "Content already exists. Original doc_id: doc-b59f5189478273c150a1d091ecacea20, Status: failed",
-    "metadata": {
-      "is_duplicate": true,
-      "original_doc_id": "doc-b59f5189478273c150a1d091ecacea20",
-      "original_track_id": "insert_20260428_175652_578f065f"
-    }
-  },
-  "dup-7f6f7a0efbcfcad377bd1f19b246e90c": {
-    "status": "failed",
-    "content_summary": "[DUPLICATE] Original document: doc-b59f5189478273c150a1d091ecacea20",
-    "content_length": 17390,
-    "chunks_count": 0,
-    "chunks_list": [],
-    "created_at": "2026-04-28T11:08:15.201703+00:00",
-    "updated_at": "2026-04-28T11:08:15.201706+00:00",
-    "file_path": "unknown_source",
-    "track_id": "insert_20260428_190815_664b1de7",
-    "error_msg": "Content already exists. Original doc_id: doc-b59f5189478273c150a1d091ecacea20, Status: failed",
-    "metadata": {
-      "is_duplicate": true,
-      "original_doc_id": "doc-b59f5189478273c150a1d091ecacea20",
-      "original_track_id": "insert_20260428_175652_578f065f"
-    }
-  },
-  "dup-9d3c6b91f587474123f71f1829e25110": {
-    "status": "failed",
-    "content_summary": "[DUPLICATE] Original document: doc-b59f5189478273c150a1d091ecacea20",
-    "content_length": 17390,
-    "chunks_count": 0,
-    "chunks_list": [],
-    "created_at": "2026-04-28T11:10:22.115495+00:00",
-    "updated_at": "2026-04-28T11:10:22.115497+00:00",
-    "file_path": "unknown_source",
-    "track_id": "insert_20260428_191022_355a3aff",
-    "error_msg": "Content already exists. Original doc_id: doc-b59f5189478273c150a1d091ecacea20, Status: failed",
-    "metadata": {
-      "is_duplicate": true,
-      "original_doc_id": "doc-b59f5189478273c150a1d091ecacea20",
-      "original_track_id": "insert_20260428_175652_578f065f"
-    }
-  },
-  "dup-a59f3b45ad063294fa2d1098d11de6dd": {
-    "status": "failed",
-    "content_summary": "[DUPLICATE] Original document: doc-b59f5189478273c150a1d091ecacea20",
-    "content_length": 17390,
-    "chunks_count": 0,
-    "chunks_list": [],
-    "created_at": "2026-04-28T11:11:52.278093+00:00",
-    "updated_at": "2026-04-28T11:11:52.278100+00:00",
-    "file_path": "unknown_source",
-    "track_id": "insert_20260428_191152_98e02448",
-    "error_msg": "Content already exists. Original doc_id: doc-b59f5189478273c150a1d091ecacea20, Status: failed",
-    "metadata": {
-      "is_duplicate": true,
-      "original_doc_id": "doc-b59f5189478273c150a1d091ecacea20",
-      "original_track_id": "insert_20260428_175652_578f065f"
+      "processing_start_time": 1777375760,
+      "processing_end_time": 1777376174
     }
   }
 }

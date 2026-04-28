@@ -2,507 +2,87 @@
   "doc-b59f5189478273c150a1d091ecacea20": {
     "relation_pairs": [
       [
-        "勾践",
-        "纯钧"
-      ],
-      [
-        "勾践",
-        "巨阙"
-      ],
-      [
-        "吴越剑士",
-        "王者"
-      ],
-      [
-        "Gan Jiang",
-        "Mo Ye"
-      ],
-      [
-        "勾践",
-        "薛烛"
-      ],
-      [
-        "楚国",
-        "湛卢"
-      ],
-      [
-        "Swordsmithing",
-        "Wu Kingdom"
+        "Guard",
+        "Lao Bai"
       ],
       [
         "Fan Li",
-        "The Brocade-Clad Swordsman"
+        "Gold-Lacquered Sword Box"
       ],
       [
-        "文种",
-        "范蠡"
+        "Guard",
+        "Wu Country Swordsmen Group"
       ],
       [
-        "Sun Tzu's Art Of War",
-        "Wu Kingdom"
+        "Fan Li",
+        "Sheep Compensation"
       ],
       [
-        "青光",
-        "青衣剑士"
+        "Fan Li",
+        "King Goujian"
       ],
       [
-        "勾践",
-        "文种"
+        "Jinshan Swordsman",
+        "Swordsmanship Technique"
       ],
       [
-        "吴越剑士",
-        "比剑"
+        "Jinshan Swordsman Team",
+        "Qingyi Swordsman Team"
       ],
       [
-        "Wu Kingdom",
-        "Yue Kingdom"
-      ],
-      [
-        "Gan Jiang",
-        "Swordsmithing Techniques"
-      ],
-      [
-        "Feng",
+        "State Of Wu",
         "Wu Zixu"
       ],
       [
-        "湘妃",
-        "湘江"
+        "Gan Jiang",
+        "Wen Dafu"
       ],
       [
-        "吴王宫",
-        "姑苏城"
+        "Blue-Clothed Swordsman",
+        "Wu-Yue Swordsmen Duel"
       ],
       [
-        "剑道",
-        "官员"
-      ],
-      [
-        "Chang Jie",
-        "Wu Swordsmen"
-      ],
-      [
-        "Fan Li",
-        "Yue State"
-      ],
-      [
-        "吴国",
-        "吴国剑士"
-      ],
-      [
-        "工布",
-        "欧冶子"
-      ],
-      [
-        "The Light Silk",
-        "The Sword"
-      ],
-      [
-        "Ou Yezi",
-        "Sword of Yue"
-      ],
-      [
-        "吴国",
-        "越国"
-      ],
-      [
-        "吴国",
-        "楚国"
-      ],
-      [
-        "宫门",
-        "范蠡"
-      ],
-      [
-        "吴王夫差",
-        "越王勾践"
-      ],
-      [
-        "Chu King",
-        "Longyuan"
-      ],
-      [
-        "王者",
-        "青衣剑士"
-      ],
-      [
-        "欧冶子",
-        "湛卢"
-      ],
-      [
-        "Wu Kingdom",
-        "Wu Swordsmanship Song"
-      ],
-      [
-        "利剑",
-        "薛烛"
-      ],
-      [
-        "Fan Li",
-        "Peonies, Peonies, Orchids, Roses"
-      ],
-      [
-        "Fan Li",
-        "Swordsmanship"
-      ],
-      [
-        "西施",
-        "阿青"
-      ],
-      [
-        "太湖",
-        "范蠡"
-      ],
-      [
-        "Goujian",
-        "The Sword"
-      ],
-      [
-        "薛烛",
-        "长剑"
-      ],
-      [
-        "A Qing",
-        "Old Bai"
-      ],
-      [
-        "越国剑士",
-        "阿青"
-      ],
-      [
-        "Mogan Mountain",
-        "Wu Zixu"
-      ],
-      [
-        "白公公",
-        "阿青"
-      ],
-      [
-        "卫士长",
-        "范蠡"
-      ],
-      [
-        "西子捧心",
-        "西施"
-      ],
-      [
-        "比剑",
-        "王者"
-      ],
-      [
-        "少女",
-        "山羊"
-      ],
-      [
-        "Goujian",
-        "Yue Kingdom"
-      ],
-      [
-        "越王勾践",
-        "金漆长匣"
-      ],
-      [
-        "吴国剑士",
-        "少女"
-      ],
-      [
-        "Goujian",
-        "The Palace Servants"
-      ],
-      [
-        "吴王夫差",
-        "青衣剑士"
-      ],
-      [
-        "A Qing's Mother",
+        "Bai Gonggong",
         "Fan Li"
       ],
       [
-        "Nine Strategies of Yue",
-        "Wu Kingdom"
-      ],
-      [
-        "破吴英雄范大夫",
-        "范蠡"
-      ],
-      [
-        "剑气",
-        "范蠡"
-      ],
-      [
-        "欧冶子",
-        "鱼肠"
-      ],
-      [
-        "勾践",
-        "越军"
-      ],
-      [
-        "The Garden",
-        "The Sheep"
-      ],
-      [
-        "Goujian",
-        "Sword of Yue"
-      ],
-      [
-        "宫门",
-        "破晓"
-      ],
-      [
-        "范蠡",
-        "越王勾践"
-      ],
-      [
-        "工布",
-        "楚国"
-      ],
-      [
-        "少女",
-        "竹棒"
-      ],
-      [
-        "余杭山",
-        "夫差"
-      ],
-      [
-        "三尺长剑",
-        "金漆长匣"
-      ],
-      [
-        "Eight Green-Clad Swordsmen",
-        "The Sword"
-      ],
-      [
-        "The Sword",
-        "The Sword Box"
-      ],
-      [
-        "山鬼",
-        "范蠡"
-      ],
-      [
-        "Fan Li",
-        "The Sheep"
-      ],
-      [
-        "比剑",
-        "锦衫剑士"
-      ],
-      [
-        "Fan Li",
-        "Wu Swordsmen"
-      ],
-      [
-        "薛烛",
-        "风胡子"
-      ],
-      [
-        "王者",
-        "酒"
+        "Building Lavish Palaces",
+        "Nine Military Strategies"
       ],
       [
         "A Qing",
-        "The Sheep"
-      ],
-      [
-        "剑士",
-        "范蠡"
-      ],
-      [
-        "吴王宫",
-        "西施"
-      ],
-      [
-        "剑法",
-        "越军"
-      ],
-      [
-        "Chu King",
-        "Tai'e"
-      ],
-      [
-        "王者",
-        "锦披大椅"
-      ],
-      [
-        "护心铜镜",
-        "青衣剑士"
-      ],
-      [
-        "Goujian",
-        "The Sandalwood Chair"
-      ],
-      [
-        "楚国",
-        "龙渊"
-      ],
-      [
-        "Wu State",
-        "Yue State"
-      ],
-      [
-        "Feng",
-        "Xu Zhu"
-      ],
-      [
-        "Sun Tzu",
-        "Wu Kingdom"
-      ],
-      [
-        "巨阙",
-        "欧冶子"
-      ],
-      [
-        "吴国剑士",
-        "越国"
-      ],
-      [
-        "白猿",
-        "阿青"
-      ],
-      [
-        "Chu King",
-        "Gongbu"
-      ],
-      [
-        "五湖",
-        "五湖之战"
-      ],
-      [
-        "吴军",
-        "夫差"
-      ],
-      [
-        "大剑",
-        "锦衫剑士"
+        "Sheep Herding"
       ],
       [
         "A Qing",
-        "Bamboo Stick"
+        "Yue Kingdom Swordsmen"
+      ],
+      [
+        "Jinshan Swordsman",
+        "Qingyi Swordsman"
+      ],
+      [
+        "Chu Kingdom",
+        "Fan Li"
+      ],
+      [
+        "King Goujian",
+        "Nine Military Strategies"
       ],
       [
         "Fan Li",
-        "Wen Zhong"
+        "Xiangfei"
       ],
       [
-        "范蠡",
-        "薛烛"
-      ],
-      [
-        "Battle of Qiantang River",
-        "Mount Kuaiji"
-      ],
-      [
-        "吴国剑士",
-        "越国卫士"
-      ],
-      [
-        "Swordsmithing",
-        "Yue Kingdom"
-      ],
-      [
-        "夫差",
-        "范蠡"
-      ],
-      [
-        "白猿",
-        "竹棒"
-      ],
-      [
-        "甲士",
-        "范蠡"
-      ],
-      [
-        "吴国",
-        "鱼肠"
-      ],
-      [
-        "越王",
-        "越王剑室"
-      ],
-      [
-        "越军",
-        "长剑"
-      ],
-      [
-        "Battle of Qiantang River",
-        "Qiantang River"
-      ],
-      [
-        "吴军",
-        "越军"
-      ],
-      [
-        "吴国剑士",
-        "阿青"
+        "Wu Country",
+        "Yue Country"
       ],
       [
         "Fan Li",
-        "Wenzhong"
+        "Fu Chai"
       ],
       [
-        "Bo Pi",
-        "Fuchai"
-      ],
-      [
-        "Wu Kingdom Swordsmiths",
-        "Wu Zixu"
-      ],
-      [
-        "乡下姑娘",
-        "阿青"
-      ],
-      [
-        "欧冶子",
-        "龙渊"
-      ],
-      [
-        "Fan Li",
-        "Fan Li's Residence"
-      ],
-      [
-        "Fan Li",
-        "Goujian"
-      ],
-      [
-        "西施",
-        "馆娃宫"
-      ],
-      [
-        "竹棒",
-        "阿青"
-      ],
-      [
-        "Sword Forging Room",
-        "Wu Zixu"
-      ],
-      [
-        "A Qing",
-        "White Gonggong"
-      ],
-      [
-        "Gongbu",
-        "Wu Zixu"
-      ],
-      [
-        "夷光",
-        "西施"
-      ],
-      [
-        "白公公",
-        "范蠡"
-      ],
-      [
-        "范蠡",
-        "越国"
-      ],
-      [
-        "Fuchai",
-        "Wu Zixu"
-      ],
-      [
-        "Goujian",
+        "Ou Yezi",
         "Wen Zhong"
       ],
       [
@@ -510,157 +90,933 @@
         "Moye"
       ],
       [
-        "欧冶子",
-        "纯钧"
+        "Weapon Manufacturing And Training",
+        "Wu Swordsmen"
+      ],
+      [
+        "Goujian",
+        "Xue Zhu"
+      ],
+      [
+        "Mountain Goats",
+        "Young Girl"
+      ],
+      [
+        "Goujian",
+        "Wu Kingdom"
+      ],
+      [
+        "Feng Shixiong",
+        "Wu Kingdom"
+      ],
+      [
+        "Wu Country Swordsmen Leader",
+        "Young Girl"
+      ],
+      [
+        "Eighteen Guards",
+        "Fan Li"
+      ],
+      [
+        "King Fuchai",
+        "King Goujian"
+      ],
+      [
+        "Feng Huzi",
+        "Goujian"
+      ],
+      [
+        "Mo Ye",
+        "Wen Dafu"
+      ],
+      [
+        "Guangwa Palace",
+        "Sheep Sounds"
+      ],
+      [
+        "Feng Shixiong",
+        "Sword Forging Workshop"
+      ],
+      [
+        "Jinshan Swordsman",
+        "Official"
+      ],
+      [
+        "God Sword Technique",
+        "Yue Kingdom Swordsmen"
+      ],
+      [
+        "Fan Li",
+        "Wan County"
+      ],
+      [
+        "Bamboo Stick",
+        "Wu Country Swordsman"
+      ],
+      [
+        "Lost Sheep",
+        "Shepherdess"
+      ],
+      [
+        "Goujian",
+        "Yue Army"
+      ],
+      [
+        "Fan Li",
+        "Staff"
+      ],
+      [
+        "Wu King Fucha",
+        "Yue King Goujian"
+      ],
+      [
+        "Qingyi Swordsman",
+        "Swordsmanship Reward"
+      ],
+      [
+        "King Wu Helu",
+        "Yu Chang"
+      ],
+      [
+        "Fan Li",
+        "Kuaiji City"
+      ],
+      [
+        "Gifts Of Xi Shi And Zheng Dan",
+        "Nine Military Strategies"
+      ],
+      [
+        "Spring Night",
+        "Xi Shi"
+      ],
+      [
+        "Fan Li",
+        "Garden"
+      ],
+      [
+        "Brocade-Robed Swordsman",
+        "Burly Man"
+      ],
+      [
+        "Feng Huzi",
+        "Wen Zhong"
+      ],
+      [
+        "Craftsmen",
+        "Xue Zhu"
+      ],
+      [
+        "Bamboo Stick",
+        "Xi Shi"
+      ],
+      [
+        "Forge New Swords",
+        "Xue Zhu"
+      ],
+      [
+        "Burly Man",
+        "Long Sword"
+      ],
+      [
+        "Nine Military Strategies",
+        "Sowing Discord Among Loyalists"
+      ],
+      [
+        "Eight Blue-Robed Swordsmen",
+        "King Goujian"
+      ],
+      [
+        "Ou Yezi",
+        "Wen Dafu"
+      ],
+      [
+        "Wu Zixu",
+        "Xue Zhuo"
+      ],
+      [
+        "Official",
+        "Sword Contest"
+      ],
+      [
+        "Bai Gonggong",
+        "Mountain"
+      ],
+      [
+        "Blue-Robed Swordsman",
+        "Sword"
+      ],
+      [
+        "Fan Li",
+        "Wei Shi Captain"
+      ],
+      [
+        "Jinshan Swordsmen",
+        "Official"
+      ],
+      [
+        "Battle at Wuhu",
+        "Yue Army"
+      ],
+      [
+        "Ah Qing",
+        "Good Grassland"
+      ],
+      [
+        "King Goujian",
+        "Shi Mai"
+      ],
+      [
+        "Fan Li",
+        "Yue King Goujian"
+      ],
+      [
+        "Fan Li",
+        "Guard"
+      ],
+      [
+        "Official",
+        "Wu-Yue Swordsmen Duel"
+      ],
+      [
+        "Gan Jiang And Mo Ye",
+        "Wu Kingdom"
+      ],
+      [
+        "Fan Li",
+        "Sword"
+      ],
+      [
+        "State Of Wu",
+        "Wen Zhong"
       ],
       [
         "Fan Li",
         "Xi Shi"
       ],
       [
-        "文种",
-        "风胡子"
+        "The Girl",
+        "Wu Country Swordsmen"
       ],
       [
-        "勾践",
-        "范蠡"
+        "Sun Wus Military Strategy",
+        "Wu Warriors"
       ],
       [
-        "长廊",
-        "阿青"
+        "Bai Gonggong",
+        "White Shadow"
       ],
       [
-        "楚国",
-        "泰阿"
+        "Feng Shixiong",
+        "Wu Zixu"
       ],
       [
-        "楚国",
-        "越国"
+        "Eight Blue-Robed Swordsmen",
+        "Wu Warriors"
       ],
       [
-        "范蠡",
-        "越国卫士"
-      ],
-      [
-        "王僚",
-        "鱼肠"
-      ],
-      [
-        "卫士",
-        "范蠡"
+        "Goujian",
+        "Wen Zhong"
       ],
       [
         "Fan Li",
-        "The Sword"
+        "Xue Zhu"
+      ],
+      [
+        "Ou Yezi",
+        "Tai E"
+      ],
+      [
+        "Feng Shixiong",
+        "Sharp Swords"
+      ],
+      [
+        "Jinshan Swordsman Team",
+        "Sword Contest"
+      ],
+      [
+        "King Goujian",
+        "Kuaiji Mountain"
+      ],
+      [
+        "King Fuchai",
+        "Zheng Dan"
+      ],
+      [
+        "Mountain Goats",
+        "Wu Country Swordsman"
+      ],
+      [
+        "Sword Contest",
+        "Wangzhe"
+      ],
+      [
+        "A Qing",
+        "Xi Shi"
+      ],
+      [
+        "A Qing",
+        "Sheep Herd"
+      ],
+      [
+        "King Fuchai",
+        "Xi Shi"
+      ],
+      [
+        "Bribery Of Officials",
+        "Nine Military Strategies"
+      ],
+      [
+        "Qingyi Swordsman Team",
+        "Sword Contest"
+      ],
+      [
+        "Fan Li",
+        "Northern Direction"
+      ],
+      [
+        "Sharp Swords",
+        "Xue Zhu"
+      ],
+      [
+        "Official",
+        "Swordsmanship Technique"
+      ],
+      [
+        "King Chu",
+        "Zhan Lu"
+      ],
+      [
+        "Yu Chang",
+        "Zhuan Zhu"
+      ],
+      [
+        "Eu Yezi Sword",
+        "King Goujian"
+      ],
+      [
+        "Fan Li",
+        "Xishi"
+      ],
+      [
+        "Gift Sword",
+        "Swordsmanship"
+      ],
+      [
+        "Lost Sheep",
+        "Wu Country Swordsmen"
+      ],
+      [
+        "Aqing",
+        "Xi Shi"
+      ],
+      [
+        "Official",
+        "Qingyi Swordsman"
+      ],
+      [
+        "Brocade-Robed Swordsman",
+        "Sword"
+      ],
+      [
+        "Goujian",
+        "Wen Dafu"
+      ],
+      [
+        "Fan Li Longsword Unit",
+        "Guangwa Palace"
+      ],
+      [
+        "Wu Country Swordsmen",
+        "Yue Country Guards"
+      ],
+      [
+        "Longyuan",
+        "Xianshi"
+      ],
+      [
+        "Bai Gonggong",
+        "Bamboo Stick"
+      ],
+      [
+        "King Goujian",
+        "Wu Swordsmen"
+      ],
+      [
+        "King Goujian",
+        "Sword"
+      ],
+      [
+        "Blood",
+        "Brocade-Robed Swordsman"
+      ],
+      [
+        "King Wu Helu",
+        "Sheng Xie"
+      ],
+      [
+        "Fan Li",
+        "Tin"
+      ],
+      [
+        "Wu Country Swordsmen Group",
+        "Young Girl"
+      ],
+      [
+        "Fan Chai",
+        "Fan Li"
+      ],
+      [
+        "King Fuchai",
+        "Yuhang Mountain"
+      ],
+      [
+        "Wu King",
+        "Xishi"
+      ],
+      [
+        "Long Sword",
+        "Qingyi Swordsman"
+      ],
+      [
+        "Fan Li",
+        "Guangwa Palace"
+      ],
+      [
+        "Wen Zhong",
+        "Xue Zhu"
+      ],
+      [
+        "Goats",
+        "Small Girl"
+      ],
+      [
+        "Fan Li",
+        "Spring Night"
+      ],
+      [
+        "A Qing",
+        "Wu Kingdom Swordsmen"
+      ],
+      [
+        "Green Shadow",
+        "White Shadow"
+      ],
+      [
+        "Feng Shixiong",
+        "Goujian"
+      ],
+      [
+        "Wu Zixu",
+        "Xishan"
+      ],
+      [
+        "Fu Chai",
+        "Yue Country"
+      ],
+      [
+        "Qingyi Swordsmen",
+        "Yue King Goujian"
+      ],
+      [
+        "Great Sword",
+        "Qingyi Swordsman"
+      ],
+      [
+        "Fan Li",
+        "Story of Xiangfei and Mountain Ghost"
+      ],
+      [
+        "Sword Forging",
+        "Wen Zhong"
+      ],
+      [
+        "Brocade-Robed Swordsman",
+        "Fan Li"
+      ],
+      [
+        "Bamboo Stick",
+        "Wu Country Swordsman (Stout)"
+      ],
+      [
+        "Gusu City",
+        "Xishi"
+      ],
+      [
+        "Qingyi Swordsmen",
+        "Sword Techniques"
+      ],
+      [
+        "Nine Military Strategies",
+        "Stockpiling Supplies"
+      ],
+      [
+        "Fan Li",
+        "Yue Country Guards"
+      ],
+      [
+        "Blue-Clothed Swordsman",
+        "King"
+      ],
+      [
+        "Qingyi Swordsman",
+        "Two Versus Two Duel"
+      ],
+      [
+        "Fan Li",
+        "Guards"
+      ],
+      [
+        "Fan Li",
+        "Wen Zhong"
+      ],
+      [
+        "Gongbu",
+        "Xianshi"
+      ],
+      [
+        "Feng Shixiong",
+        "King Of Chu"
+      ],
+      [
+        "Wu Country",
+        "Wu Jianfeng"
+      ],
+      [
+        "Jinshan Swordsman Team",
+        "Qingyi Swordsman"
+      ],
+      [
+        "Bamboo Stick",
+        "Swordsmanship"
+      ],
+      [
+        "King Chu",
+        "King Qin"
+      ],
+      [
+        "Fan Li",
+        "Sword Forging"
+      ],
+      [
+        "Grain Loan And Sabotage",
+        "Nine Military Strategies"
+      ],
+      [
+        "Fan Li",
+        "Wu Sword Fighters"
+      ],
+      [
+        "Qingyi Swordsman",
+        "Swordsmanship Technique"
+      ],
+      [
+        "Wu Country Swordsman",
+        "Young Girl"
+      ],
+      [
+        "Gan Jiang And Mo Ye",
+        "Sword Of Gan Jiang And Mo Ye"
+      ],
+      [
+        "Battle at Wuhu",
+        "Goujian"
+      ],
+      [
+        "Forge New Swords",
+        "Goujian"
+      ],
+      [
+        "Sword Technique Shadow",
+        "Yue Warriors"
+      ],
+      [
+        "King Ping Of Chu",
+        "Wu Zixu"
+      ],
+      [
+        "Four Versus Four Duel",
+        "Jinshan Swordsman"
+      ],
+      [
+        "Ah Qing",
+        "Shepherdess"
+      ],
+      [
+        "Four Versus Four Duel",
+        "Qingyi Swordsman"
+      ],
+      [
+        "Sharp Swords",
+        "Wu Soldiers"
+      ],
+      [
+        "Feng Huzi",
+        "Xue Zhu"
+      ],
+      [
+        "Qingyi Swordsmen",
+        "Wu King Fucha"
+      ],
+      [
+        "Feng Huzi",
+        "Wu Kingdom"
+      ],
+      [
+        "Feng Huzi",
+        "Feng Huzis Fingers"
+      ],
+      [
+        "Sharp Swords",
+        "Wu Zixu"
+      ],
+      [
+        "Aqing",
+        "Guangwa Palace"
+      ],
+      [
+        "King Fuchai",
+        "Wu Zixu"
+      ],
+      [
+        "King Goujian",
+        "Ou Yezi"
+      ],
+      [
+        "King Goujian",
+        "Tai Zai Bo Pi"
+      ],
+      [
+        "Blue-Clothed Swordsman",
+        "Heart-Protecting Bronze Mirror"
+      ],
+      [
+        "Jinshan Swordsmen",
+        "Yue King Goujian"
+      ],
+      [
+        "Injured Eyes",
+        "Wu Country Swordsmen"
+      ],
+      [
+        "Jinshan Swordsmen",
+        "Qingyi Swordsmen"
+      ],
+      [
+        "Taia",
+        "Xianshi"
+      ],
+      [
+        "A Qing",
+        "Mother of A Qing"
+      ],
+      [
+        "Brocade-Robed Swordsman",
+        "Wu-Yue Swordsmen Duel"
+      ],
+      [
+        "Six Wu Country Swordsmen",
+        "Young Girl"
+      ],
+      [
+        "Feng Huzi",
+        "Gong Bu"
+      ],
+      [
+        "Fan Li",
+        "Fan Lis Reputation"
+      ],
+      [
+        "Kuaiji",
+        "Wu Country Swordsmen Group"
+      ],
+      [
+        "Palace Superintendent",
+        "Wen Zhong"
+      ],
+      [
+        "Battle at Wuhu",
+        "Wu Troops"
+      ],
+      [
+        "Fan Li's Guards",
+        "Wu Sword Fighters"
       ],
       [
         "A Qing",
         "Fan Li"
       ],
       [
-        "长剑",
-        "青衣剑士"
+        "Jinshan Swordsman",
+        "Qingyi Swordsman Team"
       ],
       [
-        "范蠡",
-        "西施"
+        "Five Swords",
+        "Ou Yezi"
       ],
       [
-        "Mo Ye",
-        "Swordsmithing Techniques"
+        "A Qing",
+        "Small Girl"
       ],
       [
-        "范蠡",
-        "阿青"
+        "Fan Li",
+        "State Of Wu"
       ],
       [
-        "Ou Yezi",
-        "Swordsmithing Techniques"
+        "Lavish Gifts To Wu",
+        "Nine Military Strategies"
       ],
       [
-        "吴王阖庐",
-        "鱼肠"
+        "King Goujian",
+        "Wen Zhong"
       ],
       [
-        "吴国剑士",
-        "山羊"
+        "Fan Li",
+        "Gongmen Gate"
       ],
       [
-        "羊儿",
-        "阿青"
+        "Guards",
+        "Palace"
       ],
       [
-        "五湖之畔",
-        "越国"
+        "Blue-Clothed Swordsman",
+        "Brocade-Robed Swordsman"
       ],
       [
-        "比剑",
-        "青衣剑士"
+        "Long Yuan",
+        "Ou Yezi"
       ],
       [
-        "Tin Mountain",
-        "Wu Zi Xu"
+        "Corridor",
+        "King Fuchai"
       ],
       [
-        "欧冶子",
-        "胜邪"
+        "Qingyi Swordsmen",
+        "Swordsmanship"
       ],
       [
-        "Fuchai",
+        "Blue-Clothed Swordsman",
+        "Sword"
+      ],
+      [
+        "Fan Li",
+        "Taihu Lake"
+      ],
+      [
+        "Fan Li",
         "Goujian"
       ],
       [
-        "神剑影子",
-        "越国剑士"
+        "Aqing",
+        "Fan Li"
       ],
       [
-        "勾践",
-        "越国"
+        "Long Sword",
+        "Wu Country Swordsman"
       ],
       [
-        "欧冶子",
-        "泰阿"
+        "Battle By The Qiantang River",
+        "King Goujian"
       ],
       [
-        "Feng Shi",
+        "A Qing",
+        "White Ape"
+      ],
+      [
+        "Wu Country Swordsman",
+        "Wu Country Swordsmen Group"
+      ],
+      [
+        "Ou Yezi",
         "Xue Zhu"
       ],
       [
-        "Gou Jian",
-        "Xue Zhu"
+        "Fan Li",
+        "Mountain"
       ],
       [
-        "锦衫剑士",
-        "青衣剑士"
+        "Great Sword",
+        "Jinshan Swordsman"
       ],
       [
-        "东首锦衫剑士队",
-        "西首青衣剑士队"
-      ],
-      [
-        "Wu Kingdom",
+        "Guangwa Palace",
         "Xi Shi"
       ],
       [
-        "范蠡",
-        "越军"
+        "Battle By The Qiantang River",
+        "Shi Mai"
       ],
       [
-        "工布",
-        "风胡子"
+        "Wu Capital Gusu",
+        "Yue Army"
       ],
       [
-        "吴国剑士",
-        "竹棒"
+        "Bamboo Stick",
+        "Young Girl"
       ],
       [
-        "吴国",
-        "吴王阖庐"
+        "Street",
+        "Wu Sword Fighters"
+      ],
+      [
+        "Five Lakes",
+        "Yue Army"
+      ],
+      [
+        "Fu Chai",
+        "King Goujian"
+      ],
+      [
+        "Feng Shixiong",
+        "Xianshi"
+      ],
+      [
+        "Nine Military Strategies",
+        "Respected Divine Forces"
+      ],
+      [
+        "Fan Li",
+        "Yiguang"
+      ],
+      [
+        "Fu Chai",
+        "Xi Shi"
+      ],
+      [
+        "Fan Li",
+        "Palace Gate"
+      ],
+      [
+        "King Goujian",
+        "Sword Of Gan Jiang And Mo Ye"
+      ],
+      [
+        "King Liao",
+        "King Wu Helu"
+      ],
+      [
+        "Gong Bu",
+        "Ou Yezi"
+      ],
+      [
+        "A Qing",
+        "Bamboo Stick"
+      ],
+      [
+        "Fan Li",
+        "Lao Bai"
+      ],
+      [
+        "Fan Li",
+        "The Girl"
+      ],
+      [
+        "Eu Yezi Sword",
+        "Ou Yezi"
+      ],
+      [
+        "Fan Li",
+        "Wu Country Swordsmen Group"
+      ],
+      [
+        "Gusu",
+        "Wu Country Swordsmen Group"
+      ],
+      [
+        "A Qing",
+        "Bai Gonggong"
+      ],
+      [
+        "Feng Shige",
+        "Xue Zhuo"
+      ],
+      [
+        "Wu Kingdom",
+        "Wu Zixu"
+      ],
+      [
+        "Fan Li",
+        "Warring States Conflict"
+      ],
+      [
+        "Blue-Robed Swordsman",
+        "King Goujian"
+      ],
+      [
+        "A Qing",
+        "Palace"
+      ],
+      [
+        "Palace",
+        "Wei Shi"
+      ],
+      [
+        "Fan Li",
+        "Fan Lis Nickname"
+      ],
+      [
+        "Fan Li",
+        "Street"
+      ],
+      [
+        "Sun Wuzi",
+        "Wu Swordsmen"
+      ],
+      [
+        "Eighteen Guards",
+        "Guangwa Palace"
+      ],
+      [
+        "Fan Li",
+        "Yue Kingdom Swordsmen"
+      ],
+      [
+        "Eastern Hall",
+        "Sword Contest"
+      ],
+      [
+        "Gift Sword",
+        "Gold-Lacquered Sword Box"
+      ],
+      [
+        "A Qing",
+        "Lao Bai"
+      ],
+      [
+        "Fan Li",
+        "Sheep Herding"
+      ],
+      [
+        "King Fuchai",
+        "Wu Troops"
+      ],
+      [
+        "Jinshan Swordsman",
+        "Two Versus Two Duel"
+      ],
+      [
+        "Ah Qing",
+        "Lost Sheep"
+      ],
+      [
+        "Nine Military Strategies",
+        "Weapon Manufacturing And Training"
+      ],
+      [
+        "Official",
+        "Qingyi Swordsmen"
+      ],
+      [
+        "Sword Forging Workshop",
+        "Wu Zixu"
+      ],
+      [
+        "Fan Li",
+        "Green Shadow"
       ]
     ],
-    "count": 164,
-    "create_time": 1777375007,
-    "update_time": 1777375007,
+    "count": 253,
+    "create_time": 1777376174,
+    "update_time": 1777376174,
     "_id": "doc-b59f5189478273c150a1d091ecacea20"
   }
 }
