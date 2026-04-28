@@ -11,7 +11,7 @@ from openai import AsyncOpenAI
 # XiaoAI Provider 配置
 API_KEY = "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a"
 BASE_URL = "https://xiaoai.plus/v1"
-CHAT_MODEL = "glm-4-flash"
+CHAT_MODEL = "gpt-4o"
 EMBED_MODEL = "text-embedding-3-large"
 
 # 初始化 OpenAI 客户端
@@ -64,8 +64,11 @@ async def run_lightrag():
         llm_model_func=xiaoai_llm_func,
         embedding_func=xiaoai_embedding_func_obj,
         llm_model_name=CHAT_MODEL,
-        embedding_batch_num=10,
-        embedding_func_max_async=8
+        embedding_batch_num=5,
+        embedding_func_max_async=2,
+        default_llm_timeout=300,
+        default_embedding_timeout=120,
+        max_parallel_insert=1
     )
     await rag.initialize_storages()
     

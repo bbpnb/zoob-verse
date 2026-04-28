@@ -1,0 +1,1705 @@
+{
+  "entities": [
+    {
+      "name": "Goujian",
+      "type": "person",
+      "description": "Goujian is the King of Yue who employed Fan Li and Wen Zhong as ministers and later adopted strategi"
+    },
+    {
+      "name": "Fan Li",
+      "type": "person",
+      "description": "Fan Li is a notable figure with unique behavior and insightful perspectives, who collaborated with W"
+    },
+    {
+      "name": "Wenzhong",
+      "type": "person",
+      "description": "Wenzhong is a county magistrate who values unique perspectives and collaborates with Fan Li on state"
+    },
+    {
+      "name": "Fuchai",
+      "type": "person",
+      "description": "Fuchai is the King of Wu who ignored loyal advice and was ultimately defeated by Yue.<SEP>Fuchai is "
+    },
+    {
+      "name": "The Sword",
+      "type": "artifact",
+      "description": "The Sword is a thin but incredibly sharp weapon capable of cutting through objects with ease, symbol"
+    },
+    {
+      "name": "Eight Green-Clad Swordsmen",
+      "type": "person",
+      "description": "The Eight Green-Clad Swordsmen are skilled warriors from Wu who demonstrate the sharpness of the swo"
+    },
+    {
+      "name": "Yue Kingdom",
+      "type": "location",
+      "description": "The Yue Kingdom was a neighboring state to Wu, led by King Goujian, and engaged in conflict with Wu."
+    },
+    {
+      "name": "Wu Kingdom",
+      "type": "location",
+      "description": "The Wu Kingdom was a powerful state in ancient China, rivaling Yue and led by King Fuchai during the"
+    },
+    {
+      "name": "Sun Tzu's Art Of War",
+      "type": "content",
+      "description": "Sun Tzu's Art of War is a military treatise used by Wu warriors to achieve tactical superiority."
+    },
+    {
+      "name": "The Throne Room",
+      "type": "location",
+      "description": "The Throne Room is the setting where Goujian and his ministers discuss strategies and test the sword"
+    },
+    {
+      "name": "The Sandalwood Chair",
+      "type": "artifact",
+      "description": "The Sandalwood Chair is a piece of furniture in the throne room, cut in half by Goujian to demonstra"
+    },
+    {
+      "name": "The Light Silk",
+      "type": "artifact",
+      "description": "The Light Silk is a delicate piece of fabric used to demonstrate the sharpness of the sword by being"
+    },
+    {
+      "name": "The Palace Servants",
+      "type": "person",
+      "description": "The Palace Servants are individuals who assist in the throne room and were dismissed by Goujian duri"
+    },
+    {
+      "name": "The Brocade-Clad Swordsman",
+      "type": "person",
+      "description": "The Brocade-Clad Swordsman is a skilled swordsman who tests the sword's sharpness against Fan Li's w"
+    },
+    {
+      "name": "The Sword Box",
+      "type": "artifact",
+      "description": "The Sword Box is a container used to store and present the sword during the events in the throne roo"
+    },
+    {
+      "name": "锦衫剑士",
+      "type": "person",
+      "description": "锦衫剑士is a swordsman dressed in brocade, who engages in a duel with青衣剑士but is ultimately defeated and "
+    },
+    {
+      "name": "青衣剑士",
+      "type": "person",
+      "description": "青衣剑士is a swordsman dressed in green, known for his cunning and skillful swordsmanship, ultimately de"
+    },
+    {
+      "name": "越王勾践",
+      "type": "person",
+      "description": "越王勾践is the King of Yue, known for his strategic patience and desire to avenge his past defeat by the"
+    },
+    {
+      "name": "吴王夫差",
+      "type": "person",
+      "description": "吴王夫差is the King of Wu, who previously defeated the Yue King and sent emissaries to Yue with gifts."
+    },
+    {
+      "name": "金漆长匣",
+      "type": "artifact",
+      "description": "金漆长匣is a lacquered box containing a finely crafted sword, presented as a gift from the Wu King to th"
+    },
+    {
+      "name": "三尺长剑",
+      "type": "artifact",
+      "description": "三尺长剑is a three-foot-long sword with a thin blade and shimmering light, designed more for display tha"
+    },
+    {
+      "name": "越国",
+      "type": "location",
+      "description": "越国is the kingdom ruled by the Yue King, known for its efforts to rebuild its strength after defeat b"
+    },
+    {
+      "name": "吴国",
+      "type": "location",
+      "description": "吴国is the kingdom ruled by the Wu King, known for its military strength and rivalry with Yue.<SEP>吴国i"
+    },
+    {
+      "name": "剑道",
+      "type": "concept",
+      "description": "剑道refers to the principles and ethics of swordsmanship, emphasized by the官员during the duels.<SEP>剑道r"
+    },
+    {
+      "name": "剑气",
+      "type": "concept",
+      "description": "剑气is the aura or energy emitted by a sword, often associated with its sharpness and craftsmanship."
+    },
+    {
+      "name": "Chu King",
+      "type": "person",
+      "description": "The Chu King is a ruler who commissioned three legendary swords: Longyuan, Tai'e, and Gongbu, which "
+    },
+    {
+      "name": "Longyuan",
+      "type": "artifact",
+      "description": "Longyuan is one of the three legendary swords forged for the Chu King."
+    },
+    {
+      "name": "Tai'e",
+      "type": "artifact",
+      "description": "Tai'e is one of the three legendary swords forged for the Chu King."
+    },
+    {
+      "name": "Gongbu",
+      "type": "artifact",
+      "description": "Gongbu is one of the three legendary swords forged for the Chu King."
+    },
+    {
+      "name": "Xu Zhu",
+      "type": "person",
+      "description": "Xu Zhu is a character who recounts the story of legendary swords and their connection to his master "
+    },
+    {
+      "name": "Feng",
+      "type": "person",
+      "description": "Feng is Xu Zhu's senior brother who received the Gongbu sword and assisted Wu Kingdom in forging sha"
+    },
+    {
+      "name": "Wu Zixu",
+      "type": "person",
+      "description": "Wu Zixu was a loyal minister of Wu who advised against Yue's strategies but was forced to commit sui"
+    },
+    {
+      "name": "Wen Zhong",
+      "type": "person",
+      "description": "Wen Zhong is a minister who admired Fan Li's talents and worked with him to assist Yue King Goujian "
+    },
+    {
+      "name": "Mogan Mountain",
+      "type": "location",
+      "description": "Mogan Mountain is the site where sword forging activities took place under Wu Zixu's direction."
+    },
+    {
+      "name": "Sword Forging Room",
+      "type": "location",
+      "description": "The Sword Forging Room is located on Mogan Mountain and was used for mass production of swords."
+    },
+    {
+      "name": "Ganjiang",
+      "type": "person",
+      "description": "Ganjiang is a legendary swordsmith mentioned in the context of sword forging sacrifices."
+    },
+    {
+      "name": "Moye",
+      "type": "person",
+      "description": "Moye is a legendary swordsmith who sacrificed herself in the sword forging process."
+    },
+    {
+      "name": "Wu Kingdom Swordsmiths",
+      "type": "organization",
+      "description": "Wu Kingdom Swordsmiths refers to the group of over a thousand craftsmen working on forging swords un"
+    },
+    {
+      "name": "范蠡",
+      "type": "person",
+      "description": "范蠡, also known as Fan Li, is a prominent historical figure and advisor in the Yue Kingdom during the"
+    },
+    {
+      "name": "勾践",
+      "type": "person",
+      "description": "勾践is the King of Yue who seeks to revive the art of sword-making in his kingdom and evaluates the qu"
+    },
+    {
+      "name": "文种",
+      "type": "person",
+      "description": "文种is an advisor to勾践who provides information about swordsmiths and carries out勾践's orders.<SEP>文种is "
+    },
+    {
+      "name": "欧冶子",
+      "type": "person",
+      "description": "欧冶子was a renowned swordsmith in Yue known for crafting legendary swords."
+    },
+    {
+      "name": "风胡子",
+      "type": "person",
+      "description": "风胡子is a disciple of欧冶子who resides in Wu and possesses advanced sword-making skills."
+    },
+    {
+      "name": "薛烛",
+      "type": "person",
+      "description": "薛烛is a disciple of欧冶子who resides in Yue and is unable to forge swords due to injuries inflicted by风胡"
+    },
+    {
+      "name": "楚国",
+      "type": "location",
+      "description": "楚国is a kingdom where欧冶子crafted swords for its king, including龙渊, 泰阿, and工布."
+    },
+    {
+      "name": "湛卢",
+      "type": "artifact",
+      "description": "湛卢is one of the five legendary swords forged by欧冶子, currently in possession of楚国."
+    },
+    {
+      "name": "纯钧",
+      "type": "artifact",
+      "description": "纯钧is one of the five legendary swords forged by欧冶子, currently in possession of勾践."
+    },
+    {
+      "name": "胜邪",
+      "type": "artifact",
+      "description": "胜邪is one of the five legendary swords forged by欧冶子, currently in possession of吴国."
+    },
+    {
+      "name": "鱼肠",
+      "type": "artifact",
+      "description": "鱼肠is one of the five legendary swords forged by欧冶子, used by吴王阖庐for assassination."
+    },
+    {
+      "name": "巨阙",
+      "type": "artifact",
+      "description": "巨阙is one of the five legendary swords forged by欧冶子, considered less valuable due to its composition."
+    },
+    {
+      "name": "工布",
+      "type": "artifact",
+      "description": "工布is a sword forged by欧冶子for楚国, later obtained by风胡子."
+    },
+    {
+      "name": "龙渊",
+      "type": "artifact",
+      "description": "龙渊is a sword forged by欧冶子for楚国, highly valued by its king."
+    },
+    {
+      "name": "泰阿",
+      "type": "artifact",
+      "description": "泰阿is a sword forged by欧冶子for楚国, highly valued by its king."
+    },
+    {
+      "name": "吴王阖庐",
+      "type": "person",
+      "description": "吴王阖庐was a king of吴国who used the sword鱼肠for assassination purposes."
+    },
+    {
+      "name": "王僚",
+      "type": "person",
+      "description": "王僚was a figure assassinated by吴王阖庐using the sword鱼肠."
+    },
+    {
+      "name": "阿青",
+      "type": "person",
+      "description": "阿青is a young shepherdess with exceptional swordsmanship skills, capable of defeating multiple吴国剑士usi"
+    },
+    {
+      "name": "白猿",
+      "type": "creature",
+      "description": "白猿is a white ape that engages in a fierce battle with阿青using a bamboo stick and displays remarkable "
+    },
+    {
+      "name": "越国剑士",
+      "type": "organization",
+      "description": "越国剑士refers to the group of elite swordsmen from越国who attempt to learn阿青's sword techniques but fail "
+    },
+    {
+      "name": "越王剑室",
+      "type": "location",
+      "description": "越王剑室is the location where阿青demonstrates her sword techniques to越国剑士."
+    },
+    {
+      "name": "五湖之畔",
+      "type": "location",
+      "description": "五湖之畔is the site of the battle where越国defeats吴国."
+    },
+    {
+      "name": "神剑影子",
+      "type": "concept",
+      "description": "神剑影子refers to the faint understanding of阿青's extraordinary sword techniques that越国剑士attempt to emula"
+    },
+    {
+      "name": "利剑",
+      "type": "artifact",
+      "description": "利剑are sharp swords crafted under the supervision of薛烛, contributing to越国's military success."
+    },
+    {
+      "name": "越王",
+      "type": "person",
+      "description": "越王is the ruler of越国who provides the sword training facility and supports the development of越国's mili"
+    },
+    {
+      "name": "竹棒",
+      "type": "artifact",
+      "description": "The bamboo stick is a weapon used by the young girl to skillfully defend herself and injure the Wu s"
+    },
+    {
+      "name": "Bo Pi",
+      "type": "person",
+      "description": "Bo Pi was a corrupt minister in Wu who was bribed by Yue to influence King Fuchai."
+    },
+    {
+      "name": "Nine Strategies of Yue",
+      "type": "concept",
+      "description": "The Nine Strategies of Yue were devised by Wen Zhong to weaken Wu through various tactics, including"
+    },
+    {
+      "name": "Sun Tzu",
+      "type": "person",
+      "description": "Sun Tzu was a military strategist whose teachings influenced Wu's combat techniques and strategies."
+    },
+    {
+      "name": "Gan Jiang",
+      "type": "person",
+      "description": "Gan Jiang was a legendary swordsmith in Wu known for crafting exceptional swords."
+    },
+    {
+      "name": "Mo Ye",
+      "type": "person",
+      "description": "Mo Ye was the wife of Gan Jiang and a legendary swordsmith in Wu."
+    },
+    {
+      "name": "Ou Yezi",
+      "type": "person",
+      "description": "Ou Yezi was a renowned swordsmith in Yue, whose skills were comparable to Gan Jiang and Mo Ye."
+    },
+    {
+      "name": "Sword of Yue",
+      "type": "artifact",
+      "description": "The Sword of Yue is a thin and sharp weapon held by King Goujian, symbolizing Yue's craftsmanship an"
+    },
+    {
+      "name": "Battle of Qiantang River",
+      "type": "event",
+      "description": "The Battle of Qiantang River was a significant conflict where Yue was defeated by Wu, leading to Kin"
+    },
+    {
+      "name": "Mount Kuaiji",
+      "type": "location",
+      "description": "Mount Kuaiji was the site where King Goujian and Yue forces were besieged by Wu."
+    },
+    {
+      "name": "Swordsmithing Techniques",
+      "type": "concept",
+      "description": "Swordsmithing Techniques refer to the advanced methods used by legendary craftsmen like Gan Jiang, M"
+    },
+    {
+      "name": "Qiantang River",
+      "type": "location",
+      "description": "Qiantang River is the site of a significant battle between Yue and Wu, where Yue suffered a major de"
+    },
+    {
+      "name": "吴国剑士",
+      "type": "person",
+      "description": "The Wu swordsmen are a group of eight skilled warriors from Wu, known for their arrogance and except"
+    },
+    {
+      "name": "越国卫士",
+      "type": "person",
+      "description": "The Yue guards are loyal soldiers under the command of范蠡, tasked with protecting him and maintaining"
+    },
+    {
+      "name": "少女",
+      "type": "person",
+      "description": "The young girl is a courageous and skilled individual who uses a bamboo stick to defend herself and "
+    },
+    {
+      "name": "山羊",
+      "type": "naturalobject",
+      "description": "The mountain goats are a group of animals being herded by the young girl, one of which is killed by "
+    },
+    {
+      "name": "夫差",
+      "type": "person",
+      "description": "夫差is a figure mentioned indirectly as a potential instigator of conflict if the Wu swordsmen are har"
+    },
+    {
+      "name": "王者",
+      "type": "person",
+      "description": "王者is a ruler dressed in purple robes, with a bird-like appearance, who oversees the sword duels and "
+    },
+    {
+      "name": "官员",
+      "type": "person",
+      "description": "官员is an official who comments on the swordsmanship and enforces the rules of the duels."
+    },
+    {
+      "name": "长剑",
+      "type": "artifact",
+      "description": "长剑is a sharp and agile sword used by青衣剑士, capable of cutting through heavy weapons and defeating opp"
+    },
+    {
+      "name": "大剑",
+      "type": "artifact",
+      "description": "大剑is a large and heavy sword used by one of the锦衫剑士during the second duel.<SEP>大剑is a heavy sword wi"
+    },
+    {
+      "name": "吴越剑士",
+      "type": "organization",
+      "description": "吴越剑士refers to swordsmen from the Wu and Yue regions, participating in the duels organized by the王者.<"
+    },
+    {
+      "name": "比剑",
+      "type": "event",
+      "description": "比剑is a series of sword duels organized by王者, involving individual and team combat between青衣剑士and锦衫剑士"
+    },
+    {
+      "name": "青光",
+      "type": "artifact",
+      "description": "青光refers to the dazzling light emitted by the sword wielded by青衣剑士, symbolizing its sharpness and qu"
+    },
+    {
+      "name": "酒",
+      "type": "artifact",
+      "description": "酒is a reward given by王者to the victorious青衣剑士during the比剑event."
+    },
+    {
+      "name": "越女剑",
+      "type": "content",
+      "description": "越女剑is the title of the story, featuring swordsmanship and duels among skilled swordsmen."
+    },
+    {
+      "name": "护心铜镜",
+      "type": "artifact",
+      "description": "护心铜镜is a protective copper mirror worn by青衣剑士, which shields him from fatal injury during the duel."
+    },
+    {
+      "name": "锦披大椅",
+      "type": "artifact",
+      "description": "锦披大椅is a large chair covered in brocade, used by the王者during the sword duels."
+    },
+    {
+      "name": "东首锦衫剑士队",
+      "type": "organization",
+      "description": "东首锦衫剑士队is a group of swordsmen dressed in brocade, participating in the duels."
+    },
+    {
+      "name": "西首青衣剑士队",
+      "type": "organization",
+      "description": "西首青衣剑士队is a group of swordsmen dressed in green, participating in the duels."
+    },
+    {
+      "name": "Wu Jian",
+      "type": "artifact",
+      "description": "Wu Jian is a sharp sword forged in Wu, renowned for its unmatched sharpness among various nations."
+    },
+    {
+      "name": "Gou Jian",
+      "type": "person",
+      "description": "Gou Jian is the ruler of Yue, known for his strategic thinking and determination to avenge his natio"
+    },
+    {
+      "name": "Xue Zhu",
+      "type": "person",
+      "description": "Xue Zhu is a skilled individual who advised against forging swords for Wu and suffered injuries infl"
+    },
+    {
+      "name": "Feng Shi",
+      "type": "person",
+      "description": "Feng Shi is a swordsmith who collaborated with Wu to forge swords and harmed Xue Zhu during a disagr"
+    },
+    {
+      "name": "Wu Zi Xu",
+      "type": "person",
+      "description": "Wu Zi Xu was a prominent figure in Wu who organized the defense of resources like tin and passed awa"
+    },
+    {
+      "name": "Xi Shi",
+      "type": "person",
+      "description": "Xi Shi, also known as Yi Guang, is a renowned beauty from Yue sent to Wu as part of a political stra"
+    },
+    {
+      "name": "Tin Mountain",
+      "type": "location",
+      "description": "Tin Mountain is a resource-rich area in Wu, guarded to prevent tin extraction by Yue."
+    },
+    {
+      "name": "Swordsmithing",
+      "type": "method",
+      "description": "Swordsmithing is the process of forging swords, requiring specific materials like iron, copper, and "
+    },
+    {
+      "name": "Wu Swordsmanship Song",
+      "type": "content",
+      "description": "Wu Swordsmanship Song is a chant sung by Wu swordsmen, boasting about their sharp swords and combat "
+    },
+    {
+      "name": "Wu Swordsmen",
+      "type": "person",
+      "description": "Wu Swordsmen are a group of skilled fighters from Wu, known for their sharp swords and combat prowes"
+    },
+    {
+      "name": "Chang Jie",
+      "type": "location",
+      "description": "Chang Jie is a street where Wu swordsmen performed and caused disruptions, showcasing their arroganc"
+    },
+    {
+      "name": "白公公",
+      "type": "person",
+      "description": "白公公is a skilled swordsman who taught阿青remarkable swordsmanship and is awaited by范蠡and阿青."
+    },
+    {
+      "name": "湘妃",
+      "type": "person",
+      "description": "湘妃is a mythical or historical figure described by范蠡as extraordinarily beautiful, with poetic compari"
+    },
+    {
+      "name": "西施",
+      "type": "person",
+      "description": "西施is a renowned beauty from Chinese history, remembered fondly by范蠡, who reflects on their past rela"
+    },
+    {
+      "name": "吴王宫",
+      "type": "location",
+      "description": "吴王宫is the palace of the吴国king, where西施is imagined to be present."
+    },
+    {
+      "name": "湘江",
+      "type": "location",
+      "description": "湘江is a river described poetically by范蠡in relation to湘妃's beauty."
+    },
+    {
+      "name": "姑苏城",
+      "type": "location",
+      "description": "姑苏城is a city mentioned as the location of吴王宫."
+    },
+    {
+      "name": "山鬼",
+      "type": "person",
+      "description": "山鬼is a mythical or legendary figure mentioned by范蠡in his storytelling."
+    },
+    {
+      "name": "五湖",
+      "type": "location",
+      "description": "五湖is the site of a significant battle where the Yue army defeats the Wu army."
+    },
+    {
+      "name": "馆娃宫",
+      "type": "location",
+      "description": "馆娃宫is the palace where西施resides and where key events involving范蠡and阿青occur."
+    },
+    {
+      "name": "吴军",
+      "type": "organization",
+      "description": "吴军is the military force of Wu, which is defeated by the Yue army."
+    },
+    {
+      "name": "越军",
+      "type": "organization",
+      "description": "越军is the military force of Yue, led by范蠡, that achieves victory over Wu."
+    },
+    {
+      "name": "余杭山",
+      "type": "location",
+      "description": "余杭山is the location where夫差retreats after his army's defeat."
+    },
+    {
+      "name": "剑法",
+      "type": "concept",
+      "description": "剑法refers to the swordsmanship techniques that make the Yue warriors invincible in battle."
+    },
+    {
+      "name": "五湖之战",
+      "type": "event",
+      "description": "五湖之战is the battle where the Yue army defeats the Wu army near五湖."
+    },
+    {
+      "name": "夷光",
+      "type": "person",
+      "description": "夷光is another name for西施, highlighting her identity as a central figure in the story and her connecti"
+    },
+    {
+      "name": "乡下姑娘",
+      "type": "concept",
+      "description": "乡下姑娘refers to the perception of阿青as a simple rural girl, which is later revealed to be a misundersta"
+    },
+    {
+      "name": "破吴英雄范大夫",
+      "type": "title",
+      "description": "破吴英雄范大夫is a title referring to范蠡, emphasizing his role as a hero who led the Yue army to defeat Wu."
+    },
+    {
+      "name": "A Qing",
+      "type": "person",
+      "description": "A Qing is a young, innocent, and straightforward girl who has a deep affection for her sheep and pos"
+    },
+    {
+      "name": "Old Bai",
+      "type": "person",
+      "description": "Old Bai is a mysterious figure who used to play with A Qing using bamboo sticks and is implied to ha"
+    },
+    {
+      "name": "A Qing's Mother",
+      "type": "person",
+      "description": "A Qing's mother is a cautious woman who advises A Qing not to talk much with men and relies on selli"
+    },
+    {
+      "name": "The Sheep",
+      "type": "creature",
+      "description": "The sheep are A Qing's cherished animals, one of which, named Old Bai, was killed and deeply mourned"
+    },
+    {
+      "name": "Fan Li's Residence",
+      "type": "location",
+      "description": "Fan Li's residence is a large house with a garden where A Qing and her sheep are welcomed and treate"
+    },
+    {
+      "name": "The Garden",
+      "type": "location",
+      "description": "The garden at Fan Li's residence contains various rare and beautiful flowers, which the sheep eat wi"
+    },
+    {
+      "name": "Bamboo Stick",
+      "type": "artifact",
+      "description": "The bamboo stick is a simple tool that A Qing uses with extraordinary skill, capable of defeating mu"
+    },
+    {
+      "name": "Swordsmanship",
+      "type": "concept",
+      "description": "Swordsmanship refers to the skill A Qing demonstrates with her bamboo stick, which Fan Li believes t"
+    },
+    {
+      "name": "Yue State",
+      "type": "location",
+      "description": "Yue State is a region associated with Fan Li, who is strategizing for its benefit."
+    },
+    {
+      "name": "Wu State",
+      "type": "location",
+      "description": "Wu State is implied to be an adversary of Yue State, with Fan Li considering ways to defeat it."
+    },
+    {
+      "name": "White Gonggong",
+      "type": "person",
+      "description": "White Gonggong is a mysterious elderly figure who used to play with A Qing using bamboo sticks and i"
+    },
+    {
+      "name": "Peonies, Peonies, Orchids, Roses",
+      "type": "naturalobject",
+      "description": "Peonies, peonies, orchids, and roses are rare and beautiful flowers in Fan Li's garden, which the sh"
+    },
+    {
+      "name": "羊儿",
+      "type": "naturalobject",
+      "description": "羊儿refers to阿青's sheep, which was killed by吴国剑士, prompting阿青's actions."
+    },
+    {
+      "name": "宫门",
+      "type": "location",
+      "description": "宫门refers to the palace gate, a significant location where key events and confrontations occur."
+    },
+    {
+      "name": "太湖",
+      "type": "location",
+      "description": "太湖is a lake mentioned as the destination where范蠡and西施plan to escape and live in peace."
+    },
+    {
+      "name": "甲士",
+      "type": "person",
+      "description": "甲士refers to armored soldiers deployed by范蠡to guard the palace."
+    },
+    {
+      "name": "剑士",
+      "type": "person",
+      "description": "剑士refers to sword-wielding soldiers deployed by范蠡to guard the palace."
+    },
+    {
+      "name": "卫士",
+      "type": "person",
+      "description": "卫士refers to palace guards responsible for protecting范蠡and西施."
+    },
+    {
+      "name": "卫士长",
+      "type": "person",
+      "description": "卫士长is the leader of the palace guards who checks on范蠡's safety after the confrontation with阿青."
+    },
+    {
+      "name": "西子捧心",
+      "type": "concept",
+      "description": "西子捧心is a phrase describing西施holding her heart, symbolizing an iconic image of beauty and vulnerabili"
+    },
+    {
+      "name": "破晓",
+      "type": "event",
+      "description": "破晓refers to the dawn, marking the transition from night to day and symbolizing a moment of change in"
+    },
+    {
+      "name": "长廊",
+      "type": "location",
+      "description": "长廊refers to the long corridor within the palace where the sound of weapons falling is heard during阿青"
+    }
+  ],
+  "relationships": [
+    {
+      "source": "Goujian",
+      "target": "Fan Li",
+      "type": "关联",
+      "weight": 3.0
+    },
+    {
+      "source": "Goujian",
+      "target": "The Sword",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Goujian",
+      "target": "Fuchai",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Goujian",
+      "target": "The Sandalwood Chair",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Goujian",
+      "target": "The Palace Servants",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Goujian",
+      "target": "Wen Zhong",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "Goujian",
+      "target": "Yue Kingdom",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Goujian",
+      "target": "Sword of Yue",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "Wenzhong",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "The Sword",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "The Brocade-Clad Swordsman",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "Wen Zhong",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "Xi Shi",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "Wu Swordsmen",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "A Qing",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "A Qing's Mother",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "The Sheep",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "Fan Li's Residence",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "Swordsmanship",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "Yue State",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fan Li",
+      "target": "Peonies, Peonies, Orchids, Roses",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fuchai",
+      "target": "Wu Zixu",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Fuchai",
+      "target": "Bo Pi",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "The Sword",
+      "target": "Eight Green-Clad Swordsmen",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "The Sword",
+      "target": "The Light Silk",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "The Sword",
+      "target": "The Sword Box",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Yue Kingdom",
+      "target": "Wu Kingdom",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "Yue Kingdom",
+      "target": "Swordsmithing",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Kingdom",
+      "target": "Sun Tzu's Art Of War",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Kingdom",
+      "target": "Nine Strategies of Yue",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Kingdom",
+      "target": "Sun Tzu",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Kingdom",
+      "target": "Xi Shi",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Kingdom",
+      "target": "Wu Swordsmanship Song",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Kingdom",
+      "target": "Swordsmithing",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "锦衫剑士",
+      "target": "青衣剑士",
+      "type": "关联",
+      "weight": 3.0
+    },
+    {
+      "source": "锦衫剑士",
+      "target": "大剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "锦衫剑士",
+      "target": "比剑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "吴王夫差",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "长剑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "青光",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "比剑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "护心铜镜",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "王者",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越王勾践",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越王勾践",
+      "target": "吴王夫差",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越王勾践",
+      "target": "金漆长匣",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "金漆长匣",
+      "target": "三尺长剑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "吴国",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "越国",
+      "target": "楚国",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "勾践",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "五湖之畔",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "吴国剑士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国",
+      "target": "楚国",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国",
+      "target": "鱼肠",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国",
+      "target": "吴王阖庐",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国",
+      "target": "吴国剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "剑道",
+      "target": "官员",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "剑气",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Chu King",
+      "target": "Longyuan",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Chu King",
+      "target": "Tai'e",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Chu King",
+      "target": "Gongbu",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Gongbu",
+      "target": "Wu Zixu",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Xu Zhu",
+      "target": "Feng",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Feng",
+      "target": "Wu Zixu",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Zixu",
+      "target": "Mogan Mountain",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Zixu",
+      "target": "Sword Forging Room",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Zixu",
+      "target": "Wu Kingdom Swordsmiths",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Ganjiang",
+      "target": "Moye",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "勾践",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "阿青",
+      "type": "关联",
+      "weight": 5.0
+    },
+    {
+      "source": "范蠡",
+      "target": "薛烛",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "越国卫士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "夫差",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "白公公",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "文种",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "西施",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "范蠡",
+      "target": "山鬼",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "越军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "破吴英雄范大夫",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "宫门",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "太湖",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "甲士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "剑士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "卫士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "卫士长",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "勾践",
+      "target": "文种",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "勾践",
+      "target": "薛烛",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "勾践",
+      "target": "纯钧",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "勾践",
+      "target": "巨阙",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "勾践",
+      "target": "越军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "文种",
+      "target": "风胡子",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "湛卢",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "纯钧",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "胜邪",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "鱼肠",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "巨阙",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "工布",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "龙渊",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "泰阿",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "风胡子",
+      "target": "薛烛",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "风胡子",
+      "target": "工布",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "薛烛",
+      "target": "利剑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "薛烛",
+      "target": "长剑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "楚国",
+      "target": "湛卢",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "楚国",
+      "target": "龙渊",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "楚国",
+      "target": "泰阿",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "楚国",
+      "target": "工布",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "鱼肠",
+      "target": "吴王阖庐",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "鱼肠",
+      "target": "王僚",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "白猿",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "越国剑士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "竹棒",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "阿青",
+      "target": "白公公",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "乡下姑娘",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "吴国剑士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "羊儿",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "西施",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "长廊",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "白猿",
+      "target": "竹棒",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国剑士",
+      "target": "神剑影子",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越王剑室",
+      "target": "越王",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "竹棒",
+      "target": "少女",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "竹棒",
+      "target": "吴国剑士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Gan Jiang",
+      "target": "Mo Ye",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Gan Jiang",
+      "target": "Swordsmithing Techniques",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Mo Ye",
+      "target": "Swordsmithing Techniques",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Ou Yezi",
+      "target": "Sword of Yue",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Ou Yezi",
+      "target": "Swordsmithing Techniques",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Battle of Qiantang River",
+      "target": "Mount Kuaiji",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Battle of Qiantang River",
+      "target": "Qiantang River",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "越国卫士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "山羊",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "少女",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "少女",
+      "target": "山羊",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "夫差",
+      "target": "吴军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "夫差",
+      "target": "余杭山",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "王者",
+      "target": "比剑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "王者",
+      "target": "酒",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "王者",
+      "target": "吴越剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "王者",
+      "target": "锦披大椅",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "长剑",
+      "target": "越军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴越剑士",
+      "target": "比剑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "东首锦衫剑士队",
+      "target": "西首青衣剑士队",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Gou Jian",
+      "target": "Xue Zhu",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Xue Zhu",
+      "target": "Feng Shi",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Zi Xu",
+      "target": "Tin Mountain",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Wu Swordsmen",
+      "target": "Chang Jie",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "湘妃",
+      "target": "湘江",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "西施",
+      "target": "吴王宫",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "西施",
+      "target": "馆娃宫",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "西施",
+      "target": "夷光",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "西施",
+      "target": "西子捧心",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴王宫",
+      "target": "姑苏城",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "五湖",
+      "target": "五湖之战",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴军",
+      "target": "越军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越军",
+      "target": "剑法",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "A Qing",
+      "target": "Old Bai",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "A Qing",
+      "target": "The Sheep",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "A Qing",
+      "target": "Bamboo Stick",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "A Qing",
+      "target": "White Gonggong",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "The Sheep",
+      "target": "The Garden",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "Yue State",
+      "target": "Wu State",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "宫门",
+      "target": "破晓",
+      "type": "关联",
+      "weight": 1.0
+    }
+  ]
+}
