@@ -1,4 +1,5 @@
 """LightRAG 测试脚本：使用 XiaoAI Provider 对《越女剑》进行索引"""
+"""LightRAG 测试脚本：支持多 Provider 切换"""
 
 import os
 import sys
@@ -8,20 +9,69 @@ import numpy as np
 import networkx as nx
 from openai import AsyncOpenAI
 
-# XiaoAI Provider 配置
-API_KEY = "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a"
-BASE_URL = "https://xiaoai.plus/v1"
-CHAT_MODEL = "claude-sonnet-4-20250514"
-EMBED_MODEL = "text-embedding-3-large"
+# ================= 配置区域 =================
+# 切换 Provider: "dashscope" 或 "xiaoai"
+# 可以分别设置 LLM 和 Embedding 的 Provider
+LLM_PROVIDER = "dashscope"
+EMBED_PROVIDER = "xiaoai"
 
-# 初始化 OpenAI 客户端
-xiaoai_client = AsyncOpenAI(api_key=API_KEY, base_url=BASE_URL)
+# Provider 配置
+PROVIDERS = {
+    "dashscope": {
+        "api_key": os.getenv("DASHSCOPE_API_KEY", ""), # 从 .env 读取
+        "base_url": "https://coding.dashscope.aliyuncs.com/v1", # Coding Plan URL
+        "llm_model": "qwen3.5-plus",
+        "embed_model": "text-embedding-v3",
+        "embed_dim": 1024,
+    },
+    "xiaoai": {
+        "api_key": "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a",
+        "base_url": "https://xiaoai.plus/v1",
+        "llm_model": "gpt-4o-mini",
+        "embed_model": "text-embedding-3-large",
+        "embed_dim": 3072,
+    }
+}
+
+# 读取 .env 获取 DashScope Key
+env_path = os.path.expanduser("~/.hermes/.env")
+with open(env_path) as f:
+    content = f.read()
+
+import re
+match_key = re.search(r'DASHSCOPE_API_KEY=(.*)', content)
+if match_key:
+    PROVIDERS["dashscope"]["api_key"] = match_key.group(1).strip()
+
+# 获取当前 Provider 配置
+llm_config = PROVIDERS[LLM_PROVIDER]
+embed_config = PROVIDERS[EMBED_PROVIDER]
+
+LLM_API_KEY = llm_config["api_key"]
+LLM_BASE_URL = llm_config["base_url"]
+CHAT_MODEL = llm_config["llm_model"]
+
+EMBED_API_KEY = embed_config["api_key"]
+EMBED_BASE_URL = embed_config["base_url"]
+EMBED_MODEL = embed_config["embed_model"]
+EMBED_DIM = embed_config["embed_dim"]
+
+print(f"=== 使用 LLM Provider: {LLM_PROVIDER} ===")
+print(f"LLM Model: {CHAT_MODEL}")
+print(f"=== 使用 Embed Provider: {EMBED_PROVIDER} ===")
+print(f"Embed Model: {EMBED_MODEL}")
+print(f"Embed Dim: {EMBED_DIM}")
+# ============================================
+
+# 初始化 OpenAI 客户端 (LLM 和 Embedding 可能不同)
+llm_client = AsyncOpenAI(api_key=LLM_API_KEY, base_url=LLM_BASE_URL)
+embed_client = AsyncOpenAI(api_key=EMBED_API_KEY, base_url=EMBED_BASE_URL)
 
 from lightrag import LightRAG, QueryParam
 from lightrag.utils import EmbeddingFunc
 from lightrag.prompt import PROMPTS
 
-WORKING_DIR = "./jinyong_lightrag_test"
+WORKING_DIR = f"./jinyong_lightrag_test_{LLM_PROVIDER}_{EMBED_PROVIDER}"
 NOVEL_PATH = "src/modules/jinyong/data/raw/越女剑.txt"
 
 # 自定义 LightRAG 提取 Prompt，强制要求中文和具体关系类型
@@ -55,14 +105,14 @@ You are a Knowledge Graph Specialist responsible for extracting entities and rel
 PROMPTS["entity_extraction_system_prompt"] = CUSTOM_EXTRACTION_PROMPT
 
 # 包装 LLM 函数以匹配 LightRAG 的签名
-async def xiaoai_llm_func(prompt, system_prompt=None, history_messages=[], **kwargs) -> str:
+async def provider_llm_func(prompt, system_prompt=None, history_messages=[], **kwargs) -> str:
     messages = []
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
     messages.extend(history_messages)
     messages.append({"role": "user", "content": prompt})
     
-    resp = await xiaoai_client.chat.completions.create(
+    resp = await llm_client.chat.completions.create(
         model=CHAT_MODEL,
         messages=messages,
         temperature=0.1
@@ -70,8 +120,8 @@ async def xiaoai_llm_func(prompt, system_prompt=None, history_messages=[], **kwa
     return resp.choices[0].message.content
 
 # 包装 Embedding 函数以匹配 LightRAG 的签名
-async def xiaoai_embed_func(texts: list[str]) -> np.ndarray:
-    resp = await xiaoai_client.embeddings.create(
+async def provider_embed_func(texts: list[str]) -> np.ndarray:
+    resp = await embed_client.embeddings.create(
         model=EMBED_MODEL,
         input=texts
     )
@@ -79,9 +129,9 @@ async def xiaoai_embed_func(texts: list[str]) -> np.ndarray:
     return np.array(embeddings, dtype=np.float32)
 
 # 包装为 EmbeddingFunc 对象
-xiaoai_embedding_func_obj = EmbeddingFunc(
-    embedding_dim=3072,  # text-embedding-3-large 的维度
-    func=xiaoai_embed_func,
+provider_embedding_func_obj = EmbeddingFunc(
+    embedding_dim=EMBED_DIM,
+    func=provider_embed_func,
     max_token_size=8192
 )
 
@@ -92,8 +142,8 @@ async def run_lightrag():
     
     rag = LightRAG(
         working_dir=WORKING_DIR,
-        llm_model_func=xiaoai_llm_func,
-        embedding_func=xiaoai_embedding_func_obj,
+        llm_model_func=provider_llm_func,
+        embedding_func=provider_embedding_func_obj,
         llm_model_name=CHAT_MODEL,
         embedding_batch_num=5,
         embedding_func_max_async=2,

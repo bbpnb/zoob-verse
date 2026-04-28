@@ -1,6 +1,7 @@
 {
   "doc-b59f5189478273c150a1d091ecacea20": {
-    "status": "processed",
+    "status": "failed",
+    "error_msg": "Error code: 401 - {'error': {'message': 'Incorrect API key provided. For details, see: https://help.aliyun.com/zh/model-studio/error-code#apikey-error', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}, 'request_id': '945aa37e-e188-91a7-8978-ad23c44ca5d2'}",
     "chunks_count": 15,
     "chunks_list": [
       "chunk-c903f2e907674391708383e3d1afe7fb",
@@ -21,13 +22,13 @@
     ],
     "content_summary": "全本全集精校小说尽在：http://www.yimuhe.com/u/anglewing2620-1.html\n更多资源下载：http://qqzone.ctdisk.com\n※声明：本电子书仅供读者预览,请在下载24小时内删除，不得用作商业用途；如果喜欢请购买正版图书！※\n------------------------------------------\n\n越女剑\n　　“请！”“请！”\n　　两名剑士各自倒转剑尖，右手握剑柄，左手搭于右手手背，躬身行礼。\n　　两人身子尚未站直，突然间白光闪动，...",
     "content_length": 17390,
-    "created_at": "2026-04-28T16:07:51.231441+00:00",
-    "updated_at": "2026-04-28T16:15:21.817444+00:00",
+    "created_at": "2026-04-28T16:25:04.641845+00:00",
+    "updated_at": "2026-04-28T16:25:05.146887+00:00",
     "file_path": "unknown_source",
-    "track_id": "insert_20260429_000751_c37e27d3",
+    "track_id": "insert_20260429_002504_a5104ce3",
     "metadata": {
-      "processing_start_time": 1777392471,
-      "processing_end_time": 1777392921
+      "processing_start_time": 1777393504,
+      "processing_end_time": 1777393505
     }
   }
 }
