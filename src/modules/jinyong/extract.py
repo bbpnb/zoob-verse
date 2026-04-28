@@ -129,13 +129,15 @@ class JinyongModule(ModuleBase):
     def build_graph(self, file_path: str | Path, llm: LLMClient | None = None) -> GraphEngine:
         """从小说文件构建知识图谱"""
         entities, relationships = self.extract_from_file(file_path, llm)
+        return self.build_graph_from_data({"entities": entities, "relationships": relationships})
 
+    def build_graph_from_data(self, data: dict) -> GraphEngine:
+        """从字典数据构建知识图谱"""
         engine = GraphEngine()
-        for e in entities:
+        for e in data.get("entities", []):
             engine.add_entity(e["name"], e["type"], **e.get("attrs", {}))
-        for r in relationships:
+        for r in data.get("relationships", []):
             engine.add_relationship(r["source"], r["target"], r["type"])
-
         return engine
 
     def analyze(self, graph, method: str, **kwargs):
