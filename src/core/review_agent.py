@@ -14,9 +14,10 @@ REVIEW_SYSTEM_PROMPT = """你是一个严格的知识图谱质量审查员。你
    - 例如：“范蠡”和“陶朱公”是同一个人。
    - 合并时保留最广为人知的名称作为主名称。
 
-2. **孤岛检测**：找出没有任何关系连接的实体（度为0）。
-   - 如果该实体在文本中重要，尝试推断它与谁有关联。
-   - 如果无关紧要且无关联，建议删除。
+2. **孤岛连接（核心任务）**：找出没有任何关系连接的实体（度为0）。
+   - **不要删除孤岛实体！** 文本中出现的每个实体都有意义。
+   - 尝试推断它与谁有关联。如果找不到强关系，请使用“提及”或“关联”将其与核心人物或地点连接。
+   - 例如：如果“宛地”是孤岛，且文本中提到“勾践在宛地”，则添加关系 (勾践, 宛地, 出没)。
 
 3. **类型一致性**：确保实体类型严格属于以下五类之一：
    - 人物、门派、武功、地点、兵器
@@ -26,10 +27,10 @@ REVIEW_SYSTEM_PROMPT = """你是一个严格的知识图谱质量审查员。你
 请严格以 JSON 格式输出修改建议列表，不要包含其他文字。格式如下：
 [
   {"action": "merge", "from": "夷光", "to": "西施", "reason": "同一个人物的不同称呼"},
-  {"action": "delete", "entity": "某路人", "reason": "无关联且非核心"},
-  {"action": "relate", "source": "阿青", "target": "剑法", "type": "修炼", "reason": "文本隐含关系"},
+  {"action": "link", "source": "勾践", "target": "宛地", "type": "出没", "reason": "文本隐含关系，勾践在宛地出现"},
   {"action": "relabel", "entity": "越国", "new_type": "门派", "reason": "国家属于组织/门派范畴"}
 ]
+注意：**永远不要使用 delete 操作**。如果实体看起来孤立，请尝试连接它，而不是删除它。
 """
 
 
@@ -108,10 +109,21 @@ class ReviewAgent:
                     alias_map[from_name] = to_name
                     del entities[from_name]
 
-            elif action == "delete":
-                entity_name = suggestion["entity"]
-                if entity_name in entities:
-                    del entities[entity_name]
+            elif action == "link":
+                # 添加新关系
+                source = suggestion["source"]
+                target = suggestion["target"]
+                rel_type = suggestion["type"]
+                # 确保源和目标实体存在
+                if source not in entities:
+                    entities[source] = {"name": source, "type": "未知", "attrs": {}}
+                if target not in entities:
+                    entities[target] = {"name": target, "type": "未知", "attrs": {}}
+                relationships.append({
+                    "source": source,
+                    "target": target,
+                    "type": rel_type,
+                })
 
             elif action == "relabel":
                 entity_name = suggestion["entity"]
@@ -125,10 +137,7 @@ class ReviewAgent:
             source = alias_map.get(rel["source"], rel["source"])
             target = alias_map.get(rel["target"], rel["target"])
 
-            # 如果关系指向已删除的节点，跳过
-            if source not in entities and target not in entities:
-                continue
-
+            # 如果关系指向已合并的节点，更新它
             new_relationships.append({
                 "source": source,
                 "target": target,
