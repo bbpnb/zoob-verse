@@ -19,43 +19,40 @@ xiaoai_client = AsyncOpenAI(api_key=API_KEY, base_url=BASE_URL)
 
 from lightrag import LightRAG, QueryParam
 from lightrag.utils import EmbeddingFunc
-import lightrag.operate as operate
+from lightrag.prompt import PROMPTS
 
 WORKING_DIR = "./jinyong_lightrag_test"
 NOVEL_PATH = "src/modules/jinyong/data/raw/越女剑.txt"
 
-# 自定义 LightRAG 提取 Prompt，强制要求具体关系类型
-CUSTOM_EXTRACTION_PROMPT = """- Goal: Extract entities and relationships from the given text with high precision.
-- Entity Types:
-  - 人物 (Person): Characters, historical figures, etc.
-  - 门派 (Sect): Martial arts sects, organizations, countries.
-  - 武功 (Martial Art): Techniques, inner power, swordsmanship.
-  - 地点 (Location): Real or fictional places, cities, mountains, buildings.
-  - 兵器 (Weapon): Weapons, treasures, items.
-- Relationship Types:
-  - 师徒 (Master-Disciple): Teaching relationship.
-  - 所属 (Affiliation): Person belongs to a sect/country.
-  - 修炼 (Practices): Person practices a martial art.
-  - 出没 (Appears): Person appears at a location.
-  - 使用 (Uses): Person uses a weapon.
-  - 敌对 (Hostile): Hostile/conflict relationship.
-  - 情感 (Emotional): Romantic, familial, or emotional bond.
-  - 提及 (Mentions): Person mentions an entity in dialogue/narration.
-  - 关联 (Associated): Entities co-occur in the same context.
-- Output Format:
-  {{
-    "entities": [{{"name": "Entity Name", "type": "Entity Type", "description": "Brief description"}}],
-    "relationships": [{{"source": "Source Entity", "target": "Target Entity", "type": "Relationship Type", "description": "Brief description of relationship"}}]
-  }}
-- Rules:
-  - Extract ALL entities mentioned, even minor ones.
-  - Use EXACT relationship types from the list above. DO NOT use "关联" if a more specific type applies.
-  - Every entity must have at least one relationship.
-  - Output ONLY valid JSON.
+# 自定义 LightRAG 提取 Prompt，强制要求中文和具体关系类型
+CUSTOM_EXTRACTION_PROMPT = """---Role---
+You are a Knowledge Graph Specialist responsible for extracting entities and relationships from the input text.
+
+---Instructions---
+1.  **Language Rule (CRITICAL):**
+    *   **ALL output (entity names, types, keywords, descriptions) MUST be in Chinese (简体中文).**
+    *   **DO NOT translate Chinese names, places, or terms into English.** Keep them in their original Chinese form.
+    *   Example: Output `阿青` NOT `A Qing`. Output `越国` NOT `Yue Kingdom`. Output `白公公` NOT `White Ape`.
+
+2.  **Entity Extraction:**
+    *   Identify entities and output: `entity<|#|>entity_name<|#|>entity_type<|#|>entity_description`
+    *   Entity Types: 人物, 门派, 武功, 地点, 兵器
+
+3.  **Relationship Extraction:**
+    *   Identify relationships and output: `relation<|#|>source<|#|>target<|#|>relationship_type<|#|>description`
+    *   Relationship Types (MUST use one of these exactly): 师徒, 所属, 修炼, 出没, 使用, 敌对, 情感, 提及, 关联
+    *   Example: `relation<|#|>阿青<|#|>白公公<|#|>师徒<|#|>白公公教阿青剑术`
+
+4.  **Rules:**
+    *   Extract ALL entities, even minor ones.
+    *   Every entity must have at least one relationship.
+    *   Use EXACT relationship types from the list above.
+    *   Output ONLY the extracted list, no extra text.
+    *   End with: <|COMPLETE|>
 """
 
 # 覆盖 LightRAG 默认的提取 Prompt
-operate.EXTRACT_ENTITY_RELATION_PROMPT = CUSTOM_EXTRACTION_PROMPT
+PROMPTS["entity_extraction_system_prompt"] = CUSTOM_EXTRACTION_PROMPT
 
 # 包装 LLM 函数以匹配 LightRAG 的签名
 async def xiaoai_llm_func(prompt, system_prompt=None, history_messages=[], **kwargs) -> str:
