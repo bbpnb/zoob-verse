@@ -828,5 +828,47 @@
     "create_time": 1777558535,
     "update_time": 1777558535,
     "_id": "local:query:8a407165e365f4d19efb66501731a7e6"
+  },
+  "local:keywords:a092ab9c23868951cfad8cd435d0059c": {
+    "return": "{\"high_level_keywords\": [\"Historical origin\", \"Chinese idiom\", \"Xizi holding her heart\"], \"low_level_keywords\": [\"Xizi\", \"A Qing\", \"Xi Shi\", \"Chinese history\", \"Idiomatic expression\"]}",
+    "cache_type": "keywords",
+    "chunk_id": null,
+    "original_prompt": "西子捧心这个典故是怎么来的？和阿青、西施有什么关系？",
+    "queryparam": {
+      "mode": "local",
+      "response_type": "Multiple Paragraphs",
+      "top_k": 40,
+      "chunk_top_k": 20,
+      "max_entity_tokens": 6000,
+      "max_relation_tokens": 8000,
+      "max_total_tokens": 30000,
+      "user_prompt": "",
+      "enable_rerank": true
+    },
+    "create_time": 1777571920,
+    "update_time": 1777571920,
+    "_id": "local:keywords:a092ab9c23868951cfad8cd435d0059c"
+  },
+  "local:query:51b65fe3d874306a784e3e5dba782848": {
+    "return": "**西子捧心**这一典故源于西施的美丽形象与她的身体姿态，具体来说，它与阿青、西施之间的互动密切相关。\n\n在故事中，阿青是一位剑术高超的牧羊少女，她使用竹棒作为武器，展现了非凡的剑术技巧。阿青曾闯入馆娃宫，手持竹棒威胁西施，甚至将竹棒的尖端指向西施的心口。然而，阿青在凝视西施的容貌后，杀气逐渐消失，转而变成了惊奇、羡慕和崇敬。她喃喃地感叹西施的美貌超乎想象，随后迅速离去。\n\n尽管阿青的竹棒未直接伤害到西施，但竹棒发出的劲气却刺伤了西施的心口，使她微微蹙眉并伸手捧住心口。这一动作被后人称为“西子捧心”，并被认为是人间最美丽的形象。这一典故不仅展现了西施的美丽与柔弱，也反映了阿青与西施之间的复杂关系。\n\n### References\n\n- [1] 西子捧心",
+    "cache_type": "query",
+    "chunk_id": null,
+    "original_prompt": "西子捧心这个典故是怎么来的？和阿青、西施有什么关系？",
+    "queryparam": {
+      "mode": "local",
+      "response_type": "Multiple Paragraphs",
+      "top_k": 40,
+      "chunk_top_k": 20,
+      "max_entity_tokens": 6000,
+      "max_relation_tokens": 8000,
+      "max_total_tokens": 30000,
+      "hl_keywords": "Historical origin, Chinese idiom, Xizi holding her heart",
+      "ll_keywords": "Xizi, A Qing, Xi Shi, Chinese history, Idiomatic expression",
+      "user_prompt": "",
+      "enable_rerank": true
+    },
+    "create_time": 1777571929,
+    "update_time": 1777571929,
+    "_id": "local:query:51b65fe3d874306a784e3e5dba782848"
   }
 }
