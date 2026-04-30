@@ -1,6 +1,7 @@
 {
   "doc-b59f5189478273c150a1d091ecacea20": {
-    "status": "processed",
+    "status": "failed",
+    "error_msg": "C[15/15]: chunk-3b2a680eed881fd86d938031d895d21e: LLM func: Worker execution timeout after 600s",
     "chunks_count": 15,
     "chunks_list": [
       "chunk-c903f2e907674391708383e3d1afe7fb",
@@ -21,78 +22,13 @@
     ],
     "content_summary": "全本全集精校小说尽在：http://www.yimuhe.com/u/anglewing2620-1.html\n更多资源下载：http://qqzone.ctdisk.com\n※声明：本电子书仅供读者预览,请在下载24小时内删除，不得用作商业用途；如果喜欢请购买正版图书！※\n------------------------------------------\n\n越女剑\n　　“请！”“请！”\n　　两名剑士各自倒转剑尖，右手握剑柄，左手搭于右手手背，躬身行礼。\n　　两人身子尚未站直，突然间白光闪动，...",
     "content_length": 17390,
-    "created_at": "2026-04-30T06:17:01.363659+00:00",
-    "updated_at": "2026-04-30T06:28:32.975972+00:00",
+    "created_at": "2026-04-30T08:10:34.745210+00:00",
+    "updated_at": "2026-04-30T08:22:19.222813+00:00",
     "file_path": "unknown_source",
-    "track_id": "insert_20260430_141701_14597df6",
+    "track_id": "insert_20260430_161034_6c294796",
     "metadata": {
-      "processing_start_time": 1777529821,
-      "processing_end_time": 1777530512
-    }
-  },
-  "doc-d05a8cba0c9c3a4f31f32d623fa5ca7c": {
-    "status": "processed",
-    "chunks_count": 32,
-    "chunks_list": [
-      "chunk-f88ae78f3685a0723a49d80d0d9a5873",
-      "chunk-ab2132cdefdaed63a4226d401ab2e9a8",
-      "chunk-0078b32fb35e0483ce985f6be3583020",
-      "chunk-872ec2da087ebff79b1eb2ae8ee1970b",
-      "chunk-abc62bee742fe92b0a19092eb807898f",
-      "chunk-5003b73156eb85d8a9f59ea76f1d5d4e",
-      "chunk-35e7ac1a71641d8b0f2586a1f0e4e66c",
-      "chunk-368d40091e149ee22dff5e1fd97b64a6",
-      "chunk-57d360b229c6c13e9429e3c9a9b3aa20",
-      "chunk-b85660e25caa10c95114ba1166e61ad9",
-      "chunk-7cddc26e2632d3734c193d74fef9c656",
-      "chunk-14313a43a6a5a8d826c47dceb5bbc48b",
-      "chunk-3a280bc0037bf8810ef869f28072c0fa",
-      "chunk-5f95ffedda6d4385d0635ab387fd33e6",
-      "chunk-c1f620491f0a1c7878e2dae198a3326f",
-      "chunk-ef38f0c43a78b9020303dd31c53e4f17",
-      "chunk-e39d6adc7a5461089ad8d5d04a3b77b9",
-      "chunk-0d459cf4cb883a4446fd05607fa4651f",
-      "chunk-ed3d0128804d3e005420d33a6d13ce3d",
-      "chunk-20d894e54878536e4af6d96c9a33bced",
-      "chunk-19b2a43f08ffa1730c1ff0587e2ac18c",
-      "chunk-7761ca8ce14dfd94808e217ac5f8fec3",
-      "chunk-4113f95e5f082a0315358bdf5af6637c",
-      "chunk-3394ed148cdddca4307d9824a1c13c0e",
-      "chunk-32f6b35d7c1b17ad3c17434ffbeb5dea",
-      "chunk-9aebe992daba05e1d9f12616214d70c7",
-      "chunk-1335384b66ee37afc8701e4820a3e980",
-      "chunk-635154b96af9206264f68bde6832772c",
-      "chunk-37ad2bfe6a11bebefac0853042fc6544",
-      "chunk-aff8330803938c1b2899d312f35628dc",
-      "chunk-aca2e56bea8c78422f652b26f5a438fa",
-      "chunk-2c1af5ee221837729255ebc7ed4c9d8c"
-    ],
-    "content_summary": "全本全集精校小说尽在：http://www.yimuhe.com/u/anglewing2620-1.html\n更多资源下载：http://qqzone.ctdisk.com\n※声明：本电子书仅供读者预览,请在下载24小时内删除，不得用作商业用途；如果喜欢请购买正版图书！※\n------------------------------------------\n\n鸳鸯刀\n　　四个劲装结束、神情凶猛的汉子并肩而立，拦在当路！\n　　若是黑道上山寨的强人，不会只有四个，莫非在这黑沉沉的松林之中，暗中还埋...",
-    "content_length": 36263,
-    "created_at": "2026-04-30T06:44:32.208989+00:00",
-    "updated_at": "2026-04-30T07:22:07.286831+00:00",
-    "file_path": "unknown_source",
-    "track_id": "insert_20260430_144432_5655d19c",
-    "metadata": {
-      "processing_start_time": 1777531472,
-      "processing_end_time": 1777533727
-    }
-  },
-  "dup-72cd5566306a423c8caf75102b3936ff": {
-    "status": "failed",
-    "content_summary": "[DUPLICATE] Original document: doc-d05a8cba0c9c3a4f31f32d623fa5ca7c",
-    "content_length": 36263,
-    "chunks_count": 0,
-    "chunks_list": [],
-    "created_at": "2026-04-30T07:48:43.180380+00:00",
-    "updated_at": "2026-04-30T07:48:43.180382+00:00",
-    "file_path": "unknown_source",
-    "track_id": "insert_20260430_154843_89ecd8b0",
-    "error_msg": "Content already exists. Original doc_id: doc-d05a8cba0c9c3a4f31f32d623fa5ca7c, Status: processed",
-    "metadata": {
-      "is_duplicate": true,
-      "original_doc_id": "doc-d05a8cba0c9c3a4f31f32d623fa5ca7c",
-      "original_track_id": "insert_20260430_144432_5655d19c"
+      "processing_start_time": 1777536634,
+      "processing_end_time": 1777537339
     }
   }
 }

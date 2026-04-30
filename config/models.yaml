@@ -49,7 +49,7 @@ models:
     embed_dim: 3072
     description: "OpenAI GPT-4o (XiaoAI)"
     recommended: false
-    prompt_version: "v6"
+    prompt_version: "v7" # 切换为 V7 严格模式，解决格式解析错误
 
   gpt-4o-mini:
     provider: "xiaoai"
@@ -58,7 +58,7 @@ models:
     embed_dim: 3072
     description: "OpenAI GPT-4o-mini (XiaoAI) - 快速/低成本"
     recommended: false
-    prompt_version: "v6"
+    prompt_version: "v8" # 使用 V8 Few-Shot Prompt (针对小模型优化)
 
 providers:
   xiaomimo_token:
@@ -96,6 +96,46 @@ providers:
     prompt_version: "v6"
 
 prompts:
+  v8: |
+    ---Role---
+    You are a Knowledge Graph Specialist. Extract entities and relationships from the input text.
+
+    ---CRITICAL INSTRUCTIONS---
+    1.  **NO MARKDOWN**: DO NOT output Markdown code blocks (``` ... ```).
+    2.  **NO JSON**: DO NOT output JSON.
+    3.  **RAW TEXT ONLY**: Output ONLY the plain text lines described below.
+    4.  **BE COMPREHENSIVE**: Extract EVERY entity, even minor ones. DO NOT be conservative.
+
+    ---Instructions---
+    1.  **Language**: ALL output MUST be in Chinese (简体中文). DO NOT translate names.
+    2.  **Entity Types**: `人物`, `地点`, `武功`, `兵器`, `事件`.
+    3.  **Relationship Types**: `师徒`, `所属`, `修炼`, `出没`, `使用`, `敌对`, `情感`, `提及`, `关联`.
+    4.  **Output Format**:
+        For each entity: entity<|#|>entity_name<|#|>entity_type<|#|>entity_description
+        For each relationship: relation<|#|>source_entity<|#|>target_entity<|#|>relationship_type<|#|>relationship_description
+    5.  **Rules**:
+        *   Extract ALL entities, even minor ones.
+        *   Every entity must have at least one relationship.
+        *   **Alias Handling**: If a character has multiple names, use the most common name.
+        *   Output ONLY the extracted list.
+        *   End with: <|COMPLETE|>
+
+    ---Examples---
+    Input: "阿青在浣纱溪边遇到了范蠡。范蠡告诉她，越王勾践正在铸造纯钧剑。"
+    Output:
+    entity<|#|>阿青<|#|>人物<|#|>牧羊女，剑术高超
+    entity<|#|>范蠡<|#|>人物<|#|>越国大夫，谋士
+    entity<|#|>浣纱溪<|#|>地点<|#|>阿青遇到范蠡的地方
+    entity<|#|>越王勾践<|#|>人物<|#|>越国君主
+    entity<|#|>纯钧剑<|#|>兵器<|#|>越国铸造的宝剑
+    relation<|#|>阿青<|#|>范蠡<|#|>相遇<|#|>阿青在浣纱溪边遇到范蠡
+    relation<|#|>范蠡<|#|>越王勾践<|#|>所属<|#|>范蠡是勾践的大夫
+    relation<|#|>越王勾践<|#|>纯钧剑<|#|>使用<|#|>勾践下令铸造宝剑
+    <|COMPLETE|>
+
+    ---Task---
+    Extract entities and relationships from the input text below.
+
   v7: |
     ---Role---
     You are a Knowledge Graph Specialist. Extract entities and relationships from the input text.
