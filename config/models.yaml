@@ -1,0 +1,180 @@
+# 模型配置注册表
+# 你可以在这里添加或修改任何 Provider 和模型
+
+default: "gemini-2.5-pro"
+
+models:
+  gemini-2.5-pro:
+    provider: "xiaoai"
+    llm_model: "gemini-2.5-pro"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "Google Gemini 2.5 Pro (XiaoAI)"
+    recommended: true
+    prompt_version: "v6" # 使用 V6 极简纯文本 Prompt
+
+  mimo-v2.5:
+    provider: "xiaomimo"
+    llm_model: "mimo-v2.5"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "Xiaomi MiMo V2.5 (新套餐)"
+    recommended: false
+    prompt_version: "v3" # 使用 V3 JSON 格式 Prompt
+
+  mimo-v2.5-pro:
+    provider: "xiaomimo_token"
+    embed_provider: "xiaoai"
+    llm_model: "mimo-v2.5-pro"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "Xiaomi MiMo V2.5 Pro (Token Plan)"
+    recommended: false
+    prompt_version: "v7" # 使用 V7 超级严格纯文本 Prompt (禁止 Markdown)
+
+  qwen3.6-plus:
+    provider: "dashscope"
+    embed_provider: "xiaoai" # 使用 XiaoAI 的 Embedding (DashScope Embedding 在 Coding Plan 下不可用)
+    llm_model: "qwen3.6-plus"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "Alibaba Qwen 3.6 Plus (DashScope Coding Plan) + XiaoAI Embedding"
+    recommended: false
+    prompt_version: "v6" # 使用 V6 极简纯文本 Prompt
+
+  gpt-4o:
+    provider: "xiaoai"
+    llm_model: "gpt-4o"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "OpenAI GPT-4o (XiaoAI)"
+    recommended: false
+    prompt_version: "v6"
+
+  gpt-4o-mini:
+    provider: "xiaoai"
+    llm_model: "gpt-4o-mini"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "OpenAI GPT-4o-mini (XiaoAI) - 快速/低成本"
+    recommended: false
+    prompt_version: "v6"
+
+providers:
+  xiaomimo_token:
+    api_key: "tp-cwdfzt1z2xwl4xdw1tsm2xvqwfggduooyb30eejuny89uqx6"
+    base_url: "https://token-plan-cn.xiaomimimo.com/v1"
+    embed_api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a" # 复用 XiaoAI Embedding
+    embed_base_url: "https://xiaoai.plus/v1"
+
+  dashscope:
+    api_key: "sk-sp-9ea6bee5234a4cc1bb9b7632f52a42d8"
+    base_url: "https://coding.dashscope.aliyuncs.com/v1"
+    embed_api_key: "sk-sp-9ea6bee5234a4cc1bb9b7632f52a42d8"
+    embed_base_url: "https://coding.dashscope.aliyuncs.com/v1"
+
+  xiaoai:
+    api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a"
+    base_url: "https://xiaoai.plus/v1"
+    embed_api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a" # 复用 LLM Key
+    embed_base_url: "https://xiaoai.plus/v1"
+
+  xiaomimo:
+    api_key: "tp-cwdfzt1z2xwl4xdw1tsm2xvqwfggduooyb30eejuny89uqx6"
+    base_url: "https://token-plan-cn.xiaomimimo.com/v1"
+    embed_api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a" # 使用 XiaoAI 的 Embedding
+    embed_base_url: "https://xiaoai.plus/v1"
+
+  openrouter:
+    api_key: "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"
+    base_url: "https://openrouter.ai/api/v1"
+    llm_model: "moonshotai/kimi-k2.6"
+    embed_model: "openai/text-embedding-3-large"
+    embed_dim: 3072
+    description: "OpenRouter Kimi K2.6"
+    recommended: false
+    prompt_version: "v6"
+
+prompts:
+  v7: |
+    ---Role---
+    You are a Knowledge Graph Specialist. Extract entities and relationships from the input text.
+
+    ---CRITICAL INSTRUCTIONS---
+    1.  **NO MARKDOWN**: DO NOT output Markdown code blocks (``` ... ```).
+    2.  **NO JSON**: DO NOT output JSON.
+    3.  **RAW TEXT ONLY**: Output ONLY the plain text lines described below.
+    4.  **NO EXTRA TEXT**: Do not include any introductory or concluding remarks.
+
+    ---Instructions---
+    1.  **Language**: ALL output MUST be in Chinese (简体中文). DO NOT translate names.
+    2.  **Entity Types**: `人物`, `地点`, `武功`, `兵器`, `事件`.
+    3.  **Relationship Types**: `师徒`, `所属`, `修炼`, `出没`, `使用`, `敌对`, `情感`, `提及`, `关联`.
+    4.  **Output Format**:
+        For each entity: entity<|#|>entity_name<|#|>entity_type<|#|>entity_description
+        For each relationship: relation<|#|>source_entity<|#|>target_entity<|#|>relationship_type<|#|>relationship_description
+    5.  **Rules**:
+        *   Extract ALL entities, even minor ones.
+        *   Every entity must have at least one relationship.
+        *   **Alias Handling**: If a character has multiple names, use the most common name.
+        *   Output ONLY the extracted list.
+        *   End with: <|COMPLETE|>
+
+    ---Task---
+    Extract entities and relationships from the input text below.
+
+  v6: |
+    ---Role---
+    You are a Knowledge Graph Specialist. Extract entities and relationships from the input text.
+
+    ---CRITICAL INSTRUCTIONS---
+    1.  **DO NOT** output JSON.
+    2.  **DO NOT** use Markdown code blocks (```json ... ```).
+    3.  **DO NOT** use curly braces {} or square brackets [].
+    4.  **ONLY** output plain text lines.
+
+    ---Instructions---
+    1.  **Language**: ALL output MUST be in Chinese (简体中文). DO NOT translate names.
+    2.  **Entity Types**: `人物`, `地点`, `武功`, `兵器`, `事件`.
+    3.  **Relationship Types**: `师徒`, `所属`, `修炼`, `出没`, `使用`, `敌对`, `情感`, `提及`, `关联`.
+    4.  **Output Format**:
+        For each entity: entity<|#|>entity_name<|#|>entity_type<|#|>entity_description
+        For each relationship: relation<|#|>source_entity<|#|>target_entity<|#|>relationship_type<|#|>relationship_description
+    5.  **Rules**:
+        *   Extract ALL entities, even minor ones.
+        *   Every entity must have at least one relationship.
+        *   **Alias Handling**: If a character has multiple names, use the most common name.
+        *   Output ONLY the extracted list.
+        *   End with: <|COMPLETE|>
+
+    ---Task---
+    Extract entities and relationships from the input text below.
+
+  v3: |
+    ---Role---
+    You are a Knowledge Graph Specialist. Extract entities and relationships from the input text.
+
+    ---Instructions---
+    1.  **Language**: ALL output MUST be in Chinese (简体中文). DO NOT translate names.
+    2.  **Entity Types (Use ONLY these)**: `人物`, `地点`, `武功`, `兵器`, `事件`.
+    3.  **Relationship Types (Use ONLY these)**: `师徒`, `所属`, `修炼`, `出没`, `使用`, `敌对`, `情感`, `提及`, `关联`.
+    4.  **Output Format**: STRICT JSON ONLY. No markdown, no extra text.
+
+    ---JSON Schema---
+    {
+      "entities": [
+        {"name": "Entity Name", "type": "Entity Type", "description": "Brief description"}
+      ],
+      "relationships": [
+        {"source": "Source Entity", "target": "Target Entity", "type": "Relationship Type", "description": "Brief description"}
+      ]
+    }
+
+    ---Rules---
+    *   Extract ALL entities, even minor ones.
+    *   Every entity must have at least one relationship.
+    *   **Alias Handling**: If a character has multiple names, use the most common name.
+    *   Output ONLY valid JSON.
+
+    ---Task---
+    Extract entities and relationships from the input text below.
