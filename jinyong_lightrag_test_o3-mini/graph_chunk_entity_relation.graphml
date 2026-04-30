@@ -1,0 +1,3966 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d13" for="edge" attr.name="truncate" attr.type="string" />
+  <key id="d12" for="edge" attr.name="created_at" attr.type="long" />
+  <key id="d11" for="edge" attr.name="file_path" attr.type="string" />
+  <key id="d10" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d9" for="edge" attr.name="keywords" attr.type="string" />
+  <key id="d8" for="edge" attr.name="description" attr.type="string" />
+  <key id="d7" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d6" for="node" attr.name="truncate" attr.type="string" />
+  <key id="d5" for="node" attr.name="created_at" attr.type="long" />
+  <key id="d4" for="node" attr.name="file_path" attr.type="string" />
+  <key id="d3" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d2" for="node" attr.name="description" attr.type="string" />
+  <key id="d1" for="node" attr.name="entity_type" attr.type="string" />
+  <key id="d0" for="node" attr.name="entity_id" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="青衣剑士">
+      <data key="d0">青衣剑士</data>
+      <data key="d1">人物</data>
+      <data key="d2">一位穿着青衣、剑法精妙且冷静狡黠的剑客&lt;SEP&gt;身穿青衣、擅长使长剑的剑士&lt;SEP&gt;吴国使者剑士，剑法多变，既送礼又参战。&lt;SEP&gt;身着青衣的剑士，负责展示剑之锋利及指示大王调整剑姿。</data>
+      <data key="d3">chunk-c903f2e907674391708383e3d1afe7fb&lt;SEP&gt;chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561024</data>
+      <data key="d6" />
+    </node>
+    <node id="锦衫剑士">
+      <data key="d0">锦衫剑士</data>
+      <data key="d1">人物</data>
+      <data key="d2">一位穿着锦衫、身法矫捷的剑客，与青衣剑士在剑场上相互对抗&lt;SEP&gt;身穿锦衫、挥舞重剑的剑士&lt;SEP&gt;越王宫中的卫士，负责防守，参与比剑较技。&lt;SEP&gt;穿锦衫的剑士，拔剑试验时所用佩剑(长剑)最终断裂。</data>
+      <data key="d3">chunk-c903f2e907674391708383e3d1afe7fb&lt;SEP&gt;chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561024</data>
+      <data key="d6" />
+    </node>
+    <node id="王者">
+      <data key="d0">王者</data>
+      <data key="d1">人物</data>
+      <data key="d2">身披紫袍、形貌拙异的君主，在剑赛中赏赐胜者金银&lt;SEP&gt;主持比剑、赏赐奖赏的统治者</data>
+      <data key="d3">chunk-c903f2e907674391708383e3d1afe7fb&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561024</data>
+      <data key="d6" />
+    </node>
+    <node id="吴越剑士">
+      <data key="d0">吴越剑士</data>
+      <data key="d1">人物</data>
+      <data key="d2">被王者点名参加二次比试的剑士&lt;SEP&gt;来自吴越地区、参与比剑活动的剑士</data>
+      <data key="d3">chunk-c903f2e907674391708383e3d1afe7fb&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561024</data>
+      <data key="d6" />
+    </node>
+    <node id="大剑">
+      <data key="d0">大剑</data>
+      <data key="d1">兵器</data>
+      <data key="d2">剑身极厚、重量甚重的兵器，由东首汉子使用&lt;SEP&gt;约五十斤重的利器，由锦衫剑士挥舞</data>
+      <data key="d3">chunk-c903f2e907674391708383e3d1afe7fb&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561024</data>
+      <data key="d6" />
+    </node>
+    <node id="东首汉子">
+      <data key="d0">东首汉子</data>
+      <data key="d1">人物</data>
+      <data key="d2">从东首锦衫剑士队中走出的身材魁梧的汉子，手提大剑参赛</data>
+      <data key="d3">chunk-c903f2e907674391708383e3d1afe7fb</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561024</data>
+      <data key="d6" />
+    </node>
+    <node id="护心铜镜">
+      <data key="d0">护心铜镜</data>
+      <data key="d1">兵器</data>
+      <data key="d2">A protective copper mirror concealed within青衣剑士’s clothing that prevents chest injuries</data>
+      <data key="d3">chunk-c903f2e907674391708383e3d1afe7fb</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561024</data>
+      <data key="d6" />
+    </node>
+    <node id="从者">
+      <data key="d0">从者</data>
+      <data key="d1">人物</data>
+      <data key="d2">A subordinate attendant who appears to clear the battlefield by removing the corpse and wiping away blood</data>
+      <data key="d3">chunk-c903f2e907674391708383e3d1afe7fb</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561025</data>
+      <data key="d6" />
+    </node>
+    <node id="勾践">
+      <data key="d0">勾践</data>
+      <data key="d1">人物</data>
+      <data key="d2">越王，意志坚定，誓言复仇吴国，决心擒拿夫差。&lt;SEP&gt;King of Yue who inquires about legendary sword forging and state affairs.&lt;SEP&gt;出言评价铸剑事宜，对伍子胥颇有敌意的君主&lt;SEP&gt;越国国王，决心铸剑以报仇，并威胁敌人&lt;SEP&gt;越国君主，曾败于吴国而卧薪尝胆，决心复仇&lt;SEP&gt;越国重要将领，发动兴兵伐吴的行动&lt;SEP&gt;The king of Yue who initiated the campaign against Wu</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561026</data>
+      <data key="d6" />
+    </node>
+    <node id="文种">
+      <data key="d0">文种</data>
+      <data key="d1">人物</data>
+      <data key="d2">担任大夫，受命入宫与范蠡共同商议大事，并具有独特见解。&lt;SEP&gt;Yue official responsible for dispatching orders and reporting on tasks.&lt;SEP&gt;神色焦虑、参与国事谋划的谋士&lt;SEP&gt;提出以指导剑匠铸造利剑方案的谋士&lt;SEP&gt;主张独特见解和策略，与范蠡互投真心，相见恨晚&lt;SEP&gt;担心范蠡健康、前来探望的文大夫，好朋友</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561027</data>
+      <data key="d6" />
+    </node>
+    <node id="夫差">
+      <data key="d0">夫差</data>
+      <data key="d1">人物</data>
+      <data key="d2">吴国君主，勾践誓言要斩其首的敌对对象。&lt;SEP&gt;吴国君主，与西施之间存在复杂的情感纠葛&lt;SEP&gt;吴国国君，吴国剑士效忠的领导者。</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561028</data>
+      <data key="d6" />
+    </node>
+    <node id="吴国武士">
+      <data key="d0">吴国武士</data>
+      <data key="d1">人物</data>
+      <data key="d2">来自吴国的武士，以其独特剑术和兵刃著称。</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561029</data>
+      <data key="d6" />
+    </node>
+    <node id="吴国">
+      <data key="d0">吴国</data>
+      <data key="d1">地点</data>
+      <data key="d2">吴王夫差统治的国家，向越国送礼并与之敌对。&lt;SEP&gt;古代吴国，与越国处于敌对状态。&lt;SEP&gt;The Kingdom of吴known for its master swordsmiths.&lt;SEP&gt;伍子胥效忠的国度&lt;SEP&gt;铸剑活动涉及的国家，与越国敌对&lt;SEP&gt;吴国，文中多次提及，是伍子胥效力及吴王统治之地&lt;SEP&gt;The state to which the Wu swordsmen belong.</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561034</data>
+      <data key="d6" />
+    </node>
+    <node id="宝剑">
+      <data key="d0">宝剑</data>
+      <data key="d1">兵器</data>
+      <data key="d2">一把纤薄却锋利无比的宝剑，可将轻纱划为两半，受各方瞩目。</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561035</data>
+      <data key="d6" />
+    </node>
+    <node id="吴国武士剑术">
+      <data key="d0">吴国武士剑术</data>
+      <data key="d1">武功</data>
+      <data key="d2">吴国武士所施展的剑术，体现其群战和兵法妙用。</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561037</data>
+      <data key="d6" />
+    </node>
+    <node id="长剑">
+      <data key="d0">长剑</data>
+      <data key="d1">兵器</data>
+      <data key="d2">The entity 长剑 is described as a sharp, offensive, and well-balanced weapon renowned for its cutting edge and agile performance in combat. Multiple accounts note its physical attributes as a finely crafted, three-foot-long sword with a keen, pointed tip, emphasizing its readiness for swift attacks in battle.
+
+The 长剑 appears in diverse martial contexts. It is notably used by warriors such as the 青衣剑士 (Blue-clothed swordsmen), who employed it in duels and battle, even to the point of having to wipe off blood after combat. In another account, the 锦衫剑士 (Brocade-clothed swordsman) is recorded using a similar sword during a sword-testing session, where the weapon unexpectedly fractured, suggesting either a moment of vulnerability or the exceptional rigors of combat training. Additionally, the 长剑 is recognized as an instrument of state power and duty, with mentions of its use by卫士 (guards) not only in battle alongside 吴国剑士 (Wu swordsmen) but also in missions to execute orders and to protect figures such as 范蠡.
+
+Furthermore, the 武器 is also referenced as part of the armaments of the 越军 (soldiers of Yue) during warfare, highlighting its role across different military factions and historical narratives. The inclusion of an English description—"Long swords employed by the Wu swordsmen during battle"—underscores its broader recognition and usage in various battle scenarios.
+
+Overall, the collected descriptions of 长剑 reveal a multifaceted weapon esteemed for its precision and lethal efficiency, integral to the martial traditions and historical narratives of several distinguished warrior groups.</data>
+      <data key="d3">chunk-c903f2e907674391708383e3d1afe7fb&lt;SEP&gt;chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561039</data>
+      <data key="d6" />
+    </node>
+    <node id="宫门">
+      <data key="d0">宫门</data>
+      <data key="d1">地点</data>
+      <data key="d2">宫殿的门侧，范蠡在此等待文种的到来。&lt;SEP&gt;宫殿的入口，兵刃落地的声音由此传出</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561040</data>
+      <data key="d6" />
+    </node>
+    <node id="饮宴领赏">
+      <data key="d0">饮宴领赏</data>
+      <data key="d1">事件</data>
+      <data key="d2">勾践命令上国剑士赴别座饮宴领取赏赐的活动。</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561041</data>
+      <data key="d6" />
+    </node>
+    <node id="阿青">
+      <data key="d0">阿青</data>
+      <data key="d1">人物</data>
+      <data key="d2">A young shepherd girl with extraordinary swordsmanship skills who uses a bamboo stick in combat.&lt;SEP&gt;A young woman who tends sheep and demonstrates an innate talent in swordsmanship.&lt;SEP&gt;天真美丽的乡下姑娘，受白公公教导并与范蠡同牧羊&lt;SEP&gt;武艺高强、使用竹棒斗剑，范蠡的爱宠&lt;SEP&gt;神秘女子，通过呼喊威胁杀西施，暗中钟情于范蠡&lt;SEP&gt;被称为“阿青姑娘”，进入宫门后举竹棒威胁西施，情感复杂多变</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561043</data>
+      <data key="d6" />
+    </node>
+    <node id="西施">
+      <data key="d0">西施</data>
+      <data key="d1">人物</data>
+      <data key="d2">绝世美女(夷光)，曾与少伯情深，后被送入吴宫&lt;SEP&gt;A renowned beauty whom范蠡eagerly anticipates reuniting with.&lt;SEP&gt;传说中范蠡真正细看过的绝世美女&lt;SEP&gt;吴国美女，居住于馆娃宫，与范蠡互诉相思&lt;SEP&gt;范蠡宠爱的女子，深受其关爱，同时引发阿青由敌对转为崇敬的情感</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561044</data>
+      <data key="d6" />
+    </node>
+    <node id="卫士">
+      <data key="d0">卫士</data>
+      <data key="d1">人物</data>
+      <data key="d2">随同范蠡出行，负责保护他的随从&lt;SEP&gt;Bodyguards under范蠡’s command who assist in executing his orders.&lt;SEP&gt;负责宫门守卫的士兵，服从范蠡的命令&lt;SEP&gt;The guards who accompany and protect Fan Li</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561045</data>
+      <data key="d6" />
+    </node>
+    <node id="甲士">
+      <data key="d0">甲士</data>
+      <data key="d1">人物</data>
+      <data key="d2">一千名穿甲士兵，负责守卫馆娃宫前后</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561047</data>
+      <data key="d6" />
+    </node>
+    <node id="范蠡">
+      <data key="d0">范蠡</data>
+      <data key="d1">人物</data>
+      <data key="d2">范蠡, the historical figure associated with the state of Yue, is portrayed as an influential adviser and official who played a multifaceted role during a turbulent period in Chinese history. He is traditionally known to have served under King Goujian, where he not only received and showcased gifts but also provided critical counsel in statecraft, military strategy, and diplomacy. Accounts emphasize his involvement in matters ranging from the forging of swords for combat to commanding guards and orchestrating military operations, including leading troops against enemy strongholds. In addition to his strategic acumen, this version of 范蠡 is noted for his personal pursuits, such as his famed quest for the beauty Xi Shi and his support for figures like 阿青 through negotiation and direct command. Celebrated for his unconventional yet kind-hearted approach, he remains remembered as someone who balanced tactical brilliance with personal charm, leaving a lasting impact on Yue’s successes in both internal administration and external conflicts.
+
+A distinct portrayal of 范蠡 emerges from records concerning the Chu region. This version of 范蠡 is described as a native of the Wan area in Chu, recognized for his unorthodox behavior and unconventional outlook. Known locally by the nickname “范疯子,” he served as a local official and was also depicted as a shepherd who recounted legendary Chu stories. His actions, which noticeably deviated from societal norms, earned him a reputation for being an individual with singular insights and a distinctive character. While sharing the same name, these contrasting accounts highlight separate interpretations of 范蠡’s legacy across different cultural and regional contexts.</data>
+      <data key="d3">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561048</data>
+      <data key="d6" />
+    </node>
+    <node id="剑士">
+      <data key="d0">剑士</data>
+      <data key="d1">人物</data>
+      <data key="d2">一千名持剑士兵，与甲士一道守卫重要区域</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561048</data>
+      <data key="d6" />
+    </node>
+    <node id="白公公">
+      <data key="d0">白公公</data>
+      <data key="d1">人物</data>
+      <data key="d2">An elderly man living in the mountains, implied to be the teacher behind阿青’s sword technique.&lt;SEP&gt;年长的竹棒剑术传授者&lt;SEP&gt;曾企图刺杀范蠡的角色</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561050</data>
+      <data key="d6" />
+    </node>
+    <node id="夷光">
+      <data key="d0">夷光</data>
+      <data key="d1">人物</data>
+      <data key="d2">在范蠡计策中被提及，计划由宫女假扮的角色</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561051</data>
+      <data key="d6" />
+    </node>
+    <node id="竹棒">
+      <data key="d0">竹棒</data>
+      <data key="d1">兵器</data>
+      <data key="d2">少女手中的竹棒，既用来驱赶山羊也用于自卫反击。&lt;SEP&gt;A bamboo stick used by阿青as a weapon to strikingly disable opponents.&lt;SEP&gt;A bamboo stick used by阿青as a weapon to fend off adversaries.&lt;SEP&gt;竹制棍棒，用于戏耍、教学剑术及牧羊时持用&lt;SEP&gt;由竹制成的武器，阿青与白猿均用以对战&lt;SEP&gt;阿青使用的竹制武器，其尖端曾指向西施心口</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561051</data>
+      <data key="d6" />
+    </node>
+    <node id="兵刃">
+      <data key="d0">兵刃</data>
+      <data key="d1">兵器</data>
+      <data key="d2">落地时发出声响的兵器，营造出紧张的战斗氛围</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561052</data>
+      <data key="d6" />
+    </node>
+    <node id="馆娃宫">
+      <data key="d0">馆娃宫</data>
+      <data key="d1">地点</data>
+      <data key="d2">吴王行宫，西施居所，范蠡曾突入此地&lt;SEP&gt;守卫部署的宫殿区域之一</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561052</data>
+      <data key="d6" />
+    </node>
+    <node id="吴宫">
+      <data key="d0">吴宫</data>
+      <data key="d1">地点</data>
+      <data key="d2">吴国的宫殿，曾接纳并囚禁西施&lt;SEP&gt;范蠡计划化装成越国士兵逃离的敌国宫殿</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561053</data>
+      <data key="d6" />
+    </node>
+    <node id="太湖">
+      <data key="d0">太湖</data>
+      <data key="d1">地点</data>
+      <data key="d2">范蠡与西施计划划船远逃的湖泊</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561054</data>
+      <data key="d6" />
+    </node>
+    <node id="长廊">
+      <data key="d0">长廊</data>
+      <data key="d1">地点</data>
+      <data key="d2">连接馆娃宫内的通道，回声清朗&lt;SEP&gt;宫内的走廊，回响着兵刃落地的声响</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561055</data>
+      <data key="d6" />
+    </node>
+    <node id="自杀计划">
+      <data key="d0">自杀计划</data>
+      <data key="d1">事件</data>
+      <data key="d2">范蠡考虑在关键时刻自杀以求西施宽恕并达成逃离计划</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561056</data>
+      <data key="d6" />
+    </node>
+    <node id="卫士长">
+      <data key="d0">卫士长</data>
+      <data key="d1">人物</data>
+      <data key="d2">领头的卫士，向范蠡致以关切问候</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561057</data>
+      <data key="d6" />
+    </node>
+    <node id="宫女">
+      <data key="d0">宫女</data>
+      <data key="d1">人物</data>
+      <data key="d2">The palace maid considered by Fan Li to impersonate Yiguang as part of his deceptive plan</data>
+      <data key="d3">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561058</data>
+      <data key="d6" />
+    </node>
+    <node id="老白">
+      <data key="d0">老白</data>
+      <data key="d1">人物</data>
+      <data key="d2">An affectionately named sheep whose body is mended and preserved, symbolizing sentimental value.&lt;SEP&gt;The pet sheep of阿青that was injured in battle and affectionately called "老白".</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561059</data>
+      <data key="d6" />
+    </node>
+    <node id="婢仆">
+      <data key="d0">婢仆</data>
+      <data key="d1">人物</data>
+      <data key="d2">Maid servants employed in范蠡’s household to help with daily tasks.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561060</data>
+      <data key="d6" />
+    </node>
+    <node id="仆役">
+      <data key="d0">仆役</data>
+      <data key="d1">人物</data>
+      <data key="d2">Household servants working within范蠡’s domain, including in the garden.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561060</data>
+      <data key="d6" />
+    </node>
+    <node id="剑术">
+      <data key="d0">剑术</data>
+      <data key="d1">武功</data>
+      <data key="d2">The art of swordsmanship exhibited by阿青and also somewhat known to范蠡.&lt;SEP&gt;A sword technique demonstrated by阿青, developed through self-practice and alluded to be taught by白公公.&lt;SEP&gt;神妙的剑术，传说中由白公公教授</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561061</data>
+      <data key="d6" />
+    </node>
+    <node id="姑娘屋">
+      <data key="d0">姑娘屋</data>
+      <data key="d1">地点</data>
+      <data key="d2">The residence associated with阿青, referred to as her house.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561062</data>
+      <data key="d6" />
+    </node>
+    <node id="大草地">
+      <data key="d0">大草地</data>
+      <data key="d1">地点</data>
+      <data key="d2">A spacious grassland mentioned in conversation, symbolizing a place for raising sheep.&lt;SEP&gt;A vast grassland within范蠡's property mentioned as a grazing area.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561062</data>
+      <data key="d6" />
+    </node>
+    <node id="大夫第">
+      <data key="d0">大夫第</data>
+      <data key="d1">地点</data>
+      <data key="d2">The large mansion where范蠡lives.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561063</data>
+      <data key="d6" />
+    </node>
+    <node id="花园">
+      <data key="d0">花园</data>
+      <data key="d1">地点</data>
+      <data key="d2">The garden within范蠡’s property where sheep graze and events occur.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561063</data>
+      <data key="d6" />
+    </node>
+    <node id="凉亭">
+      <data key="d0">凉亭</data>
+      <data key="d1">地点</data>
+      <data key="d2">A pavilion in the garden used for hosting and hospitality.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561064</data>
+      <data key="d6" />
+    </node>
+    <node id="山里">
+      <data key="d0">山里</data>
+      <data key="d1">地点</data>
+      <data key="d2">The mountainous area where白公公resides.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561065</data>
+      <data key="d6" />
+    </node>
+    <node id="山边">
+      <data key="d0">山边</data>
+      <data key="d1">地点</data>
+      <data key="d2">The edge of the mountain where阿青and范蠡wait for白公公.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561066</data>
+      <data key="d6" />
+    </node>
+    <node id="越国">
+      <data key="d0">越国</data>
+      <data key="d1">地点</data>
+      <data key="d2">越王勾践及范蠡所属的国家，战事频仍。&lt;SEP&gt;The Kingdom of Yue ruled by勾践.&lt;SEP&gt;西施所属的国家，与吴国处于敌对状态&lt;SEP&gt;越国，勾践执政之国，文种与范蠡受任大夫之处&lt;SEP&gt;The state from which the Yue guards originate.&lt;SEP&gt;A state mentioned in strategic plans, anticipated to benefit from the sword technique.&lt;SEP&gt;白公公受命教练武士的国家</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561071</data>
+      <data key="d6" />
+    </node>
+    <node id="吴">
+      <data key="d0">吴</data>
+      <data key="d1">地点</data>
+      <data key="d2">A state positioned as an opponent to越国.&lt;SEP&gt;吴国，范蠡被期望破除的对手</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561073</data>
+      <data key="d6" />
+    </node>
+    <node id="阿青母">
+      <data key="d0">阿青母</data>
+      <data key="d1">人物</data>
+      <data key="d2">The mother of阿青, referenced regarding household matters and care.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561074</data>
+      <data key="d6" />
+    </node>
+    <node id="牧羊">
+      <data key="d0">牧羊</data>
+      <data key="d1">事件</data>
+      <data key="d2">An event involving grazing sheep in the countryside, during which范蠡accompanies阿青.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561076</data>
+      <data key="d6" />
+    </node>
+    <node id="骑羊">
+      <data key="d0">骑羊</data>
+      <data key="d1">事件</data>
+      <data key="d2">A playful event from阿青’s youth when白公公rode a sheep, sparking early encounters.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561078</data>
+      <data key="d6" />
+    </node>
+    <node id="对打">
+      <data key="d0">对打</data>
+      <data key="d1">事件</data>
+      <data key="d2">A playful fighting event between阿青and白公公using a bamboo stick during阿青's youth.</data>
+      <data key="d3">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561083</data>
+      <data key="d6" />
+    </node>
+    <node id="薛烛">
+      <data key="d0">薛烛</data>
+      <data key="d1">人物</data>
+      <data key="d2">Disciple of欧冶子noted for his sword forging skills but disabled due to loss of fingers.&lt;SEP&gt;叙述并参与铸剑过程，后被伍子胥召至吴国协助&lt;SEP&gt;参与铸剑事宜的谋士，提出材料情况并劝阻风师哥&lt;SEP&gt;受范蠡命令督率良工铸剑&lt;SEP&gt;受范蠡命令督率良工铸造兵器的将领</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561085</data>
+      <data key="d6" />
+    </node>
+    <node id="吴王夫差">
+      <data key="d0">吴王夫差</data>
+      <data key="d1">人物</data>
+      <data key="d2">吴国国王，派遣青衣剑士送礼，曾击败越王勾践。&lt;SEP&gt;吴国国王，兵败退守余杭山后自杀</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561086</data>
+      <data key="d6" />
+    </node>
+    <node id="越国武士">
+      <data key="d0">越国武士</data>
+      <data key="d1">人物</data>
+      <data key="d2">习练“剑法影子”的士兵，因剑法精妙而无敌于天下</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561087</data>
+      <data key="d6" />
+    </node>
+    <node id="良工">
+      <data key="d0">良工</data>
+      <data key="d1">人物</data>
+      <data key="d2">精通铸剑技术的工匠，由薛烛督率制造千千万万口利剑</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561090</data>
+      <data key="d6" />
+    </node>
+    <node id="越军">
+      <data key="d0">越军</data>
+      <data key="d1">人物</data>
+      <data key="d2">越国军队，作战中持长剑冲阵</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561092</data>
+      <data key="d6" />
+    </node>
+    <node id="吴军">
+      <data key="d0">吴军</data>
+      <data key="d1">人物</data>
+      <data key="d2">吴国军队，与越军在战场上激烈交锋</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561093</data>
+      <data key="d6" />
+    </node>
+    <node id="剑法影子">
+      <data key="d0">剑法影子</data>
+      <data key="d1">武功</data>
+      <data key="d2">从剑中捉摸出的神秘剑法影子，传承越国武士的绝技</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561094</data>
+      <data key="d6" />
+    </node>
+    <node id="利剑">
+      <data key="d0">利剑</data>
+      <data key="d1">兵器</data>
+      <data key="d2">吴国与越国铸造的锋利剑，能对敌致命&lt;SEP&gt;薄如纸的剑，由勾践持有，象征复仇决心&lt;SEP&gt;范蠡命薛烛铸成，用以装备军队&lt;SEP&gt;由良工铸造的众多兵器，助力越国军战无不胜</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561094</data>
+      <data key="d6" />
+    </node>
+    <node id="越国伐吴">
+      <data key="d0">越国伐吴</data>
+      <data key="d1">事件</data>
+      <data key="d2">越国兴兵伐吴，吴兵大败，吴王夫差兵败自杀的战役</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561095</data>
+      <data key="d6" />
+    </node>
+    <node id="余杭山">
+      <data key="d0">余杭山</data>
+      <data key="d1">地点</data>
+      <data key="d2">吴王夫差退守的山地</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561095</data>
+      <data key="d6" />
+    </node>
+    <node id="姑苏">
+      <data key="d0">姑苏</data>
+      <data key="d1">地点</data>
+      <data key="d2">与会稽之间水程短的目的地&lt;SEP&gt;吴国京城所在，文种与范蠡曾居住之地&lt;SEP&gt;吴国剑士出发的地方之一。&lt;SEP&gt;吴国的都城，被越军攻入</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561097</data>
+      <data key="d6" />
+    </node>
+    <node id="五湖之畔">
+      <data key="d0">五湖之畔</data>
+      <data key="d1">地点</data>
+      <data key="d2">发生越吴大战的边湖地带</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561097</data>
+      <data key="d6" />
+    </node>
+    <node id="会稽山">
+      <data key="d0">会稽山</data>
+      <data key="d1">地点</data>
+      <data key="d2">勾践被围困之处，险象环生&lt;SEP&gt;范蠡曾在此被吴军围困的山脉</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561099</data>
+      <data key="d6" />
+    </node>
+    <node id="宫墙">
+      <data key="d0">宫墙</data>
+      <data key="d1">地点</data>
+      <data key="d2">围绕馆娃宫的高墙，传出阿青呼喊之声</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561100</data>
+      <data key="d6" />
+    </node>
+    <node id="旁人">
+      <data key="d0">旁人</data>
+      <data key="d1">人物</data>
+      <data key="d2">An unnamed person who received the transmission of the sword technique shadow</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561101</data>
+      <data key="d6" />
+    </node>
+    <node id="山羊">
+      <data key="d0">山羊</data>
+      <data key="d1">creature</data>
+      <data key="d2">A goat raised within the Guanwagong palace</data>
+      <data key="d3">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561102</data>
+      <data key="d6" />
+    </node>
+    <node id="越王勾践">
+      <data key="d0">越王勾践</data>
+      <data key="d1">人物</data>
+      <data key="d2">越国国王，曾被吴王夫差击败，卧薪尝胆，暗中训练士卒以图复仇。</data>
+      <data key="d3">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561104</data>
+      <data key="d6" />
+    </node>
+    <node id="新铸宝剑">
+      <data key="d0">新铸宝剑</data>
+      <data key="d1">兵器</data>
+      <data key="d2">越国新铸的宝剑，剑身极薄、宝光流动，仅供观赏。</data>
+      <data key="d3">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561105</data>
+      <data key="d6" />
+    </node>
+    <node id="剑法">
+      <data key="d0">剑法</data>
+      <data key="d1">武功</data>
+      <data key="d2">赛场上展现出的高超剑术&lt;SEP&gt;双方剑士所施展的剑技，包括守势如剑网和锐攻交错的攻势。&lt;SEP&gt;精湛的剑术，体现了吴国剑士高超的战斗技艺。</data>
+      <data key="d3">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561106</data>
+      <data key="d6" />
+    </node>
+    <node id="比剑">
+      <data key="d0">比剑</data>
+      <data key="d1">事件</data>
+      <data key="d2">为试探吴国军力而进行的比剑较技，双方各派精锐剑士参战。</data>
+      <data key="d3">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561107</data>
+      <data key="d6" />
+    </node>
+    <node id="送礼">
+      <data key="d0">送礼</data>
+      <data key="d1">事件</data>
+      <data key="d2">吴国派青衣剑士送礼给越王勾践的仪式，包含礼物交换与敬意表现。</data>
+      <data key="d3">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561108</data>
+      <data key="d6" />
+    </node>
+    <node id="金漆长匣">
+      <data key="d0">金漆长匣</data>
+      <data key="d1">兵器</data>
+      <data key="d2">A gilded long case used to present the newly forged sword.</data>
+      <data key="d3">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561109</data>
+      <data key="d6" />
+    </node>
+    <node id="部属">
+      <data key="d0">部属</data>
+      <data key="d1">人物</data>
+      <data key="d2">范蠡的部属，曾见范蠡后评论其为疯子</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561110</data>
+      <data key="d6" />
+    </node>
+    <node id="伍子胥">
+      <data key="d0">伍子胥</data>
+      <data key="d1">人物</data>
+      <data key="d2">吴国上卿，神通广施，策划转赠宝剑及暗藏阴谋&lt;SEP&gt;曾备下礼物召唤风师哥协助铸剑的历史人物&lt;SEP&gt;吴国的重要谋士，推行多项改革措施</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561111</data>
+      <data key="d6" />
+    </node>
+    <node id="吴王">
+      <data key="d0">吴王</data>
+      <data key="d1">人物</data>
+      <data key="d2">King of吴国, ruler and enemy of Yue.&lt;SEP&gt;吴国国王，重用伍子胥，后与越国讲和&lt;SEP&gt;姑苏城吴王宫中的君主，与宫中美女共处</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561112</data>
+      <data key="d6" />
+    </node>
+    <node id="太宰伯嚭">
+      <data key="d0">太宰伯嚭</data>
+      <data key="d1">人物</data>
+      <data key="d2">吴王身边的奸臣，被越国计策买通</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561113</data>
+      <data key="d6" />
+    </node>
+    <node id="孙武子">
+      <data key="d0">孙武子</data>
+      <data key="d1">人物</data>
+      <data key="d2">曾辅佐吴王、统兵破楚，其兵法后被提及</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561114</data>
+      <data key="d6" />
+    </node>
+    <node id="欧冶子">
+      <data key="d0">欧冶子</data>
+      <data key="d1">人物</data>
+      <data key="d2">Renowned swordsmith and teacher famed for forging legendary swords.&lt;SEP&gt;越国著名铸剑师，以铸剑术闻名</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561116</data>
+      <data key="d6" />
+    </node>
+    <node id="干将">
+      <data key="d0">干将</data>
+      <data key="d1">人物</data>
+      <data key="d2">Famed swordsmith from吴国, part of the celebrated couple with莫邪.&lt;SEP&gt;吴国著名剑匠，与莫邪并称</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561117</data>
+      <data key="d6" />
+    </node>
+    <node id="莫邪">
+      <data key="d0">莫邪</data>
+      <data key="d1">人物</data>
+      <data key="d2">Renowned swordsmith from吴国and partner of干将.&lt;SEP&gt;吴国著名剑匠，与干将并称，共为夫妻</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561117</data>
+      <data key="d6" />
+    </node>
+    <node id="石买">
+      <data key="d0">石买</data>
+      <data key="d1">人物</data>
+      <data key="d2">越国将领，受勾践重用出任将帅</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561118</data>
+      <data key="d6" />
+    </node>
+    <node id="灭吴九术">
+      <data key="d0">灭吴九术</data>
+      <data key="d1">武功</data>
+      <data key="d2">文种策划的九种针对吴国的复仇策略</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561120</data>
+      <data key="d6" />
+    </node>
+    <node id="孙武子遗法">
+      <data key="d0">孙武子遗法</data>
+      <data key="d1">武功</data>
+      <data key="d2">孙武子传下来的剑术法则，吴国剑士善用</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561121</data>
+      <data key="d6" />
+    </node>
+    <node id="吴国剑士">
+      <data key="d0">吴国剑士</data>
+      <data key="d1">人物</data>
+      <data key="d2">昨日在越宫获胜，醉酒后在长街闹事的吴国剑士&lt;SEP&gt;A group of eight skilled swordsmen dispatched by the吴王, renowned for their precise swordsmanship&lt;SEP&gt;吴国派出的剑士，多名参与现场战斗，态度傲慢且好斗。&lt;SEP&gt;Warriors from Wu state who wield long swords and engage in melee combat.&lt;SEP&gt;吴国的剑士，曾于长街与阿青交手</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561124</data>
+      <data key="d6" />
+    </node>
+    <node id="越国士兵">
+      <data key="d0">越国士兵</data>
+      <data key="d1">人物</data>
+      <data key="d2">代表越国出战的武士</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561126</data>
+      <data key="d6" />
+    </node>
+    <node id="钱塘江">
+      <data key="d0">钱塘江</data>
+      <data key="d1">地点</data>
+      <data key="d2">战斗发生地之一，吴越交战时曾在其边沿</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561128</data>
+      <data key="d6" />
+    </node>
+    <node id="中原诸国">
+      <data key="d0">中原诸国</data>
+      <data key="d1">地点</data>
+      <data key="d2">中原地区各国，被文种形容为暮气沉沉</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561133</data>
+      <data key="d6" />
+    </node>
+    <node id="越吴战争">
+      <data key="d0">越吴战争</data>
+      <data key="d1">事件</data>
+      <data key="d2">越国与吴国之间的战争</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561135</data>
+      <data key="d6" />
+    </node>
+    <node id="卧薪尝胆">
+      <data key="d0">卧薪尝胆</data>
+      <data key="d1">事件</data>
+      <data key="d2">勾践为复仇而忍辱自励的著名举措</data>
+      <data key="d3">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561136</data>
+      <data key="d6" />
+    </node>
+    <node id="官员">
+      <data key="d0">官员</data>
+      <data key="d1">人物</data>
+      <data key="d2">陪同王者、赞誉剑术并统筹赛事的官员</data>
+      <data key="d3">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561140</data>
+      <data key="d6" />
+    </node>
+    <node id="大殿东首">
+      <data key="d0">大殿东首</data>
+      <data key="d1">地点</data>
+      <data key="d2">大殿东端，锦衫剑士集结比剑的场所</data>
+      <data key="d3">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561144</data>
+      <data key="d6" />
+    </node>
+    <node id="西首">
+      <data key="d0">西首</data>
+      <data key="d1">地点</data>
+      <data key="d2">大殿西端，青衣剑士出场及比剑的位置</data>
+      <data key="d3">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561146</data>
+      <data key="d6" />
+    </node>
+    <node id="一对一比剑">
+      <data key="d0">一对一比剑</data>
+      <data key="d1">事件</data>
+      <data key="d2">青衣剑士与锦衫剑士之间进行的单挑比剑</data>
+      <data key="d3">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561148</data>
+      <data key="d6" />
+    </node>
+    <node id="三次比剑">
+      <data key="d0">三次比剑</data>
+      <data key="d1">事件</data>
+      <data key="d2">官员宣布的进行三场比剑的赛事</data>
+      <data key="d3">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561149</data>
+      <data key="d6" />
+    </node>
+    <node id="二对二比剑">
+      <data key="d0">二对二比剑</data>
+      <data key="d1">事件</data>
+      <data key="d2">双方各出两人进行的比剑比赛</data>
+      <data key="d3">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561150</data>
+      <data key="d6" />
+    </node>
+    <node id="四对四比试">
+      <data key="d0">四对四比试</data>
+      <data key="d1">事件</data>
+      <data key="d2">双方各派四人参加的比剑较量</data>
+      <data key="d3">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561152</data>
+      <data key="d6" />
+    </node>
+    <node id="单打独斗比剑">
+      <data key="d0">单打独斗比剑</data>
+      <data key="d1">事件</data>
+      <data key="d2">个人单挑比剑的比赛</data>
+      <data key="d3">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561153</data>
+      <data key="d6" />
+    </node>
+    <node id="越国卫士">
+      <data key="d0">越国卫士</data>
+      <data key="d1">人物</data>
+      <data key="d2">Guards from Yue state who come to the battlefield to assist and escort important figures.</data>
+      <data key="d3">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561153</data>
+      <data key="d6" />
+    </node>
+    <node id="宾馆">
+      <data key="d0">宾馆</data>
+      <data key="d1">地点</data>
+      <data key="d2">A lodging place where伍子胥and风师兄held a conversation&lt;SEP&gt;The place designated for the envoy's rest and recovery.</data>
+      <data key="d3">chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561160</data>
+      <data key="d6" />
+    </node>
+    <node id="剑网">
+      <data key="d0">剑网</data>
+      <data key="d1">武功</data>
+      <data key="d2">A sword technique that creates a protective net, used by the Wu swordsmen.</data>
+      <data key="d3">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561160</data>
+      <data key="d6" />
+    </node>
+    <node id="上国使者">
+      <data key="d0">上国使者</data>
+      <data key="d1">人物</data>
+      <data key="d2">An envoy from an unspecified state who is escorted for rest.&lt;SEP&gt;Ambassadors from the superior nation, represented by the eight Wu warriors.</data>
+      <data key="d3">chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561161</data>
+      <data key="d6" />
+    </node>
+    <node id="医生">
+      <data key="d0">医生</data>
+      <data key="d1">人物</data>
+      <data key="d2">A medical practitioner called upon to treat the injured combatants.</data>
+      <data key="d3">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561161</data>
+      <data key="d6" />
+    </node>
+    <node id="范蠡的家">
+      <data key="d0">范蠡的家</data>
+      <data key="d1">地点</data>
+      <data key="d2">The residence of范蠡where he invites阿青to dine.</data>
+      <data key="d3">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561168</data>
+      <data key="d6" />
+    </node>
+    <node id="风师哥">
+      <data key="d0">风师哥</data>
+      <data key="d1">人物</data>
+      <data key="d2">与铸剑有关，被召唤前往吴国协助铸剑的人物</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561168</data>
+      <data key="d6" />
+    </node>
+    <node id="风胡子">
+      <data key="d0">风胡子</data>
+      <data key="d1">人物</data>
+      <data key="d2">Senior disciple of欧冶子known for exceptional talent and envy, implicated in severing薛烛’s fingers.&lt;SEP&gt;被勾践威胁捉拿并处死的对手</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561169</data>
+      <data key="d6" />
+    </node>
+    <node id="少伯">
+      <data key="d0">少伯</data>
+      <data key="d1">人物</data>
+      <data key="d2">与西施情深相爱的男子，被西施恳求接她回去</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561170</data>
+      <data key="d6" />
+    </node>
+    <node id="吴国使臣">
+      <data key="d0">吴国使臣</data>
+      <data key="d1">人物</data>
+      <data key="d2">代表吴国出现，其身份被范蠡识别&lt;SEP&gt;A Wu envoy noted by范蠡, who is rude but is not to be engaged in combat.</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561175</data>
+      <data key="d6" />
+    </node>
+    <node id="锡山">
+      <data key="d0">锡山</data>
+      <data key="d1">地点</data>
+      <data key="d2">伍子胥派兵守护，不允许百姓采锡的山</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561176</data>
+      <data key="d6" />
+    </node>
+    <node id="会稽">
+      <data key="d0">会稽</data>
+      <data key="d1">地点</data>
+      <data key="d2">与姑苏构成短水程线路的起点之一&lt;SEP&gt;吴国剑士在此地区展开战斗与挑衅。</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561177</data>
+      <data key="d6" />
+    </node>
+    <node id="浣纱溪畔">
+      <data key="d0">浣纱溪畔</data>
+      <data key="d1">地点</data>
+      <data key="d2">西施常出现之地，展现其绝美容颜</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561178</data>
+      <data key="d6" />
+    </node>
+    <node id="越宫">
+      <data key="d0">越宫</data>
+      <data key="d1">地点</data>
+      <data key="d2">越国宫殿，吴国剑士曾在此大获全胜</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561178</data>
+      <data key="d6" />
+    </node>
+    <node id="长街">
+      <data key="d0">长街</data>
+      <data key="d1">地点</data>
+      <data key="d2">吴国剑士闹事、喧哗的街道&lt;SEP&gt;少女从东端出现的街道区域。</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561179</data>
+      <data key="d6" />
+    </node>
+    <node id="铸剑">
+      <data key="d0">铸剑</data>
+      <data key="d1">事件</data>
+      <data key="d2">关于吴越两国铸造锋利宝剑的整个事件</data>
+      <data key="d3">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561180</data>
+      <data key="d6" />
+    </node>
+    <node id="先师">
+      <data key="d0">先师</data>
+      <data key="d1">人物</data>
+      <data key="d2">曾为楚王铸剑三口并传授铸剑之道</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561180</data>
+      <data key="d6" />
+    </node>
+    <node id="楚王">
+      <data key="d0">楚王</data>
+      <data key="d1">人物</data>
+      <data key="d2">King of楚国who possesses several legendary swords.&lt;SEP&gt;楚国国王，珍视先师所铸之宝剑</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561181</data>
+      <data key="d6" />
+    </node>
+    <node id="师哥">
+      <data key="d0">师哥</data>
+      <data key="d1">人物</data>
+      <data key="d2">获得楚王宝剑者</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561181</data>
+      <data key="d6" />
+    </node>
+    <node id="风师兄">
+      <data key="d0">风师兄</data>
+      <data key="d1">人物</data>
+      <data key="d2">在吴国铸剑、指点剑匠，使宝剑锋利的武者</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561182</data>
+      <data key="d6" />
+    </node>
+    <node id="楚平王">
+      <data key="d0">楚平王</data>
+      <data key="d1">人物</data>
+      <data key="d2">楚国君主，其棺中藏有宝剑，由伍子胥发掘</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561182</data>
+      <data key="d6" />
+    </node>
+    <node id="王僚">
+      <data key="d0">王僚</data>
+      <data key="d1">人物</data>
+      <data key="d2">Victim targeted by assassin专诸under吴王’s orders.&lt;SEP&gt;曾成为伍子胥策谋刺杀目标的君臣</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561183</data>
+      <data key="d6" />
+    </node>
+    <node id="楚国">
+      <data key="d0">楚国</data>
+      <data key="d1">地点</data>
+      <data key="d2">The Kingdom of楚where several legendary swords are housed.&lt;SEP&gt;楚王、楚平王统治的国度&lt;SEP&gt;古代国家，背景故事中的传奇之地</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561184</data>
+      <data key="d6" />
+    </node>
+    <node id="北方齐晋">
+      <data key="d0">北方齐晋</data>
+      <data key="d1">地点</data>
+      <data key="d2">北方齐国与晋国争霸的地区</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561185</data>
+      <data key="d6" />
+    </node>
+    <node id="莫干山">
+      <data key="d0">莫干山</data>
+      <data key="d1">地点</data>
+      <data key="d2">风师兄铸剑房所在之山</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561185</data>
+      <data key="d6" />
+    </node>
+    <node id="干将莫邪">
+      <data key="d0">干将莫邪</data>
+      <data key="d1">兵器</data>
+      <data key="d2">传说中铸剑惨事的象征，警示铸剑耗力</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561186</data>
+      <data key="d6" />
+    </node>
+    <node id="吴剑">
+      <data key="d0">吴剑</data>
+      <data key="d1">兵器</data>
+      <data key="d2">风师兄指点铸剑后产出的锋利宝剑</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561187</data>
+      <data key="d6" />
+    </node>
+    <node id="吴士勇">
+      <data key="d0">吴士勇</data>
+      <data key="d1">人物</data>
+      <data key="d2">吴国勇士，以悍勇著称</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561187</data>
+      <data key="d6" />
+    </node>
+    <node id="吴越">
+      <data key="d0">吴越</data>
+      <data key="d1">地点</data>
+      <data key="d2">吴越地区，相关于吴国局势</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561188</data>
+      <data key="d6" />
+    </node>
+    <node id="龙渊">
+      <data key="d0">龙渊</data>
+      <data key="d1">兵器</data>
+      <data key="d2">Legendary sword forged by欧冶子for楚王.&lt;SEP&gt;先师为楚王铸造的第一口宝剑</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561189</data>
+      <data key="d6" />
+    </node>
+    <node id="泰阿">
+      <data key="d0">泰阿</data>
+      <data key="d1">兵器</data>
+      <data key="d2">Legendary sword forged by欧冶子for楚王.&lt;SEP&gt;先师为楚王铸造的第二口宝剑</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561189</data>
+      <data key="d6" />
+    </node>
+    <node id="工布">
+      <data key="d0">工布</data>
+      <data key="d1">兵器</data>
+      <data key="d2">Legendary sword forged by欧冶子for楚王, noted for its flowing inscriptions.&lt;SEP&gt;先师为楚王铸造的第三口宝剑</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561190</data>
+      <data key="d6" />
+    </node>
+    <node id="小人">
+      <data key="d0">小人</data>
+      <data key="d1">人物</data>
+      <data key="d2">自称，后被伍子胥召唤前往吴国协助铸剑</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561191</data>
+      <data key="d6" />
+    </node>
+    <node id="专诸刺王僚">
+      <data key="d0">专诸刺王僚</data>
+      <data key="d1">事件</data>
+      <data key="d2">伍子胥策划并实施专诸刺杀王僚的行动</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561192</data>
+      <data key="d6" />
+    </node>
+    <node id="礼物">
+      <data key="d0">礼物</data>
+      <data key="d1">artifact</data>
+      <data key="d2">The gift prepared by伍子胥to summon薛烛to assist in sword forging</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561193</data>
+      <data key="d6" />
+    </node>
+    <node id="铸剑房">
+      <data key="d0">铸剑房</data>
+      <data key="d1">地点</data>
+      <data key="d2">A sword forging workshop located on莫干山</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561195</data>
+      <data key="d6" />
+    </node>
+    <node id="剑匠">
+      <data key="d0">剑匠</data>
+      <data key="d1">人物</data>
+      <data key="d2">A group of over a thousand swordsmiths involved in forging swords</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561196</data>
+      <data key="d6" />
+    </node>
+    <node id="先师遗泽">
+      <data key="d0">先师遗泽</data>
+      <data key="d1">concept</data>
+      <data key="d2">Represents the legacy of先师, signifying his transmitted wisdom and treasure</data>
+      <data key="d3">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561196</data>
+      <data key="d6" />
+    </node>
+    <node id="为首的吴国剑士">
+      <data key="d0">为首的吴国剑士</data>
+      <data key="d1">人物</data>
+      <data key="d2">吴国剑士中的首领，表现出挑衅与自负。</data>
+      <data key="d3">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561197</data>
+      <data key="d6" />
+    </node>
+    <node id="范蠡手下的卫士">
+      <data key="d0">范蠡手下的卫士</data>
+      <data key="d1">人物</data>
+      <data key="d2">隶属于范蠡的护卫，持剑守阵但服从命令不敢擅动。</data>
+      <data key="d3">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561197</data>
+      <data key="d6" />
+    </node>
+    <node id="少女">
+      <data key="d0">少女</data>
+      <data key="d1">人物</data>
+      <data key="d2">身穿浅绿衫、赶着山羊的女子，展现出机敏与高超反击技艺。</data>
+      <data key="d3">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561198</data>
+      <data key="d6" />
+    </node>
+    <node id="吴越冲突">
+      <data key="d0">吴越冲突</data>
+      <data key="d1">事件</data>
+      <data key="d2">涉及范蠡、吴国剑士及少女之间的武力对抗与外交博弈。</data>
+      <data key="d3">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561200</data>
+      <data key="d6" />
+    </node>
+    <node id="大夫">
+      <data key="d0">大夫</data>
+      <data key="d1">人物</data>
+      <data key="d2">An official whose honor is guarded in the conflict, as any assault on him is met with execution.</data>
+      <data key="d3">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561201</data>
+      <data key="d6" />
+    </node>
+    <node id="范府">
+      <data key="d0">范府</data>
+      <data key="d1">地点</data>
+      <data key="d2">范蠡的府邸，文种前来拜访的地方</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561202</data>
+      <data key="d6" />
+    </node>
+    <node id="湘妃">
+      <data key="d0">湘妃</data>
+      <data key="d1">人物</data>
+      <data key="d2">楚国传说中的美丽女子形象，范蠡讲述故事时提及</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561203</data>
+      <data key="d6" />
+    </node>
+    <node id="山鬼">
+      <data key="d0">山鬼</data>
+      <data key="d1">人物</data>
+      <data key="d2">楚国传说中的山中鬼怪，伴随湘妃传说出现</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561204</data>
+      <data key="d6" />
+    </node>
+    <node id="湘江">
+      <data key="d0">湘江</data>
+      <data key="d1">地点</data>
+      <data key="d2">清澈的江水，映出倒影，范蠡借此描绘美丽景色</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561205</data>
+      <data key="d6" />
+    </node>
+    <node id="姑苏城">
+      <data key="d0">姑苏城</data>
+      <data key="d1">地点</data>
+      <data key="d2">吴王宫所在的城市</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561206</data>
+      <data key="d6" />
+    </node>
+    <node id="吴王宫">
+      <data key="d0">吴王宫</data>
+      <data key="d1">地点</data>
+      <data key="d2">吴王的居所，故事中出现的场景</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561208</data>
+      <data key="d6" />
+    </node>
+    <node id="大江">
+      <data key="d0">大江</data>
+      <data key="d1">地点</data>
+      <data key="d2">波涛汹涌的大江，被范蠡凝望</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561209</data>
+      <data key="d6" />
+    </node>
+    <node id="山坡草地">
+      <data key="d0">山坡草地</data>
+      <data key="d1">地点</data>
+      <data key="d2">范蠡与阿青牧羊、唱歌所在的山坡及草地</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561212</data>
+      <data key="d6" />
+    </node>
+    <node id="椽吏">
+      <data key="d0">椽吏</data>
+      <data key="d1">人物</data>
+      <data key="d2">范府中的中层官吏，负责传达范蠡状况，并表达忧虑</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561213</data>
+      <data key="d6" />
+    </node>
+    <node id="下吏">
+      <data key="d0">下吏</data>
+      <data key="d1">人物</data>
+      <data key="d2">范府中较低级别的官吏，负责公务请示事宜</data>
+      <data key="d3">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561214</data>
+      <data key="d6" />
+    </node>
+    <node id="白猿">
+      <data key="d0">白猿</data>
+      <data key="d1">人物</data>
+      <data key="d2">一头白色猿猴，持竹棒与阿青激斗，曾断去两臂</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561216</data>
+      <data key="d6" />
+    </node>
+    <node id="越国剑士">
+      <data key="d0">越国剑士</data>
+      <data key="d1">人物</data>
+      <data key="d2">越国一流剑士，多次模仿阿青的剑法</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561216</data>
+      <data key="d6" />
+    </node>
+    <node id="越王">
+      <data key="d0">越王</data>
+      <data key="d1">人物</data>
+      <data key="d2">越国君主，于剑室中见证阿青剑法的神奇</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561218</data>
+      <data key="d6" />
+    </node>
+    <node id="会稽城">
+      <data key="d0">会稽城</data>
+      <data key="d1">地点</data>
+      <data key="d2">越国的一座城市，范蠡派部属寻找阿青所在地</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561219</data>
+      <data key="d6" />
+    </node>
+    <node id="荒山野岭">
+      <data key="d0">荒山野岭</data>
+      <data key="d1">地点</data>
+      <data key="d2">部属寻找阿青踪迹时搜寻的野外区域</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561223</data>
+      <data key="d6" />
+    </node>
+    <node id="山谷">
+      <data key="d0">山谷</data>
+      <data key="d1">地点</data>
+      <data key="d2">猿啸在此回响，见证了战斗余韵</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561224</data>
+      <data key="d6" />
+    </node>
+    <node id="五湖">
+      <data key="d0">五湖</data>
+      <data key="d1">地点</data>
+      <data key="d2">勾践伐吴时战斗的水边区域</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561225</data>
+      <data key="d6" />
+    </node>
+    <node id="阿青剑法">
+      <data key="d0">阿青剑法</data>
+      <data key="d1">武功</data>
+      <data key="d2">阿青独创的剑术精妙无比，令越国剑士难以逾越</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561226</data>
+      <data key="d6" />
+    </node>
+    <node id="勾践兴兵伐吴">
+      <data key="d0">勾践兴兵伐吴</data>
+      <data key="d1">事件</data>
+      <data key="d2">勾践发动的伐吴战争，标志着越国大举出征</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561233</data>
+      <data key="d6" />
+    </node>
+    <node id="阿青与白猿斗剑">
+      <data key="d0">阿青与白猿斗剑</data>
+      <data key="d1">事件</data>
+      <data key="d2">阿青与白猿于地里进行的激烈斗剑之战</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561233</data>
+      <data key="d6" />
+    </node>
+    <node id="阿青家">
+      <data key="d0">阿青家</data>
+      <data key="d1">地点</data>
+      <data key="d2">The residence of阿青, now only an empty house remains</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561240</data>
+      <data key="d6" />
+    </node>
+    <node id="剑室">
+      <data key="d0">剑室</data>
+      <data key="d1">地点</data>
+      <data key="d2">The sword chamber of越王, where阿青demonstrated her sword technique</data>
+      <data key="d3">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561240</data>
+      <data key="d6" />
+    </node>
+    <node id="秦王">
+      <data key="d0">秦王</data>
+      <data key="d1">人物</data>
+      <data key="d2">King of秦who attempted to seize a legendary sword but was thwarted.</data>
+      <data key="d3">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561242</data>
+      <data key="d6" />
+    </node>
+    <node id="越王允常">
+      <data key="d0">越王允常</data>
+      <data key="d1">人物</data>
+      <data key="d2">Former King of Yue and father of勾践, originally associated with the forging of legendary swords.</data>
+      <data key="d3">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561246</data>
+      <data key="d6" />
+    </node>
+    <node id="湛卢">
+      <data key="d0">湛卢</data>
+      <data key="d1">兵器</data>
+      <data key="d2">Legendary sword forged by欧冶子(and originally by越王允常), currently possessed by楚王.</data>
+      <data key="d3">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561247</data>
+      <data key="d6" />
+    </node>
+    <node id="纯钧">
+      <data key="d0">纯钧</data>
+      <data key="d1">兵器</data>
+      <data key="d2">Legendary sword forged by欧冶子(with origins tied to越王允常), kept in the Yue king’s palace.</data>
+      <data key="d3">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561249</data>
+      <data key="d6" />
+    </node>
+    <node id="胜邪">
+      <data key="d0">胜邪</data>
+      <data key="d1">兵器</data>
+      <data key="d2">The foremost legendary sword forged by欧冶子, now in吴国.</data>
+      <data key="d3">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561249</data>
+      <data key="d6" />
+    </node>
+    <node id="鱼肠">
+      <data key="d0">鱼肠</data>
+      <data key="d1">兵器</data>
+      <data key="d2">Legendary sword forged by欧冶子, now in吴国and used by an assassin.</data>
+      <data key="d3">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561250</data>
+      <data key="d6" />
+    </node>
+    <node id="巨阙">
+      <data key="d0">巨阙</data>
+      <data key="d1">兵器</data>
+      <data key="d2">Legendary sword forged by欧冶子(and originally by越王允常), kept in the Yue king’s palace.</data>
+      <data key="d3">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561256</data>
+      <data key="d6" />
+    </node>
+    <node id="专诸">
+      <data key="d0">专诸</data>
+      <data key="d1">人物</data>
+      <data key="d2">Assassin commissioned by吴王who used the鱼肠sword to carry out an assassination.</data>
+      <data key="d3">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561257</data>
+      <data key="d6" />
+    </node>
+    <node id="先王">
+      <data key="d0">先王</data>
+      <data key="d1">人物</data>
+      <data key="d2">Former king who commissioned欧冶子to forge five legendary swords.</data>
+      <data key="d3">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1777561257</data>
+      <data key="d6" />
+    </node>
+    <edge source="青衣剑士" target="锦衫剑士">
+      <data key="d7">2.0</data>
+      <data key="d8">在剑场上互为对手，进行激烈的比剑&lt;SEP&gt;两者在比剑中互为对手</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-c903f2e907674391708383e3d1afe7fb&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561262</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="长剑">
+      <data key="d7">2.0</data>
+      <data key="d8">在比剑中以长剑攻防，展示出高超剑法&lt;SEP&gt;青衣剑士在比剑中挥动锋利的长剑</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-c903f2e907674391708383e3d1afe7fb&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561269</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="王者">
+      <data key="d7">3.0</data>
+      <data key="d8">比剑后向王者行礼致谢，表达敬意&lt;SEP&gt;青衣剑士屈膝行礼以示对王者的尊敬&lt;SEP&gt;王者赏赐青衣剑士金十斤以表嘉奖</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-c903f2e907674391708383e3d1afe7fb&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561271</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="护心铜镜">
+      <data key="d7">1.0</data>
+      <data key="d8">The copper mirror is hidden within青衣剑士’s attire, offering him protection during combat</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-c903f2e907674391708383e3d1afe7fb</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561278</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="宝剑">
+      <data key="d7">1.0</data>
+      <data key="d8">指示大王平伸剑刃，使轻纱落于剑上以展示剑之锋利。</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561286</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="勾践">
+      <data key="d7">2.0</data>
+      <data key="d8">下令青衣剑士赴别座饮宴领取赏赐，体现对部下的调遣。&lt;SEP&gt;Instructed the king to extend his sword blade upward.</data>
+      <data key="d9">关联,提及</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561306</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="剑法">
+      <data key="d7">2.0</data>
+      <data key="d8">青衣剑士修炼并展现出高超的剑法&lt;SEP&gt;青衣剑士修炼轻快而凶猛的攻势剑法。</data>
+      <data key="d9">修炼</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561384</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="吴国">
+      <data key="d7">1.0</data>
+      <data key="d8">青衣剑士作为吴国使者，奉命行事。</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561387</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="比剑">
+      <data key="d7">1.0</data>
+      <data key="d8">青衣剑士以使者身份参与比剑较技。</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561388</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="送礼">
+      <data key="d7">1.0</data>
+      <data key="d8">青衣剑士作为吴国使者，执行送礼仪式向越王致意。</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561392</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="金漆长匣">
+      <data key="d7">1.0</data>
+      <data key="d8">A Qingyi Sword Soldier picks up and utilizes the gilded long case to offer the treasure sword.</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561394</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="官员">
+      <data key="d7">1.0</data>
+      <data key="d8">官员赞叹青衣剑士手中好剑，称“好剑”</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561419</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="西首">
+      <data key="d7">1.0</data>
+      <data key="d8">青衣剑士从西首走出参与比剑</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561422</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="一对一比剑">
+      <data key="d7">1.0</data>
+      <data key="d8">青衣剑士参与了一对一比剑比赛</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561427</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="二对二比剑">
+      <data key="d7">1.0</data>
+      <data key="d8">青衣剑士参战于二对二比剑比赛</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561432</data>
+      <data key="d13" />
+    </edge>
+    <edge source="青衣剑士" target="四对四比试">
+      <data key="d7">1.0</data>
+      <data key="d8">青衣剑士参与了四对四比试的赛事</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561439</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="长剑">
+      <data key="d7">1.0</data>
+      <data key="d8">拔剑后挥剑劈下，结果长剑在试验中断为两截。</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561271</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="范蠡">
+      <data key="d7">1.0</data>
+      <data key="d8">Ordered the sash-wearing swordsman to draw and swing his sword for testing.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561308</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="越国">
+      <data key="d7">1.0</data>
+      <data key="d8">锦衫剑士隶属于越国宫廷，守护越王安全。</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561384</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="剑法">
+      <data key="d7">2.0</data>
+      <data key="d8">锦衫剑士修炼并展示出精湛的剑法&lt;SEP&gt;锦衫剑士修炼严密防守的守势剑法，如同剑网罩敌。</data>
+      <data key="d9">修炼</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561387</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="比剑">
+      <data key="d7">1.0</data>
+      <data key="d8">锦衫剑士以卫士身份参与比剑较技，坚守防线。</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561392</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="大剑">
+      <data key="d7">1.0</data>
+      <data key="d8">锦衫剑士使用沉重的大剑进行进攻</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561419</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="大殿东首">
+      <data key="d7">1.0</data>
+      <data key="d8">锦衫剑士聚集于大殿东首进行比剑</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561421</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="一对一比剑">
+      <data key="d7">1.0</data>
+      <data key="d8">锦衫剑士参与了一对一比剑比赛</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561432</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="二对二比剑">
+      <data key="d7">1.0</data>
+      <data key="d8">锦衫剑士参战于二对二比剑比赛</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561439</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="官员">
+      <data key="d7">1.0</data>
+      <data key="d8">官员喊话并提醒锦衫剑士“学剑之士，当守剑道！”</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561444</data>
+      <data key="d13" />
+    </edge>
+    <edge source="锦衫剑士" target="四对四比试">
+      <data key="d7">1.0</data>
+      <data key="d8">锦衫剑士参与了四对四比试的赛事</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561446</data>
+      <data key="d13" />
+    </edge>
+    <edge source="王者" target="吴越剑士">
+      <data key="d7">1.0</data>
+      <data key="d8">在命令中点名吴越剑士参加二次比试</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-c903f2e907674391708383e3d1afe7fb</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561278</data>
+      <data key="d13" />
+    </edge>
+    <edge source="王者" target="从者">
+      <data key="d7">1.0</data>
+      <data key="d8">The attendant is part of the王者’s retinue responsible for managing post-battle tasks</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-c903f2e907674391708383e3d1afe7fb</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561293</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴越剑士" target="官员">
+      <data key="d7">1.0</data>
+      <data key="d8">官员以“吴越剑士”之名宣布“三次比剑”赛事</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561422</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴越剑士" target="三次比剑">
+      <data key="d7">1.0</data>
+      <data key="d8">吴越剑士作为参赛者参加了三次比剑</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561428</data>
+      <data key="d13" />
+    </edge>
+    <edge source="大剑" target="东首汉子">
+      <data key="d7">1.0</data>
+      <data key="d8">在比试中提起大剑施展力量</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-c903f2e907674391708383e3d1afe7fb</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561262</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="夫差">
+      <data key="d7">2.0</data>
+      <data key="d8">誓言将夫差斩首，以此报复吴国。&lt;SEP&gt;视夫差为越国仇敌，预示长久的仇恨</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561271</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="宝剑">
+      <data key="d7">1.0</data>
+      <data key="d8">取出宝剑以展示决心与复仇之心。</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561299</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="范蠡">
+      <data key="d7">4.0</data>
+      <data key="d8">命令范蠡进行宝剑试验并共同商议大事。&lt;SEP&gt;表达对勾践决心的赞许与鼓励。&lt;SEP&gt;勾践向范蠡询问对伍子胥局势的意见&lt;SEP&gt;勾践同样重用范蠡，将其计策用于复仇</data>
+      <data key="d9">关联,情感</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561329</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="文种">
+      <data key="d7">3.0</data>
+      <data key="d8">吩咐召来文大夫，共同讨论当前局势。&lt;SEP&gt;勾践观察文种神色，关心国事&lt;SEP&gt;勾践赏识文种之才，任其为大夫并采纳其战略</data>
+      <data key="d9">关联,情感</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561334</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="饮宴领赏">
+      <data key="d7">1.0</data>
+      <data key="d8">安排上国剑士赴别座饮宴领取赏赐，以示奖赏。</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561336</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="越国伐吴">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践initiated the campaign against Wu</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561376</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="太宰伯嚭">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践采用文种与范蠡的计策，买通太宰伯嚭以撼动吴国</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561394</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="灭吴九术">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践采纳了文种提出的灭吴九术，作为复仇之策</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561401</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="石买">
+      <data key="d7">1.0</data>
+      <data key="d8">石买作为越国将领，隶属于勾践的麾下</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561404</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="吴国">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践为复仇目的，与吴国展开激烈对抗</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561414</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="利剑">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践手持薄如纸的利剑，彰显其复仇决心</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561416</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="会稽山">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践曾在会稽山遭困，险些亡国</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561419</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="越吴战争">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践发动对吴国的战争，以图复仇</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561420</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="卧薪尝胆">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践卧薪尝胆以激励自己，誓言复仇</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561424</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="风胡子">
+      <data key="d7">2.0</data>
+      <data key="d8">威胁捉住风胡子并斩成肉酱以报仇&lt;SEP&gt;勾践fears that风胡子might seek revenge and thus choose not to return.</data>
+      <data key="d9">情感,敌对</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561450</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="越国">
+      <data key="d7">2.0</data>
+      <data key="d8">勾践is the ruler of越国.&lt;SEP&gt;作为越国之君统领国内事务</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561478</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="薛烛">
+      <data key="d7">2.0</data>
+      <data key="d8">勾践questions薛烛about the quality and origin of the legendary swords forged by his teacher.&lt;SEP&gt;薛烛expressed gratitude and respect towards勾践after being encouraged and rewarded</data>
+      <data key="d9">情感,提及</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561499</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="风师兄">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践暗示楚王曾赐剑于风师兄</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561505</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="伍子胥">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践自信并宣称绝非伍子胥之对手</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561506</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="勾践兴兵伐吴">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践发动伐吴战争，标志着重大军事行动</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561594</data>
+      <data key="d13" />
+    </edge>
+    <edge source="勾践" target="欧冶子">
+      <data key="d7">1.0</data>
+      <data key="d8">勾践recalled and referenced the legendary forging skills of欧冶子.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561683</data>
+      <data key="d13" />
+    </edge>
+    <edge source="文种" target="范蠡">
+      <data key="d7">3.0</data>
+      <data key="d8">因范蠡行事异于常人，进而主动前往会见其统筹谋略。&lt;SEP&gt;Addresses him as "范贤弟" to show close camaraderie&lt;SEP&gt;文种作为好友前来探望、关心范蠡</data>
+      <data key="d9">情感,提及</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561299</data>
+      <data key="d13" />
+    </edge>
+    <edge source="文种" target="吴国">
+      <data key="d7">1.0</data>
+      <data key="d8">文种与范蠡同往吴国京城姑苏居住数月</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561391</data>
+      <data key="d13" />
+    </edge>
+    <edge source="文种" target="越国">
+      <data key="d7">2.0</data>
+      <data key="d8">文种serves as an official in越国.&lt;SEP&gt;文种前往越国，经勾践接见被拜为大夫</data>
+      <data key="d9">出没,所属</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561393</data>
+      <data key="d13" />
+    </edge>
+    <edge source="文种" target="灭吴九术">
+      <data key="d7">1.0</data>
+      <data key="d8">灭吴九术是文种策划的九种具体灭吴策略</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561396</data>
+      <data key="d13" />
+    </edge>
+    <edge source="文种" target="孙武子">
+      <data key="d7">1.0</data>
+      <data key="d8">文种提起吴国剑士善用孙武子遗法而使局面难控</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561405</data>
+      <data key="d13" />
+    </edge>
+    <edge source="文种" target="薛烛">
+      <data key="d7">2.0</data>
+      <data key="d8">文种reports that薛烛has been summoned and dispatched as ordered.&lt;SEP&gt;回禀铸剑所需材料情况给文种</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561452</data>
+      <data key="d13" />
+    </edge>
+    <edge source="文种" target="铸剑">
+      <data key="d7">1.0</data>
+      <data key="d8">认为通过指点剑匠可铸成千口万口利剑</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561457</data>
+      <data key="d13" />
+    </edge>
+    <edge source="文种" target="范府">
+      <data key="d7">1.0</data>
+      <data key="d8">文种拜访范府，探望范蠡的健康状况</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561589</data>
+      <data key="d13" />
+    </edge>
+    <edge source="夫差" target="西施">
+      <data key="d7">1.0</data>
+      <data key="d8">与西施之间存在复杂的爱恨纠葛</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561457</data>
+      <data key="d13" />
+    </edge>
+    <edge source="夫差" target="吴国">
+      <data key="d7">1.0</data>
+      <data key="d8">作为吴国领袖统治国家</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561463</data>
+      <data key="d13" />
+    </edge>
+    <edge source="夫差" target="吴国剑士">
+      <data key="d7">1.0</data>
+      <data key="d8">吴国剑士效忠于吴国国君夫差。</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561556</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国武士" target="范蠡">
+      <data key="d7">1.0</data>
+      <data key="d8">通过评论吴国武士兵刃锋利及剑术表现，暗示其群战之术。</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561300</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="吴王夫差">
+      <data key="d7">1.0</data>
+      <data key="d8">吴王夫差是吴国的最高统治者。</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561383</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="范蠡">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡因被拜访而暂留吴国</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561393</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="姑苏">
+      <data key="d7">1.0</data>
+      <data key="d8">姑苏为吴国京城所在地</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561405</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="钱塘江">
+      <data key="d7">1.0</data>
+      <data key="d8">钱塘江边曾发生吴越交战的激烈战斗</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561412</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="干将">
+      <data key="d7">1.0</data>
+      <data key="d8">吴国曾有著名剑匠干将，以铸剑著称</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561416</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="莫邪">
+      <data key="d7">1.0</data>
+      <data key="d8">吴国著名剑匠莫邪与干将并称</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561420</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="吴国剑士">
+      <data key="d7">1.0</data>
+      <data key="d8">The Wu swordsmen belong to Wu state.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561440</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="铸剑">
+      <data key="d7">1.0</data>
+      <data key="d8">铸造的利剑被视为杀敌之神器</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561461</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="伍子胥">
+      <data key="d7">1.0</data>
+      <data key="d8">伍子胥身为吴国上卿，效忠吴国</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561507</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国" target="吴王">
+      <data key="d7">1.0</data>
+      <data key="d8">吴王is the ruler of吴国.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561605</data>
+      <data key="d13" />
+    </edge>
+    <edge source="宝剑" target="范蠡">
+      <data key="d7">1.0</data>
+      <data key="d8">负责取剑试验，演示宝剑在切割轻纱时展现出的非凡锋利。</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561292</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国武士剑术" target="范蠡">
+      <data key="d7">1.0</data>
+      <data key="d8">评论吴国武士剑术，暗示虽精妙但与此地剑士相比各有差异。</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561278</data>
+      <data key="d13" />
+    </edge>
+    <edge source="长剑" target="越国武士">
+      <data key="d7">1.0</data>
+      <data key="d8">越国武士在战斗中以长剑出击</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561365</data>
+      <data key="d13" />
+    </edge>
+    <edge source="长剑" target="越军">
+      <data key="d7">1.0</data>
+      <data key="d8">越军作战时持长剑冲锋陷阵</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561371</data>
+      <data key="d13" />
+    </edge>
+    <edge source="长剑" target="范蠡">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡展示长剑及金漆匣中的宝剑，给在场众人留下惊讶。</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561390</data>
+      <data key="d13" />
+    </edge>
+    <edge source="长剑" target="吴国剑士">
+      <data key="d7">2.0</data>
+      <data key="d8">吴国剑士在战斗中以长剑进攻和防御。&lt;SEP&gt;The Wu swordsmen wield long swords during battle.</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561446</data>
+      <data key="d13" />
+    </edge>
+    <edge source="长剑" target="卫士">
+      <data key="d7">1.0</data>
+      <data key="d8">拔出长剑执行大王命令保护范蠡</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561454</data>
+      <data key="d13" />
+    </edge>
+    <edge source="长剑" target="范蠡手下的卫士">
+      <data key="d7">1.0</data>
+      <data key="d8">卫士依仗长剑保护范蠡并维护秩序。</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561549</data>
+      <data key="d13" />
+    </edge>
+    <edge source="宫门" target="范蠡">
+      <data key="d7">1.0</data>
+      <data key="d8">站在宫门侧等待文种到达，以便及时进入商议。</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-c6f4631a6bc7286dd9560f06b9845d9e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561307</data>
+      <data key="d13" />
+    </edge>
+    <edge source="宫门" target="兵刃">
+      <data key="d7">1.0</data>
+      <data key="d8">兵刃落地之声从宫门传来，营造紧张气氛</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561331</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="范蠡">
+      <data key="d7">10.0</data>
+      <data key="d8">The relation between 范蠡 and 阿青 is characterized by mutual affection and complex emotional interplay. 范蠡 demonstrates keen interest in 阿青 by inviting her to his home and actively caring for her, including promising support and supplies for her family. He is portrayed as deeply concerned about her well-being and safety, often regarding her as not only a beloved companion but also a cherished friend.
+
+Simultaneously, 阿青 exhibits clear, affectionate feelings toward 范蠡. Her warm embrace and playful interactions—illustrated by a humorous, intimate moment involving the tug of 范蠡’s white beard—underscore her complex emotions and underlying fondness. She harbors secret admiration for him, revealing layers of tenderness and nuanced sentiment within their relationship.
+
+Additionally, their shared experiences outdoors—where they graze sheep and sing together in the mountains or open natural settings—highlight an intimate bond and a harmonious connection. These moments of joint leisure further illustrate the depth of their attachment and the unspoken understanding that exists between them, even as they navigate uncertainties suggested by their decision to meet outside the palace gate to uncover hidden truths.
+
+Overall, the relation between 范蠡 and 阿青 emerges as a multifaceted connection built on care, mutual support, playful intimacy, and shared moments of joy and inquiry. Both individuals contribute to a dynamic interplay of affectionate gestures and responsible concern that defines their enduring bond.</data>
+      <data key="d9">关联,情感</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561323</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="西施">
+      <data key="d7">3.0</data>
+      <data key="d8">阿青声称要杀死西施，意图阻隔二人情感&lt;SEP&gt;转而对西施产生惊奇、羡慕与崇敬之情&lt;SEP&gt;曾持竹棒威胁西施，试图伤害对方</data>
+      <data key="d9">情感,敌对</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561329</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="竹棒">
+      <data key="d7">4.0</data>
+      <data key="d8">阿青uses the bamboo stick as her chosen weapon in combat.&lt;SEP&gt;阿青employs a bamboo stick as a weapon during her encounters.&lt;SEP&gt;阿青在战斗中挥舞竹棒施展剑法&lt;SEP&gt;利用竹棒作为武器表达敌意</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561330</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="白公公">
+      <data key="d7">2.0</data>
+      <data key="d8">白公公is implied to be the teacher behind阿青’s development in swordsmanship.&lt;SEP&gt;白公公传授神妙剑术给阿青</data>
+      <data key="d9">师徒</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561340</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="剑术">
+      <data key="d7">3.0</data>
+      <data key="d8">阿青demonstrates exceptional swordsmanship skills.&lt;SEP&gt;阿青practices and hones her sword technique through self-learning.&lt;SEP&gt;阿青在白公公的指导下学习神妙剑术</data>
+      <data key="d9">修炼</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561342</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="阿青母">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青shares a familial bond with her mother.</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561343</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="姑娘屋">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青is associated with the residence known as姑娘屋.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561347</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="山里">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青is connected to山里as she awaits the arrival of白公公.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561352</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="骑羊">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青is associated with the event involving白公公riding a sheep during her early years.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561359</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="对打">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青participated in the playful fighting event with白公公using a bamboo stick.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561361</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="牧羊">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青participates in the event of grazing sheep.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561364</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="宫墙">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青的呼声越过宫墙外传入，制造紧张气氛</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561374</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="吴国剑士">
+      <data key="d7">2.0</data>
+      <data key="d8">阿青engages in combat against the Wu swordsmen.&lt;SEP&gt;阿青曾在长街与吴国剑士进行激战</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561436</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="老白">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青shows deep care and affection for her pet sheep老白.</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561446</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="白猿">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青与白猿在地里激烈斗剑，相互对抗</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561590</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="越国剑士">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青在剑室中对抗越国剑士，其剑法独步</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561592</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="会稽城">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青失踪后，其踪迹曾在会稽城附近出现</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561593</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="荒山野岭">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青曾被搜索于荒山野岭中</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561597</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="阿青与白猿斗剑">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青参与了与白猿的激烈斗剑事件</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561602</data>
+      <data key="d13" />
+    </edge>
+    <edge source="阿青" target="阿青家">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青was present in her residence</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561606</data>
+      <data key="d13" />
+    </edge>
+    <edge source="西施" target="范蠡">
+      <data key="d7">5.0</data>
+      <data key="d8">曾亲自访寻并将西施送入吴宫，情感交织&lt;SEP&gt;范蠡eagerly anticipates reuniting with西施.&lt;SEP&gt;范蠡表达对西施美貌的爱慕与倾心&lt;SEP&gt;范蠡与西施互诉相思，情感浓烈&lt;SEP&gt;深爱西施，与其共谋未来</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561328</data>
+      <data key="d13" />
+    </edge>
+    <edge source="西施" target="馆娃宫">
+      <data key="d7">1.0</data>
+      <data key="d8">西施居住在馆娃宫内</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561368</data>
+      <data key="d13" />
+    </edge>
+    <edge source="西施" target="长廊">
+      <data key="d7">1.0</data>
+      <data key="d8">西施在长廊中步履轻盈，仿佛弹奏乐章</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561372</data>
+      <data key="d13" />
+    </edge>
+    <edge source="西施" target="少伯">
+      <data key="d7">1.0</data>
+      <data key="d8">与少伯相爱，恳求少伯永远不忘她</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561452</data>
+      <data key="d13" />
+    </edge>
+    <edge source="西施" target="吴宫">
+      <data key="d7">1.0</data>
+      <data key="d8">因范蠡之举而被送入吴宫</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561459</data>
+      <data key="d13" />
+    </edge>
+    <edge source="西施" target="浣纱溪畔">
+      <data key="d7">1.0</data>
+      <data key="d8">常在浣纱溪畔出现，展现绝美容颜</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561462</data>
+      <data key="d13" />
+    </edge>
+    <edge source="西施" target="吴王">
+      <data key="d7">1.0</data>
+      <data key="d8">西施在吴王宫中陪伴吴王</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561582</data>
+      <data key="d13" />
+    </edge>
+    <edge source="卫士" target="范蠡">
+      <data key="d7">4.0</data>
+      <data key="d8">卫士作为随从随行护卫范蠡&lt;SEP&gt;范蠡instructs his卫士to sew up老白's body and bury it near阿青's residence.&lt;SEP&gt;命令卫士负责宫门及周边区域的守卫&lt;SEP&gt;The guards are subordinate to Fan Li</data>
+      <data key="d9">所属,提及</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561335</data>
+      <data key="d13" />
+    </edge>
+    <edge source="甲士" target="范蠡">
+      <data key="d7">1.0</data>
+      <data key="d8">调动甲士守卫馆娃宫前后以加强防御</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561337</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="白公公">
+      <data key="d7">2.0</data>
+      <data key="d8">范蠡implies that白公公is the hidden teacher of阿青’s sword technique and suggests his potential role in training warriors.&lt;SEP&gt;曾企图刺杀范蠡，构成直接威胁</data>
+      <data key="d9">提及,敌对</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561334</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="剑士">
+      <data key="d7">1.0</data>
+      <data key="d8">指挥剑士协同保卫任务</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561339</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="自杀计划">
+      <data key="d7">1.0</data>
+      <data key="d8">考虑以自杀结束局面，从而求得西施的宽恕</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561340</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="吴宫">
+      <data key="d7">1.0</data>
+      <data key="d8">计划化装成越国甲士从吴宫逃走</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561342</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="馆娃宫">
+      <data key="d7">2.0</data>
+      <data key="d8">范蠡率军攻入吴国都城并直冲馆娃宫&lt;SEP&gt;部署守卫以确保馆娃宫区域的安全</data>
+      <data key="d9">关联,出没</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6&lt;SEP&gt;chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561343</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="太湖">
+      <data key="d7">1.0</data>
+      <data key="d8">计划与西施换上庶民衣衫赴太湖划船远逃</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561345</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="夷光">
+      <data key="d7">1.0</data>
+      <data key="d8">考虑用宫女假扮夷光以实施计策</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561346</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="卫士长">
+      <data key="d7">1.0</data>
+      <data key="d8">以关切问候表达对范蠡的忠诚与关怀</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561347</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="宫女">
+      <data key="d7">1.0</data>
+      <data key="d8">Fan Li contemplated using a palace maid to impersonate Yiguang to lure Ah Qing into committing the act</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561348</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="婢仆">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡directs his maid servants in managing his household.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561352</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="仆役">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡is linked with his household servants who assist in daily operations.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561355</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="阿青母">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡demonstrates care for阿青’s mother by promising to supply necessities.</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561356</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="大夫第">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡is frequently present in his mansion, 大夫第.</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561358</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="花园">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡is active in the garden where events unfold.</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561359</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="牧羊">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡accompanies阿青during the grazing sheep event.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561361</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="山边">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡joins阿青at the mountain edge while waiting for白公公.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561362</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="老白">
+      <data key="d7">2.0</data>
+      <data key="d8">范蠡mentions offering compensation concerning阿青's pet sheep老白.&lt;SEP&gt;范蠡shows care for老白by ordering his body to be sewn up and preserved.</data>
+      <data key="d9">情感,提及</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40&lt;SEP&gt;chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561365</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="薛烛">
+      <data key="d7">4.0</data>
+      <data key="d8">范蠡advises薛烛to resume sword forging despite his limitations.&lt;SEP&gt;以“范大夫”称呼表达对范蠡的尊敬&lt;SEP&gt;范蠡命薛烛督率良工铸成利剑，以备战需&lt;SEP&gt;范蠡命令薛烛督率良工铸造千千万万口利剑</data>
+      <data key="d9">关联,情感,提及</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9&lt;SEP&gt;chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-e93cef7b7f368309937f9f274b9ad084&lt;SEP&gt;chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561369</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="越国伐吴">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡率兵参加伐吴战役，冲入吴国都城</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561373</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="长廊">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡经过长廊奔向西施所在之处</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561376</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="会稽山">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡曾在会稽山遭吴军围困，历经劫难</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561380</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="越国">
+      <data key="d7">2.0</data>
+      <data key="d8">范蠡作为越国大夫，服务于国家政事。&lt;SEP&gt;范蠡与文种同赴越国，并获得勾践赏识</data>
+      <data key="d9">出没,所属</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9&lt;SEP&gt;chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561386</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="部属">
+      <data key="d7">1.0</data>
+      <data key="d8">部属见到范蠡后称其为本地出名的疯子</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561391</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="孙武子">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡在讨论中提及孙武子辅佐吴王、兵法精妙之事</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561399</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="剑术">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡possesses a basic mastery of swordsmanship.</data>
+      <data key="d9">修炼</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561444</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="越国卫士">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡issues commands to the Yue guards to take action.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561448</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="医生">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡calls for a doctor to treat the injured combatants.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561451</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="范蠡的家">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡invites阿青to dine at his home.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561454</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="大草地">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡notes that his property includes a vast grassland for grazing.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561456</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="吴国剑士">
+      <data key="d7">1.0</data>
+      <data key="d8">在长街上嘲讽并威胁范蠡</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561458</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="伍子胥">
+      <data key="d7">2.0</data>
+      <data key="d8">范蠡认为伍子胥终将难逃大王之掌控&lt;SEP&gt;指出伍子胥早已派兵守住锡山</data>
+      <data key="d9">提及,敌对</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561461</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="吴国使臣">
+      <data key="d7">2.0</data>
+      <data key="d8">其身份被范蠡识别，暗示吴国来意&lt;SEP&gt;范蠡notes the presence of the Wu envoy, emphasizing that despite his rudeness, he should not be harmed.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1&lt;SEP&gt;chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561462</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="铸剑">
+      <data key="d7">1.0</data>
+      <data key="d8">思考采铜、炼锡、造炉及铸剑的整个问题</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561478</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="范蠡手下的卫士">
+      <data key="d7">1.0</data>
+      <data key="d8">卫士隶属于范蠡，执行其军事命令。</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561532</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="吴越冲突">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡作为越国使者参与并影响了吴越冲突事件。</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561534</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="上国使者">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡refers to the eight warriors as ambassadors from the superior nation.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561576</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="范府">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡居住并管理范府</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561581</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="竹棒">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡手持竹棒在山野间牧羊与唱歌</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561589</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="湘妃">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡讲述楚国湘妃的传说</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561590</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="山鬼">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡讲述与湘妃传说相伴的山鬼故事</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561591</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="湘江">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡描绘湘江中西施倒影的美丽景致</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561593</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范蠡" target="大江">
+      <data key="d7">1.0</data>
+      <data key="d8">范蠡凝望波涛汹涌的大江，心中暗生感慨</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561596</data>
+      <data key="d13" />
+    </edge>
+    <edge source="白公公" target="骑羊">
+      <data key="d7">1.0</data>
+      <data key="d8">白公公is linked with the playful event of riding a sheep during his youth.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561356</data>
+      <data key="d13" />
+    </edge>
+    <edge source="白公公" target="对打">
+      <data key="d7">1.0</data>
+      <data key="d8">白公公engaged in a playful fight with阿青using a bamboo stick.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561364</data>
+      <data key="d13" />
+    </edge>
+    <edge source="白公公" target="竹棒">
+      <data key="d7">1.0</data>
+      <data key="d8">白公公用竹棒装作玩耍，借机教授剑术</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561579</data>
+      <data key="d13" />
+    </edge>
+    <edge source="白公公" target="山坡草地">
+      <data key="d7">1.0</data>
+      <data key="d8">白公公来到山坡草地，出现于牧羊现场</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561585</data>
+      <data key="d13" />
+    </edge>
+    <edge source="竹棒" target="少女">
+      <data key="d7">1.0</data>
+      <data key="d8">少女运用竹棒进行自卫和反击吴国剑士。</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561550</data>
+      <data key="d13" />
+    </edge>
+    <edge source="竹棒" target="白猿">
+      <data key="d7">1.0</data>
+      <data key="d8">白猿在与阿青斗剑时持竹棒对攻</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561592</data>
+      <data key="d13" />
+    </edge>
+    <edge source="兵刃" target="长廊">
+      <data key="d7">1.0</data>
+      <data key="d8">兵刃落地声响在长廊回荡</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-013870c1938481d1558d4c2e439c83d6</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561336</data>
+      <data key="d13" />
+    </edge>
+    <edge source="馆娃宫" target="山羊">
+      <data key="d7">1.0</data>
+      <data key="d8">The goat is raised within the Guanwagong palace</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561376</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国" target="吴">
+      <data key="d7">1.0</data>
+      <data key="d8">越国is positioned in opposition to吴, with strategic intentions implied.</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-8283a4a379ab2b74495b2a64a83b7b40</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561355</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国" target="越王勾践">
+      <data key="d7">1.0</data>
+      <data key="d8">作为越国国王，掌管国家大权。</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561383</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国" target="中原诸国">
+      <data key="d7">1.0</data>
+      <data key="d8">中原诸国被文种描述为暮气沉沉，与越国兴起形成对比</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561412</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国" target="欧冶子">
+      <data key="d7">1.0</data>
+      <data key="d8">越国拥有著名铸剑师欧冶子，技艺精湛</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561415</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国" target="越国卫士">
+      <data key="d7">1.0</data>
+      <data key="d8">The Yue guards are affiliated with Yue state.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561439</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国" target="铸剑">
+      <data key="d7">1.0</data>
+      <data key="d8">同样铸剑但使用精铜材料，表现出材料差异</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561463</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国" target="纯钧">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword纯钧is kept in the Yue king’s palace.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561612</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国" target="巨阙">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword巨阙is kept in the Yue king’s palace.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561640</data>
+      <data key="d13" />
+    </edge>
+    <edge source="薛烛" target="良工">
+      <data key="d7">1.0</data>
+      <data key="d8">薛烛指导良工利用工艺铸造兵器</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561362</data>
+      <data key="d13" />
+    </edge>
+    <edge source="薛烛" target="风师哥">
+      <data key="d7">2.0</data>
+      <data key="d8">劝阻风师哥不要再回吴国，以免引发吴越矛盾&lt;SEP&gt;During the night, 风师哥used his sharp sword to cut off four of薛烛's fingers, rendering him disabled</data>
+      <data key="d9">情感,敌对</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561449</data>
+      <data key="d13" />
+    </edge>
+    <edge source="薛烛" target="铸剑">
+      <data key="d7">1.0</data>
+      <data key="d8">参与铸剑事件并报告所需材料情况</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561459</data>
+      <data key="d13" />
+    </edge>
+    <edge source="薛烛" target="风师兄">
+      <data key="d7">1.0</data>
+      <data key="d8">薛烛转述风师兄与伍子胥讨论铸剑及局势的谈话</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561507</data>
+      <data key="d13" />
+    </edge>
+    <edge source="薛烛" target="伍子胥">
+      <data key="d7">1.0</data>
+      <data key="d8">伍子胥携礼物邀请薛烛前往吴国助其铸剑</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561510</data>
+      <data key="d13" />
+    </edge>
+    <edge source="薛烛" target="利剑">
+      <data key="d7">1.0</data>
+      <data key="d8">薛烛督率良工铸造出众多利剑</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561592</data>
+      <data key="d13" />
+    </edge>
+    <edge source="薛烛" target="欧冶子">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子is the teacher of薛烛.</data>
+      <data key="d9">师徒</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561599</data>
+      <data key="d13" />
+    </edge>
+    <edge source="薛烛" target="风胡子">
+      <data key="d7">2.0</data>
+      <data key="d8">Due to envy, 风胡子severed薛烛’s fingers, hindering his sword forging.&lt;SEP&gt;薛烛reported that his senior, 风胡子, is currently in吴国.</data>
+      <data key="d9">提及,敌对</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561605</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴王夫差" target="越国伐吴">
+      <data key="d7">1.0</data>
+      <data key="d8">吴王夫差领导吴军抵抗越国的入侵</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561364</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴王夫差" target="余杭山">
+      <data key="d7">1.0</data>
+      <data key="d8">吴王夫差退守于余杭山以图自保</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561371</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴王夫差" target="越王勾践">
+      <data key="d7">1.0</data>
+      <data key="d8">越王曾被吴王击败，心怀报仇之志。</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561377</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国武士" target="剑法影子">
+      <data key="d7">1.0</data>
+      <data key="d8">越国武士习练这种神秘的剑法影子以求剑法大成</data>
+      <data key="d9">修炼</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561361</data>
+      <data key="d13" />
+    </edge>
+    <edge source="良工" target="利剑">
+      <data key="d7">1.0</data>
+      <data key="d8">良工铸造出的利剑助力越国军无往不胜</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561367</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越军" target="吴军">
+      <data key="d7">1.0</data>
+      <data key="d8">吴军与越军在战场上激烈交锋</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561374</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越军" target="姑苏">
+      <data key="d7">1.0</data>
+      <data key="d8">越军攻入姑苏，入城后大获全胜</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561377</data>
+      <data key="d13" />
+    </edge>
+    <edge source="剑法影子" target="旁人">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword technique shadow was transmitted to an unnamed person</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-f89960ee186e8b69358a7a5c384a3ee9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561375</data>
+      <data key="d13" />
+    </edge>
+    <edge source="利剑" target="阿青剑法">
+      <data key="d7">1.0</data>
+      <data key="d8">阿青的剑法激发了越国铸剑行动，意境相连</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561605</data>
+      <data key="d13" />
+    </edge>
+    <edge source="姑苏" target="会稽">
+      <data key="d7">1.0</data>
+      <data key="d8">两地之间仅数日水程，联系紧密</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561461</data>
+      <data key="d13" />
+    </edge>
+    <edge source="姑苏" target="吴国剑士">
+      <data key="d7">1.0</data>
+      <data key="d8">吴国剑士从姑苏出发，并在行进中活跃。</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561577</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王勾践" target="比剑">
+      <data key="d7">1.0</data>
+      <data key="d8">越王借比剑试探吴国军力，为复仇作准备。</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561384</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王勾践" target="新铸宝剑">
+      <data key="d7">1.0</data>
+      <data key="d8">越王接过宝剑，观赏其宝光流动，虽觉单薄却精妙。</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561385</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王勾践" target="送礼">
+      <data key="d7">1.0</data>
+      <data key="d8">越王接受吴国送礼，表面恭顺以隐藏内心仇恨。</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561394</data>
+      <data key="d13" />
+    </edge>
+    <edge source="新铸宝剑" target="金漆长匣">
+      <data key="d7">1.0</data>
+      <data key="d8">The gilded long case is associated with the newly forged sword as it contains the three-footed blade.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-42c3e318eb3b9f5e9c1bd450e13ff5b9</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561399</data>
+      <data key="d13" />
+    </edge>
+    <edge source="剑法" target="吴国剑士">
+      <data key="d7">1.0</data>
+      <data key="d8">吴国剑士展现并修炼精湛剑法，彰显其武艺高强。</data>
+      <data key="d9">修炼</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561575</data>
+      <data key="d13" />
+    </edge>
+    <edge source="伍子胥" target="吴王">
+      <data key="d7">2.0</data>
+      <data key="d8">吴王未采纳伍子胥忠谏，双方矛盾激化(背景反映吴国内部纷争)&lt;SEP&gt;吴王重用伍子胥，采纳其一系列改革措施</data>
+      <data key="d9">关联,敌对</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561393</data>
+      <data key="d13" />
+    </edge>
+    <edge source="伍子胥" target="风师哥">
+      <data key="d7">1.0</data>
+      <data key="d8">备下礼物召唤风师哥前往吴国协助铸剑</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561452</data>
+      <data key="d13" />
+    </edge>
+    <edge source="伍子胥" target="风师兄">
+      <data key="d7">3.0</data>
+      <data key="d8">伍子胥与风师兄共同探讨吴国与北方局势及铸造利剑的方案&lt;SEP&gt;伍子胥赠剑并提议铸造希世之宝剑给风师兄&lt;SEP&gt;因获得宝剑而对伍子胥心存感激</data>
+      <data key="d9">关联,情感</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561480</data>
+      <data key="d13" />
+    </edge>
+    <edge source="伍子胥" target="王僚">
+      <data key="d7">1.0</data>
+      <data key="d8">伍子胥策划专诸刺杀以除掉王僚</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561501</data>
+      <data key="d13" />
+    </edge>
+    <edge source="伍子胥" target="楚平王">
+      <data key="d7">1.0</data>
+      <data key="d8">伍子胥从楚平王之棺中取出宝剑</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561508</data>
+      <data key="d13" />
+    </edge>
+    <edge source="伍子胥" target="专诸刺王僚">
+      <data key="d7">1.0</data>
+      <data key="d8">伍子胥策划并实施了专诸刺杀王僚的行动</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561528</data>
+      <data key="d13" />
+    </edge>
+    <edge source="伍子胥" target="宾馆">
+      <data key="d7">1.0</data>
+      <data key="d8">伍子胥visited the宾馆for a conversation with风师兄</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561533</data>
+      <data key="d13" />
+    </edge>
+    <edge source="伍子胥" target="礼物">
+      <data key="d7">1.0</data>
+      <data key="d8">伍子胥prepared the礼物to invite薛烛to Wu</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561549</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴王" target="孙武子">
+      <data key="d7">1.0</data>
+      <data key="d8">孙武子曾辅佐吴王，助其统兵破楚</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561407</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴王" target="吴国剑士">
+      <data key="d7">2.0</data>
+      <data key="d8">吴国剑士隶属于吴国，代表其武力展现&lt;SEP&gt;吴王dispatched eight swordsmen as a demonstration of martial prowess</data>
+      <data key="d9">使用,所属</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561415</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴王" target="胜邪">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword胜邪is currently under吴王’s control in吴国.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561610</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴王" target="鱼肠">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword鱼肠is currently possessed by吴王in吴国.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561614</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴王" target="专诸">
+      <data key="d7">1.0</data>
+      <data key="d8">吴王commissioned专诸to assassinate王僚using the鱼肠sword.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561640</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="风胡子">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子is the teacher of风胡子.</data>
+      <data key="d9">师徒</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561606</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="湛卢">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子forged the legendary sword湛卢.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561612</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="纯钧">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子forged the legendary sword纯钧.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561635</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="胜邪">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子forged the legendary sword胜邪.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561636</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="鱼肠">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子forged the legendary sword鱼肠.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561637</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="巨阙">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子forged the legendary sword巨阙.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561639</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="龙渊">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子forged the legendary sword龙渊for楚王.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561661</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="泰阿">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子forged the legendary sword泰阿for楚王.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561681</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="工布">
+      <data key="d7">1.0</data>
+      <data key="d8">欧冶子forged the legendary sword工布for楚王.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561682</data>
+      <data key="d13" />
+    </edge>
+    <edge source="欧冶子" target="先王">
+      <data key="d7">1.0</data>
+      <data key="d8">先王ordered欧冶子to forge five legendary swords under his command.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561710</data>
+      <data key="d13" />
+    </edge>
+    <edge source="干将" target="莫邪">
+      <data key="d7">1.0</data>
+      <data key="d8">干将与莫邪为夫妇，共同铸剑传世</data>
+      <data key="d9">情感</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561418</data>
+      <data key="d13" />
+    </edge>
+    <edge source="孙武子遗法" target="吴国剑士">
+      <data key="d7">1.0</data>
+      <data key="d8">They skillfully employ the tactics of孙武子遗法during group battles</data>
+      <data key="d9">修炼</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561419</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国剑士" target="越国士兵">
+      <data key="d7">1.0</data>
+      <data key="d8">吴国剑士与越国士兵在武力对抗中互为敌手</data>
+      <data key="d9">敌对</data>
+      <data key="d10">chunk-9f3e590b3ab7f94ee3770d3739196401</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561417</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国剑士" target="剑网">
+      <data key="d7">1.0</data>
+      <data key="d8">The Wu swordsmen employ a sword net technique for defense.</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561449</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国剑士" target="长街">
+      <data key="d7">1.0</data>
+      <data key="d8">在长街上游荡并制造混乱</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-2a72fd2ce03a23a58c65d98d2258f3e1</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561463</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国剑士" target="吴越冲突">
+      <data key="d7">1.0</data>
+      <data key="d8">吴国剑士在吴越冲突中与越国势力形成对抗。</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561550</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国剑士" target="会稽">
+      <data key="d7">1.0</data>
+      <data key="d8">吴国剑士抵达会稽后展开各项武力挑衅。</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561580</data>
+      <data key="d13" />
+    </edge>
+    <edge source="吴国剑士" target="大夫">
+      <data key="d7">1.0</data>
+      <data key="d8">Wu soldiers declare that anyone who offends the大夫will be executed.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561582</data>
+      <data key="d13" />
+    </edge>
+    <edge source="官员" target="单打独斗比剑">
+      <data key="d7">1.0</data>
+      <data key="d8">官员提到已进行两场单打独斗比剑比赛</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-0e58ecd9d19ebc5fffab3dc66a3dbd19</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561432</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国卫士" target="上国使者">
+      <data key="d7">1.0</data>
+      <data key="d8">The Yue guards escort the envoy from the unspecified state.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-939cc8f0980bb7b81255939246f7fe66</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561445</data>
+      <data key="d13" />
+    </edge>
+    <edge source="宾馆" target="风师兄">
+      <data key="d7">1.0</data>
+      <data key="d8">风师兄was present at the宾馆during his conversation with伍子胥</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561532</data>
+      <data key="d13" />
+    </edge>
+    <edge source="上国使者" target="吴越冲突">
+      <data key="d7">1.0</data>
+      <data key="d8">The presence of the superior nation's ambassadors escalates the conflict between Wu and Yue.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561583</data>
+      <data key="d13" />
+    </edge>
+    <edge source="风胡子" target="工布">
+      <data key="d7">1.0</data>
+      <data key="d8">Three years ago, 风胡子presented the legendary sword工布to薛烛.</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561685</data>
+      <data key="d13" />
+    </edge>
+    <edge source="长街" target="少女">
+      <data key="d7">1.0</data>
+      <data key="d8">少女从长街东端出现，引发与吴国剑士的冲突。</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561581</data>
+      <data key="d13" />
+    </edge>
+    <edge source="先师" target="楚王">
+      <data key="d7">1.0</data>
+      <data key="d8">先师为楚王铸造了三口宝剑</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561476</data>
+      <data key="d13" />
+    </edge>
+    <edge source="先师" target="龙渊">
+      <data key="d7">1.0</data>
+      <data key="d8">先师铸造龙渊作为楚王宝剑之一</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561503</data>
+      <data key="d13" />
+    </edge>
+    <edge source="先师" target="泰阿">
+      <data key="d7">1.0</data>
+      <data key="d8">先师铸造泰阿作为楚王宝剑之一</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561527</data>
+      <data key="d13" />
+    </edge>
+    <edge source="先师" target="工布">
+      <data key="d7">1.0</data>
+      <data key="d8">先师铸造工布作为楚王宝剑之一</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561530</data>
+      <data key="d13" />
+    </edge>
+    <edge source="楚王" target="师哥">
+      <data key="d7">1.0</data>
+      <data key="d8">楚王珍爱宝剑，结果宝剑归于师哥</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561499</data>
+      <data key="d13" />
+    </edge>
+    <edge source="楚王" target="楚国">
+      <data key="d7">1.0</data>
+      <data key="d8">楚王is the ruler of楚国.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561605</data>
+      <data key="d13" />
+    </edge>
+    <edge source="楚王" target="湛卢">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword湛卢is currently possessed by楚王.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561610</data>
+      <data key="d13" />
+    </edge>
+    <edge source="楚王" target="龙渊">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword龙渊is possessed by楚王.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561636</data>
+      <data key="d13" />
+    </edge>
+    <edge source="楚王" target="泰阿">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword泰阿is possessed by楚王.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561661</data>
+      <data key="d13" />
+    </edge>
+    <edge source="楚王" target="工布">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword工布is possessed by楚王.</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561683</data>
+      <data key="d13" />
+    </edge>
+    <edge source="风师兄" target="莫干山">
+      <data key="d7">1.0</data>
+      <data key="d8">风师兄于莫干山铸剑房中指点剑匠</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561501</data>
+      <data key="d13" />
+    </edge>
+    <edge source="风师兄" target="吴剑">
+      <data key="d7">1.0</data>
+      <data key="d8">风师兄指点铸剑，使得吴剑锋利无匹</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561503</data>
+      <data key="d13" />
+    </edge>
+    <edge source="风师兄" target="小人">
+      <data key="d7">1.0</data>
+      <data key="d8">风师兄召唤小人(薛烛)前往吴国协助铸剑</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561509</data>
+      <data key="d13" />
+    </edge>
+    <edge source="风师兄" target="铸剑房">
+      <data key="d7">1.0</data>
+      <data key="d8">风师兄worked in the铸剑房on莫干山, directing the swordsmiths</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561533</data>
+      <data key="d13" />
+    </edge>
+    <edge source="风师兄" target="剑匠">
+      <data key="d7">1.0</data>
+      <data key="d8">风师兄provided guidance to the剑匠during the sword casting process</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561554</data>
+      <data key="d13" />
+    </edge>
+    <edge source="风师兄" target="先师遗泽">
+      <data key="d7">1.0</data>
+      <data key="d8">风师兄acknowledged that the sword symbolized先师遗泽</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-3b2a680eed881fd86d938031d895d21e</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561573</data>
+      <data key="d13" />
+    </edge>
+    <edge source="为首的吴国剑士" target="吴越冲突">
+      <data key="d7">1.0</data>
+      <data key="d8">为首的吴国剑士在吴越冲突中充当挑衅者和主导战局的一方。</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561581</data>
+      <data key="d13" />
+    </edge>
+    <edge source="少女" target="吴越冲突">
+      <data key="d7">1.0</data>
+      <data key="d8">少女的出现与反击使吴越冲突进一步升级。</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-76f36e0abe52b904e30fbb2a78b9a4a4</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561579</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范府" target="椽吏">
+      <data key="d7">1.0</data>
+      <data key="d8">椽吏隶属于范府，管理内部事务</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561591</data>
+      <data key="d13" />
+    </edge>
+    <edge source="范府" target="下吏">
+      <data key="d7">1.0</data>
+      <data key="d8">下吏隶属于范府，执行公务请示</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-bb8a415d6907f0cafb86835c412854f7</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561592</data>
+      <data key="d13" />
+    </edge>
+    <edge source="白猿" target="山谷">
+      <data key="d7">1.0</data>
+      <data key="d8">战斗后白猿跃上树梢，猿啸回荡于山谷间</data>
+      <data key="d9">出没</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561594</data>
+      <data key="d13" />
+    </edge>
+    <edge source="白猿" target="阿青与白猿斗剑">
+      <data key="d7">1.0</data>
+      <data key="d8">白猿参与了与阿青的斗剑战斗</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561598</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越国剑士" target="阿青剑法">
+      <data key="d7">1.0</data>
+      <data key="d8">越国剑士试图模仿并修炼阿青的剑法</data>
+      <data key="d9">修炼</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561593</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王" target="阿青剑法">
+      <data key="d7">1.0</data>
+      <data key="d8">越王在剑室中见证了阿青剑法的非凡魅力</data>
+      <data key="d9">提及</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561597</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王" target="剑室">
+      <data key="d7">1.0</data>
+      <data key="d8">The sword chamber belongs to越王</data>
+      <data key="d9">所属</data>
+      <data key="d10">chunk-e93cef7b7f368309937f9f274b9ad084</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561605</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王允常" target="湛卢">
+      <data key="d7">1.0</data>
+      <data key="d8">越王允常originally forged the sword湛卢.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561644</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王允常" target="纯钧">
+      <data key="d7">1.0</data>
+      <data key="d8">越王允常originally forged the sword纯钧.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561647</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王允常" target="胜邪">
+      <data key="d7">1.0</data>
+      <data key="d8">越王允常originally forged the sword胜邪.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561649</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王允常" target="鱼肠">
+      <data key="d7">1.0</data>
+      <data key="d8">越王允常originally forged the sword鱼肠.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561650</data>
+      <data key="d13" />
+    </edge>
+    <edge source="越王允常" target="巨阙">
+      <data key="d7">1.0</data>
+      <data key="d8">越王允常originally forged the sword巨阙.</data>
+      <data key="d9">关联</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561651</data>
+      <data key="d13" />
+    </edge>
+    <edge source="鱼肠" target="专诸">
+      <data key="d7">1.0</data>
+      <data key="d8">专诸uses the legendary sword鱼肠during his assassination.</data>
+      <data key="d9">使用</data>
+      <data key="d10">chunk-9f20b87683fe0cc8608a321ff18feb71</data>
+      <data key="d11">unknown_source</data>
+      <data key="d12">1777561644</data>
+      <data key="d13" />
+    </edge>
+  </graph>
+</graphml>

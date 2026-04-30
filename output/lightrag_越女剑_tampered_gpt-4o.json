@@ -1,0 +1,2612 @@
+{
+  "entities": [
+    {
+      "name": "勾践",
+      "type": "人物",
+      "description": "Goujian (勾践) was a ruler of the ancient Yue Kingdom (越国) and is widely recognized as a central figur"
+    },
+    {
+      "name": "薛烛",
+      "type": "人物",
+      "description": "Xue Zhu (薛烛) was a skilled swordsmith and craftsman from the ancient state of Yue (越国). He was one o"
+    },
+    {
+      "name": "风胡子",
+      "type": "人物",
+      "description": "欧冶子的弟子之一，现居吴国。<SEP>吴国铸剑匠，与薛烛有过冲突。<SEP>欧冶子的弟子之一，现居吴国。<SEP>吴国铸剑匠，与薛烛有过冲突。"
+    },
+    {
+      "name": "伍子胥",
+      "type": "人物",
+      "description": "吴国上卿，曾鞭楚平王遗尸并获取宝剑。<SEP>吴国大臣，辅佐吴王夫差，忠谏被忽视。<SEP>吴国大臣，曾派兵守住锡山。<SEP>吴国上卿，曾鞭楚平王遗尸并获取宝剑。<SEP>吴国大臣，辅佐吴王夫差，忠"
+    },
+    {
+      "name": "文种",
+      "type": "人物",
+      "description": "Wen Zhong (文种) was a prominent official and strategist of the Yue Kingdom during the Spring and Autu"
+    },
+    {
+      "name": "西施",
+      "type": "人物",
+      "description": "Xishi (西施), also known as \"Xizi\" (西子), is a renowned beauty from the ancient Yue Kingdom during the "
+    },
+    {
+      "name": "夫差",
+      "type": "人物",
+      "description": "夫差 was a ruler of the ancient state of Wu during the Spring and Autumn Period in Chinese history. He"
+    },
+    {
+      "name": "锡山",
+      "type": "地点",
+      "description": "吴国控制的采锡地点。<SEP>吴国控制的采锡地点。"
+    },
+    {
+      "name": "浣纱溪",
+      "type": "地点",
+      "description": "西施居住的地方。<SEP>西施居住的地方。"
+    },
+    {
+      "name": "姑苏",
+      "type": "地点",
+      "description": "The entity 姑苏 (Gusu) is historically recognized as the capital city of the ancient state of Wu durin"
+    },
+    {
+      "name": "越宫",
+      "type": "地点",
+      "description": "越国的宫殿。<SEP>越国的宫殿。"
+    },
+    {
+      "name": "吴歌",
+      "type": "事件",
+      "description": "吴国剑士在街上高歌。<SEP>吴国剑士在街上高歌。"
+    },
+    {
+      "name": "利剑",
+      "type": "兵器",
+      "description": "勾践手中的薄如纸的剑。<SEP>吴越两国铸造的锋利兵器。<SEP>薛烛铸造的兵器，越军使用。<SEP>越国铸造的锋利剑器，用于战争。<SEP>勾践手中的薄如纸的剑。<SEP>吴越两国铸造的锋利兵器。<"
+    },
+    {
+      "name": "吴国剑士",
+      "type": "人物",
+      "description": "The term \"吴国剑士\" refers to a group of highly skilled swordsmen originating from the ancient state of "
+    },
+    {
+      "name": "越国百姓",
+      "type": "人物",
+      "description": "越国的普通民众，受到吴国的压制。<SEP>越国的普通民众，受到吴国的压制。"
+    },
+    {
+      "name": "吴国",
+      "type": "地点",
+      "description": "Wu State (吴国) was an ancient Chinese kingdom that existed during the Spring and Autumn Period (770–4"
+    },
+    {
+      "name": "越国山水",
+      "type": "地点",
+      "description": "越国的自然环境，被认为赋予西施灵气。<SEP>越国的自然环境，被认为赋予西施灵气。"
+    },
+    {
+      "name": "越国",
+      "type": "地点",
+      "description": "The entity 越国 (Yue State) refers to an ancient Chinese kingdom prominently associated with its ruler"
+    },
+    {
+      "name": "若耶溪",
+      "type": "地点",
+      "description": "越国的一条溪流，西施的声音被比喻为若耶溪的流水。<SEP>越国的一条溪流，西施的声音被比喻为若耶溪的流水。"
+    },
+    {
+      "name": "阿青",
+      "type": "人物",
+      "description": "牧羊少女，剑术高超，以竹棒为武器。<SEP>一个天真烂漫的乡村姑娘，擅长使用竹棒，有高超的剑术。<SEP>美貌乡下姑娘，擅长使用竹棒，剑术高超。<SEP>女子，喜欢范蠡，欲杀西施。<SEP>越国剑术高"
+    },
+    {
+      "name": "范蠡",
+      "type": "人物",
+      "description": "Fan Li (范蠡) was a distinguished statesman, strategist, and advisor of the Yue Kingdom during the Spr"
+    },
+    {
+      "name": "白公公",
+      "type": "人物",
+      "description": "住在山中的老人，与阿青对打竹棒，可能是阿青剑术的启蒙者。<SEP>神秘人物，教授阿青剑术。<SEP>曾试图刺杀范蠡的人。"
+    },
+    {
+      "name": "馆娃宫",
+      "type": "地点",
+      "description": "吴王夫差为西施所建的宫殿。<SEP>吴国的宫殿，范蠡和西施所在之地。<SEP>吴国宫殿，范蠡与西施所在之地。<SEP>西施居住之地，夫差为其建造。"
+    },
+    {
+      "name": "太湖",
+      "type": "地点",
+      "description": "范蠡计划与西施隐居的地方。<SEP>范蠡计划与西施隐居之地。"
+    },
+    {
+      "name": "竹棒",
+      "type": "兵器",
+      "description": "The term \"竹棒\" refers to a weapon made of bamboo that is prominently associated with two distinct cha"
+    },
+    {
+      "name": "西子捧心",
+      "type": "事件",
+      "description": "西施因阿青的竹棒劲气受伤而捧心的美丽形象。<SEP>西施因阿黑竹棒劲气受伤，形成美丽形象。"
+    },
+    {
+      "name": "卫士",
+      "type": "人物",
+      "description": "范蠡手下的十六名卫士，忠诚但愤怒。<SEP>范蠡的随从，负责保护范蠡。<SEP>负责守卫馆娃宫的士兵。<SEP>范蠡手下的十六名卫士，忠诚但愤怒。<SEP>负责保护范蠡和西施的人员。"
+    },
+    {
+      "name": "卫士长",
+      "type": "人物",
+      "description": "负责指挥馆娃宫卫士的领导者。<SEP>负责指挥卫士，向范蠡报告情况。"
+    },
+    {
+      "name": "甲士",
+      "type": "人物",
+      "description": "范蠡调遣的一千名士兵。<SEP>范蠡调遣的一千名士兵，用于守卫馆娃宫。"
+    },
+    {
+      "name": "剑士",
+      "type": "人物",
+      "description": "范蠡调遣的一千名士兵，擅长使用剑。<SEP>范蠡调遣的一千名士兵，用于守卫馆娃宫。"
+    },
+    {
+      "name": "吴宫",
+      "type": "地点",
+      "description": "吴国的宫殿，范蠡计划逃离的地方。"
+    },
+    {
+      "name": "弓箭手",
+      "type": "人物",
+      "description": "范蠡计划调遣的士兵，用于守卫宫门。"
+    },
+    {
+      "name": "湘妃",
+      "type": "人物",
+      "description": "楚国传说中的美丽女子。<SEP>楚国传说中的美人。"
+    },
+    {
+      "name": "山鬼",
+      "type": "人物",
+      "description": "楚国传说中的神秘人物。<SEP>楚国传说中的神秘人物。"
+    },
+    {
+      "name": "姑苏城",
+      "type": "地点",
+      "description": "吴王宫所在之地。<SEP>吴王宫所在地。"
+    },
+    {
+      "name": "吴王宫",
+      "type": "地点",
+      "description": "吴王居住的宫殿。<SEP>吴王居住的宫殿，西施所在之地。"
+    },
+    {
+      "name": "剑术",
+      "type": "武功",
+      "description": "吴国剑士所精通的技艺。<SEP>阿青擅长的技艺，可能由白公公启蒙。<SEP>阿青所修炼的高超武功。<SEP>吴国剑士所精通的技艺。<SEP>范蠡略通的技艺，阿黑精通的剑法。<SEP>黑猩猩教授阿黑的武"
+    },
+    {
+      "name": "牧羊",
+      "type": "事件",
+      "description": "范蠡与阿青在山野间共同牧羊。<SEP>范蠡与阿黑在山野间的活动。<SEP>阿黑与范蠡共同进行的活动。"
+    },
+    {
+      "name": "湘江",
+      "type": "地点",
+      "description": "湘妃传说中的江河。<SEP>楚国的江河，湘妃传说相关地点。"
+    },
+    {
+      "name": "白云",
+      "type": "自然物",
+      "description": "范蠡用来形容湘妃皮肤的柔和。<SEP>范蠡用来比喻湘妃皮肤的柔和。"
+    },
+    {
+      "name": "红花",
+      "type": "自然物",
+      "description": "范蠡用来形容湘妃嘴唇的娇嫩。<SEP>范蠡用来比喻湘妃嘴唇的娇嫩。"
+    },
+    {
+      "name": "溪水",
+      "type": "自然物",
+      "description": "范蠡用来形容湘妃眼睛的清澈。<SEP>范蠡用来比喻湘妃眼睛的清澈。"
+    },
+    {
+      "name": "大江",
+      "type": "自然物",
+      "description": "范蠡向北方眺望的大江，象征他对西施的思念。"
+    },
+    {
+      "name": "椽吏",
+      "type": "人物",
+      "description": "范蠡府中的官员，向文种报告范蠡的情况。"
+    },
+    {
+      "name": "楚国",
+      "type": "地点",
+      "description": "楚王所在国家，被吴国攻破。<SEP>楚王的国家，拥有湛卢剑。<SEP>范蠡曾经生活过的国家。<SEP>楚王所在国家，被吴国攻破。<SEP>楚王的国家，拥有湛卢剑。<SEP>范蠡曾经居住的国家。"
+    },
+    {
+      "name": "青衣剑士",
+      "type": "人物",
+      "description": "The entity \"青衣剑士\" refers to a group of skilled swordsmen characterized by their distinctive blue att"
+    },
+    {
+      "name": "锦衫剑士",
+      "type": "人物",
+      "description": "锦衫剑士 is a swordsman associated with the royal court of Yue, an ancient kingdom in Chinese history. H"
+    },
+    {
+      "name": "宝剑",
+      "type": "兵器",
+      "description": "吴国新铸的剑，赠予越王勾践。<SEP>吴国赠送的利剑，锋利无比。<SEP>吴国新铸的剑，赠予越王勾践。<SEP>吴国赠送的利剑，锋利无比。"
+    },
+    {
+      "name": "孙武子兵法",
+      "type": "武功",
+      "description": "吴国武士群战之术的依据。<SEP>吴国武士群战之术的依据。"
+    },
+    {
+      "name": "宛地",
+      "type": "地点",
+      "description": "范蠡的故乡。<SEP>范蠡的故乡。"
+    },
+    {
+      "name": "檀木椅子",
+      "type": "兵器",
+      "description": "被勾践用宝剑劈为两半。<SEP>被勾践用宝剑劈为两半。"
+    },
+    {
+      "name": "宫监",
+      "type": "人物",
+      "description": "越国宫廷中的传令官。<SEP>越国宫廷中的传令官。"
+    },
+    {
+      "name": "殿",
+      "type": "地点",
+      "description": "越国宫殿，勾践与众人议事之地。<SEP>越国宫殿，勾践与众人议事之地。"
+    },
+    {
+      "name": "飞马",
+      "type": "事件",
+      "description": "文种骑马赶到宫殿。<SEP>文种骑马赶到宫殿。"
+    },
+    {
+      "name": "试剑",
+      "type": "事件",
+      "description": "范蠡与锦衫剑士试验宝剑锋利。<SEP>范蠡与锦衫剑士试验宝剑锋利。"
+    },
+    {
+      "name": "送宝剑",
+      "type": "事件",
+      "description": "吴国派青衣剑士送宝剑至越国。<SEP>吴国派青衣剑士送宝剑至越国。"
+    },
+    {
+      "name": "报仇吴国",
+      "type": "事件",
+      "description": "勾践决心对吴国复仇。<SEP>勾践决心对吴国复仇。"
+    },
+    {
+      "name": "范疯子",
+      "type": "人物",
+      "description": "范蠡的绰号，因其行为与众不同而得名。<SEP>范蠡的绰号，因其行为与众不同而得名。"
+    },
+    {
+      "name": "文大夫",
+      "type": "人物",
+      "description": "文种的尊称，勾践命范蠡传召他入宫。<SEP>文种的尊称，勾践命范蠡传召他入宫。"
+    },
+    {
+      "name": "越王",
+      "type": "人物",
+      "description": "勾践的尊称，青衣剑士称呼他为“大王”。<SEP>越国国君，剑室的主人。<SEP>勾践的尊称，青衣剑士称呼他为“大王”。<SEP>越国的国王。"
+    },
+    {
+      "name": "剑匣",
+      "type": "兵器",
+      "description": "装宝剑的匣子，由范蠡托上给勾践。<SEP>装宝剑的匣子，由范蠡托上给勾践。"
+    },
+    {
+      "name": "越女剑",
+      "type": "事件",
+      "description": "描述了一场剑士之间的比试和相关情节的事件。<SEP>描述了一场剑士之间的比试和相关情节的事件。"
+    },
+    {
+      "name": "王者",
+      "type": "人物",
+      "description": "统治者，主持剑士比试并给予奖励。<SEP>身披紫袍，形貌拙异，主持剑士比试并赏赐青衣剑士。<SEP>统治者，主持剑士比试并给予奖励。<SEP>身披紫袍，形貌拙异，主持剑士比试并赏赐青衣剑士。"
+    },
+    {
+      "name": "护心铜镜",
+      "type": "兵器",
+      "description": "青衣剑士衣内胸口藏着的防护兵器，用于抵挡攻击。<SEP>青衣剑士衣内胸口藏着的防护兵器，用于抵挡攻击。"
+    },
+    {
+      "name": "吴越剑士",
+      "type": "人物",
+      "description": "参与比试的剑士，分为青衣剑士和锦衫剑士两队。<SEP>参与剑术比试的剑士，代表吴越地区。<SEP>参与比试的剑士，分为青衣剑士和锦衫剑士两队。<SEP>参与剑术比试的剑士，代表吴越地区。"
+    },
+    {
+      "name": "大剑",
+      "type": "兵器",
+      "description": "锦衫剑士使用的沉重兵器。<SEP>锦衫剑士使用的兵器，长逾五尺，剑身极厚。<SEP>锦衫剑士使用的沉重兵器。<SEP>锦衫剑士使用的兵器，长逾五尺，剑身极厚。"
+    },
+    {
+      "name": "锦披大椅",
+      "type": "地点",
+      "description": "王者高坐的椅子，象征权威和比试的主持位置。<SEP>王者高坐的椅子，象征权威和比试的主持位置。"
+    },
+    {
+      "name": "高瘦官员",
+      "type": "人物",
+      "description": "王者右首的一名官员，负责宣布比试规则。<SEP>王者右首的一名官员，负责宣布比试规则。"
+    },
+    {
+      "name": "欧冶子",
+      "type": "人物",
+      "description": "越国著名铸剑师，曾铸造五口宝剑。<SEP>越国铸剑师，铸剑技艺高超。<SEP>越国著名铸剑师，曾铸造五口宝剑。<SEP>越国铸剑师，铸剑技艺高超。"
+    },
+    {
+      "name": "吴王阖庐",
+      "type": "人物",
+      "description": "吴国国君，曾使用鱼肠剑刺杀王僚。<SEP>吴国国君，曾使用鱼肠剑刺杀王僚。"
+    },
+    {
+      "name": "王僚",
+      "type": "人物",
+      "description": "吴国前任国君，被鱼肠剑刺杀。<SEP>吴国前任国君，被鱼肠剑刺杀。"
+    },
+    {
+      "name": "专诸",
+      "type": "人物",
+      "description": "刺客，使用鱼肠剑刺杀王僚。<SEP>刺客，使用鱼肠剑刺杀王僚。"
+    },
+    {
+      "name": "楚王",
+      "type": "人物",
+      "description": "楚国国君，拥有湛卢剑。<SEP>楚国国君，曾拥有三口宝剑。<SEP>楚国国君，拥有湛卢剑。<SEP>楚国国君，曾拥有三口宝剑。"
+    },
+    {
+      "name": "秦王",
+      "type": "人物",
+      "description": "秦国国君，曾试图夺取湛卢剑。<SEP>秦国国君，曾试图夺取湛卢剑。"
+    },
+    {
+      "name": "允常",
+      "type": "人物",
+      "description": "越国前任国君，勾践之父。<SEP>越国前任国君，勾践之父。"
+    },
+    {
+      "name": "干将",
+      "type": "人物",
+      "description": "吴国著名铸剑师。<SEP>吴国铸剑师，与妻子莫邪共同铸剑。<SEP>吴国著名铸剑师。<SEP>吴国铸剑师，与妻子莫邪共同铸剑。"
+    },
+    {
+      "name": "莫邪",
+      "type": "人物",
+      "description": "干将的妻子，亦为铸剑师。<SEP>吴国铸剑师，干将之妻，与其共同铸剑。<SEP>干将的妻子，亦为铸剑师。<SEP>吴国铸剑师，干将之妻，与其共同铸剑。"
+    },
+    {
+      "name": "湛卢",
+      "type": "兵器",
+      "description": "欧冶子铸造的五口宝剑之一，现存于楚国。<SEP>欧冶子铸造的五口宝剑之一，现存于楚国。"
+    },
+    {
+      "name": "纯钧",
+      "type": "兵器",
+      "description": "欧冶子铸造的五口宝剑之一，现存于越国。<SEP>欧冶子铸造的五口宝剑之一，现存于越国。"
+    },
+    {
+      "name": "胜邪",
+      "type": "兵器",
+      "description": "欧冶子铸造的五口宝剑之一，现存于吴国。<SEP>欧冶子铸造的五口宝剑之一，现存于吴国。"
+    },
+    {
+      "name": "鱼肠",
+      "type": "兵器",
+      "description": "欧冶子铸造的五口宝剑之一，现存于吴国。<SEP>欧冶子铸造的五口宝剑之一，现存于吴国。"
+    },
+    {
+      "name": "巨阙",
+      "type": "兵器",
+      "description": "欧冶子铸造的五口宝剑之一，现存于越国。<SEP>欧冶子铸造的五口宝剑之一，现存于越国。"
+    },
+    {
+      "name": "工布",
+      "type": "兵器",
+      "description": "欧冶子为楚国铸造的宝剑之一，现为风胡子所有。<SEP>楚王所铸三口宝剑之一，后被伍子胥赠予风师兄。<SEP>欧冶子为楚国铸造的宝剑之一，现为风胡子所有。<SEP>楚王所铸三口宝剑之一，后被伍子胥赠予风"
+    },
+    {
+      "name": "龙渊",
+      "type": "兵器",
+      "description": "欧冶子为楚国铸造的宝剑之一。<SEP>楚王所铸三口宝剑之一。<SEP>欧冶子为楚国铸造的宝剑之一。<SEP>楚王所铸三口宝剑之一。"
+    },
+    {
+      "name": "泰阿",
+      "type": "兵器",
+      "description": "欧冶子为楚国铸造的宝剑之一。<SEP>楚王所铸三口宝剑之一。<SEP>欧冶子为楚国铸造的宝剑之一。<SEP>楚王所铸三口宝剑之一。"
+    },
+    {
+      "name": "秦国",
+      "type": "地点",
+      "description": "秦王的国家，曾试图夺取湛卢剑。<SEP>秦王的国家，曾试图夺取湛卢剑。"
+    },
+    {
+      "name": "少女",
+      "type": "人物",
+      "description": "身穿浅绿衫子，容貌秀丽，武艺高强。<SEP>身穿浅绿衫子，容貌秀丽，武艺高强。"
+    },
+    {
+      "name": "会稽",
+      "type": "地点",
+      "description": "越国所在的地点。<SEP>越国所在的地点。"
+    },
+    {
+      "name": "长剑",
+      "type": "兵器",
+      "description": "青衣剑士使用的锋利兵器。<SEP>吴国剑士和卫士使用的兵器。<SEP>越军使用的兵器，在战斗中发挥重要作用。<SEP>青衣剑士使用的锋利兵器。<SEP>吴国剑士和卫士使用的兵器。"
+    },
+    {
+      "name": "杀羊事件",
+      "type": "事件",
+      "description": "吴国剑士杀害少女的山羊，引发冲突。<SEP>吴国剑士杀害少女的山羊，引发冲突。<SEP>吴国剑士杀害阿黑的羊，引发冲突。"
+    },
+    {
+      "name": "戳瞎事件",
+      "type": "事件",
+      "description": "少女以竹棒戳瞎两名吴国剑士的眼睛。<SEP>少女以竹棒戳瞎两名吴国剑士的眼睛。"
+    },
+    {
+      "name": "山羊",
+      "type": "自然物",
+      "description": "少女赶着的十几头山羊，其中一头被吴国剑士杀害。<SEP>阿青家中饲养的动物，数量约十几头。<SEP>少女赶着的十几头山羊，其中一头被吴国剑士杀害。<SEP>阿黑家中留下的动物。<SEP>西施在宫室中饲"
+    },
+    {
+      "name": "越王勾践",
+      "type": "人物",
+      "description": "越国国君，曾败于吴王夫差，卧薪尝胆，欲报仇。<SEP>越国国君，曾败于吴王夫差，卧薪尝胆，欲报仇。"
+    },
+    {
+      "name": "吴王夫差",
+      "type": "人物",
+      "description": "吴国国君，曾击败越王勾践。<SEP>吴国国君，曾击败越王勾践。"
+    },
+    {
+      "name": "卧薪尝胆",
+      "type": "事件",
+      "description": "越王勾践为报仇而忍辱负重的行为。<SEP>越王勾践为报仇而忍辱负重的行为。"
+    },
+    {
+      "name": "比剑",
+      "type": "事件",
+      "description": "越王勾践试探吴国军力的剑术较量。<SEP>剑士之间的比试，分为单打独斗、二对二和四对四。<SEP>越王勾践试探吴国军力的剑术较量。<SEP>剑士之间的比试，分为单打独斗、二对二和四对四。"
+    },
+    {
+      "name": "金漆长匣",
+      "type": "兵器",
+      "description": "装有宝剑的匣子，由青衣剑士奉上。<SEP>装有宝剑的匣子，由青衣剑士奉上。"
+    },
+    {
+      "name": "剑道",
+      "type": "概念",
+      "description": "学剑之士应遵守的剑术原则。<SEP>官员提到的剑士应遵守的行为准则。<SEP>学剑之士应遵守的剑术原则。<SEP>官员提到的剑士应遵守的行为准则。"
+    },
+    {
+      "name": "剑网",
+      "type": "武功",
+      "description": "青衣剑士使用的防守剑招，形成一道密不透风的剑势。<SEP>青衣剑士使用的防守剑招，形成一道密不透风的剑势。"
+    },
+    {
+      "name": "轻纱",
+      "type": "自然物",
+      "description": "青衣剑士用于展示宝剑锋利的物品。<SEP>青衣剑士用于展示宝剑锋利的物品。"
+    },
+    {
+      "name": "老白",
+      "type": "生物",
+      "description": "阿青的羊，被吴国剑士杀害。<SEP>阿青的羊，因被杀而引发了故事中的情感互动。<SEP>阿黑的羊，被吴国剑士杀害。<SEP>阿黑的羊，故事中被杀害。"
+    },
+    {
+      "name": "范蠡府邸",
+      "type": "地点",
+      "description": "范蠡居住的地方，阿青曾到访。"
+    },
+    {
+      "name": "山里",
+      "type": "地点",
+      "description": "白公公居住的地方，阿青和范蠡曾去牧羊。<SEP>黑猩猩的居住地。"
+    },
+    {
+      "name": "阿青的母亲",
+      "type": "人物",
+      "description": "阿青的母亲，劝阿青不要与男人多说话。"
+    },
+    {
+      "name": "糕饼点心",
+      "type": "内容",
+      "description": "范蠡命婢仆取出的食物，用来款待阿青。<SEP>范蠡命婢仆取出款待阿黑的食物。"
+    },
+    {
+      "name": "牡丹",
+      "type": "自然物",
+      "description": "范蠡花园中的一种名花，被羊群咬嚼。"
+    },
+    {
+      "name": "芍药",
+      "type": "自然物",
+      "description": "范蠡花园中的一种名花，被羊群咬嚼。"
+    },
+    {
+      "name": "芝兰",
+      "type": "自然物",
+      "description": "范蠡花园中的一种名花，被羊群咬嚼。"
+    },
+    {
+      "name": "玫瑰",
+      "type": "自然物",
+      "description": "范蠡花园中的一种名花，被羊群咬嚼。"
+    },
+    {
+      "name": "官员",
+      "type": "人物",
+      "description": "王者身旁的官员，负责宣布比试规则并评价剑术。<SEP>王者身旁的官员，负责宣布比试规则并评价剑术。"
+    },
+    {
+      "name": "大殿",
+      "type": "地点",
+      "description": "剑士比试的场所。<SEP>剑士比试的场所。"
+    },
+    {
+      "name": "青光",
+      "type": "自然物",
+      "description": "青衣剑士长剑发出的光芒，令人感到寒气袭体。<SEP>青衣剑士长剑发出的光芒，令人感到寒气袭体。"
+    },
+    {
+      "name": "酒",
+      "type": "物品",
+      "description": "王者赏赐给剑士的奖励之一。<SEP>王者赏赐给剑士的奖励之一。"
+    },
+    {
+      "name": "金十斤",
+      "type": "物品",
+      "description": "王者赏赐给青衣剑士的奖励。<SEP>王者赏赐给青衣剑士的奖励。"
+    },
+    {
+      "name": "伯嚭",
+      "type": "人物",
+      "description": "吴国奸臣，被越国贿赂后帮助勾践。<SEP>吴国奸臣，被越国贿赂后帮助勾践。"
+    },
+    {
+      "name": "郑旦",
+      "type": "人物",
+      "description": "越国美女，与西施一同被赠送给吴王夫差。<SEP>越国美女，与西施一同被赠送给吴王夫差。"
+    },
+    {
+      "name": "孙武",
+      "type": "人物",
+      "description": "吴国兵法家，著有《孙子兵法》，曾辅佐吴王。<SEP>吴国兵法家，著有《孙子兵法》，曾辅佐吴王。"
+    },
+    {
+      "name": "会稽山",
+      "type": "地点",
+      "description": "越国地名，勾践曾在此被吴军围困。<SEP>越国地名，勾践曾在此被吴军围困。"
+    },
+    {
+      "name": "钱塘江",
+      "type": "地点",
+      "description": "越国地名，越军在此与吴军交战失败。<SEP>越国地名，越军在此与吴军交战失败。"
+    },
+    {
+      "name": "灭吴九术",
+      "type": "事件",
+      "description": "文种与范蠡提出的九种策略，用于削弱吴国。<SEP>文种与范蠡提出的九种策略，用于削弱吴国。"
+    },
+    {
+      "name": "吴越战争",
+      "type": "事件",
+      "description": "吴国与越国之间的战争，最终越国胜利。<SEP>吴国与越国之间的战争，最终越国胜利。"
+    },
+    {
+      "name": "孙子兵法",
+      "type": "武功",
+      "description": "孙武所著兵法，用于军事战略。<SEP>孙武所著兵法，用于军事战略。"
+    },
+    {
+      "name": "石买",
+      "type": "人物",
+      "description": "越国将领，在钱塘江之战中率军作战但失败。<SEP>越国将领，在钱塘江之战中率军作战但失败。"
+    },
+    {
+      "name": "太宰伯嚭",
+      "type": "人物",
+      "description": "吴国奸臣，被越国贿赂后帮助勾践。<SEP>吴国奸臣，被越国贿赂后帮助勾践。"
+    },
+    {
+      "name": "越国武士",
+      "type": "人物",
+      "description": "越国的士兵，与吴国剑士对抗。<SEP>越国的士兵，与吴国剑士对抗。"
+    },
+    {
+      "name": "风师兄",
+      "type": "人物",
+      "description": "薛烛的师兄，铸剑技艺高超。<SEP>薛烛的师兄，铸剑技艺高超。"
+    },
+    {
+      "name": "莫干山",
+      "type": "地点",
+      "description": "吴国铸剑房所在地。<SEP>吴国铸剑房所在地。"
+    },
+    {
+      "name": "铸剑房",
+      "type": "地点",
+      "description": "莫干山上的铸剑场所。<SEP>莫干山上的铸剑场所。"
+    },
+    {
+      "name": "铸剑",
+      "type": "事件",
+      "description": "风师兄与薛烛协助伍子胥铸造利剑。<SEP>风师兄与薛烛协助伍子胥铸造利剑。"
+    },
+    {
+      "name": "楚平王之棺",
+      "type": "事件",
+      "description": "伍子胥鞭楚平王遗尸并获取宝剑。<SEP>伍子胥鞭楚平王遗尸并获取宝剑。"
+    },
+    {
+      "name": "专诸刺王僚",
+      "type": "事件",
+      "description": "伍子胥曾策划专诸刺杀王僚。<SEP>伍子胥曾策划专诸刺杀王僚。"
+    },
+    {
+      "name": "干将莫邪铸剑",
+      "type": "事件",
+      "description": "干将莫邪铸剑时莫邪投炉，宝剑方成。<SEP>干将莫邪铸剑时莫邪投炉，宝剑方成。"
+    },
+    {
+      "name": "剑匠",
+      "type": "人物",
+      "description": "莫干山铸剑房中的工匠，共有一千余名。<SEP>莫干山铸剑房中的工匠，共有一千余名。"
+    },
+    {
+      "name": "徒兵",
+      "type": "概念",
+      "description": "步战士兵，与车战士兵相对。<SEP>步战士兵，与车战士兵相对。"
+    },
+    {
+      "name": "剑戟",
+      "type": "兵器",
+      "description": "步战中使用的武器，伍子胥要求铸造大量剑戟。<SEP>步战中使用的武器，伍子胥要求铸造大量剑戟。"
+    },
+    {
+      "name": "越国卫士",
+      "type": "人物",
+      "description": "越国的士兵，负责保护范蠡。<SEP>越国的士兵，听命于范蠡。"
+    },
+    {
+      "name": "上国使者",
+      "type": "人物",
+      "description": "被越国卫士护送并需要治疗眼伤的使者。<SEP>被越国卫士护送回宾馆休息的使者。"
+    },
+    {
+      "name": "白猿",
+      "type": "生物",
+      "description": "与阿青交手的白色猿猴，使用竹棒，剑法高超。"
+    },
+    {
+      "name": "越国剑士",
+      "type": "人物",
+      "description": "越国的剑术高手群体，与阿青对战学习剑法。<SEP>越国的剑术高手。"
+    },
+    {
+      "name": "五湖",
+      "type": "地点",
+      "description": "越军与吴军交战之地。<SEP>越军与吴军交战的地点。<SEP>越军与吴军交战之地。"
+    },
+    {
+      "name": "剑室",
+      "type": "地点",
+      "description": "越王的剑术训练场所。<SEP>越王的剑术训练场所。"
+    },
+    {
+      "name": "神剑影子",
+      "type": "概念",
+      "description": "越国武士剑法的精髓，传授后使越国剑法无敌。<SEP>阿青剑法的精髓，被越国剑士模仿。<SEP>阿黑剑法的精髓，被越国剑士传授。<SEP>越国武士传授的剑法，威力无敌。"
+    },
+    {
+      "name": "越军伐吴",
+      "type": "事件",
+      "description": "勾践率越军攻打吴国的战争。"
+    },
+    {
+      "name": "荒山野岭",
+      "type": "地点",
+      "description": "范蠡派遣部属寻找阿青的地方之一。"
+    },
+    {
+      "name": "会稽城",
+      "type": "地点",
+      "description": "越国的一座城，范蠡派遣部属寻找阿青的地方之一。<SEP>越国的城市，故事发生地之一。"
+    },
+    {
+      "name": "余杭山",
+      "type": "地点",
+      "description": "夫差战败后退守之地。<SEP>夫差兵败后退守之地。"
+    },
+    {
+      "name": "破吴之战",
+      "type": "事件",
+      "description": "越国兴兵伐吴，最终攻入吴国都城。"
+    },
+    {
+      "name": "范蠡与西施相会",
+      "type": "事件",
+      "description": "范蠡在馆娃宫与西施倾诉相思。"
+    },
+    {
+      "name": "阿青威胁西施",
+      "type": "事件",
+      "description": "阿青在馆娃宫外威胁要杀西施。"
+    },
+    {
+      "name": "越军",
+      "type": "人物",
+      "description": "越国的军队，使用利剑与吴军交战。"
+    },
+    {
+      "name": "吴军",
+      "type": "人物",
+      "description": "吴国的军队，与越军交战。"
+    },
+    {
+      "name": "音乐般的脚步声",
+      "type": "事件",
+      "description": "西施在馆娃宫长廊上行走时发出的声音，夫差为此建长廊。"
+    },
+    {
+      "name": "羊群",
+      "type": "UNKNOWN",
+      "description": "羊群咬嚼范蠡花园中的牡丹。"
+    },
+    {
+      "name": "阿黑",
+      "type": "人物",
+      "description": "牧羊少女，剑术高超，以竹棒击败吴国剑士。<SEP>范蠡的爱宠，剑术高超的小姑娘。<SEP>乡下姑娘，擅长使用竹棒，与范蠡关系密切。<SEP>天真烂漫的乡村姑娘，擅长使用竹棒。<SEP>与范蠡关系复杂，"
+    },
+    {
+      "name": "黑猩猩",
+      "type": "生物",
+      "description": "与阿黑对战的生物，使用竹棒。<SEP>山中老人，教授阿黑剑术。<SEP>住在山中的猩猩，与阿黑对打竹棒。<SEP>曾试图刺杀范蠡，被阿黑阻挡。"
+    },
+    {
+      "name": "范蠡的大夫第",
+      "type": "地点",
+      "description": "范蠡的居所，阿黑曾到访。"
+    },
+    {
+      "name": "破吴",
+      "type": "事件",
+      "description": "范蠡计划通过训练越国武士以击败吴国。"
+    },
+    {
+      "name": "姑娘屋子",
+      "type": "地点",
+      "description": "阿黑的居所，范蠡吩咐将老白埋在其旁边。"
+    },
+    {
+      "name": "凉亭",
+      "type": "地点",
+      "description": "范蠡花园中的建筑，阿黑在此喝茶吃饼。"
+    },
+    {
+      "name": "花园",
+      "type": "地点",
+      "description": "范蠡居所中的区域，阿黑的羊群曾在此活动。"
+    },
+    {
+      "name": "山谷",
+      "type": "地点",
+      "description": "黑猩猩逃离后啸声回荡的地方。"
+    },
+    {
+      "name": "露水",
+      "type": "自然物",
+      "description": "范蠡用来比喻湘妃嘴唇的晶莹。"
+    },
+    {
+      "name": "破吴战争",
+      "type": "事件",
+      "description": "越国兴兵伐吴，最终攻入吴国都城。"
+    },
+    {
+      "name": "长廊",
+      "type": "地点",
+      "description": "馆娃宫中的建筑，夫差为西施建造，用于听她的脚步声。"
+    },
+    {
+      "name": "宾馆",
+      "type": "地点",
+      "description": "上国使者被护送至休息的地方。"
+    },
+    {
+      "name": "大草地",
+      "type": "地点",
+      "description": "范蠡家中的草地，范蠡邀请阿黑赶羊去吃草。"
+    }
+  ],
+  "relationships": [
+    {
+      "source": "勾践",
+      "target": "越国",
+      "type": "关联",
+      "weight": 7.0
+    },
+    {
+      "source": "勾践",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 6.0
+    },
+    {
+      "source": "勾践",
+      "target": "文种",
+      "type": "关联",
+      "weight": 8.0
+    },
+    {
+      "source": "勾践",
+      "target": "宝剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "夫差",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "勾践",
+      "target": "报仇吴国",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "殿",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "檀木椅子",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "送宝剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "越王",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "薛烛",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "风胡子",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "欧冶子",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "吴越战争",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "利剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "石买",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "勾践",
+      "target": "越军伐吴",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "薛烛",
+      "target": "风胡子",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "薛烛",
+      "target": "利剑",
+      "type": "关联",
+      "weight": 5.0
+    },
+    {
+      "source": "薛烛",
+      "target": "欧冶子",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "薛烛",
+      "target": "工布",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "薛烛",
+      "target": "风师兄",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "薛烛",
+      "target": "铸剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "薛烛",
+      "target": "越国",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "薛烛",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "风胡子",
+      "target": "欧冶子",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "风胡子",
+      "target": "工布",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "伍子胥",
+      "target": "锡山",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "伍子胥",
+      "target": "越国百姓",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "伍子胥",
+      "target": "夫差",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "伍子胥",
+      "target": "风师兄",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "伍子胥",
+      "target": "楚王",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "伍子胥",
+      "target": "楚平王之棺",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "伍子胥",
+      "target": "专诸刺王僚",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "伍子胥",
+      "target": "剑戟",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "文种",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 6.0
+    },
+    {
+      "source": "文种",
+      "target": "越国",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "文种",
+      "target": "飞马",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "文种",
+      "target": "范疯子",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "文种",
+      "target": "殿",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "文种",
+      "target": "宫监",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "文种",
+      "target": "文大夫",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "文种",
+      "target": "灭吴九术",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "西施",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 10.0
+    },
+    {
+      "source": "西施",
+      "target": "夫差",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "西施",
+      "target": "浣纱溪",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "西施",
+      "target": "越国山水",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "西施",
+      "target": "若耶溪",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "西施",
+      "target": "阿青",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "西施",
+      "target": "馆娃宫",
+      "type": "关联",
+      "weight": 3.0
+    },
+    {
+      "source": "西施",
+      "target": "西子捧心",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "西施",
+      "target": "吴王宫",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "西施",
+      "target": "范蠡与西施相会",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "西施",
+      "target": "阿青威胁西施",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "西施",
+      "target": "音乐般的脚步声",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "西施",
+      "target": "吴国",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "西施",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "西施",
+      "target": "山羊",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "夫差",
+      "target": "吴国",
+      "type": "关联",
+      "weight": 6.0
+    },
+    {
+      "source": "夫差",
+      "target": "姑苏",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "夫差",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "夫差",
+      "target": "伯嚭",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "夫差",
+      "target": "郑旦",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "夫差",
+      "target": "孙武",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "夫差",
+      "target": "吴越战争",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "夫差",
+      "target": "余杭山",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "夫差",
+      "target": "破吴战争",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "夫差",
+      "target": "馆娃宫",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "夫差",
+      "target": "长廊",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "姑苏",
+      "target": "吴国剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "姑苏",
+      "target": "吴国",
+      "type": "关联",
+      "weight": 3.0
+    },
+    {
+      "source": "姑苏",
+      "target": "越军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越宫",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越宫",
+      "target": "吴国剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴歌",
+      "target": "吴国剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "利剑",
+      "target": "越国",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "利剑",
+      "target": "越军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "利剑",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "利剑",
+      "target": "破吴战争",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "长剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "卫士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "杀羊事件",
+      "type": "关联",
+      "weight": 3.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "会稽",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "少女",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "山羊",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "越国",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "越国武士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "孙子兵法",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "吴国",
+      "type": "关联",
+      "weight": 5.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "阿青",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "老白",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国剑士",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "越国",
+      "type": "关联",
+      "weight": 9.0
+    },
+    {
+      "source": "吴国",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 3.0
+    },
+    {
+      "source": "吴国",
+      "target": "青衣剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "孙武子兵法",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "吴王阖庐",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "王僚",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "干将",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "吴国",
+      "target": "莫邪",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "吴国",
+      "target": "胜邪",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "鱼肠",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "吴王夫差",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "剑术",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "孙子兵法",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "欧冶子",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "楚国",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴国",
+      "target": "越军伐吴",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "吴国",
+      "target": "破吴之战",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 12.0
+    },
+    {
+      "source": "越国",
+      "target": "锦衫剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "允常",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "湛卢",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "纯钧",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "巨阙",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "越王勾践",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "欧冶子",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "会稽山",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "钱塘江",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "孙子兵法",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "剑术",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "越国武士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "越国卫士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国",
+      "target": "越国剑士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "阿青",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "白猿",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "破吴之战",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "破吴战争",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国",
+      "target": "神剑影子",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "范蠡",
+      "type": "关联",
+      "weight": 8.0
+    },
+    {
+      "source": "阿青",
+      "target": "竹棒",
+      "type": "关联",
+      "weight": 5.0
+    },
+    {
+      "source": "阿青",
+      "target": "西子捧心",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "白公公",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "阿青",
+      "target": "剑术",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "阿青",
+      "target": "老白",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "阿青",
+      "target": "范蠡府邸",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "山里",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "阿青的母亲",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "白猿",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "越国剑士",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "神剑影子",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "越王",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "山羊",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "馆娃宫",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿青",
+      "target": "阿青威胁西施",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "白公公",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "馆娃宫",
+      "type": "关联",
+      "weight": 3.0
+    },
+    {
+      "source": "范蠡",
+      "target": "太湖",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "卫士",
+      "type": "关联",
+      "weight": 5.0
+    },
+    {
+      "source": "范蠡",
+      "target": "卫士长",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "甲士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "吴宫",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "弓箭手",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "牧羊",
+      "type": "关联",
+      "weight": 3.0
+    },
+    {
+      "source": "范蠡",
+      "target": "湘妃",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "山鬼",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "姑苏城",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "吴王宫",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "溪水",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "白云",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "红花",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "大江",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "椽吏",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "楚国",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "宛地",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "宝剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "试剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "范疯子",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "殿",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "孙武子兵法",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "送宝剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "剑匣",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "文大夫",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "少女",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "越王勾践",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "金漆长匣",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "范蠡府邸",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "剑术",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "老白",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "糕饼点心",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "灭吴九术",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "越国卫士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "越军伐吴",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "荒山野岭",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "会稽城",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "范蠡",
+      "target": "范蠡与西施相会",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 6.0
+    },
+    {
+      "source": "范蠡",
+      "target": "范蠡的大夫第",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "破吴",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "姑娘屋子",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "越王",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "神剑影子",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "露水",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "破吴战争",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "大草地",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "范蠡",
+      "target": "黑猩猩",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "白公公",
+      "target": "山里",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "馆娃宫",
+      "target": "音乐般的脚步声",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "馆娃宫",
+      "target": "长廊",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "馆娃宫",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "竹棒",
+      "target": "少女",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "竹棒",
+      "target": "白猿",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "竹棒",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 5.0
+    },
+    {
+      "source": "竹棒",
+      "target": "黑猩猩",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "卫士",
+      "target": "卫士长",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "湘妃",
+      "target": "湘江",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "剑术",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "剑术",
+      "target": "黑猩猩",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "楚国",
+      "target": "楚王",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "楚国",
+      "target": "龙渊",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "楚国",
+      "target": "泰阿",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "楚国",
+      "target": "工布",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "送宝剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "越王",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "锦衫剑士",
+      "type": "关联",
+      "weight": 6.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "护心铜镜",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "王者",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "宝剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "剑网",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "轻纱",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "吴王夫差",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "长剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "青衣剑士",
+      "target": "大殿",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "锦衫剑士",
+      "target": "大剑",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "锦衫剑士",
+      "target": "大殿",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "宝剑",
+      "target": "金漆长匣",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越王",
+      "target": "剑室",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越女剑",
+      "target": "吴越剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "王者",
+      "target": "吴越剑士",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "王者",
+      "target": "锦披大椅",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "王者",
+      "target": "高瘦官员",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "王者",
+      "target": "比剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "王者",
+      "target": "酒",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "王者",
+      "target": "金十斤",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴越剑士",
+      "target": "高瘦官员",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴越剑士",
+      "target": "比剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "湛卢",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "纯钧",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "胜邪",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "鱼肠",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "巨阙",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "工布",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "龙渊",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "欧冶子",
+      "target": "泰阿",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "吴王阖庐",
+      "target": "鱼肠",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "专诸",
+      "target": "鱼肠",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "楚王",
+      "target": "湛卢",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "楚王",
+      "target": "龙渊",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "楚王",
+      "target": "泰阿",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "楚王",
+      "target": "工布",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "秦王",
+      "target": "秦国",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "干将",
+      "target": "莫邪",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "工布",
+      "target": "风师兄",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "少女",
+      "target": "戳瞎事件",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "少女",
+      "target": "山羊",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "长剑",
+      "target": "青光",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "长剑",
+      "target": "越军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "杀羊事件",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "山羊",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越王勾践",
+      "target": "卧薪尝胆",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越王勾践",
+      "target": "比剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越王勾践",
+      "target": "吴王夫差",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "比剑",
+      "target": "官员",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "比剑",
+      "target": "大殿",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "剑道",
+      "target": "官员",
+      "type": "关联",
+      "weight": 4.0
+    },
+    {
+      "source": "老白",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "山里",
+      "target": "黑猩猩",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "牡丹",
+      "target": "羊群",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "芍药",
+      "target": "羊群",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "芝兰",
+      "target": "羊群",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "玫瑰",
+      "target": "羊群",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "伯嚭",
+      "target": "太宰伯嚭",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "孙武",
+      "target": "孙子兵法",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "钱塘江",
+      "target": "石买",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国武士",
+      "target": "神剑影子",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "风师兄",
+      "target": "铸剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "莫干山",
+      "target": "铸剑房",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "铸剑房",
+      "target": "剑匠",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "铸剑",
+      "target": "干将莫邪铸剑",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "徒兵",
+      "target": "剑戟",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国卫士",
+      "target": "上国使者",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "上国使者",
+      "target": "宾馆",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越国剑士",
+      "target": "神剑影子",
+      "type": "关联",
+      "weight": 2.0
+    },
+    {
+      "source": "越国剑士",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "五湖",
+      "target": "越军伐吴",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "五湖",
+      "target": "越军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "五湖",
+      "target": "破吴战争",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "会稽城",
+      "target": "阿黑",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "越军",
+      "target": "吴军",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿黑",
+      "target": "黑猩猩",
+      "type": "关联",
+      "weight": 3.0
+    },
+    {
+      "source": "阿黑",
+      "target": "范蠡的大夫第",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿黑",
+      "target": "凉亭",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿黑",
+      "target": "花园",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "阿黑",
+      "target": "大草地",
+      "type": "关联",
+      "weight": 1.0
+    },
+    {
+      "source": "黑猩猩",
+      "target": "山谷",
+      "type": "关联",
+      "weight": 1.0
+    }
+  ]
+}

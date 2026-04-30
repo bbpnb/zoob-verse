@@ -42,6 +42,33 @@ models:
     recommended: false
     prompt_version: "v6" # 使用 V6 极简纯文本 Prompt
 
+  o4-mini:
+    provider: "xiaoai"
+    llm_model: "o4-mini"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "OpenAI o4-mini (XiaoAI) - 最新推理模型"
+    recommended: false
+    prompt_version: "v7" # 使用 V7 严格纯文本 Prompt
+
+  o3-mini:
+    provider: "xiaoai"
+    llm_model: "o3-mini"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "OpenAI o3-mini (XiaoAI) - 新推理模型"
+    recommended: false
+    prompt_version: "v7" # 使用 V7 严格纯文本 Prompt
+
+  o1-mini:
+    provider: "xiaoai"
+    llm_model: "o1-mini"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "OpenAI o1-mini (XiaoAI) - 推理模型"
+    recommended: false
+    prompt_version: "v7" # 使用 V7 严格纯文本 Prompt
+
   gpt-4o:
     provider: "xiaoai"
     llm_model: "gpt-4o"
@@ -50,6 +77,26 @@ models:
     description: "OpenAI GPT-4o (XiaoAI)"
     recommended: false
     prompt_version: "v7" # 切换为 V7 严格模式，解决格式解析错误
+
+  deepseek-chat:
+    provider: "deepseek"
+    embed_provider: "xiaoai" # 使用 XiaoAI 的 Embedding (DeepSeek 暂无官方 Embedding)
+    llm_model: "deepseek-chat"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "DeepSeek Chat (官方) - 高性价比通用模型"
+    recommended: false
+    prompt_version: "v7" # 使用 V7 严格纯文本 Prompt
+
+  deepseek-reasoner:
+    provider: "deepseek"
+    embed_provider: "xiaoai" # 使用 XiaoAI 的 Embedding
+    llm_model: "deepseek-reasoner"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "DeepSeek Reasoner (官方) - 推理模型"
+    recommended: false
+    prompt_version: "v7" # 使用 V7 严格纯文本 Prompt
 
   gpt-4o-mini:
     provider: "xiaoai"
@@ -60,7 +107,22 @@ models:
     recommended: false
     prompt_version: "v8" # 使用 V8 Few-Shot Prompt (针对小模型优化)
 
+  gpt-5-mini:
+    provider: "xiaoai"
+    llm_model: "gpt-5-mini"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "OpenAI GPT-5-mini (XiaoAI) - 最新低价格模型"
+    recommended: false
+    prompt_version: "v7" # V7 简化纯文本 Prompt
+
 providers:
+  deepseek:
+    api_key: "sk-0b1ae2eb6e1949c7a8e98c9e3ecf7f5d"
+    base_url: "https://api.deepseek.com/v1"
+    embed_api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a" # 复用 XiaoAI Embedding
+    embed_base_url: "https://xiaoai.plus/v1"
+
   xiaomimo_token:
     api_key: "tp-cwdfzt1z2xwl4xdw1tsm2xvqwfggduooyb30eejuny89uqx6"
     base_url: "https://token-plan-cn.xiaomimimo.com/v1"

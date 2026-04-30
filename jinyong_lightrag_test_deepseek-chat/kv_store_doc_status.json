@@ -21,30 +21,13 @@
     ],
     "content_summary": "全本全集精校小说尽在：http://www.yimuhe.com/u/anglewing2620-1.html\n更多资源下载：http://qqzone.ctdisk.com\n※声明：本电子书仅供读者预览,请在下载24小时内删除，不得用作商业用途；如果喜欢请购买正版图书！※\n------------------------------------------\n\n越女剑\n　　“请！”“请！”\n　　两名剑士各自倒转剑尖，右手握剑柄，左手搭于右手手背，躬身行礼。\n　　两人身子尚未站直，突然间白光闪动，...",
     "content_length": 17390,
-    "created_at": "2026-04-30T07:58:14.121238+00:00",
-    "updated_at": "2026-04-30T08:04:19.205768+00:00",
+    "created_at": "2026-04-30T15:22:45.127483+00:00",
+    "updated_at": "2026-04-30T15:33:14.828900+00:00",
     "file_path": "unknown_source",
-    "track_id": "insert_20260430_155814_3b1037ae",
+    "track_id": "insert_20260430_232245_d1f10f90",
     "metadata": {
-      "processing_start_time": 1777535894,
-      "processing_end_time": 1777536259
-    }
-  },
-  "dup-6ab38dd9acf60ef79adb9311d05edfb4": {
-    "status": "failed",
-    "content_summary": "[DUPLICATE] Original document: doc-b59f5189478273c150a1d091ecacea20",
-    "content_length": 17390,
-    "chunks_count": 0,
-    "chunks_list": [],
-    "created_at": "2026-04-30T16:43:52.695860+00:00",
-    "updated_at": "2026-04-30T16:43:52.695863+00:00",
-    "file_path": "unknown_source",
-    "track_id": "insert_20260501_004352_36536c2f",
-    "error_msg": "Content already exists. Original doc_id: doc-b59f5189478273c150a1d091ecacea20, Status: processed",
-    "metadata": {
-      "is_duplicate": true,
-      "original_doc_id": "doc-b59f5189478273c150a1d091ecacea20",
-      "original_track_id": "insert_20260430_155814_3b1037ae"
+      "processing_start_time": 1777562565,
+      "processing_end_time": 1777563194
     }
   }
 }
