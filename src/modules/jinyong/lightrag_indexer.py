@@ -149,7 +149,8 @@ class LightragIndexer:
                 relationships.append({
                     "source": s,
                     "target": t,
-                    "type": d.get("relation_type", "关联"),
+                    "type": d.get("keywords", "关联"),
+                    "description": d.get("description", ""),
                     "weight": d.get("weight", 1.0)
                 })
                 

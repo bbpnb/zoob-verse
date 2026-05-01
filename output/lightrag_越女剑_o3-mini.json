@@ -865,1399 +865,1632 @@
     {
       "source": "西施",
       "target": "馆娃宫",
-      "type": "关联",
+      "type": "出没",
+      "description": "作为居住者出现在吴王的馆娃宫中",
       "weight": 1.0
     },
     {
       "source": "西施",
       "target": "阿青",
-      "type": "关联",
+      "type": "情感,敌对",
+      "description": "多次威胁要杀害西施，并呼喊其名字<SEP>阿青expresses admiration and respect for西施's beauty.",
       "weight": 2.0
     },
     {
       "source": "西施",
       "target": "范蠡",
-      "type": "关联",
+      "type": "情感,提及",
+      "description": "范蠡对西施怀有期待与深情<SEP>范蠡实际上描述所见为西施的绝美容颜<SEP>深情呼唤西施，表达热切的恋慕之情<SEP>范蠡is emotionally attached to西施, considering her one of his most beloved companions.",
       "weight": 4.0
     },
     {
       "source": "西施",
       "target": "夫差",
-      "type": "关联",
+      "type": "情感",
+      "description": "Being with西施causes夫差emotional turmoil",
       "weight": 1.0
     },
     {
       "source": "吴王夫差",
       "target": "余杭山",
-      "type": "关联",
+      "type": "出没",
+      "description": "退守于余杭山以抵抗越军攻势",
       "weight": 1.0
     },
     {
       "source": "吴王夫差",
       "target": "越王勾践",
-      "type": "关联",
+      "type": "敌对",
+      "description": "越王勾践暗中训练士卒，伺机攻吴以报昔日之仇。",
       "weight": 1.0
     },
     {
       "source": "吴王夫差",
       "target": "青衣剑士",
-      "type": "关联",
+      "type": "所属",
+      "description": "青衣剑士由吴王夫差派出，代表吴国利益。",
       "weight": 1.0
     },
     {
       "source": "薛烛",
       "target": "范蠡",
       "type": "关联",
+      "description": "范蠡与薛烛讨论铸剑之术<SEP>命其督造利剑以备国用<SEP>命令薛烛督率良工铸成大量利剑",
       "weight": 3.0
     },
     {
       "source": "薛烛",
       "target": "良工",
       "type": "关联",
+      "description": "Xue Zhu led the group of skilled craftsmen in forging a multitude of sharp swords",
       "weight": 1.0
     },
     {
       "source": "薛烛",
       "target": "风师兄",
       "type": "关联",
+      "description": "风师兄作为薛烛的师兄受到提及",
       "weight": 1.0
     },
     {
       "source": "薛烛",
       "target": "伍子胥",
-      "type": "关联",
+      "type": "提及",
+      "description": "伍子胥邀请薛烛前往吴国协助铸剑",
       "weight": 1.0
     },
     {
       "source": "薛烛",
       "target": "小人",
       "type": "关联",
+      "description": "薛烛used '小人' as a self-reference",
       "weight": 1.0
     },
     {
       "source": "薛烛",
       "target": "欧冶子",
-      "type": "关联",
+      "type": "师徒",
+      "description": "欧冶子传授铸剑技艺，是薛烛的师父",
       "weight": 1.0
     },
     {
       "source": "薛烛",
       "target": "风胡子",
-      "type": "关联",
+      "type": "关联,情感",
+      "description": "风胡子因妒忌薛烛的铸剑才能而割去其手指<SEP>They are fellow disciples, with风胡子as the senior.",
       "weight": 2.0
     },
     {
       "source": "薛烛",
       "target": "勾践",
       "type": "关联",
+      "description": "勾践曾召见薛烛并与其对话",
       "weight": 1.0
     },
     {
       "source": "勾践",
       "target": "吴国",
-      "type": "关联",
+      "type": "敌对",
+      "description": "发起伐吴战争，以图复仇并扩大越国势力<SEP>发起伐吴战争，企图攻灭吴国",
       "weight": 2.0
     },
     {
       "source": "勾践",
       "target": "文种",
       "type": "关联",
+      "description": "勾践与文种共同商讨并采纳复国及复仇策略<SEP>勾践与文种共同商讨国事",
       "weight": 2.0
     },
     {
       "source": "勾践",
       "target": "范蠡",
       "type": "关联",
+      "description": "范蠡作为谋士全力辅助勾践，实现复国大业<SEP>勾践依赖范蠡的智谋，共同谋划国事<SEP>勾践与范蠡携手谋略，任命二人为大夫<SEP>勾践与范蠡联合谋划越国大计",
       "weight": 4.0
     },
     {
       "source": "勾践",
       "target": "太宰伯嚭",
-      "type": "关联",
+      "type": "使用",
+      "description": "勾践买通太宰伯嚭，使其为越国陈说策略",
       "weight": 1.0
     },
     {
       "source": "勾践",
       "target": "利剑",
-      "type": "关联",
+      "type": "使用",
+      "description": "勾践持利剑示决心，象征其复仇与战略部署",
       "weight": 1.0
     },
     {
       "source": "勾践",
       "target": "石买",
       "type": "关联",
+      "description": "勾践appointed石买as military commander for the war against吴国",
       "weight": 1.0
     },
     {
       "source": "勾践",
       "target": "宝剑",
-      "type": "关联",
+      "type": "使用",
+      "description": "勾践于斩椅事件中握剑砍断坐椅，展示决心",
       "weight": 1.0
     },
     {
       "source": "勾践",
       "target": "夫差",
-      "type": "关联",
+      "type": "敌对",
+      "description": "勾践誓言用宝剑斩杀夫差，以报国仇<SEP>勾践and Fu Chai are adversaries",
       "weight": 2.0
     },
     {
       "source": "勾践",
       "target": "越国",
-      "type": "关联",
+      "type": "所属",
+      "description": "勾践统治越国，肩负国家重任",
       "weight": 1.0
     },
     {
       "source": "勾践",
       "target": "斩椅事件",
       "type": "关联",
+      "description": "勾践在斩椅事件中发泄怒火，彰显决心",
       "weight": 1.0
     },
     {
       "source": "勾践",
       "target": "饮宴领赏事件",
       "type": "关联",
+      "description": "勾践下令上国剑士赴宴领取赏赐",
       "weight": 1.0
     },
     {
       "source": "勾践",
       "target": "伍子胥",
-      "type": "关联",
+      "type": "敌对",
+      "description": "勾践认为伍子胥对越国构成威胁",
       "weight": 1.0
     },
     {
       "source": "勾践",
       "target": "吴王",
-      "type": "关联",
+      "type": "敌对",
+      "description": "勾践与吴王处于敌对状态",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "范蠡",
-      "type": "关联",
+      "type": "关联,情感,提及",
+      "description": "The relationship between 范蠡 and 阿青 is characterized by a deep, multifaceted connection that includes elements of admiration, care, and both playful and protective behaviors. Multiple descriptions indicate that 范蠡 has expressed strong affection toward 阿青, inviting her to share meals and demonstrating a sincere concern for her well-being. He not only cherishes and values her—sometimes even treating her like a beloved pet—but also offers guidance in delicate matters, as shown when he cautioned her against actions that could inadvertently cause fatal harm to an opponent.\n\nAt the same time, the dynamic between them is portrayed as mutually affectionate, with accounts noting that both individuals rely on each other and share genuine, if sometimes conflicting, feelings. While some descriptions emphasize 范蠡’s intense infatuation and romantic interest towards 阿青, another narrative characterizes his affection as almost akin to that of an elder sibling toward a younger sister. This duality suggests that the relationship may encompass both romantic and platonic dimensions, reflecting its complexity and the varying perspectives of those involved.\n\nMoreover, the context surrounding the relationship involves intriguing external interactions. There are instances where the name of 范蠡 is called out in hostile tones from beyond palace walls, and decisions are made to meet outside the palace gate to discern 阿青’s true intentions during unfolding events. In addition, 阿青 herself is depicted as engaging directly with 范蠡—demonstrated by her playful act of pulling a white hair from his beard—highlighting a dynamic that is not only affectionate but also interactive and nuanced.",
       "weight": 10.0
     },
     {
       "source": "阿青",
       "target": "竹棒",
-      "type": "关联",
+      "type": "使用",
+      "description": "阿青在战斗中以竹棒攻击对手<SEP>阿青利用竹棒击退坏人，展现武艺<SEP>阿青在战斗中依靠竹棒施展武技<SEP>阿青uses the bamboo stick as a weapon during the confrontation.",
       "weight": 4.0
     },
     {
       "source": "阿青",
       "target": "剑术",
-      "type": "关联",
+      "type": "修炼",
+      "description": "阿青精通剑术，其剑法高超<SEP>阿青自学竹棒剑法，形成独特的剑术",
       "weight": 2.0
     },
     {
       "source": "阿青",
       "target": "老白",
-      "type": "关联",
+      "type": "提及",
+      "description": "阿青laments her lost sheep, 老白, during the encounter",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "吴国剑士",
-      "type": "关联",
+      "type": "敌对",
+      "description": "吴国剑士与阿青在战场上互为敌手<SEP>曾在长街上与吴国剑士决斗",
       "weight": 2.0
     },
     {
       "source": "阿青",
       "target": "阿青师父",
-      "type": "关联",
+      "type": "师徒",
+      "description": "阿青is the disciple of her unknown master",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "白公公",
-      "type": "关联",
+      "type": "师徒",
+      "description": "白公公曾与阿青对打，推测其传授了竹棒剑术<SEP>白公公教授阿青神妙的剑术",
       "weight": 2.0
     },
     {
       "source": "阿青",
       "target": "大草地",
       "type": "关联",
+      "description": "阿青家中有大草地，用于放羊",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "坏人",
-      "type": "关联",
+      "type": "敌对",
+      "description": "阿青used a bamboo stick to poke out the eyes of eight坏人during a confrontation",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "郊外的山",
-      "type": "关联",
+      "type": "出没",
+      "description": "阿青在郊外的山中牧羊放歌",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "白猿",
-      "type": "关联",
+      "type": "提及,敌对",
+      "description": "曾提及白猿因战斗失去两臂<SEP>双方以竹棒进行激烈对决",
       "weight": 2.0
     },
     {
       "source": "阿青",
       "target": "牧羊唱歌",
       "type": "关联",
+      "description": "阿青参与了在山野牧羊并唱歌等待白公公的活动",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "越国剑士",
-      "type": "关联",
+      "type": "敌对",
+      "description": "在剑室演练中击退多名越国剑士",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "神剑影子",
-      "type": "关联",
+      "type": "提及",
+      "description": "其剑法之精妙被比作神剑影子",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "阿青家",
-      "type": "关联",
+      "type": "所属",
+      "description": "阿青原本居住在此处",
       "weight": 1.0
     },
     {
       "source": "阿青",
       "target": "越国剑室",
-      "type": "关联",
+      "type": "出没",
+      "description": "曾在剑室中亲自示范竹棒剑法",
       "weight": 1.0
     },
     {
       "source": "越国武士",
       "target": "神剑影子",
-      "type": "关联",
+      "type": "修炼",
+      "description": "通过修炼神剑影子，越国武士的剑法变得无敌于天下",
       "weight": 1.0
     },
     {
       "source": "越国武士",
       "target": "白公公",
-      "type": "关联",
+      "type": "提及",
+      "description": "White Public's demonstration of swordsmanship implies its potential to train Yue state warriors",
       "weight": 1.0
     },
     {
       "source": "越国武士",
       "target": "吴国剑士",
-      "type": "关联",
+      "type": "敌对",
+      "description": "吴国剑士and越国武士clash on the battlefield",
       "weight": 1.0
     },
     {
       "source": "越国武士",
       "target": "越国",
-      "type": "关联",
+      "type": "所属",
+      "description": "越国武士are part of越国's military forces",
       "weight": 1.0
     },
     {
       "source": "越军",
       "target": "长剑",
-      "type": "关联",
+      "type": "使用",
+      "description": "在战场上使用长剑与吴兵激战",
       "weight": 1.0
     },
     {
       "source": "越军",
       "target": "吴兵",
-      "type": "关联",
+      "type": "敌对",
+      "description": "在战斗中与吴兵进行激烈交锋",
       "weight": 1.0
     },
     {
       "source": "良工",
       "target": "范蠡",
       "type": "关联",
+      "description": "指派良工铸造千千万万口利剑",
       "weight": 1.0
     },
     {
       "source": "神剑影子",
       "target": "越国剑士",
-      "type": "关联",
+      "type": "修炼",
+      "description": "努力模仿阿青剑法中隐现的神韵",
       "weight": 1.0
     },
     {
       "source": "长剑",
       "target": "青衣剑士(初战)",
-      "type": "关联",
+      "type": "使用",
+      "description": "使用长剑发动猛烈攻击",
       "weight": 1.0
     },
     {
       "source": "长剑",
       "target": "锦衫剑士(初战)",
-      "type": "关联",
+      "type": "使用",
+      "description": "执剑应战，迎击对手攻势",
       "weight": 1.0
     },
     {
       "source": "长剑",
       "target": "西首青衣剑士(队员)",
-      "type": "关联",
+      "type": "使用",
+      "description": "在二次比试中使用长剑迎击对手",
       "weight": 1.0
     },
     {
       "source": "长剑",
       "target": "青衣剑士",
-      "type": "关联",
+      "type": "使用,关联",
+      "description": "青衣剑士赠送新铸长剑给越王作为回礼。<SEP>青衣剑士在比试中使用长剑攻防转换",
       "weight": 2.0
     },
     {
       "source": "长剑",
       "target": "吴国剑士",
-      "type": "关联",
+      "type": "使用",
+      "description": "吴国剑士以长剑作为主要兵器进行交战<SEP>吴国剑士在战斗中使用长剑",
       "weight": 2.0
     },
     {
       "source": "长剑",
       "target": "越国卫士",
-      "type": "关联",
+      "type": "使用",
+      "description": "越国卫士装备长剑参与战斗",
       "weight": 1.0
     },
     {
       "source": "长剑",
       "target": "越王勾践",
-      "type": "关联",
+      "type": "提及",
+      "description": "越王勾践对新铸长剑虽心存疑虑，但亦赞叹其剑法之精妙。",
       "weight": 1.0
     },
     {
       "source": "姑苏",
       "target": "吴国剑士",
-      "type": "关联",
+      "type": "出没",
+      "description": "吴国剑士自姑苏出发，进行军事行动",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "馆娃宫",
-      "type": "关联",
+      "type": "出没",
+      "description": "率领长剑手攻入吴国都城馆娃宫",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "会稽山",
-      "type": "关联",
+      "type": "出没",
+      "description": "曾在会稽山经历吴军围困时面临巨大风险",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "卫士",
-      "type": "关联",
+      "type": "所属",
+      "description": "携带卫士随行护卫，确保行程安全",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "吴国使臣",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡perceived the leader of the Wu swordsmen as a Wu envoy",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "上国使者",
       "type": "关联",
+      "description": "范蠡下令越国卫士护送上国使者",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "剑术",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡对阿青出神入化的剑术表示惊叹",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "医生",
       "type": "关联",
+      "description": "Fan Li instructs the guards to summon a doctor for treating injuries",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "大草地",
       "type": "关联",
+      "description": "Fan Li refers to his property’s excellent grassland as a grazing area",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "肥羊",
       "type": "关联",
+      "description": "Fan Li offers ten plump sheep as compensation",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "越王勾践",
-      "type": "关联",
+      "type": "所属",
+      "description": "作为越国大夫，范蠡隶属于越王勾践的政权体系。",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "剑道",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡instructs sword students to adhere to the principle of剑道.",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "剑气",
       "type": "关联",
+      "description": "During the encounter, 范蠡’s face is enveloped by a blue haze due to the emanating剑气.",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "越国",
-      "type": "关联",
+      "type": "所属,提及",
+      "description": "范蠡作为越国官员，隶属于越国<SEP>范蠡提议派白公公去培训越国武士",
       "weight": 2.0
     },
     {
       "source": "范蠡",
       "target": "吴",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡认为白公公能助越国武士破吴",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "众卫士",
       "type": "关联",
+      "description": "范蠡指挥众卫士执行各种命令",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "大夫第",
       "type": "关联",
+      "description": "范蠡居住于大夫第，显示其身份",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "婢仆",
       "type": "关联",
+      "description": "范蠡命令婢仆筹备糕饼点心招待",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "阿青妈",
-      "type": "关联",
+      "type": "情感",
+      "description": "范蠡邀请阿青及其母亲同住大夫第，共享温暖",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "白公公",
-      "type": "关联",
+      "type": "提及,敌对",
+      "description": "范蠡expressed a desire to meet白公公to evaluate his martial arts skills<SEP>范蠡is in opposition to白公公, who once attempted to assassinate him.",
       "weight": 2.0
     },
     {
       "source": "范蠡",
       "target": "老白",
       "type": "关联",
+      "description": "范蠡ordered his guards to sew老白's severed body parts and bury him near阿青's house",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "竹棒",
-      "type": "关联",
+      "type": "使用",
+      "description": "范蠡持竹棒进行牧羊及讲述故事时辅助表达",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "范府",
-      "type": "关联",
+      "type": "所属",
+      "description": "范府为范蠡的居处与活动基地",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "文种",
-      "type": "关联",
+      "type": "情感,提及",
+      "description": "范蠡欣赏文种不凡见解，共同谋划对策<SEP>二人互相投机、交流甚欢，情谊深厚<SEP>文种前来范府探望并询问范蠡的身体状况",
       "weight": 3.0
     },
     {
       "source": "范蠡",
       "target": "楚国",
-      "type": "关联",
+      "type": "关联,所属",
+      "description": "范蠡来自楚国<SEP>范蠡讲述与楚国湘妃相关的故事",
       "weight": 2.0
     },
     {
       "source": "范蠡",
       "target": "湘妃",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡起初提及湘妃的美丽传说",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "郊外的山",
-      "type": "关联",
+      "type": "出没",
+      "description": "范蠡在郊外的山中与阿青共同牧羊",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "山坡草地",
-      "type": "关联",
+      "type": "出没",
+      "description": "范蠡在山坡草地讲述楚国与湘妃的传说",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "牧羊唱歌",
       "type": "关联",
+      "description": "范蠡参与了在山野牧羊并唱歌等待白公公的活动",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "大江",
-      "type": "关联",
+      "type": "出没",
+      "description": "范蠡遥望大江以表达内心情怀",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "江里湖里",
       "type": "关联",
+      "description": "范蠡梦想与阿青共在江里湖里漂流终生",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "大王",
-      "type": "关联",
+      "type": "情感",
+      "description": "The monarch expresses care and concern for Fan’s wellbeing",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "阿青失踪",
       "type": "关联",
+      "description": "在阿青失踪后派遣数百部属进行搜寻",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "荒山野岭",
-      "type": "关联",
+      "type": "出没",
+      "description": "Subordinates were dispatched by Fan Li to search the wild mountains and wilderness",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "孙武子",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡引用孙武子兵法，讨论吴国剑士群斗的策略",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "吴王",
-      "type": "关联",
+      "type": "提及",
+      "description": "吴王通过范蠡得知越国谋略，反映冲突与策略博弈",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "王霸之道",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡discusses the concept of王霸之道during his conversation with文种",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "吴国武士",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡评价吴国武士剑术及兵刃技艺不如本国精锐",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "孙武子兵法",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡指出吴国武士善用孙武子兵法作战",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "锦衫剑士",
       "type": "关联",
+      "description": "范蠡指挥锦衫剑士拔剑试剑，共同检验兵器",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "宝剑",
-      "type": "关联",
+      "type": "使用",
+      "description": "范蠡在试剑过程中操控宝剑验证其锋利",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "商议事件",
       "type": "关联",
+      "description": "范蠡参与了召集文种，共同商议国事的事件",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "宛",
-      "type": "关联",
+      "type": "所属",
+      "description": "范蠡的身世与宛地密切相关",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "吴国剑士",
-      "type": "关联",
+      "type": "关联,提及",
+      "description": "范蠡内心认为吴国剑士虽无礼，但不可轻易动手<SEP>范蠡命令手下卫士围困吴国剑士以防冲突升级",
       "weight": 2.0
     },
     {
       "source": "范蠡",
       "target": "夫差",
-      "type": "关联",
+      "type": "情感",
+      "description": "范蠡顾虑若杀吴国剑士将激怒吴国君主夫差",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "越国卫士",
-      "type": "关联",
+      "type": "所属",
+      "description": "The越国卫士are subordinates under范蠡’s command",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "甲士",
       "type": "关联",
+      "description": "范蠡commands the armored soldiers (甲士) as part of his strategic planning.",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "弓箭手",
       "type": "关联",
+      "description": "范蠡directs the archers (弓箭手) to guard the palace gate.",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "剑士",
       "type": "关联",
+      "description": "范蠡orders the sword soldiers (剑士) to safeguard the palace.",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "吴宫",
-      "type": "关联",
+      "type": "所属",
+      "description": "范蠡operates within吴宫, indicating his official domain.",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "太湖",
-      "type": "关联",
+      "type": "提及",
+      "description": "范蠡mentions太湖as his planned destination for escape.",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "夷光",
       "type": "关联",
+      "description": "Fan Li considers incorporating夷光into his escape disguise plan.",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "宫女",
       "type": "关联",
+      "description": "Fan Li plans to have a palace maid impersonate夷光as part of his strategy.",
       "weight": 1.0
     },
     {
       "source": "范蠡",
       "target": "伍子胥",
-      "type": "关联",
+      "type": "敌对",
+      "description": "范蠡视伍子胥为对越国的威胁",
       "weight": 1.0
     },
     {
       "source": "馆娃宫",
       "target": "甲士",
-      "type": "关联",
+      "type": "出没",
+      "description": "The armored soldiers (甲士) are stationed around馆娃宫to guard it.",
       "weight": 1.0
     },
     {
       "source": "馆娃宫",
       "target": "剑士",
-      "type": "关联",
+      "type": "出没",
+      "description": "The sword soldiers (剑士) are deployed around馆娃宫as part of the defense.",
       "weight": 1.0
     },
     {
       "source": "青衣剑士(初战)",
       "target": "锦衫剑士(初战)",
-      "type": "关联",
+      "type": "敌对",
+      "description": "在首场比剑中互为对手展开激烈较量",
       "weight": 1.0
     },
     {
       "source": "青衣剑士(初战)",
       "target": "护心铜镜",
-      "type": "关联",
+      "type": "使用",
+      "description": "胸藏护心铜镜以化解致命剑刺",
       "weight": 1.0
     },
     {
       "source": "青衣剑士(初战)",
       "target": "王者",
-      "type": "关联",
+      "type": "情感",
+      "description": "在胜后向王者行礼致谢表达敬意",
       "weight": 1.0
     },
     {
       "source": "青衣剑士(初战)",
       "target": "剑法",
-      "type": "关联",
+      "type": "修炼",
+      "description": "Demonstrates his refined and exceptional sword technique",
       "weight": 1.0
     },
     {
       "source": "青衣剑士(初战)",
       "target": "比剑",
       "type": "关联",
+      "description": "Participated in the initial duel",
       "weight": 1.0
     },
     {
       "source": "锦衫剑士(初战)",
       "target": "从者",
       "type": "关联",
+      "description": "抬运其尸体并清理比剑后的血迹",
       "weight": 1.0
     },
     {
       "source": "锦衫剑士(初战)",
       "target": "比剑",
       "type": "关联",
+      "description": "Participated in the initial duel",
       "weight": 1.0
     },
     {
       "source": "王者",
       "target": "吴越剑士",
       "type": "关联",
+      "description": "命令吴越剑士参加二次比试以延续比剑竞技",
       "weight": 1.0
     },
     {
       "source": "王者",
       "target": "青衣剑士",
-      "type": "关联",
+      "type": "情感",
+      "description": "王者对青衣剑士的剑法赞赏有加，并予以赏赐",
       "weight": 1.0
     },
     {
       "source": "王者",
       "target": "二对二比剑",
       "type": "关联",
+      "description": "王者主持并安排了二对二的剑术比试",
       "weight": 1.0
     },
     {
       "source": "王者",
       "target": "四对四比试",
       "type": "关联",
+      "description": "王者宣布并监督了四对四的剑术比试",
       "weight": 1.0
     },
     {
       "source": "王者",
       "target": "赏酒赏金",
-      "type": "关联",
+      "type": "情感",
+      "description": "王者通过赏酒赏金表达对剑士出色表现的认可",
       "weight": 1.0
     },
     {
       "source": "吴越剑士",
       "target": "官员",
-      "type": "关联",
+      "type": "关联,提及",
+      "description": "官员在宣布“三次比剑”时提到了吴越剑士<SEP>协助王者呼唤吴越剑士出场参赛",
       "weight": 2.0
     },
     {
       "source": "吴越剑士",
       "target": "二次比试",
       "type": "关联",
+      "description": "Ordered to participate in the second duel",
       "weight": 1.0
     },
     {
       "source": "吴越剑士",
       "target": "三次比剑",
       "type": "关联",
+      "description": "吴越剑士的身份与三次比剑事件相互关联",
       "weight": 1.0
     },
     {
       "source": "大剑",
       "target": "东首魁梧汉子",
-      "type": "关联",
+      "type": "使用",
+      "description": "在二次比试中提着大剑作战",
       "weight": 1.0
     },
     {
       "source": "大剑",
       "target": "锦衫剑士",
-      "type": "关联",
+      "type": "使用",
+      "description": "锦衫剑士以大剑猛攻对手",
       "weight": 1.0
     },
     {
       "source": "官员",
       "target": "二次比试",
       "type": "关联",
+      "description": "Summoned participants for the second duel",
       "weight": 1.0
     },
     {
       "source": "官员",
       "target": "青衣剑士",
-      "type": "关联",
+      "type": "提及",
+      "description": "官员称赞青衣剑士剑法精湛，并当众点名",
       "weight": 1.0
     },
     {
       "source": "官员",
       "target": "锦衫剑士",
-      "type": "关联",
+      "type": "提及",
+      "description": "官员reminds锦衫剑士to uphold剑道by urging them to maintain discipline",
       "weight": 1.0
     },
     {
       "source": "东首魁梧汉子",
       "target": "西首青衣剑士(队员)",
-      "type": "关联",
+      "type": "敌对",
+      "description": "在二次比试中彼此对抗展开激烈较量",
       "weight": 1.0
     },
     {
       "source": "东首魁梧汉子",
       "target": "二次比试",
       "type": "关联",
+      "description": "Took part in the second duel",
       "weight": 1.0
     },
     {
       "source": "西首青衣剑士(队员)",
       "target": "二次比试",
       "type": "关联",
+      "description": "Took part in the second duel",
       "weight": 1.0
     },
     {
       "source": "剑法",
       "target": "青衣剑士",
-      "type": "关联",
+      "type": "修炼",
+      "description": "青衣剑士practice varied sword techniques known as剑法.",
       "weight": 1.0
     },
     {
       "source": "剑法",
       "target": "锦衫剑士",
-      "type": "关联",
+      "type": "修炼",
+      "description": "锦衫剑士employ distinctive sword techniques that form part of剑法.",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "锡山",
       "type": "关联",
+      "description": "伍子胥dispatched troops to guard锡山",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "吴王",
-      "type": "关联",
+      "type": "使用",
+      "description": "吴王重用伍子胥，听从其计策辅佐治国",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "工布",
-      "type": "关联",
+      "type": "使用",
+      "description": "伍子胥在楚王墓中获得工布宝剑",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "风师兄",
-      "type": "关联",
+      "type": "情感",
+      "description": "伍子胥赠送工布宝剑给风师兄",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "专诸",
       "type": "关联",
+      "description": "伍子胥采用了类似专诸刺杀王僚的手段",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "吴国",
-      "type": "关联",
+      "type": "所属",
+      "description": "伍子胥为吴国效力",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "越国",
-      "type": "关联",
+      "type": "敌对",
+      "description": "伍子胥的计谋对越国构成威胁",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "宾馆",
-      "type": "关联",
+      "type": "出没",
+      "description": "伍子胥在宾馆与风师兄讨论战争局势",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "齐",
-      "type": "关联",
+      "type": "提及",
+      "description": "伍子胥mentioned the competitive situation involving the state of Qi",
       "weight": 1.0
     },
     {
       "source": "伍子胥",
       "target": "晋",
-      "type": "关联",
+      "type": "提及",
+      "description": "伍子胥mentioned the competitive situation involving the state of Jin",
       "weight": 1.0
     },
     {
       "source": "文种",
       "target": "椽吏",
-      "type": "关联",
+      "type": "提及",
+      "description": "The clerk informs Wen Zhong about Fan’s unusual behavior and condition",
       "weight": 1.0
     },
     {
       "source": "文种",
       "target": "灭吴九术",
-      "type": "关联",
+      "type": "提及",
+      "description": "文种详细论述灭吴九术的各项措施，作为复仇手段",
       "weight": 1.0
     },
     {
       "source": "文种",
       "target": "孙武子",
-      "type": "关联",
+      "type": "提及",
+      "description": "文种提及孙武子遗法，说明对群体作战策略的运用",
       "weight": 1.0
     },
     {
       "source": "文种",
       "target": "吴王",
-      "type": "关联",
+      "type": "提及",
+      "description": "吴王从文种处获取越国战略信息，体现双方交流",
       "weight": 1.0
     },
     {
       "source": "文种",
       "target": "王霸之道",
-      "type": "关联",
+      "type": "提及",
+      "description": "文种discusses the concept of王霸之道during his conversation with范蠡",
       "weight": 1.0
     },
     {
       "source": "文种",
       "target": "宛",
-      "type": "关联",
+      "type": "所属",
+      "description": "文种在宛地担任县令，管理当地政务",
       "weight": 1.0
     },
     {
       "source": "文种",
       "target": "商议事件",
       "type": "关联",
+      "description": "文种与范蠡并肩参与商议事件",
       "weight": 1.0
     },
     {
       "source": "吴国剑士",
       "target": "吴国",
-      "type": "关联",
+      "type": "所属",
+      "description": "吴国剑士are part of吴国's military forces<SEP>吴国剑士隶属于吴国<SEP>代表吴国参战",
       "weight": 4.0
     },
     {
       "source": "吴国剑士",
       "target": "越国卫士",
-      "type": "关联",
+      "type": "敌对",
+      "description": "吴国剑士与越国卫士在战场上互相对立",
       "weight": 1.0
     },
     {
       "source": "吴国剑士",
       "target": "剑网",
-      "type": "关联",
+      "type": "使用",
+      "description": "吴国剑士利用剑网防御反击",
       "weight": 1.0
     },
     {
       "source": "吴国剑士",
       "target": "公鸡",
-      "type": "关联",
+      "type": "提及",
+      "description": "Disarmed Wu Guo swordmen are compared to defeated roosters",
       "weight": 1.0
     },
     {
       "source": "吴国剑士",
       "target": "长街",
-      "type": "关联",
+      "type": "出没",
+      "description": "The Wu swordsmanship clashed on the long street during the earlier fight",
       "weight": 1.0
     },
     {
       "source": "吴国剑士",
       "target": "会稽",
-      "type": "关联",
+      "type": "出没",
+      "description": "吴国剑士前往会稽，意图与越国对峙",
       "weight": 1.0
     },
     {
       "source": "吴国剑士",
       "target": "剑术",
-      "type": "关联",
+      "type": "修炼",
+      "description": "吴国剑士展现出其经过严苛修炼的高超剑术",
       "weight": 1.0
     },
     {
       "source": "吴国剑士",
       "target": "少女",
-      "type": "关联",
+      "type": "敌对",
+      "description": "少女与吴国剑士之间爆发激烈冲突",
       "weight": 1.0
     },
     {
       "source": "吴国剑士",
       "target": "山羊",
-      "type": "关联",
+      "type": "敌对",
+      "description": "A吴国剑士splits a山羊in a display of his precise swordsmanship",
       "weight": 1.0
     },
     {
       "source": "吴国剑士",
       "target": "大夫",
       "type": "关联",
+      "description": "The command warns that any吴国剑士colliding with the大夫will be executed",
       "weight": 1.0
     },
     {
       "source": "青衣剑士",
       "target": "锦衫剑士",
-      "type": "关联",
+      "type": "敌对",
+      "description": "在比剑过程中，越王宫卫士与吴国使者展开激烈交锋。<SEP>双方在剑术比试中互为激烈对手",
       "weight": 2.0
     },
     {
       "source": "青衣剑士",
       "target": "西首",
-      "type": "关联",
+      "type": "出没",
+      "description": "部分青衣剑士于西首列队待命",
       "weight": 1.0
     },
     {
       "source": "青衣剑士",
       "target": "半截大剑",
       "type": "关联",
+      "description": "青衣剑士’s skill caused the大剑to be split, resulting in the半截大剑",
       "weight": 1.0
     },
     {
       "source": "青衣剑士",
       "target": "宝剑",
-      "type": "关联",
+      "type": "使用",
+      "description": "青衣剑士在剑试演示中运用宝剑切断轻纱",
       "weight": 1.0
     },
     {
       "source": "青衣剑士",
       "target": "剑试演示",
       "type": "关联",
+      "description": "青衣剑士主导了剑试演示事件",
       "weight": 1.0
     },
     {
       "source": "青衣剑士",
       "target": "饮宴领赏事件",
       "type": "关联",
+      "description": "八名青衣剑士依命行礼下殿并赴宴领取赏赐",
       "weight": 1.0
     },
     {
       "source": "越国",
       "target": "越国卫士",
-      "type": "关联",
+      "type": "所属",
+      "description": "越国卫士隶属于越国",
       "weight": 1.0
     },
     {
       "source": "越国",
       "target": "越国剑士",
-      "type": "关联",
+      "type": "所属",
+      "description": "作为越国精英参训",
       "weight": 1.0
     },
     {
       "source": "越国",
       "target": "伐吴",
       "type": "关联",
+      "description": "伐吴行动为越国对抗吴国的重要军事行动",
       "weight": 1.0
     },
     {
       "source": "越国",
       "target": "吴王",
-      "type": "关联",
+      "type": "敌对",
+      "description": "吴国与越国因争霸而处于长期敌对状态",
       "weight": 1.0
     },
     {
       "source": "越国",
       "target": "吴国",
-      "type": "关联",
+      "type": "敌对",
+      "description": "吴国and越国are long-term adversaries",
       "weight": 1.0
     },
     {
       "source": "锦衫剑士",
       "target": "大殿东首",
-      "type": "关联",
+      "type": "出没",
+      "description": "锦衫剑士集结于大殿东首以备比试",
       "weight": 1.0
     },
     {
       "source": "锦衫剑士",
       "target": "佩剑",
-      "type": "关联",
+      "type": "使用",
+      "description": "锦衫剑士在拔剑试剑事件中拔出并试击佩剑",
       "weight": 1.0
     },
     {
       "source": "锦衫剑士",
       "target": "拔剑试剑",
       "type": "关联",
+      "description": "锦衫剑士参与了拔剑试剑事件",
       "weight": 1.0
     },
     {
       "source": "上国使者",
       "target": "宾馆",
       "type": "关联",
+      "description": "上国使者在范蠡安排下前往宾馆休息",
       "weight": 1.0
     },
     {
       "source": "竹棒",
       "target": "白公公",
-      "type": "关联",
+      "type": "使用",
+      "description": "白公公以竹棒作为教学及互动工具",
       "weight": 1.0
     },
     {
       "source": "竹棒",
       "target": "白猿",
-      "type": "关联",
+      "type": "使用",
+      "description": "白猿以竹棒与阿青交战",
       "weight": 1.0
     },
     {
       "source": "竹棒",
       "target": "少女",
-      "type": "关联",
+      "type": "使用",
+      "description": "少女利用竹棒有效地反击吴国剑士的攻击",
       "weight": 1.0
     },
     {
       "source": "吴国",
       "target": "吴国武士",
-      "type": "关联",
+      "type": "所属",
+      "description": "吴国武士隶属于吴国国力体系",
       "weight": 1.0
     },
     {
       "source": "吴国",
       "target": "伍将军",
-      "type": "关联",
+      "type": "所属",
+      "description": "伍将军身为吴国上卿",
       "weight": 1.0
     },
     {
       "source": "吴国",
       "target": "风师兄",
-      "type": "关联",
+      "type": "出没",
+      "description": "风师兄前往吴国致谢伍将军",
       "weight": 1.0
     },
     {
       "source": "吴国",
       "target": "齐",
-      "type": "关联",
+      "type": "敌对",
+      "description": "Wu and Qi are in adversarial competition",
       "weight": 1.0
     },
     {
       "source": "吴国",
       "target": "晋",
-      "type": "关联",
+      "type": "敌对",
+      "description": "Wu and Jin are in adversarial competition",
       "weight": 1.0
     },
     {
       "source": "剑术",
       "target": "少女",
-      "type": "关联",
+      "type": "修炼",
+      "description": "少女在战斗中展示出精妙的剑法和反应能力",
       "weight": 1.0
     },
     {
       "source": "白公公",
       "target": "山里",
-      "type": "关联",
+      "type": "出没",
+      "description": "白公公长期在山中居住",
       "weight": 1.0
     },
     {
       "source": "白公公",
       "target": "郊外的山",
-      "type": "关联",
+      "type": "出没",
+      "description": "白公公在阿青与范蠡牧羊之处现身",
       "weight": 1.0
     },
     {
       "source": "吴王",
       "target": "吴王宫",
-      "type": "关联",
+      "type": "所属",
+      "description": "吴王宫作为吴王的居所",
       "weight": 1.0
     },
     {
       "source": "吴王",
       "target": "鱼肠",
-      "type": "关联",
+      "type": "使用,所属",
+      "description": "吴王曾命专诸使用鱼肠剑实施刺杀<SEP>吴王收藏鱼肠宝剑",
       "weight": 2.0
     },
     {
       "source": "吴王",
       "target": "胜邪",
-      "type": "关联",
+      "type": "所属",
+      "description": "吴王收藏胜邪宝剑",
       "weight": 1.0
     },
     {
       "source": "吴王",
       "target": "吴国刺杀王僚",
-      "type": "关联",
+      "type": "提及",
+      "description": "吴王通过派遣刺杀行动表现其对越国的威胁",
       "weight": 1.0
     },
     {
       "source": "吴王",
       "target": "越王允常",
       "type": "关联",
+      "description": "吴王requested the five swords forged by越王允常.",
       "weight": 1.0
     },
     {
       "source": "湘妃",
       "target": "湘江",
-      "type": "关联",
+      "type": "出没",
+      "description": "湘妃曾在湘江边露面，其倒影映水而生",
       "weight": 1.0
     },
     {
       "source": "吴王宫",
       "target": "姑苏城",
-      "type": "关联",
+      "type": "所属",
+      "description": "吴王宫位于姑苏城内部",
       "weight": 1.0
     },
     {
       "source": "绿影",
       "target": "白影",
-      "type": "关联",
+      "type": "敌对",
+      "description": "The green and white figures are depicted as engaged in a rapid and competitive struggle",
       "weight": 1.0
     },
     {
       "source": "白猿",
       "target": "树梢",
-      "type": "关联",
+      "type": "出没",
+      "description": "The white ape leaped onto the treetop to escape after the fight",
       "weight": 1.0
     },
     {
       "source": "白猿",
       "target": "山谷",
-      "type": "关联",
+      "type": "出没",
+      "description": "The howls of the white ape resonated throughout the valley",
       "weight": 1.0
     },
     {
       "source": "越王",
       "target": "越国剑室",
-      "type": "关联",
+      "type": "提及",
+      "description": "越王剑室为阿青展示技艺的重要场所",
       "weight": 1.0
     },
     {
       "source": "伐吴",
       "target": "五湖",
-      "type": "关联",
+      "type": "出没",
+      "description": "伐吴之战于五湖畔展开",
       "weight": 1.0
     },
     {
       "source": "阿青家",
       "target": "山羊",
-      "type": "关联",
+      "type": "所属",
+      "description": "Alqing’s residence contained a small herd of mountain goats",
       "weight": 1.0
     },
     {
       "source": "干将",
       "target": "莫邪",
-      "type": "关联",
+      "type": "关联,情感",
+      "description": "They are husband and wife.<SEP>干将与莫邪共同铸剑的传说",
       "weight": 2.0
     },
     {
       "source": "欧冶子",
       "target": "风胡子",
-      "type": "关联",
+      "type": "师徒",
+      "description": "欧冶子传授铸剑技艺，是风胡子的师父",
       "weight": 1.0
     },
     {
       "source": "欧冶子",
       "target": "先王",
       "type": "关联",
+      "description": "先王commanded欧冶子to forge five swords.",
       "weight": 1.0
     },
     {
       "source": "宝剑",
       "target": "剑试演示",
       "type": "关联",
+      "description": "宝剑在演示中充分体现了其锋利特性",
       "weight": 1.0
     },
     {
       "source": "宝剑",
       "target": "斩椅事件",
       "type": "关联",
+      "description": "宝剑在斩椅事件中成为勾践砍断座椅的工具",
       "weight": 1.0
     },
     {
       "source": "佩剑",
       "target": "拔剑试剑",
       "type": "关联",
+      "description": "佩剑在拔剑试剑事件中因试击而断裂",
       "weight": 1.0
     },
     {
       "source": "弓箭手",
       "target": "宫门",
-      "type": "关联",
+      "type": "出没",
+      "description": "The archers (弓箭手) are positioned at the palace gate (宫门) to secure it.",
       "weight": 1.0
     },
     {
       "source": "兵刃落地",
       "target": "宫门",
-      "type": "关联",
+      "type": "出没",
+      "description": "The sound event of weapons (兵刃落地) originates from the vicinity of the palace gate (宫门).",
       "weight": 1.0
     },
     {
       "source": "夷光",
       "target": "宫女",
       "type": "关联",
+      "description": "The palace maid is intended to impersonate夷光as part of the scheme.",
       "weight": 1.0
     },
     {
       "source": "先师",
       "target": "楚王",
       "type": "关联",
+      "description": "先师为楚王铸造三口宝剑",
       "weight": 1.0
     },
     {
       "source": "楚王",
       "target": "龙渊",
-      "type": "关联",
+      "type": "情感,所属",
+      "description": "楚王收藏龙渊宝剑<SEP>楚王对龙渊宝剑珍爱有加",
       "weight": 2.0
     },
     {
       "source": "楚王",
       "target": "泰阿",
-      "type": "关联",
+      "type": "情感,所属",
+      "description": "楚王收藏泰阿宝剑<SEP>楚王对泰阿宝剑珍爱有加",
       "weight": 2.0
     },
     {
       "source": "楚王",
       "target": "工布",
-      "type": "关联",
+      "type": "情感,所属",
+      "description": "楚王收藏工布宝剑<SEP>楚王对工布宝剑珍爱有加",
       "weight": 2.0
     },
     {
       "source": "楚王",
       "target": "湛卢",
-      "type": "关联",
+      "type": "所属",
+      "description": "楚王收藏湛卢宝剑",
       "weight": 1.0
     },
     {
       "source": "楚王",
       "target": "秦王",
-      "type": "关联",
+      "type": "敌对",
+      "description": "秦王因湛卢剑事件而与楚王爆发冲突",
       "weight": 1.0
     },
     {
       "source": "风师兄",
       "target": "伍将军",
-      "type": "关联",
+      "type": "情感",
+      "description": "风师兄因谢伍将军热情接待而表达感激",
       "weight": 1.0
     },
     {
       "source": "风师兄",
       "target": "莫干山",
-      "type": "关联",
+      "type": "出没",
+      "description": "风师兄在莫干山铸剑房铸造利剑",
       "weight": 1.0
     },
     {
       "source": "风师兄",
       "target": "剑匠",
       "type": "关联",
+      "description": "风师兄指导剑匠铸造宝剑",
       "weight": 1.0
     },
     {
       "source": "风师兄",
       "target": "师哥",
       "type": "关联",
+      "description": "风师兄is also referred to as师哥",
       "weight": 1.0
     },
     {
       "source": "风师兄",
       "target": "风胡子",
       "type": "关联",
+      "description": "风师兄is also known by the nickname风胡子",
       "weight": 1.0
     },
     {
       "source": "专诸",
       "target": "王僚",
-      "type": "关联",
+      "type": "敌对",
+      "description": "专诸刺杀王僚，二者处于对立状态",
       "weight": 1.0
     },
     {
       "source": "专诸",
       "target": "吴国刺杀王僚",
-      "type": "关联",
+      "type": "提及",
+      "description": "专诸执行吴国派遣的刺杀任务",
       "weight": 1.0
     },
     {
       "source": "王僚",
       "target": "吴国刺杀王僚",
-      "type": "关联",
+      "type": "提及",
+      "description": "王僚为刺杀行动的目标",
       "weight": 1.0
     },
     {
       "source": "莫干山",
       "target": "铸剑房",
       "type": "关联",
+      "description": "The sword-forging workshop is located on Moganshan",
       "weight": 1.0
     },
     {
       "source": "齐",
       "target": "晋",
-      "type": "关联",
+      "type": "敌对",
+      "description": "Qi and Jin are in opposition",
       "weight": 1.0
     },
     {
       "source": "越王允常",
       "target": "纯钧",
-      "type": "关联",
+      "type": "所属",
+      "description": "越王允常将纯钧收藏于越国大王宫",
       "weight": 1.0
     },
     {
       "source": "越王允常",
       "target": "巨阙",
-      "type": "关联",
+      "type": "所属",
+      "description": "越王允常将巨阙收藏于越国大王宫",
       "weight": 1.0
     }
   ]

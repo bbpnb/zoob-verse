@@ -33,16 +33,27 @@ def visualize_graph(json_path: str | Path, output_path: str | Path) -> None:
     for entity in data.get("entities", []):
         name = entity["name"]
         etype = entity.get("type", "未知")
+        desc = entity.get("description", "")
         color = color_map.get(etype, "#95A5A6")
-        G.add_node(name, label=name, title=f"{etype}: {name}", color=color, size=20)
+        # Include description in title (truncate for readability)
+        title_text = f"{etype}: {name}"
+        if desc:
+            # Replace SEP with newline for better readability
+            formatted_desc = desc.replace("<SEP>", "\n")
+            if len(formatted_desc) > 300:
+                formatted_desc = formatted_desc[:300] + "..."
+            title_text += f"\n{formatted_desc}"
+        G.add_node(name, label=name, title=title_text, color=color, size=20)
 
     # 添加边
     for rel in data.get("relationships", []):
+        rel_type = rel.get("type", "关联")
+        desc = rel.get("description", "")
         G.add_edge(
             rel["source"],
             rel["target"],
-            label=rel["type"],
-            title=rel["type"],
+            label=rel_type,
+            title=f"{rel_type}: {desc}",
             arrows="to",
         )
 
