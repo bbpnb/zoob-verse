@@ -1065,6 +1065,7 @@ def test_eval_command_runs_default_query_set_with_existing_run(monkeypatch, tmp_
                 "model": "deepseek-v4-flash",
                 "method": "lightrag",
                 "run_id": "fixture",
+                "token_usage": {"tracked": {"llm": {"prompt_tokens": 100, "completion_tokens": 20}}},
             },
             ensure_ascii=False,
         ),
@@ -1110,6 +1111,8 @@ def test_eval_command_runs_default_query_set_with_existing_run(monkeypatch, tmp_
     assert queries[0]["route"] in {"graph_only", "graph_low_confidence"}
     assert "debug" in queries[0]
     assert (run_dir / "report.json").exists()
+    report = json.loads((run_dir / "report.json").read_text(encoding="utf-8"))
+    assert report["token_usage"]["prompt_tokens"] == 100
 
 
 def test_visualize_graph_writes_valid_options_object(tmp_path):

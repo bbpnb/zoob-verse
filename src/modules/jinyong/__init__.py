@@ -408,7 +408,7 @@ def eval_run(run_dir, query_set, model, query_model, debug, config_path):
             metadata.get("run_id", run_path.name),
             existing_run_dir=run_path,
         )
-        write_report(spec, graph_data, query_results=results)
+        write_report(spec, graph_data, query_results=results, token_usage=metadata.get("token_usage", {}))
     click.echo(f"[jinyong] 评估完成: {run_path / 'queries.json'}")
 
 
