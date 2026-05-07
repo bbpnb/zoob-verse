@@ -110,6 +110,7 @@ python -m src jinyong derive-view \
 - 固定语料、query set、embedding，优先只改变一个变量。
 - 大索引前先确认模型、provider、语料、run name 和预计成本。
 - 每个 run 都先走标准建图与质检，再做 eval 和 compare。
+- 当前中文质量实验优先用 `deepseek-v4-flash-zh-strict` 对比旧的 `deepseek-v4-flash-zh-schema`。
 
 ```bash
 python -m src jinyong compare-runs \

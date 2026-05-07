@@ -29,11 +29,15 @@ def test_models_config_registers_paid_fallback_platform_models():
     assert models["deepseek-v4-pro"]["prompt_version"] == models["deepseek-v4-flash"]["prompt_version"]
     assert models["deepseek-v4-flash-zh-schema"]["llm_model"] == models["deepseek-v4-flash"]["llm_model"]
     assert models["deepseek-v4-flash-zh-schema"]["prompt_version"] == "v9_zh_schema"
+    assert models["deepseek-v4-flash-zh-strict"]["llm_model"] == models["deepseek-v4-flash"]["llm_model"]
+    assert models["deepseek-v4-flash-zh-strict"]["prompt_version"] == "v10_zh_graph_strict"
     assert models["qwen3.5-plus"]["prompt_version"] == "v9_zh_schema"
     assert models["qwen3.5-plus"]["lightrag"]["default_llm_timeout"] == 900
     assert models["qwen3.5-plus"]["lightrag"]["embedding_func_max_async"] == 1
     assert "v9_zh_schema" in config["prompts"]
     assert "禁止英文" in config["prompts"]["v9_zh_schema"]
+    assert "v10_zh_graph_strict" in config["prompts"]
+    assert "只使用简体中文" in config["prompts"]["v10_zh_graph_strict"]
 
     assert models["mimo-v2.5-pro"]["provider"] == "xiaomimo_token"
     assert models["mimo-v2.5-pro"]["llm_model"] == "MiMo-V2.5-Pro"
@@ -57,6 +61,26 @@ def test_pricing_config_registers_deepseek_v4_pro():
     assert pricing["models"]["deepseek-v4-pro"]["input_per_1m"] > pricing["models"]["deepseek-v4-flash"]["input_per_1m"]
     assert pricing["models"]["deepseek-v4-pro"]["output_per_1m"] > pricing["models"]["deepseek-v4-flash"]["output_per_1m"]
     assert pricing["models"]["deepseek-v4-flash-zh-schema"] == pricing["models"]["deepseek-v4-flash"]
+    assert pricing["models"]["deepseek-v4-flash-zh-strict"] == pricing["models"]["deepseek-v4-flash"]
+
+
+def test_v10_prompt_removes_english_schema_placeholders():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+    prompt = config["prompts"]["v10_zh_graph_strict"]
+
+    forbidden_fragments = [
+        "entity_description",
+        "relationship_description",
+        "Extract entities",
+        "Entity Types",
+        "Relationship Types",
+        "Output Format",
+        "Language",
+    ]
+    for fragment in forbidden_fragments:
+        assert fragment not in prompt
+    assert "entity<|#|>实体名<|#|>实体类型<|#|>中文描述" in prompt
+    assert "如果想到的是英文说明，必须改写成中文" in prompt
 
 
 def test_load_analysis_profile_merges_core_and_domain_profile():
@@ -868,6 +892,30 @@ def test_lightrag_indexer_overrides_keyword_prompt_to_chinese(monkeypatch):
     assert "中文文学知识图谱检索关键词抽取器" in PROMPTS["keywords_extraction"]
     assert "禁止输出英文关键词" in PROMPTS["keywords_extraction"]
     assert indexer.rag.kwargs["default_llm_timeout"] == 777
+
+
+def test_lightrag_indexer_can_inject_v10_strict_prompt(monkeypatch):
+    from lightrag.prompt import PROMPTS
+
+    import src.modules.jinyong.lightrag_indexer as module
+    from src.modules.jinyong.lightrag_indexer import LightragIndexer
+
+    class FakeEmbeddingFunc:
+        def __init__(self, *args, **kwargs):
+            pass
+
+    class FakeLightRAG:
+        def __init__(self, *args, **kwargs):
+            self.kwargs = kwargs
+
+    monkeypatch.setattr(module, "EmbeddingFunc", FakeEmbeddingFunc)
+    monkeypatch.setattr(module, "LightRAG", FakeLightRAG)
+
+    indexer = LightragIndexer(model_name="deepseek-v4-flash-zh-strict")
+
+    assert indexer.cfg["prompt_version"] == "v10_zh_graph_strict"
+    assert "只使用简体中文" in PROMPTS["entity_extraction_system_prompt"]
+    assert "entity_description" not in PROMPTS["entity_extraction_system_prompt"]
 
 
 def test_lightrag_keyword_prompt_can_be_formatted():
