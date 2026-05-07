@@ -1,193 +1,314 @@
 """LightRAG 索引模块：支持多 Provider 切换 & 动态模型选择"""
 
-import os
-import sys
-import json
-import asyncio
 import argparse
-import yaml
+import os
+import asyncio
+import time
+from pathlib import Path
+
 import numpy as np
-import networkx as nx
 from openai import AsyncOpenAI
 from lightrag import LightRAG, QueryParam
 from lightrag.utils import EmbeddingFunc
 from lightrag.prompt import PROMPTS
 
+from src.core.workbench import (
+    DEFAULT_CONFIG_PATH,
+    RunSpec,
+    TokenUsageTracker,
+    estimate_text_tokens,
+    graphml_to_graph_json,
+    load_model_config,
+    require_api_key,
+    write_json,
+)
+
 # ================= 配置加载 =================
-DEFAULT_CONFIG_PATH = "config/models.yaml"
 
-def load_config(config_path: str = DEFAULT_CONFIG_PATH, model_name: str = "gemini-2.5-pro"):
+
+ZH_KEYWORDS_EXTRACTION_PROMPT = """---Role---
+你是中文文学知识图谱检索关键词抽取器，负责把用户问题转换为 LightRAG 检索关键词。
+
+---Goal---
+请从用户问题中抽取两类中文关键词：
+1. high_level_keywords: 中文主题、关系类型、分析角度。
+2. low_level_keywords: 中文人物名、地点名、物件名、事件名、武功/兵器名等具体实体。
+
+---Instructions & Constraints---
+1. 输出必须是合法 JSON object，不要 Markdown，不要解释。
+2. 所有关键词必须使用简体中文。
+3. 禁止输出英文关键词，禁止输出拼音。
+4. low_level_keywords 优先保留原问题中的中文实体名。
+5. high_level_keywords 可以包含中文关系词，例如：师徒、所属、使用、出没、敌对、情感、传授、影响、因果、伪装、牺牲、权谋、提及、关联。
+6. 避免抽象英文概念，例如 motivation、foreshadowing、path nodes、character relationship。
+7. 如果问题里没有明确实体，也要用中文概括具体检索词，不要使用英文。
+
+---Output Format---
+{{
+  "high_level_keywords": ["中文主题词1", "中文主题词2"],
+  "low_level_keywords": ["中文实体1", "中文实体2"]
+}}
+
+---Examples---
+Query: "选择一位核心人物，分析其行为背后不太显性的情感或利益动机。"
+Output:
+{{
+  "high_level_keywords": ["人物动机", "情感", "利益", "行为原因"],
+  "low_level_keywords": ["核心人物", "范蠡", "阿青", "西施"]
+}}
+
+Query: "哪条人物或事件路径最适合做成自媒体内容？请说明路径节点和看点。"
+Output:
+{{
+  "high_level_keywords": ["人物路径", "事件路径", "内容选题", "看点"],
+  "low_level_keywords": ["阿青", "范蠡", "西施", "白公公", "越国剑士"]
+}}
+
+---User Query---
+{query}
+"""
+
+
+ZH_KEYWORDS_EXTRACTION_EXAMPLES = [
+    """Query: "阿青的剑术源头是谁？范蠡是如何将这种个人剑术转化为越国军队的战斗力的？"
+
+Output:
+{{
+  "high_level_keywords": ["剑术源头", "传授", "影响", "军队战斗力"],
+  "low_level_keywords": ["阿青", "白公公", "范蠡", "越国剑士", "越国军队"]
+}}
+""",
+    """Query: "作品中有哪些早期事件影响了后续人物选择？请给出一条清晰的因果链。"
+
+Output:
+{{
+  "high_level_keywords": ["早期事件", "人物选择", "因果", "影响"],
+  "low_level_keywords": ["范蠡", "西施", "勾践", "夫差", "阿青"]
+}}
+""",
+]
+
+
+def load_config(config_path: str = str(DEFAULT_CONFIG_PATH), model_name: str = "deepseek-v4-flash"):
     """从 YAML 配置加载模型和 Provider 设置"""
-    with open(config_path, "r", encoding="utf-8") as f:
-        config = yaml.safe_load(f)
+    return load_model_config(config_path, model_name)
 
-    if model_name not in config["models"]:
-        raise ValueError(f"模型 {model_name} 不存在于配置中。可用模型: {list(config['models'].keys())}")
-
-    model_cfg = config["models"][model_name]
-    provider_name = model_cfg["provider"]
-    provider_cfg = config["providers"][provider_name]
-    
-    # Support separate embedding provider (Hybrid Mode)
-    embed_provider_name = model_cfg.get("embed_provider", provider_name)
-    embed_provider_cfg = config["providers"][embed_provider_name]
-    
-    prompt_version = model_cfg.get("prompt_version", "v6")
-    prompt_text = config["prompts"][prompt_version]
-
-    return {
-        "model_name": model_name,
-        "llm_model": model_cfg["llm_model"],
-        "embed_model": model_cfg["embed_model"],
-        "embed_dim": model_cfg["embed_dim"],
-        "llm_api_key": provider_cfg["api_key"],
-        "llm_base_url": provider_cfg["base_url"],
-        "embed_api_key": embed_provider_cfg.get("embed_api_key", embed_provider_cfg["api_key"]),
-        "embed_base_url": embed_provider_cfg.get("embed_base_url", embed_provider_cfg["base_url"]),
-        "prompt": prompt_text,
-        "description": model_cfg.get("description", ""),
-    }
 
 class LightragIndexer:
     """LightRAG 索引器类"""
-    
-    def __init__(self, config_path: str = DEFAULT_CONFIG_PATH, model_name: str = "gemini-2.5-pro"):
+
+    def __init__(
+        self,
+        config_path: str = str(DEFAULT_CONFIG_PATH),
+        model_name: str = "deepseek-v4-flash",
+        working_dir: str | Path | None = None,
+    ):
         self.cfg = load_config(config_path, model_name)
-        self.working_dir = f"./jinyong_lightrag_test_{model_name}"
-        
+        require_api_key(self.cfg, "llm_api_key")
+        require_api_key(self.cfg, "embed_api_key")
+        self.working_dir = str(working_dir or f"./jinyong_lightrag_test_{model_name}")
+        self.usage_tracker = TokenUsageTracker()
+        self.current_stage = "index"
+
         # 覆盖 LightRAG 默认的提取 Prompt
         PROMPTS["entity_extraction_system_prompt"] = self.cfg["prompt"]
-        
+        PROMPTS["keywords_extraction"] = ZH_KEYWORDS_EXTRACTION_PROMPT
+        PROMPTS["keywords_extraction_examples"] = ZH_KEYWORDS_EXTRACTION_EXAMPLES
+
         # 初始化 EmbeddingFunc
         self._provider_embed_func_obj = EmbeddingFunc(
             embedding_dim=self.cfg["embed_dim"],
             func=self._provider_embed_func,
-            max_token_size=8192
+            max_token_size=8192,
         )
-        
+
         # 初始化 LightRAG
+        lightrag_cfg = self.cfg.get("lightrag", {})
         self.rag = LightRAG(
             working_dir=self.working_dir,
             llm_model_func=self._provider_llm_func,
             embedding_func=self._provider_embed_func_obj,
             llm_model_name=self.cfg["llm_model"],
-            embedding_batch_num=5,
-            embedding_func_max_async=2,
-            default_llm_timeout=300,
-            default_embedding_timeout=120,
-            max_parallel_insert=1
+            embedding_batch_num=int(lightrag_cfg.get("embedding_batch_num", 5)),
+            embedding_func_max_async=int(lightrag_cfg.get("embedding_func_max_async", 2)),
+            default_llm_timeout=int(lightrag_cfg.get("default_llm_timeout", 300)),
+            default_embedding_timeout=int(lightrag_cfg.get("default_embedding_timeout", 120)),
+            max_parallel_insert=int(lightrag_cfg.get("max_parallel_insert", 1)),
         )
+        self._storages_initialized = False
+
+    async def _ensure_storages_initialized(self) -> None:
+        if not self._storages_initialized:
+            await self.rag.initialize_storages()
+            self._storages_initialized = True
 
     async def _provider_llm_func(self, prompt, system_prompt=None, history_messages=[], **kwargs) -> str:
         # 创建临时客户端以避免 pickling 问题
-        client = AsyncOpenAI(api_key=self.cfg["llm_api_key"], base_url=self.cfg["llm_base_url"])
+        timeout = float(self.cfg.get("lightrag", {}).get("default_llm_timeout", 300))
+        client = AsyncOpenAI(api_key=self.cfg["llm_api_key"], base_url=self.cfg["llm_base_url"], timeout=timeout)
         messages = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
         messages.extend(history_messages)
         messages.append({"role": "user", "content": prompt})
-        
+
         resp = await client.chat.completions.create(
             model=self.cfg["llm_model"],
             messages=messages,
-            temperature=0.1
+            temperature=0.1,
         )
+        if resp.usage:
+            self.usage_tracker.add_llm_usage(
+                resp.usage.model_dump(),
+                model=self.cfg["model_name"],
+                stage=self.current_stage,
+            )
         await client.close()
         return resp.choices[0].message.content
 
     async def _provider_embed_func(self, texts: list[str]) -> np.ndarray:
         # 创建临时客户端以避免 pickling 问题
-        client = AsyncOpenAI(api_key=self.cfg["embed_api_key"], base_url=self.cfg["embed_base_url"])
+        timeout = float(self.cfg.get("lightrag", {}).get("default_embedding_timeout", 120))
+        client = AsyncOpenAI(api_key=self.cfg["embed_api_key"], base_url=self.cfg["embed_base_url"], timeout=timeout)
         resp = await client.embeddings.create(
             model=self.cfg["embed_model"],
-            input=texts
+            input=texts,
+        )
+        usage_tokens = estimate_text_tokens("\n".join(texts))
+        self.usage_tracker.add_embedding_usage(
+            usage_tokens,
+            model=self.cfg["embed_model"],
+            stage=self.current_stage,
         )
         await client.close()
         embeddings = [item.embedding for item in resp.data]
         return np.array(embeddings, dtype=np.float32)
 
-    async def index_novel(self, novel_path: str, output_dir: str = "output"):
+    async def index_novel(
+        self,
+        novel_path: str,
+        output_dir: str = "output",
+        graph_json_path: str | Path | None = None,
+    ):
         """索引一部小说"""
         print(f"=== 初始化 LightRAG (模型: {self.cfg['model_name']}) ===")
         print(f"描述: {self.cfg['description']}")
-        
-        await self.rag.initialize_storages()
-        
+        self.current_stage = "index"
+
+        await self._ensure_storages_initialized()
+
         print(f"=== 读取文本: {novel_path} ===")
         with open(novel_path, "r", encoding="gbk") as f:
             text = f.read()
         print(f"文本长度: {len(text)} 字符")
-        
+
         print("=== 开始索引 (这可能需要几分钟) ===")
+        started = time.perf_counter()
         await self.rag.ainsert(text)
-        print("=== 索引完成 ===")
-        
+        elapsed = round(time.perf_counter() - started, 3)
+        print(f"=== 索引完成 ({elapsed}s) ===")
+
         # 提取图谱数据
         print("\n=== 提取图谱数据 ===")
         graph_path = os.path.join(self.working_dir, "graph_chunk_entity_relation.graphml")
         if os.path.exists(graph_path):
-            G = nx.read_graphml(graph_path)
-            print(f"图谱节点数: {G.number_of_nodes()}")
-            print(f"图谱边数: {G.number_of_edges()}")
-            
-            # 统计孤岛
-            orphans = sum(1 for n in G.nodes() if G.degree(n) == 0)
-            orphan_rate = orphans/G.number_of_nodes()*100 if G.number_of_nodes() > 0 else 0
-            print(f"孤岛节点数: {orphans} ({orphan_rate:.1f}%)")
-            
-            # 导出为 JSON
-            entities = []
-            for n, d in G.nodes(data=True):
-                entities.append({
-                    "name": n,
-                    "type": d.get("entity_type", "未知"),
-                    "description": d.get("description", "")[:100]
-                })
-            
-            relationships = []
-            for s, t, d in G.edges(data=True):
-                relationships.append({
-                    "source": s,
-                    "target": t,
-                    "type": d.get("keywords", "关联"),
-                    "description": d.get("description", ""),
-                    "weight": d.get("weight", 1.0)
-                })
-                
-            output_data = {"entities": entities, "relationships": relationships}
-            
+            output_data = graphml_to_graph_json(graph_path)
+            print(f"图谱节点数: {len(output_data['entities'])}")
+            print(f"图谱边数: {len(output_data['relationships'])}")
+
             # 动态生成输出文件名
             novel_name = os.path.splitext(os.path.basename(novel_path))[0]
-            output_path = os.path.join(output_dir, f"lightrag_{novel_name}_{self.cfg['model_name']}.json")
-            
+            output_path = graph_json_path or os.path.join(
+                output_dir,
+                f"lightrag_{novel_name}_{self.cfg['model_name']}.json",
+            )
+
             os.makedirs(output_dir, exist_ok=True)
-            with open(output_path, "w", encoding="utf-8") as f:
-                json.dump(output_data, f, ensure_ascii=False, indent=2)
+            write_json(output_path, output_data)
             print(f"图谱数据已保存: {output_path}")
-            
-            return output_data
+
+            return {
+                "graph": output_data,
+                "elapsed_seconds": elapsed,
+                "token_usage": {
+                    "index_text_tokens_estimate": estimate_text_tokens(text),
+                    "total_tokens": estimate_text_tokens(text),
+                    "tracked": self.usage_tracker.snapshot(),
+                },
+            }
         else:
             print(f"未找到图谱文件: {graph_path}")
             return None
 
-    async def query(self, question: str, mode: str = "local"):
+    async def query(self, question: str, mode: str = "local", debug: bool = False):
         """查询图谱"""
         try:
+            await self._ensure_storages_initialized()
+            self.current_stage = "query"
             res = await self.rag.aquery(question, param=QueryParam(mode=mode))
+            if debug:
+                return {
+                    "answer": res,
+                    "debug": {
+                        "retrieved_entities": [],
+                        "retrieved_relationships": [],
+                        "retrieved_chunks": [],
+                    },
+                    "token_usage": self.usage_tracker.snapshot(),
+                }
             return res
         except Exception as e:
-            return f"查询失败: {e}"
+            message = f"查询失败: {e}"
+            if debug:
+                return {
+                    "answer": message,
+                    "debug": {
+                        "retrieved_entities": [],
+                        "retrieved_relationships": [],
+                        "retrieved_chunks": [],
+                    },
+                    "token_usage": self.usage_tracker.snapshot(),
+                }
+            return message
+
+
+async def index_run(
+    spec: RunSpec,
+    novel_path: str,
+    config_path: str = str(DEFAULT_CONFIG_PATH),
+) -> dict | None:
+    spec.ensure_dirs()
+    indexer = LightragIndexer(
+        config_path=config_path,
+        model_name=spec.model,
+        working_dir=spec.cache_dir,
+    )
+    result = await indexer.index_novel(novel_path=novel_path, graph_json_path=spec.graph_json_path)
+    if result:
+        spec.write_metadata(
+            novel_path=novel_path,
+            model_description=indexer.cfg.get("description", ""),
+            prompt_version=indexer.cfg.get("prompt_version", ""),
+            index_model=spec.model,
+            query_model=spec.model,
+            embedding_model=indexer.cfg.get("embed_model", ""),
+            embedding_dim=indexer.cfg.get("embed_dim", 0),
+            token_usage=result["token_usage"],
+            elapsed_seconds=result["elapsed_seconds"],
+        )
+        return result
+    return None
 
 # ================= CLI 入口 =================
 def main():
     parser = argparse.ArgumentParser(description="LightRAG 文学知识图谱索引器")
-    parser.add_argument("--model", type=str, default="gemini-2.5-pro", help="使用的模型名称 (默认: gemini-2.5-pro)")
+    parser.add_argument("--model", type=str, default="deepseek-v4-flash", help="使用的模型名称")
     parser.add_argument("--novel", type=str, required=True, help="小说文本路径 (GBK 编码)")
     parser.add_argument("--config", type=str, default="config/models.yaml", help="配置文件路径")
     parser.add_argument("--output-dir", type=str, default="output", help="输出目录")
-    
+
     args = parser.parse_args()
-    
+
     indexer = LightragIndexer(config_path=args.config, model_name=args.model)
     asyncio.run(indexer.index_novel(novel_path=args.novel, output_dir=args.output_dir))
 

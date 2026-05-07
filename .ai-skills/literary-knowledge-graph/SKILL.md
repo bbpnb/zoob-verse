@@ -1,71 +1,111 @@
 ---
 name: literary-knowledge-graph
-description: 从文学作品构建知识图谱 — 关系挖掘、模式发现、内容生成。支持金庸、古龙、刘慈欣等作品模块。
-version: 0.1.0
-author: graph-lore project
+description: Use when operating zoob-verse to build, query, evaluate, report, or visualize literary knowledge graphs from fiction texts.
+version: 0.2.0
+author: zoob-verse project
 license: MIT
 metadata:
   hermes:
-    tags: [knowledge-graph, literary-analysis, graphrag, text-mining, neo4j]
+    tags: [knowledge-graph, literary-analysis, lightrag, graphrag, text-mining]
     category: research
 ---
 
-# Literary Knowledge Graph Platform
+# zoob-verse Literary Knowledge Graph
 
-从叙事文本（文学作品、影视、诗歌等）中构建知识图谱，挖掘隐藏关系，发现模式，生成洞察。
+Use this skill to operate `/Users/zhenboyuan/code/mine/zoob-verse` through its CLI.
 
-## 项目路径
-
-```
-/Users/zhenboyuan/code/mine/zoob-verse/
-```
-
-## 可用模块
-
-| 模块 | 描述 | 实体类型 |
-|------|------|---------|
-| `jinyong` | 金庸武侠宇宙 | 人物、门派、武功、地点、事件 |
-| `gulong` | 古龙武侠宇宙 | 人物、组织、兵器、流派、地点 |
-| `liucixin` | 刘慈欣科幻宇宙 | 人物、科技、文明、事件、时间线 |
-
-## CLI 参考
+## Setup
 
 ```bash
-# 数据导入
-python -m src <module> ingest --xlsx <xlsx路径>
-python -m src <module> ingest --files <txt文件...>
-
-# 图谱索引
-python -m src <module> index --novel <txt路径>
-
-# 查询
-python -m src <module> query "<问题>"
-python -m src <module> query --type reasoning "<推理问题>"
-
-# 分析
-python -m src <module> analyze --type shortest-path --from <A> --to <B>
-python -m src <module> analyze --type community-detection
-python -m src <module> analyze --type centrality --method betweenness
+cd /Users/zhenboyuan/code/mine/zoob-verse
+source .venv/bin/activate
+pip install -e ".[dev]"
 ```
 
-## 新增模块
+Secrets are read from local `.env`. Never print, inspect, or commit `.env`.
 
-1. 复制 `src/modules/jinyong/` 为新模块目录
-2. 编辑 `config/settings.yaml` 定义实体/关系类型
-3. 实现 `extract()` 和 `analyze()` 方法
-4. CLI 自动发现新模块
+```bash
+cp .env.example .env
+# Fill only the needed keys, for example DEEPSEEK_API_KEY and XIAOAI_API_KEY.
+# Optional paid fallback keys: XIAOMIMO_API_KEY, DASHSCOPE_API_KEY, OPENROUTER_API_KEY.
+```
 
-## 架构
+## Main Workflow
 
-- **核心引擎**：通用图构建和分析（NetworkX）
-- **模块系统**：各作品独立定义 schema 和处理逻辑
-- **CLI 接口**：统一入口，动态分发到模块
+Use short works such as `越女剑` or `鸳鸯刀` before longer corpora.
 
-详见 `ARCHITECTURE.md` 和 `docs/decisions.md`。
+```bash
+python -m src jinyong index \
+  --novel src/modules/jinyong/data/raw/越女剑.txt \
+  --corpus 越女剑 \
+  --model deepseek-v4-flash \
+  --run-name smoke
 
-## Pitfalls
+python -m src jinyong eval \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
 
-- **不要假设所有模块处理方式相同** — 金庸、唐诗、美剧的实体类型和分析目标完全不同
-- **核心引擎保持通用** — engine.py 不关心任何具体实体类型
-- **模块配置独立** — 每个模块有自己的 config/settings.yaml
-- **Skill 不包代码** — Skill 记录方法论，代码在项目中
+python -m src jinyong report \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+```
+
+Run outputs live under:
+
+```text
+runs/jinyong/<corpus>/<model>/<method>/<run>/
+```
+
+Important files:
+
+- `graph.json`: standardized graph data
+- `queries.json`: fixed or ad-hoc query results
+- `report.md`: human-readable quality report
+- `report.json`: machine-readable metrics
+- `cache/`: LightRAG cache
+
+## Commands
+
+```bash
+# Ask one query against an existing run
+python -m src jinyong query \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke \
+  --mode local \
+  "阿青的剑术源头是谁？"
+
+# Long-context direct-read baseline; does not write graph data
+python -m src jinyong direct-analyze \
+  --novel src/modules/jinyong/data/raw/越女剑.txt \
+  --corpus 越女剑 \
+  --model deepseek-v4-flash \
+  --run-name direct-smoke \
+  --question "阿青的剑术源头和人物动机有什么冷门解读？"
+
+# Visualize a graph
+python -m src jinyong visualize \
+  --input runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke/graph.json \
+  --output runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke/graph.html
+```
+
+## Model Guidance
+
+- `deepseek-v4-flash`: low-cost smoke test and baseline, not final quality default.
+- `gpt-4o`: stronger historical quality baseline for graph extraction.
+- `gpt-4o-mini`: cheap weak baseline.
+- `mimo-v2.5-pro` / `mimo-v2.5`: Xiaomi MiMo Token Plan through `https://token-plan-cn.xiaomimimo.com/v1`; aggressive extraction baseline, watch noise and token use.
+- DashScope Coding Plan models through `https://coding.dashscope.aliyuncs.com/v1`: `qwen3.6-plus`, `qwen3.5-plus`, `qwen3-coder-plus`, `glm-5`, `glm-4.7`, `kimi-k2.5`, `minimax-m2.5`.
+- Avoid expensive model comparisons without explicit user confirmation because LightRAG indexing can consume many tokens.
+- DashScope Coding Plan can have strict rate limits; if limited errors occur, pause or switch provider instead of retrying aggressively.
+- `debug-query` should record retrieved entities, relations, and chunks so later model comparisons can audit whether the graph or the query LLM produced the answer.
+- query model still matters; the graph expands evidence, but the LLM still has to synthesize it.
+- Index and query models may differ: keep `index_model`, `query_model`, and embedding metadata explicit in every run.
+- Do not switch embedding models inside an existing run; rebuild vectors/indexes when changing embedding.
+- Track token usage and estimated cost in metadata, query results, and reports whenever provider usage is available.
+- Rerank models are optional and should be configured explicitly before use.
+
+Keep embedding fixed when comparing LLMs, usually `text-embedding-3-large`, so model quality differences are easier to interpret.
+
+## Safety Rules
+
+- Do not delete `jinyong_lightrag_test_*`, `output/`, or `runs/` unless explicitly asked.
+- Do not show API keys. If keys appear in git history, advise rotation.
+- Prefer `index -> eval -> report` over one-off scripts.
+- Before running paid or costly commands, tell the user which model, corpus, run name, and provider will be used, then get explicit user confirmation.

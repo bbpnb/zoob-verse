@@ -1,8 +1,6 @@
 """金庸模块 — 实体和关系提取"""
 
-import json
 from pathlib import Path
-from typing import Any
 
 import click
 

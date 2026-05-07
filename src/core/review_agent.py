@@ -1,7 +1,6 @@
 """图谱审查与清洗模块"""
 
 import json
-from typing import Any
 
 from src.core.llm import LLMClient
 

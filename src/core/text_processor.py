@@ -2,7 +2,6 @@
 
 import re
 from pathlib import Path
-from typing import Generator
 
 
 def read_text(file_path: str | Path, encoding: str = "gbk") -> str:

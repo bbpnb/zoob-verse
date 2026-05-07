@@ -32,6 +32,7 @@ src/modules/*/data/processed/
 # GraphRAG output
 .lightrag/
 graphrag_output/
+runs/
 
 # Jupyter
 .ipynb_checkpoints/

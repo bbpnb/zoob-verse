@@ -1,7 +1,7 @@
 # 模型配置注册表
 # 你可以在这里添加或修改任何 Provider 和模型
 
-default: "gemini-2.5-pro"
+default: "deepseek-v4-flash"
 
 models:
   gemini-2.5-pro:
@@ -14,21 +14,22 @@ models:
     prompt_version: "v6" # 使用 V6 极简纯文本 Prompt
 
   mimo-v2.5:
-    provider: "xiaomimo"
-    llm_model: "mimo-v2.5"
+    provider: "xiaomimo_token"
+    embed_provider: "xiaoai"
+    llm_model: "MiMo-V2.5"
     embed_model: "text-embedding-3-large"
     embed_dim: 3072
-    description: "Xiaomi MiMo V2.5 (新套餐)"
+    description: "Xiaomi MiMo V2.5 (Token Plan) + XiaoAI Embedding"
     recommended: false
     prompt_version: "v3" # 使用 V3 JSON 格式 Prompt
 
   mimo-v2.5-pro:
     provider: "xiaomimo_token"
     embed_provider: "xiaoai"
-    llm_model: "mimo-v2.5-pro"
+    llm_model: "MiMo-V2.5-Pro"
     embed_model: "text-embedding-3-large"
     embed_dim: 3072
-    description: "Xiaomi MiMo V2.5 Pro (Token Plan)"
+    description: "Xiaomi MiMo V2.5 Pro (Token Plan) + XiaoAI Embedding"
     recommended: false
     prompt_version: "v7" # 使用 V7 超级严格纯文本 Prompt (禁止 Markdown)
 
@@ -41,6 +42,72 @@ models:
     description: "Alibaba Qwen 3.6 Plus (DashScope Coding Plan) + XiaoAI Embedding"
     recommended: false
     prompt_version: "v6" # 使用 V6 极简纯文本 Prompt
+
+  qwen3.5-plus:
+    provider: "dashscope"
+    embed_provider: "xiaoai"
+    llm_model: "qwen3.5-plus"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "Alibaba Qwen 3.5 Plus (DashScope Coding Plan) + XiaoAI Embedding"
+    recommended: false
+    prompt_version: "v9_zh_schema"
+    lightrag:
+      default_llm_timeout: 900
+      default_embedding_timeout: 240
+      embedding_batch_num: 2
+      embedding_func_max_async: 1
+      max_parallel_insert: 1
+
+  qwen3-coder-plus:
+    provider: "dashscope"
+    embed_provider: "xiaoai"
+    llm_model: "qwen3-coder-plus"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "Alibaba Qwen 3 Coder Plus (DashScope Coding Plan) + XiaoAI Embedding"
+    recommended: false
+    prompt_version: "v6"
+
+  glm-5:
+    provider: "dashscope"
+    embed_provider: "xiaoai"
+    llm_model: "glm-5"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "Zhipu GLM-5 (DashScope Coding Plan) + XiaoAI Embedding"
+    recommended: false
+    prompt_version: "v7"
+
+  glm-4.7:
+    provider: "dashscope"
+    embed_provider: "xiaoai"
+    llm_model: "glm-4.7"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "Zhipu GLM-4.7 (DashScope Coding Plan) + XiaoAI Embedding"
+    recommended: false
+    prompt_version: "v7"
+
+  kimi-k2.5:
+    provider: "dashscope"
+    embed_provider: "xiaoai"
+    llm_model: "kimi-k2.5"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "Moonshot Kimi K2.5 (DashScope Coding Plan) + XiaoAI Embedding"
+    recommended: false
+    prompt_version: "v6"
+
+  minimax-m2.5:
+    provider: "dashscope"
+    embed_provider: "xiaoai"
+    llm_model: "MiniMax-M2.5"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "MiniMax M2.5 (DashScope Coding Plan) + XiaoAI Embedding"
+    recommended: false
+    prompt_version: "v6"
 
   o4-mini:
     provider: "xiaoai"
@@ -77,6 +144,36 @@ models:
     description: "OpenAI GPT-4o (XiaoAI)"
     recommended: false
     prompt_version: "v7" # 切换为 V7 严格模式，解决格式解析错误
+
+  deepseek-v4-flash:
+    provider: "deepseek"
+    embed_provider: "xiaoai"
+    llm_model: "deepseek-v4-flash"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "DeepSeek V4 Flash (官方) - 高速低成本模型"
+    recommended: false
+    prompt_version: "v7"
+
+  deepseek-v4-flash-zh-schema:
+    provider: "deepseek"
+    embed_provider: "xiaoai"
+    llm_model: "deepseek-v4-flash"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "DeepSeek V4 Flash (官方) - 严格中文 schema 实验配置"
+    recommended: false
+    prompt_version: "v9_zh_schema"
+
+  deepseek-v4-pro:
+    provider: "deepseek"
+    embed_provider: "xiaoai"
+    llm_model: "deepseek-v4-pro"
+    embed_model: "text-embedding-3-large"
+    embed_dim: 3072
+    description: "DeepSeek V4 Pro (官方) - 高质量对比模型"
+    recommended: false
+    prompt_version: "v7"
 
   deepseek-chat:
     provider: "deepseek"
@@ -118,38 +215,40 @@ models:
 
 providers:
   deepseek:
-    api_key: "sk-0b1ae2eb6e1949c7a8e98c9e3ecf7f5d"
+    api_key_env: "DEEPSEEK_API_KEY"
     base_url: "https://api.deepseek.com/v1"
-    embed_api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a" # 复用 XiaoAI Embedding
+    embed_api_key_env: "XIAOAI_API_KEY" # 复用 XiaoAI Embedding
     embed_base_url: "https://xiaoai.plus/v1"
 
   xiaomimo_token:
-    api_key: "tp-cwdfzt1z2xwl4xdw1tsm2xvqwfggduooyb30eejuny89uqx6"
+    api_key_env: "XIAOMIMO_API_KEY"
     base_url: "https://token-plan-cn.xiaomimimo.com/v1"
-    embed_api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a" # 复用 XiaoAI Embedding
+    embed_api_key_env: "XIAOAI_API_KEY" # 复用 XiaoAI Embedding
     embed_base_url: "https://xiaoai.plus/v1"
 
   dashscope:
-    api_key: "sk-sp-9ea6bee5234a4cc1bb9b7632f52a42d8"
+    api_key_env: "DASHSCOPE_API_KEY"
     base_url: "https://coding.dashscope.aliyuncs.com/v1"
-    embed_api_key: "sk-sp-9ea6bee5234a4cc1bb9b7632f52a42d8"
+    embed_api_key_env: "DASHSCOPE_API_KEY"
     embed_base_url: "https://coding.dashscope.aliyuncs.com/v1"
 
   xiaoai:
-    api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a"
+    api_key_env: "XIAOAI_API_KEY"
     base_url: "https://xiaoai.plus/v1"
-    embed_api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a" # 复用 LLM Key
+    embed_api_key_env: "XIAOAI_API_KEY" # 复用 LLM Key
     embed_base_url: "https://xiaoai.plus/v1"
 
   xiaomimo:
-    api_key: "tp-cwdfzt1z2xwl4xdw1tsm2xvqwfggduooyb30eejuny89uqx6"
+    api_key_env: "XIAOMIMO_API_KEY"
     base_url: "https://token-plan-cn.xiaomimimo.com/v1"
-    embed_api_key: "sk-ws3DKKUW6iwMON6D056d43B67b144aC9B7C6DcD945F7982a" # 使用 XiaoAI 的 Embedding
+    embed_api_key_env: "XIAOAI_API_KEY" # 使用 XiaoAI 的 Embedding
     embed_base_url: "https://xiaoai.plus/v1"
 
   openrouter:
-    api_key: "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"
+    api_key_env: "OPENROUTER_API_KEY"
     base_url: "https://openrouter.ai/api/v1"
+    embed_api_key_env: "OPENROUTER_API_KEY"
+    embed_base_url: "https://openrouter.ai/api/v1"
     llm_model: "moonshotai/kimi-k2.6"
     embed_model: "openai/text-embedding-3-large"
     embed_dim: 3072
@@ -158,6 +257,52 @@ providers:
     prompt_version: "v6"
 
 prompts:
+  v9_zh_schema: |
+    ---Role---
+    你是中文文学知识图谱抽取专家。请从输入小说文本中抽取实体和关系，输出必须用于可复用的中文知识图谱。
+
+    ---CRITICAL INSTRUCTIONS---
+    1. 禁止输出 Markdown、JSON、解释、前后缀说明。
+    2. 只能输出下方格式的纯文本行。
+    3. 所有实体类型、关系类型、描述必须使用简体中文。
+    4. 禁止英文实体类型、英文关系类型、英文描述句子。
+    5. 关系类型只能选择一个标准标签，不允许逗号拼接或复合标签。
+    6. 少用“关联”；只有无法归入其他标准关系时才可使用。
+
+    ---Entity Types (Use ONLY these)---
+    人物、组织、地点、武功、兵器、物件、事件、概念、生物
+
+    ---Relationship Types (Use ONLY these)---
+    师徒、所属、使用、出没、敌对、情感、传授、影响、因果、伪装、牺牲、权谋、提及、关联
+
+    ---Output Format---
+    实体行: entity<|#|>实体名<|#|>实体类型<|#|>中文描述
+    关系行: relation<|#|>源实体<|#|>目标实体<|#|>关系类型<|#|>中文描述
+
+    ---Rules---
+    - 实体名保持原文中文名称；不要翻译成人名拼音或英文。
+    - 如果人物有多个称呼，优先使用作品中最常用、最明确的中文称呼。
+    - 描述用一句简短中文，说明该实体或关系在文本中的作用。
+    - 每个实体应尽量至少有一条关系。
+    - 结尾必须输出: <|COMPLETE|>
+
+    ---Example---
+    Input: "阿青在浣纱溪边遇到了范蠡。范蠡告诉她，越王勾践正在铸造纯钧剑。"
+    Output:
+    entity<|#|>阿青<|#|>人物<|#|>牧羊女，剑术极高
+    entity<|#|>范蠡<|#|>人物<|#|>越国大夫，参与灭吴大计
+    entity<|#|>浣纱溪<|#|>地点<|#|>阿青与范蠡相遇的溪边
+    entity<|#|>越王勾践<|#|>人物<|#|>越国君主
+    entity<|#|>纯钧剑<|#|>兵器<|#|>越国铸造的名剑
+    relation<|#|>阿青<|#|>浣纱溪<|#|>出没<|#|>阿青在浣纱溪边出现
+    relation<|#|>阿青<|#|>范蠡<|#|>影响<|#|>阿青的剑术启发范蠡训练越国剑士
+    relation<|#|>范蠡<|#|>越王勾践<|#|>所属<|#|>范蠡是越王勾践的大夫
+    relation<|#|>越王勾践<|#|>纯钧剑<|#|>使用<|#|>勾践命人铸造并使用名剑
+    <|COMPLETE|>
+
+    ---Task---
+    从下面输入文本中抽取中文实体和中文关系。
+
   v8: |
     ---Role---
     You are a Knowledge Graph Specialist. Extract entities and relationships from the input text.

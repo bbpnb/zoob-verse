@@ -35,15 +35,14 @@ def visualize_graph(json_path: str | Path, output_path: str | Path) -> None:
         etype = entity.get("type", "未知")
         desc = entity.get("description", "")
         color = color_map.get(etype, "#95A5A6")
-        # Include description in title (truncate for readability)
-        title_text = f"{etype}: {name}"
+        # Title with description
+        title_text = f"<b>{name}</b><br>Type: {etype}"
         if desc:
-            # Replace SEP with newline for better readability
-            formatted_desc = desc.replace("<SEP>", "\n")
-            if len(formatted_desc) > 300:
-                formatted_desc = formatted_desc[:300] + "..."
-            title_text += f"\n{formatted_desc}"
-        G.add_node(name, label=name, title=title_text, color=color, size=20)
+            formatted_desc = desc.replace("<SEP>", "<br>").replace("<br><br>", "<br>")
+            if len(formatted_desc) > 400:
+                formatted_desc = formatted_desc[:400] + "..."
+            title_text += f"<br>{formatted_desc}"
+        G.add_node(name, label=name, title=title_text, color=color, size=10, font={'size': 12, 'color': 'white'})
 
     # 添加边
     for rel in data.get("relationships", []):
@@ -56,6 +55,18 @@ def visualize_graph(json_path: str | Path, output_path: str | Path) -> None:
             title=f"{rel_type}: {desc}",
             arrows="to",
         )
+
+    # 优化：根据节点的度（连接数）动态调整大小和字体
+    degrees = dict(G.degree())
+    for node in G.nodes():
+        degree = degrees.get(node, 0)
+        # 节点大小：基础 15 + 度数 * 2，最大 50
+        size = min(50, 15 + degree * 2)
+        # 字体大小：基础 14 + 度数 * 0.5，最大 24
+        font_size = min(24, 14 + int(degree * 0.5))
+        
+        G.nodes[node]['size'] = size
+        G.nodes[node]['font'] = {'size': font_size, 'color': 'white', 'face': 'arial', 'bold': True}
 
     # 配置 pyvis 网络
     net = Network(
@@ -89,30 +100,30 @@ def visualize_graph(json_path: str | Path, output_path: str | Path) -> None:
         {' '.join(legend_items)}
     </div>
     """
-    net.set_options(f"""
-    var options = {{
-        "layout": {{
+    net.set_options("""
+    var options = {
+        "layout": {
             "improvedLayout": true
-        }},
-        "interaction": {{
+        },
+        "interaction": {
             "hover": true,
             "tooltipDelay": 200,
             "zoomView": true,
             "dragView": true
-        }},
-        "physics": {{
+        },
+        "physics": {
             "enabled": true,
-            "forceAtlas2Based": {{
+            "forceAtlas2Based": {
                 "gravitationalConstant": -50,
                 "centralGravity": 0.01,
                 "springLength": 150,
                 "springConstant": 0.1
-            }},
+            },
             "maxVelocity": 146,
             "minVelocity": 0.1,
             "solver": "forceAtlas2Based"
-        }}
-    }}
+        }
+    }
     """)
 
     # 注入图例 HTML
