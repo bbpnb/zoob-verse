@@ -7,6 +7,7 @@ import time
 from pathlib import Path
 
 import numpy as np
+from lightrag.rerank import generic_rerank_api
 from openai import AsyncOpenAI
 from lightrag import LightRAG, QueryParam
 from lightrag.utils import EmbeddingFunc
@@ -188,6 +189,8 @@ class LightragIndexer:
             entity_extract_max_gleaning=int(lightrag_cfg.get("entity_extract_max_gleaning", 1)),
             default_llm_timeout=int(lightrag_cfg.get("default_llm_timeout", 300)),
             default_embedding_timeout=int(lightrag_cfg.get("default_embedding_timeout", 120)),
+            rerank_model_func=self._build_rerank_func(),
+            min_rerank_score=float(lightrag_cfg.get("min_rerank_score", 0.0)),
             max_parallel_insert=int(lightrag_cfg.get("max_parallel_insert", 1)),
         )
         self._storages_initialized = False
@@ -210,6 +213,26 @@ class LightragIndexer:
             "language": "简体中文",
             "entity_types": ["人物", "组织", "地点", "武功", "兵器", "物件", "事件", "概念", "生物"],
         }
+
+    def _build_rerank_func(self):
+        if not self.cfg.get("rerank_model"):
+            return None
+        require_api_key(self.cfg, "rerank_api_key")
+
+        async def _rerank(query: str, documents: list[str], top_n: int | None = None):
+            return await generic_rerank_api(
+                query=query,
+                documents=documents,
+                model=self.cfg["rerank_model"],
+                base_url=self.cfg["rerank_base_url"],
+                api_key=self.cfg["rerank_api_key"],
+                top_n=top_n,
+                return_documents=False,
+                response_format="standard",
+                request_format="standard",
+            )
+
+        return _rerank
 
     async def _ensure_storages_initialized(self) -> None:
         if not self._storages_initialized:
@@ -314,12 +337,32 @@ class LightragIndexer:
             print(f"未找到图谱文件: {graph_path}")
             return None
 
-    async def query(self, question: str, mode: str = "local", debug: bool = False):
+    async def query(
+        self,
+        question: str,
+        mode: str = "local",
+        debug: bool = False,
+        top_k: int | None = None,
+        chunk_top_k: int | None = None,
+        max_total_tokens: int | None = None,
+        enable_rerank: bool = True,
+    ):
         """查询图谱"""
         try:
             await self._ensure_storages_initialized()
             self.current_stage = "query"
-            res = await self.rag.aquery(question, param=QueryParam(mode=mode))
+            if not hasattr(self, "usage_tracker"):
+                self.usage_tracker = TokenUsageTracker()
+            query_param = QueryParam(mode=mode, enable_rerank=enable_rerank)
+            if top_k is not None:
+                query_param.top_k = top_k
+            if chunk_top_k is not None:
+                query_param.chunk_top_k = chunk_top_k
+            if max_total_tokens is not None:
+                query_param.max_total_tokens = max_total_tokens
+            usage_before = self.usage_tracker.snapshot()
+            res = await self.rag.aquery(question, param=query_param)
+            usage_delta = self.usage_tracker.diff(usage_before)
             if debug:
                 return {
                     "answer": res,
@@ -328,7 +371,7 @@ class LightragIndexer:
                         "retrieved_relationships": [],
                         "retrieved_chunks": [],
                     },
-                    "token_usage": self.usage_tracker.snapshot(),
+                    "token_usage": usage_delta,
                 }
             return res
         except Exception as e:
@@ -341,7 +384,7 @@ class LightragIndexer:
                         "retrieved_relationships": [],
                         "retrieved_chunks": [],
                     },
-                    "token_usage": self.usage_tracker.snapshot(),
+                    "token_usage": usage_delta if "usage_delta" in locals() else self.usage_tracker.snapshot(),
                 }
             return message
 

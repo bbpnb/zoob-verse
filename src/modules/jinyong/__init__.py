@@ -283,9 +283,25 @@ def suggest_repairs(run_dir, limit, output_prefix):
 @click.option("--mode", type=click.Choice(["local", "global", "hybrid", "naive", "mix"]), default="local")
 @click.option("--model", default=None, help="覆盖运行目录元数据中的模型名")
 @click.option("--query-model", default=None, help="查询阶段模型配置名；默认使用运行目录模型")
+@click.option("--top-k", type=int, default=None, help="实体/关系召回上限，默认使用 LightRAG 配置")
+@click.option("--chunk-top-k", type=int, default=None, help="文本 chunk 召回上限，默认使用 LightRAG 配置")
+@click.option("--max-total-tokens", type=int, default=None, help="查询上下文 token 总预算，默认使用 LightRAG 配置")
+@click.option("--disable-rerank", is_flag=True, help="禁用查询阶段 rerank")
 @click.option("--debug", is_flag=True, help="保存召回调试字段")
 @click.option("--config", "config_path", type=click.Path(exists=True), default=str(DEFAULT_CONFIG_PATH))
-def query(question, run_dir, mode, model, query_model, debug, config_path):
+def query(
+    question,
+    run_dir,
+    mode,
+    model,
+    query_model,
+    top_k,
+    chunk_top_k,
+    max_total_tokens,
+    disable_rerank,
+    debug,
+    config_path,
+):
     """查询知识图谱"""
     run_path = Path(run_dir)
     metadata = read_json(run_path / "metadata.json") if (run_path / "metadata.json").exists() else {}
@@ -304,7 +320,15 @@ def query(question, run_dir, mode, model, query_model, debug, config_path):
 
     async def _run_query():
         started = time.perf_counter()
-        result = await indexer.query(question, mode=mode, debug=debug)
+        result = await indexer.query(
+            question,
+            mode=mode,
+            debug=debug,
+            top_k=top_k,
+            chunk_top_k=chunk_top_k,
+            max_total_tokens=max_total_tokens,
+            enable_rerank=not disable_rerank,
+        )
         return result, round(time.perf_counter() - started, 3)
 
     result, elapsed = asyncio.run(_run_query())
@@ -332,6 +356,12 @@ def query(question, run_dir, mode, model, query_model, debug, config_path):
             "query_model": query_model_name,
             "route": "graph_low_confidence" if fallback["should_fallback"] else "graph_only",
             "fallback_reasons": fallback["reasons"],
+            "query_options": {
+                "top_k": top_k,
+                "chunk_top_k": chunk_top_k,
+                "max_total_tokens": max_total_tokens,
+                "enable_rerank": not disable_rerank,
+            },
             "token_usage": token_usage,
             "debug": debug_payload if debug else {},
         }
@@ -346,9 +376,13 @@ def query(question, run_dir, mode, model, query_model, debug, config_path):
 @click.option("--query-set", type=click.Path(exists=True), default=None, help="JSON 查询集")
 @click.option("--model", default=None, help="覆盖运行目录元数据中的模型名")
 @click.option("--query-model", default=None, help="查询阶段模型配置名；默认使用运行目录模型")
+@click.option("--top-k", type=int, default=None, help="实体/关系召回上限，默认使用 LightRAG 配置")
+@click.option("--chunk-top-k", type=int, default=None, help="文本 chunk 召回上限，默认使用 LightRAG 配置")
+@click.option("--max-total-tokens", type=int, default=None, help="查询上下文 token 总预算，默认使用 LightRAG 配置")
+@click.option("--disable-rerank", is_flag=True, help="禁用查询阶段 rerank")
 @click.option("--debug", is_flag=True, help="保存召回调试字段")
 @click.option("--config", "config_path", type=click.Path(exists=True), default=str(DEFAULT_CONFIG_PATH))
-def eval_run(run_dir, query_set, model, query_model, debug, config_path):
+def eval_run(run_dir, query_set, model, query_model, top_k, chunk_top_k, max_total_tokens, disable_rerank, debug, config_path):
     """运行固定查询集并保存评估结果"""
     run_path = Path(run_dir)
     metadata = read_json(run_path / "metadata.json") if (run_path / "metadata.json").exists() else {}
@@ -370,7 +404,15 @@ def eval_run(run_dir, query_set, model, query_model, debug, config_path):
         results = []
         for item in queries:
             started = time.perf_counter()
-            result = await indexer.query(item["question"], mode=item.get("mode", "local"), debug=debug)
+            result = await indexer.query(
+                item["question"],
+                mode=item.get("mode", "local"),
+                debug=debug,
+                top_k=top_k,
+                chunk_top_k=chunk_top_k,
+                max_total_tokens=max_total_tokens,
+                enable_rerank=not disable_rerank,
+            )
             if isinstance(result, dict):
                 answer = result.get("answer", "")
                 debug_payload = result.get("debug", {})
@@ -389,6 +431,12 @@ def eval_run(run_dir, query_set, model, query_model, debug, config_path):
                     "query_model": query_model_name,
                     "route": "graph_low_confidence" if fallback["should_fallback"] else "graph_only",
                     "fallback_reasons": fallback["reasons"],
+                    "query_options": {
+                        "top_k": top_k,
+                        "chunk_top_k": chunk_top_k,
+                        "max_total_tokens": max_total_tokens,
+                        "enable_rerank": not disable_rerank,
+                    },
                     "token_usage": token_usage,
                     "debug": debug_payload if debug else {},
                 }

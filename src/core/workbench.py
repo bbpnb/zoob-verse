@@ -349,6 +349,19 @@ class TokenUsageTracker:
             "calls": list(self.calls),
         }
 
+    def diff(self, before: dict[str, Any]) -> dict[str, Any]:
+        """Return usage added after a previous snapshot."""
+        before_llm = before.get("llm", {})
+        before_embedding = before.get("embedding", {})
+        before_call_count = len(before.get("calls", []))
+        return {
+            "llm": {key: self.llm[key] - int(before_llm.get(key, 0) or 0) for key in self.llm},
+            "embedding": {
+                "total_tokens": self.embedding["total_tokens"] - int(before_embedding.get("total_tokens", 0) or 0)
+            },
+            "calls": list(self.calls[before_call_count:]),
+        }
+
 
 def estimate_usage_cost(
     usage: dict[str, Any],
@@ -487,12 +500,22 @@ def load_model_config(
     provider_cfg = providers[provider_name]
     embed_provider_name = model_cfg.get("embed_provider", provider_name)
     embed_provider_cfg = providers[embed_provider_name]
+    rerank_provider_name = model_cfg.get("rerank_provider")
+    rerank_provider_cfg = providers[rerank_provider_name] if rerank_provider_name else {}
     prompt_version = model_cfg.get("prompt_version", "v7")
 
     llm_api_key = os.getenv(provider_cfg["api_key_env"], "")
     embed_api_key = os.getenv(
         embed_provider_cfg.get("embed_api_key_env", embed_provider_cfg["api_key_env"]),
         "",
+    )
+    rerank_api_key = (
+        os.getenv(
+            rerank_provider_cfg.get("rerank_api_key_env", rerank_provider_cfg.get("api_key_env", "")),
+            "",
+        )
+        if rerank_provider_name
+        else ""
     )
 
     return {
@@ -508,6 +531,11 @@ def load_model_config(
         "embed_api_key": embed_api_key,
         "embed_api_key_env": embed_provider_cfg.get("embed_api_key_env", embed_provider_cfg["api_key_env"]),
         "embed_base_url": embed_provider_cfg.get("embed_base_url", embed_provider_cfg["base_url"]),
+        "rerank_provider": rerank_provider_name,
+        "rerank_model": model_cfg.get("rerank_model", ""),
+        "rerank_api_key": rerank_api_key,
+        "rerank_api_key_env": rerank_provider_cfg.get("rerank_api_key_env", rerank_provider_cfg.get("api_key_env", "")),
+        "rerank_base_url": rerank_provider_cfg.get("rerank_base_url", ""),
         "prompt_version": prompt_version,
         "prompt": prompts[prompt_version],
         "description": model_cfg.get("description", ""),
@@ -517,7 +545,12 @@ def load_model_config(
 
 def require_api_key(cfg: dict[str, Any], key_name: str = "llm_api_key") -> None:
     if not cfg.get(key_name):
-        env_name = cfg["llm_api_key_env"] if key_name == "llm_api_key" else cfg["embed_api_key_env"]
+        env_key_name = {
+            "llm_api_key": "llm_api_key_env",
+            "embed_api_key": "embed_api_key_env",
+            "rerank_api_key": "rerank_api_key_env",
+        }.get(key_name, f"{key_name}_env")
+        env_name = cfg.get(env_key_name, env_key_name)
         raise ValueError(f"未设置 API Key。请设置环境变量 {env_name}。")
 
 

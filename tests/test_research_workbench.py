@@ -85,6 +85,23 @@ def test_models_config_registers_siliconflow_bge_m3_embedding_profile():
     assert model["lightrag"]["embedding_func_max_async"] == 1
 
 
+def test_require_api_key_uses_rerank_env_name():
+    from src.core.workbench import require_api_key
+
+    cfg = {
+        "llm_api_key_env": "DEEPSEEK_API_KEY",
+        "embed_api_key_env": "EMBED_ONLY_API_KEY",
+        "rerank_api_key_env": "SILICONFLOW_API_KEY",
+    }
+
+    try:
+        require_api_key(cfg, "rerank_api_key")
+    except ValueError as exc:
+        assert "SILICONFLOW_API_KEY" in str(exc)
+    else:
+        raise AssertionError("require_api_key should fail when rerank_api_key is missing")
+
+
 def test_v10_prompt_removes_english_schema_placeholders():
     config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
     prompt = config["prompts"]["v10_zh_graph_strict"]
@@ -475,6 +492,25 @@ def test_token_usage_tracker_accumulates_llm_and_embedding_usage():
     assert usage["llm"]["prompt_cache_hit_tokens"] == 40
     assert usage["embedding"]["total_tokens"] == 25
     assert usage["calls"][0]["stage"] == "query"
+
+
+def test_token_usage_tracker_diff_returns_incremental_usage():
+    from src.core.workbench import TokenUsageTracker
+
+    tracker = TokenUsageTracker()
+    tracker.add_llm_usage({"prompt_tokens": 100, "completion_tokens": 20}, model="m1", stage="query")
+    tracker.add_embedding_usage(10, model="e1", stage="query")
+    before = tracker.snapshot()
+
+    tracker.add_llm_usage({"prompt_tokens": 30, "completion_tokens": 5}, model="m1", stage="query")
+    tracker.add_embedding_usage(2, model="e1", stage="query")
+    usage = tracker.diff(before)
+
+    assert usage["llm"]["prompt_tokens"] == 30
+    assert usage["llm"]["completion_tokens"] == 5
+    assert usage["llm"]["total_tokens"] == 35
+    assert usage["embedding"]["total_tokens"] == 2
+    assert len(usage["calls"]) == 2
 
 
 def test_summarize_query_usage_adds_costs():
@@ -982,6 +1018,27 @@ def test_lightrag_indexer_passes_stability_lightrag_options(monkeypatch):
     assert indexer.rag.kwargs["entity_extract_max_gleaning"] == 0
 
 
+def test_lightrag_indexer_configures_siliconflow_reranker(monkeypatch):
+    import src.modules.jinyong.lightrag_indexer as module
+    from src.modules.jinyong.lightrag_indexer import LightragIndexer
+
+    class FakeEmbeddingFunc:
+        def __init__(self, *args, **kwargs):
+            pass
+
+    class FakeLightRAG:
+        def __init__(self, *args, **kwargs):
+            self.kwargs = kwargs
+
+    monkeypatch.setattr(module, "EmbeddingFunc", FakeEmbeddingFunc)
+    monkeypatch.setattr(module, "LightRAG", FakeLightRAG)
+
+    indexer = LightragIndexer(model_name="deepseek-v4-flash-zh-strict-bge-m3-rerank")
+
+    assert indexer.rag.kwargs["rerank_model_func"] is not None
+    assert indexer.rag.kwargs["min_rerank_score"] == 0.0
+
+
 def test_lightrag_indexer_v10_overrides_full_extraction_prompt_stack():
     from lightrag.prompt import PROMPTS
 
@@ -1031,6 +1088,19 @@ def test_index_command_exposes_index_model_alias():
 
     assert result.exit_code == 0
     assert "--index-model" in result.output
+
+
+def test_query_and_eval_commands_expose_query_budget_options():
+    query_help = CliRunner().invoke(cli, ["query", "--help"])
+    eval_help = CliRunner().invoke(cli, ["eval", "--help"])
+
+    assert query_help.exit_code == 0
+    assert eval_help.exit_code == 0
+    for output in [query_help.output, eval_help.output]:
+        assert "--top-k" in output
+        assert "--chunk-top-k" in output
+        assert "--max-total-tokens" in output
+        assert "--disable-rerank" in output
 
 
 def test_report_command_generates_report_from_existing_run(tmp_path):
@@ -1087,7 +1157,16 @@ def test_eval_command_runs_default_query_set_with_existing_run(monkeypatch, tmp_
             self.usage_tracker = None
             pass
 
-        async def query(self, question, mode="local", debug=False):
+        async def query(
+            self,
+            question,
+            mode="local",
+            debug=False,
+            top_k=None,
+            chunk_top_k=None,
+            max_total_tokens=None,
+            enable_rerank=True,
+        ):
             if debug:
                 return {
                     "answer": f"{mode}: {question[:8]}",
@@ -1113,6 +1192,99 @@ def test_eval_command_runs_default_query_set_with_existing_run(monkeypatch, tmp_
     assert (run_dir / "report.json").exists()
     report = json.loads((run_dir / "report.json").read_text(encoding="utf-8"))
     assert report["token_usage"]["prompt_tokens"] == 100
+
+
+def test_query_command_passes_query_budget_options(monkeypatch, tmp_path):
+    run_dir = tmp_path / "jinyong" / "越女剑" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "fixture"
+    run_dir.mkdir(parents=True)
+    (run_dir / "metadata.json").write_text(
+        json.dumps(
+            {
+                "module": "jinyong",
+                "corpus": "越女剑",
+                "model": "deepseek-v4-flash-zh-strict-bge-m3",
+                "index_model": "deepseek-v4-flash-zh-strict-bge-m3",
+                "embedding_model": "BAAI/bge-m3",
+                "embedding_dim": 1024,
+                "method": "lightrag",
+                "run_id": "fixture",
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    calls = []
+
+    class FakeIndexer:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        async def query(
+            self,
+            question,
+            mode="local",
+            debug=False,
+            top_k=None,
+            chunk_top_k=None,
+            max_total_tokens=None,
+            enable_rerank=True,
+        ):
+            calls.append(
+                {
+                    "question": question,
+                    "mode": mode,
+                    "top_k": top_k,
+                    "chunk_top_k": chunk_top_k,
+                    "max_total_tokens": max_total_tokens,
+                    "enable_rerank": enable_rerank,
+                }
+            )
+            return "预算查询答案"
+
+    import src.modules.jinyong as jinyong_cli
+
+    monkeypatch.setattr(jinyong_cli, "LightragIndexer", FakeIndexer)
+
+    result = CliRunner().invoke(
+        cli,
+        [
+            "query",
+            "阿青的剑术如何影响越国？",
+            "--run-dir",
+            str(run_dir),
+            "--query-model",
+            "deepseek-v4-flash-zh-strict-bge-m3-rerank",
+            "--mode",
+            "hybrid",
+            "--top-k",
+            "12",
+            "--chunk-top-k",
+            "4",
+            "--max-total-tokens",
+            "10000",
+            "--disable-rerank",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert calls == [
+        {
+            "question": "阿青的剑术如何影响越国？",
+            "mode": "hybrid",
+            "top_k": 12,
+            "chunk_top_k": 4,
+            "max_total_tokens": 10000,
+            "enable_rerank": False,
+        }
+    ]
+    queries = json.loads((run_dir / "queries.json").read_text(encoding="utf-8"))
+    assert queries[-1]["query_options"] == {
+        "top_k": 12,
+        "chunk_top_k": 4,
+        "max_total_tokens": 10000,
+        "enable_rerank": False,
+    }
 
 
 def test_visualize_graph_writes_valid_options_object(tmp_path):
