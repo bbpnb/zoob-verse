@@ -31,6 +31,7 @@ def test_models_config_registers_paid_fallback_platform_models():
     assert models["deepseek-v4-flash-zh-schema"]["prompt_version"] == "v9_zh_schema"
     assert models["deepseek-v4-flash-zh-strict"]["llm_model"] == models["deepseek-v4-flash"]["llm_model"]
     assert models["deepseek-v4-flash-zh-strict"]["prompt_version"] == "v10_zh_graph_strict"
+    assert models["deepseek-v4-flash-zh-strict"]["lightrag"]["embedding_func_max_async"] == 1
     assert models["qwen3.5-plus"]["prompt_version"] == "v9_zh_schema"
     assert models["qwen3.5-plus"]["lightrag"]["default_llm_timeout"] == 900
     assert models["qwen3.5-plus"]["lightrag"]["embedding_func_max_async"] == 1
