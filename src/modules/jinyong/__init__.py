@@ -16,6 +16,7 @@ from src.core.workbench import (
     RunSpec,
     audit_facets_data,
     audit_graph_data,
+    build_repair_suggestions,
     clean_graph_data,
     estimate_text_tokens,
     estimate_usage_cost,
@@ -251,6 +252,29 @@ def audit_facets(run_dir, graph_path, facets_path, profile, output_prefix):
     write_json(json_path, {k: v for k, v in audit.items() if k != "markdown"})
     md_path.write_text(audit["markdown"], encoding="utf-8")
     click.echo(f"[jinyong] 标签审计已保存: {md_path}")
+
+
+@cli.command("suggest-repairs")
+@click.option("--run-dir", type=click.Path(exists=True), required=True, help="研究运行目录")
+@click.option("--limit", type=int, default=100, show_default=True, help="最多输出多少条建议")
+@click.option("--output-prefix", type=click.Path(), default=None, help="输出文件前缀，默认写入 run-dir/repair.suggestions")
+def suggest_repairs(run_dir, limit, output_prefix):
+    """根据审计结果生成本地修复建议，不自动改图谱"""
+    run_path = Path(run_dir)
+    graph_data = load_graph_data(run_path / "graph.normalized.json")
+    raw_graph_data = load_graph_data(run_path / "graph.json")
+    audit_data = (
+        read_json(run_path / "audit.graph.json")
+        if (run_path / "audit.graph.json").exists()
+        else audit_graph_data(graph_data, raw_graph_data=raw_graph_data)
+    )
+    suggestions = build_repair_suggestions(graph_data, raw_graph_data, audit_data, limit=limit)
+    prefix = Path(output_prefix) if output_prefix else run_path / "repair.suggestions"
+    json_path = Path(f"{prefix}.json")
+    md_path = Path(f"{prefix}.md")
+    write_json(json_path, {k: v for k, v in suggestions.items() if k != "markdown"})
+    md_path.write_text(suggestions["markdown"], encoding="utf-8")
+    click.echo(f"[jinyong] 修复建议已保存: {md_path}")
 
 
 @cli.command("query")

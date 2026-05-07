@@ -28,6 +28,9 @@ python -m src jinyong normalize-graph \
 python -m src jinyong audit-graph \
   --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
 
+python -m src jinyong suggest-repairs \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+
 python -m src jinyong report \
   --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
 ```
@@ -37,6 +40,7 @@ python -m src jinyong report \
 - `graph.json`：原始标准图谱
 - `graph.normalized.json`：主图谱基准
 - `audit.graph.md|json`：质量问题清单
+- `repair.suggestions.md|json`：本地修复建议，不自动改图谱
 - `report.md|json`：指标、成本和查询汇总
 
 何时停下来：如果 `audit.graph` 显示大量空描述、泛化关系或缺失实体引用，先修索引/prompt/清洗规则，不要急着做主题分析。
@@ -125,6 +129,7 @@ python -m src jinyong compare-runs \
 | `index` | 付费建图入口 |
 | `normalize-graph` | 主图谱清洗与别名合并 |
 | `audit-graph` | 主图谱质量检查 |
+| `suggest-repairs` | 本地修复建议生成 |
 | `query` | 单题查询 |
 | `eval` | 固定题集评估 |
 | `report` | 运行报告 |

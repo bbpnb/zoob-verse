@@ -1186,6 +1186,95 @@ def audit_facets_data(
     }
 
 
+def render_repair_suggestions_markdown(suggestions: list[dict[str, Any]]) -> str:
+    counts = collections.Counter(item.get("action", "unknown") for item in suggestions)
+    lines = [
+        "# Repair Suggestions",
+        "",
+        "## Summary",
+        "",
+        f"- Suggestions: {len(suggestions)}",
+    ]
+    for action, count in sorted(counts.items()):
+        lines.append(f"- {action}: {count}")
+    lines.extend(["", "## Suggestions", ""])
+    if not suggestions:
+        lines.append("_No repair suggestions._")
+    for item in suggestions:
+        subject = item.get("entity") or f"{item.get('source', '')}->{item.get('target', '')}"
+        evidence = str(item.get("evidence", "")).strip()
+        if len(evidence) > 180:
+            evidence = evidence[:180] + "..."
+        lines.append(f"- **{item.get('action', 'unknown')}** `{subject}`: {item.get('reason', '')}")
+        if evidence:
+            lines.append(f"  - Evidence: {evidence}")
+    return "\n".join(lines) + "\n"
+
+
+def build_repair_suggestions(
+    graph_data: dict[str, Any],
+    raw_graph_data: dict[str, Any],
+    audit_data: dict[str, Any],
+    *,
+    limit: int = 100,
+) -> dict[str, Any]:
+    raw_entity_desc = _raw_entity_descriptions(raw_graph_data)
+    raw_rel_desc = _raw_relationship_descriptions(raw_graph_data)
+    suggestions = []
+    for issue in audit_data.get("issues", []):
+        kind = issue.get("kind")
+        if kind == "filtered_entity_description":
+            entity = issue.get("entity", "")
+            suggestions.append(
+                {
+                    "action": "translate_entity_description",
+                    "priority": "medium",
+                    "entity": entity,
+                    "reason": "normalized graph has no Chinese description, but raw graph has source description",
+                    "evidence": "；".join(raw_entity_desc.get(entity, [])[:2]),
+                }
+            )
+        elif kind == "filtered_relationship_description":
+            source = issue.get("source", "")
+            target = issue.get("target", "")
+            rel_type = issue.get("type", "")
+            evidence = []
+            for (raw_source, raw_target, _raw_type), values in raw_rel_desc.items():
+                if raw_source == source and raw_target == target:
+                    evidence.extend(values)
+            suggestions.append(
+                {
+                    "action": "translate_relationship_description",
+                    "priority": "medium",
+                    "source": source,
+                    "target": target,
+                    "type": rel_type,
+                    "reason": "normalized graph has no Chinese relationship description, but raw graph has source description",
+                    "evidence": "；".join(evidence[:2]),
+                }
+            )
+        elif kind == "generic_relationship_type":
+            suggestions.append(
+                {
+                    "action": "review_generic_relationship",
+                    "priority": "high",
+                    "source": issue.get("source", ""),
+                    "target": issue.get("target", ""),
+                    "reason": "relationship type is still generic after normalization",
+                }
+            )
+    limited = suggestions[:limit]
+    return {
+        "summary": {
+            "suggestion_count": len(limited),
+            "total_candidate_count": len(suggestions),
+            "action_types": dict(collections.Counter(item["action"] for item in limited)),
+        },
+        "suggestions": limited,
+        "markdown": render_repair_suggestions_markdown(limited),
+    }
+
+
 def compute_graph_quality_metrics(data: dict[str, Any]) -> dict[str, Any]:
     entities = data.get("entities", [])
     relationships = data.get("relationships", [])

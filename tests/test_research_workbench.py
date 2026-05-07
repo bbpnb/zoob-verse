@@ -236,6 +236,33 @@ def test_audit_facets_data_flags_profile_type_violations():
     assert audit["issues"][0]["entity"] == "竹棒"
 
 
+def test_build_repair_suggestions_prioritizes_filtered_descriptions_and_generic_relations():
+    from src.core.workbench import audit_graph_data, build_repair_suggestions
+
+    normalized = {
+        "entities": [{"name": "范蠡", "type": "人物", "description": ""}],
+        "relationships": [
+            {"source": "范蠡", "target": "西施", "type": "情感", "description": ""},
+            {"source": "范蠡", "target": "吴国", "type": "关联", "description": "范蠡与吴国相关"},
+        ],
+    }
+    raw = {
+        "entities": [{"name": "范蠡", "type": "person", "description": "Fan Li, minister of Yue"}],
+        "relationships": [
+            {"source": "范蠡", "target": "西施", "type": "emotion", "description": "Fan Li loves Xi Shi"},
+            {"source": "范蠡", "target": "吴国", "type": "related_to", "description": "Fan Li is related to Wu"},
+        ],
+    }
+    audit = audit_graph_data(normalized, raw_graph_data=raw)
+
+    suggestions = build_repair_suggestions(normalized, raw, audit)
+
+    assert suggestions["summary"]["suggestion_count"] >= 2
+    assert any(item["action"] == "translate_entity_description" for item in suggestions["suggestions"])
+    assert any(item["action"] == "review_generic_relationship" for item in suggestions["suggestions"])
+    assert "Repair Suggestions" in suggestions["markdown"]
+
+
 def test_model_config_loads_keys_from_local_dotenv(monkeypatch, tmp_path):
     from src.core.workbench import load_model_config
 
@@ -738,6 +765,7 @@ def test_jinyong_cli_exposes_research_workbench_commands():
         "derive-view",
         "audit-graph",
         "audit-facets",
+        "suggest-repairs",
         "direct-analyze",
     ]:
         assert command in result.output
@@ -764,6 +792,41 @@ def test_audit_graph_command_writes_audit_files(tmp_path):
     assert (run_dir / "audit.graph.md").exists()
     audit = json.loads((run_dir / "audit.graph.json").read_text(encoding="utf-8"))
     assert audit["summary"]["issue_count"] >= 1
+
+
+def test_suggest_repairs_command_writes_suggestion_files(tmp_path):
+    run_dir = tmp_path / "jinyong" / "越女剑" / "deepseek-v4-flash" / "lightrag" / "fixture"
+    run_dir.mkdir(parents=True)
+    (run_dir / "graph.normalized.json").write_text(
+        json.dumps(
+            {
+                "entities": [{"name": "范蠡", "type": "人物", "description": ""}],
+                "relationships": [{"source": "范蠡", "target": "西施", "type": "情感", "description": ""}],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    (run_dir / "graph.json").write_text(
+        json.dumps(
+            {
+                "entities": [{"name": "范蠡", "type": "person", "description": "Fan Li, minister of Yue"}],
+                "relationships": [
+                    {"source": "范蠡", "target": "西施", "type": "emotion", "description": "Fan Li loves Xi Shi"}
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    result = CliRunner().invoke(cli, ["suggest-repairs", "--run-dir", str(run_dir)])
+
+    assert result.exit_code == 0
+    assert (run_dir / "repair.suggestions.json").exists()
+    assert (run_dir / "repair.suggestions.md").exists()
+    suggestions = json.loads((run_dir / "repair.suggestions.json").read_text(encoding="utf-8"))
+    assert suggestions["summary"]["suggestion_count"] >= 1
 
 
 def test_lightrag_indexer_overrides_keyword_prompt_to_chinese(monkeypatch):
