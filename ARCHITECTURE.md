@@ -38,6 +38,7 @@ zoob-verse 是一个面向叙事文本的分层研究工作台：
 
 ## 相关文档
 
+- `WORKFLOWS.md`
 - `README.md`
 - `PROJECT.md`
 - `docs/decisions.md`

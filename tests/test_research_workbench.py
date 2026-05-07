@@ -920,3 +920,18 @@ def test_project_docs_record_graphrag_boundaries_and_debug_query_need():
     assert "retrieved entities" in skill
     assert "2026-05-06: GraphRAG 查询机制与 debug-query 需求" in decisions
     assert "不是替代查询阶段 LLM 智力" in decisions
+
+
+def test_workflow_docs_are_primary_agent_entrypoint():
+    workflows = Path("WORKFLOWS.md").read_text(encoding="utf-8")
+    readme = Path("README.md").read_text(encoding="utf-8")
+    project = Path("PROJECT.md").read_text(encoding="utf-8")
+    skill = Path(".ai-skills/literary-knowledge-graph/SKILL.md").read_text(encoding="utf-8")
+
+    assert "标准建图与质检" in workflows
+    assert "查询与评估" in workflows
+    assert "主题材料整理" in workflows
+    assert "模型与方法对比" in workflows
+    assert "WORKFLOWS.md" in readme
+    assert "WORKFLOWS.md" in project
+    assert "WORKFLOWS.md" in skill

@@ -14,6 +14,15 @@ metadata:
 
 Use this skill to operate `/Users/zhenboyuan/code/mine/zoob-verse` through its CLI.
 
+Before running commands, identify which workflow the user is asking for:
+
+- Standard build and quality check: index, normalize, audit, report.
+- Query and evaluation: query, eval, report, optional direct-analyze fallback.
+- Topic material preparation: extract-events, tag-facets, audit-facets, derive-view.
+- Model or method comparison: run comparable experiments, audit/report/eval each, then compare-runs.
+
+For details, read `WORKFLOWS.md`. Use it as the operating map; commands are tools inside a workflow.
+
 ## Setup
 
 ```bash
@@ -48,6 +57,16 @@ python -m src jinyong report \
   --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
 ```
 
+Quality gate after indexing:
+
+```bash
+python -m src jinyong normalize-graph \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+
+python -m src jinyong audit-graph \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+```
+
 Run outputs live under:
 
 ```text
@@ -57,9 +76,12 @@ runs/jinyong/<corpus>/<model>/<method>/<run>/
 Important files:
 
 - `graph.json`: standardized graph data
+- `graph.normalized.json`: baseline graph for query, audit, and derived materials
+- `audit.graph.md`: graph quality issues
 - `queries.json`: fixed or ad-hoc query results
 - `report.md`: human-readable quality report
 - `report.json`: machine-readable metrics
+- `events.json`, `facets.json`, `views/`: optional derived research materials, not the main graph
 - `cache/`: LightRAG cache
 
 ## Commands

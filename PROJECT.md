@@ -18,6 +18,7 @@ zoob-verse 是一个面向叙事文本的分层研究工作台，而不是单纯
 
 - 只用 `.env` 放本地密钥
 - 变更模型和重跑大索引前先确认成本
+- 开始任务前先看 `WORKFLOWS.md`，确认当前是在建图、查询评估、主题材料整理还是模型对比
 - `index/eval/report/direct-analyze` 是主流程
 - 索引模型、查询模型、embedding 版本都要记录
 
@@ -42,6 +43,7 @@ python -m src jinyong direct-analyze
 
 ## 相关文档
 
+- `WORKFLOWS.md`
 - `README.md`
 - `ARCHITECTURE.md`
 - `docs/decisions.md`

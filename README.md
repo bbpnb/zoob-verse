@@ -44,6 +44,7 @@ python -m src jinyong direct-analyze \
 
 ## 文档入口
 
+- [WORKFLOWS.md](WORKFLOWS.md)
 - [PROJECT.md](PROJECT.md)
 - [ARCHITECTURE.md](ARCHITECTURE.md)
 - [docs/decisions.md](docs/decisions.md)
