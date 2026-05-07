@@ -64,7 +64,7 @@ def visualize_graph(json_path: str | Path, output_path: str | Path) -> None:
         size = min(50, 15 + degree * 2)
         # 字体大小：基础 14 + 度数 * 0.5，最大 24
         font_size = min(24, 14 + int(degree * 0.5))
-        
+
         G.nodes[node]['size'] = size
         G.nodes[node]['font'] = {'size': font_size, 'color': 'white', 'face': 'arial', 'bold': True}
 
