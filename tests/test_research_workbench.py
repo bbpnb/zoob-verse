@@ -173,6 +173,49 @@ def test_write_derived_view_creates_facet_report(tmp_path):
     assert "阿青" in output.read_text(encoding="utf-8")
 
 
+def test_audit_graph_data_flags_quality_issues():
+    from src.core.workbench import audit_graph_data
+
+    graph = {
+        "entities": [
+            {"name": "阿青", "type": "人物", "description": ""},
+            {"name": "范蠡", "type": "人物", "description": "越国大夫"},
+        ],
+        "relationships": [
+            {"source": "阿青", "target": "未知人物", "type": "关联", "description": ""},
+            {"source": "阿青", "target": "范蠡", "type": "情感", "description": "阿青喜欢范蠡"},
+        ],
+    }
+
+    audit = audit_graph_data(graph)
+
+    assert audit["summary"]["issue_count"] >= 3
+    assert any(issue["kind"] == "empty_entity_description" for issue in audit["issues"])
+    assert any(issue["kind"] == "generic_relationship_type" for issue in audit["issues"])
+    assert any(issue["kind"] == "missing_target_entity" for issue in audit["issues"])
+    assert "## Summary" in audit["markdown"]
+
+
+def test_audit_facets_data_flags_profile_type_violations():
+    from src.core.workbench import audit_facets_data
+
+    graph = {
+        "entities": [
+            {"name": "阿青", "type": "人物", "description": "牧羊少女"},
+            {"name": "竹棒", "type": "兵器", "description": "阿青使用的武器"},
+        ],
+        "relationships": [],
+    }
+    facets = {"entities": {"阿青": ["女性角色"], "竹棒": ["女性角色"]}, "relationships": []}
+    profile = {"facet_entity_types": {"女性角色": ["人物"]}}
+
+    audit = audit_facets_data(graph, facets, profile)
+
+    assert audit["summary"]["issue_count"] == 1
+    assert audit["issues"][0]["kind"] == "facet_entity_type_violation"
+    assert audit["issues"][0]["entity"] == "竹棒"
+
+
 def test_model_config_loads_keys_from_local_dotenv(monkeypatch, tmp_path):
     from src.core.workbench import load_model_config
 
@@ -660,9 +703,34 @@ def test_jinyong_cli_exposes_research_workbench_commands():
         "extract-events",
         "tag-facets",
         "derive-view",
+        "audit-graph",
+        "audit-facets",
         "direct-analyze",
     ]:
         assert command in result.output
+
+
+def test_audit_graph_command_writes_audit_files(tmp_path):
+    run_dir = tmp_path / "jinyong" / "越女剑" / "deepseek-v4-flash" / "lightrag" / "fixture"
+    run_dir.mkdir(parents=True)
+    (run_dir / "graph.normalized.json").write_text(
+        json.dumps(
+            {
+                "entities": [{"name": "阿青", "type": "人物", "description": ""}],
+                "relationships": [{"source": "阿青", "target": "未知人物", "type": "关联", "description": ""}],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    result = CliRunner().invoke(cli, ["audit-graph", "--run-dir", str(run_dir)])
+
+    assert result.exit_code == 0
+    assert (run_dir / "audit.graph.json").exists()
+    assert (run_dir / "audit.graph.md").exists()
+    audit = json.loads((run_dir / "audit.graph.json").read_text(encoding="utf-8"))
+    assert audit["summary"]["issue_count"] >= 1
 
 
 def test_lightrag_indexer_overrides_keyword_prompt_to_chinese(monkeypatch):

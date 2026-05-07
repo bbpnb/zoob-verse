@@ -1018,6 +1018,117 @@ def write_derived_view(
     return output_path
 
 
+def render_audit_markdown(title: str, issues: list[dict[str, Any]]) -> str:
+    counts = collections.Counter(issue.get("kind", "unknown") for issue in issues)
+    lines = [
+        f"# {title}",
+        "",
+        "## Summary",
+        "",
+        f"- Issues: {len(issues)}",
+    ]
+    for kind, count in sorted(counts.items()):
+        lines.append(f"- {kind}: {count}")
+    lines.extend(["", "## Issues", ""])
+    if not issues:
+        lines.append("_No issues found._")
+    for issue in issues:
+        subject = issue.get("entity") or f"{issue.get('source', '')}->{issue.get('target', '')}"
+        detail = issue.get("detail", "")
+        lines.append(f"- **{issue.get('kind', 'unknown')}** `{subject}` {detail}".rstrip())
+    return "\n".join(lines) + "\n"
+
+
+def audit_graph_data(graph_data: dict[str, Any]) -> dict[str, Any]:
+    entities = graph_data.get("entities", [])
+    relationships = graph_data.get("relationships", [])
+    entity_names = {str(entity.get("name", "")).strip() for entity in entities if entity.get("name")}
+    issues = []
+
+    for entity in entities:
+        name = str(entity.get("name", "")).strip()
+        if not name:
+            issues.append({"kind": "empty_entity_name", "severity": "high", "entity": ""})
+            continue
+        if not str(entity.get("description", "")).strip():
+            issues.append({"kind": "empty_entity_description", "severity": "low", "entity": name})
+        normalized_type = normalize_entity_type(entity.get("type", ""))
+        if normalized_type not in STANDARD_ENTITY_TYPES:
+            issues.append(
+                {
+                    "kind": "non_schema_entity_type",
+                    "severity": "medium",
+                    "entity": name,
+                    "detail": str(entity.get("type", "")),
+                }
+            )
+
+    for rel in relationships:
+        source = str(rel.get("source", "")).strip()
+        target = str(rel.get("target", "")).strip()
+        rel_type = normalize_relation_type(rel.get("type", ""))
+        if source and source not in entity_names:
+            issues.append({"kind": "missing_source_entity", "severity": "high", "source": source, "target": target})
+        if target and target not in entity_names:
+            issues.append({"kind": "missing_target_entity", "severity": "high", "source": source, "target": target})
+        if rel_type in DEGRADED_RELATION_TYPES:
+            issues.append({"kind": "generic_relationship_type", "severity": "medium", "source": source, "target": target})
+        if not str(rel.get("description", "")).strip():
+            issues.append({"kind": "empty_relationship_description", "severity": "low", "source": source, "target": target})
+
+    return {
+        "summary": {
+            "issue_count": len(issues),
+            "entity_count": len(entities),
+            "relationship_count": len(relationships),
+            "issue_types": dict(collections.Counter(issue["kind"] for issue in issues)),
+        },
+        "issues": issues,
+        "markdown": render_audit_markdown("Graph Audit", issues),
+    }
+
+
+def audit_facets_data(
+    graph_data: dict[str, Any],
+    facets_data: dict[str, Any],
+    profile: dict[str, Any],
+) -> dict[str, Any]:
+    entity_types = {
+        str(entity.get("name", "")).strip(): str(entity.get("type", "")).strip()
+        for entity in graph_data.get("entities", [])
+        if entity.get("name")
+    }
+    facet_entity_types = profile.get("facet_entity_types", {})
+    issues = []
+    for name, tags in facets_data.get("entities", {}).items():
+        entity_type = entity_types.get(name, "")
+        if name not in entity_types:
+            issues.append({"kind": "facet_unknown_entity", "severity": "high", "entity": name})
+            continue
+        for facet in tags:
+            allowed_types = facet_entity_types.get(facet, [])
+            if allowed_types and entity_type not in allowed_types:
+                issues.append(
+                    {
+                        "kind": "facet_entity_type_violation",
+                        "severity": "medium",
+                        "entity": name,
+                        "facet": facet,
+                        "detail": f"type={entity_type}, allowed={','.join(allowed_types)}",
+                    }
+                )
+    return {
+        "summary": {
+            "issue_count": len(issues),
+            "tagged_entity_count": len(facets_data.get("entities", {})),
+            "tagged_relationship_count": len(facets_data.get("relationships", [])),
+            "issue_types": dict(collections.Counter(issue["kind"] for issue in issues)),
+        },
+        "issues": issues,
+        "markdown": render_audit_markdown("Facet Audit", issues),
+    }
+
+
 def compute_graph_quality_metrics(data: dict[str, Any]) -> dict[str, Any]:
     entities = data.get("entities", [])
     relationships = data.get("relationships", [])

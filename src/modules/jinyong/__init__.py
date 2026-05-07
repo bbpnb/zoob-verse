@@ -14,6 +14,8 @@ from src.core.workbench import (
     DEFAULT_CONFIG_PATH,
     DEFAULT_RUNS_ROOT,
     RunSpec,
+    audit_facets_data,
+    audit_graph_data,
     clean_graph_data,
     estimate_text_tokens,
     estimate_usage_cost,
@@ -209,6 +211,44 @@ def derive_view(run_dir, facet):
     events_data = read_json(run_path / "events.json")
     output = write_derived_view(run_path / "views", facet, graph_data, facets_data, events_data)
     click.echo(f"[jinyong] 派生视图已保存: {output}")
+
+
+@cli.command("audit-graph")
+@click.option("--run-dir", type=click.Path(exists=True), required=True, help="研究运行目录")
+@click.option("--graph", "graph_path", type=click.Path(exists=True), default=None, help="覆盖图谱路径")
+@click.option("--output-prefix", type=click.Path(), default=None, help="输出文件前缀，默认写入 run-dir/audit.graph")
+def audit_graph(run_dir, graph_path, output_prefix):
+    """审计图谱结构和质量问题"""
+    run_path = Path(run_dir)
+    graph_data = load_graph_data(graph_path or run_path / "graph.normalized.json")
+    audit = audit_graph_data(graph_data)
+    prefix = Path(output_prefix) if output_prefix else run_path / "audit.graph"
+    json_path = Path(f"{prefix}.json")
+    md_path = Path(f"{prefix}.md")
+    write_json(json_path, {k: v for k, v in audit.items() if k != "markdown"})
+    md_path.write_text(audit["markdown"], encoding="utf-8")
+    click.echo(f"[jinyong] 图谱审计已保存: {md_path}")
+
+
+@cli.command("audit-facets")
+@click.option("--run-dir", type=click.Path(exists=True), required=True, help="研究运行目录")
+@click.option("--graph", "graph_path", type=click.Path(exists=True), default=None, help="覆盖图谱路径")
+@click.option("--facets", "facets_path", type=click.Path(exists=True), default=None, help="覆盖标签路径")
+@click.option("--profile", default="jinyong", help="分析画像名称")
+@click.option("--output-prefix", type=click.Path(), default=None, help="输出文件前缀，默认写入 run-dir/audit.facets")
+def audit_facets(run_dir, graph_path, facets_path, profile, output_prefix):
+    """审计分析标签污染和 profile 约束问题"""
+    run_path = Path(run_dir)
+    graph_data = load_graph_data(graph_path or run_path / "graph.normalized.json")
+    facets_data = read_json(facets_path or run_path / "facets.json")
+    profile_data = load_analysis_profile(profile)
+    audit = audit_facets_data(graph_data, facets_data, profile_data)
+    prefix = Path(output_prefix) if output_prefix else run_path / "audit.facets"
+    json_path = Path(f"{prefix}.json")
+    md_path = Path(f"{prefix}.md")
+    write_json(json_path, {k: v for k, v in audit.items() if k != "markdown"})
+    md_path.write_text(audit["markdown"], encoding="utf-8")
+    click.echo(f"[jinyong] 标签审计已保存: {md_path}")
 
 
 @cli.command("query")
