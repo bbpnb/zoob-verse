@@ -11,7 +11,8 @@ zoob-verse 是一个面向叙事文本的分层研究工作台，而不是单纯
 - LightRAG 负责抽取和召回
 - `src/core/workbench.py` 负责归一化、报告和运行目录
 - `runs/` 保存每次实验
-- 事件层、分析标签层、派生视图层做专题挖掘
+- `events.json`、`facets.json`、`views/` 是实验性辅助层，用来把主图谱再整理成可研究的材料切片，不是主图谱本体，也不是最终结论
+- 主图谱始终以 `graph.normalized.json` 为准
 
 ## 必须遵守
 

@@ -30,6 +30,12 @@ python -m src jinyong index \
 python -m src jinyong eval --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
 python -m src jinyong report --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
 
+# 可选：从规范化图谱生成实验性辅助层
+python -m src jinyong normalize-graph --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+python -m src jinyong extract-events --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+python -m src jinyong tag-facets --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke --profile jinyong
+python -m src jinyong derive-view --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke --facet 女性角色
+
 # 长上下文对照
 python -m src jinyong direct-analyze \
   --novel src/modules/jinyong/data/raw/越女剑.txt \
@@ -50,3 +56,4 @@ python -m src jinyong direct-analyze \
 - API Key 只通过 `.env` 提供，不提交明文。
 - `runs/` 保存标准实验输出。
 - 旧的一次性脚本已弃用，后续实验优先走 CLI。
+- `events.json`、`facets.json`、`views/` 是从 `graph.normalized.json` 派生出的研究材料，不是主图谱本体。
