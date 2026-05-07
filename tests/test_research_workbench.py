@@ -59,6 +59,120 @@ def test_pricing_config_registers_deepseek_v4_pro():
     assert pricing["models"]["deepseek-v4-flash-zh-schema"] == pricing["models"]["deepseek-v4-flash"]
 
 
+def test_load_analysis_profile_merges_core_and_domain_profile():
+    from src.core.workbench import load_analysis_profile
+
+    profile = load_analysis_profile("jinyong")
+
+    assert "人物" in profile["core_entity_types"]
+    assert "事件" in profile["core_entity_types"]
+    assert "武功" in profile["domain_entity_types"]
+    assert "女性角色" in profile["analysis_facets"]
+    assert "宗教意象" in profile["analysis_facets"]
+
+
+def test_extract_key_events_from_normalized_graph():
+    from src.core.workbench import extract_key_events
+
+    graph = {
+        "entities": [
+            {"name": "阿青", "type": "人物", "description": "牧羊少女，剑术极高"},
+            {"name": "范蠡", "type": "人物", "description": "越国大夫"},
+            {"name": "西施", "type": "人物", "description": "越国美女"},
+        ],
+        "relationships": [
+            {
+                "source": "阿青",
+                "target": "范蠡",
+                "type": "影响",
+                "description": "阿青的剑术启发范蠡训练越国剑士",
+                "weight": 3,
+            },
+            {
+                "source": "范蠡",
+                "target": "西施",
+                "type": "情感",
+                "description": "范蠡思念西施，希望重逢",
+                "weight": 2,
+            },
+        ],
+    }
+
+    events = extract_key_events(graph)
+
+    assert events[0]["event_type"] == "影响"
+    assert events[0]["participants"] == ["阿青", "范蠡"]
+    assert "阿青的剑术" in events[0]["evidence"]
+
+
+def test_tag_analysis_facets_uses_profile_keywords():
+    from src.core.workbench import tag_analysis_facets
+
+    graph = {
+        "entities": [
+            {"name": "阿青", "type": "人物", "description": "牧羊少女，剑术极高"},
+            {"name": "勾践", "type": "人物", "description": "越国君主，卧薪尝胆，灭吴雪耻"},
+        ],
+        "relationships": [
+            {"source": "勾践", "target": "吴国", "type": "敌对", "description": "勾践复仇灭吴"}
+        ],
+    }
+    profile = {
+        "facet_keywords": {
+            "女性角色": ["少女", "阿青"],
+            "权力结构": ["君主", "灭吴", "复仇"],
+        }
+    }
+
+    facets = tag_analysis_facets(graph, profile)
+
+    assert facets["entities"]["阿青"] == ["女性角色"]
+    assert "权力结构" in facets["entities"]["勾践"]
+    assert facets["relationships"][0]["facets"] == ["权力结构"]
+
+
+def test_tag_analysis_facets_avoids_female_role_mentions_on_non_matching_entities():
+    from src.core.workbench import tag_analysis_facets
+
+    graph = {
+        "entities": [
+            {"name": "夫差", "type": "人物", "description": "吴国君主，西施陪伴的对象"},
+            {"name": "阿青", "type": "人物", "description": "牧羊少女，剑术极高"},
+            {"name": "竹棒", "type": "兵器", "description": "阿青使用的武器"},
+        ],
+        "relationships": [],
+    }
+    profile = {
+        "facet_keywords": {
+            "女性角色": ["少女", "美女", "夫人", "公主", "西施", "阿青"],
+        },
+        "facet_entity_types": {"女性角色": ["人物"]},
+    }
+
+    facets = tag_analysis_facets(graph, profile)
+
+    assert facets["entities"] == {"阿青": ["女性角色"]}
+
+
+def test_write_derived_view_creates_facet_report(tmp_path):
+    from src.core.workbench import write_derived_view
+
+    graph = {
+        "entities": [
+            {"name": "阿青", "type": "人物", "description": "牧羊少女，剑术极高"},
+            {"name": "勾践", "type": "人物", "description": "越国君主"},
+        ],
+        "relationships": [],
+    }
+    facets = {"entities": {"阿青": ["女性角色"]}, "relationships": []}
+    events = {"events": [{"name": "阿青-影响-范蠡", "event_type": "影响", "evidence": "阿青的剑术启发范蠡"}]}
+
+    output = write_derived_view(tmp_path, "女性角色", graph, facets, events)
+
+    assert output.exists()
+    assert "阿青" in output.read_text(encoding="utf-8")
+
+
 def test_model_config_loads_keys_from_local_dotenv(monkeypatch, tmp_path):
     from src.core.workbench import load_model_config
 
@@ -543,6 +657,9 @@ def test_jinyong_cli_exposes_research_workbench_commands():
         "clean-graph",
         "normalize-graph",
         "visualize",
+        "extract-events",
+        "tag-facets",
+        "derive-view",
         "direct-analyze",
     ]:
         assert command in result.output

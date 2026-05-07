@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 DEFAULT_RUNS_ROOT = Path("runs")
 DEFAULT_CONFIG_PATH = Path("config/models.yaml")
 DEFAULT_PRICING_PATH = Path("config/pricing.yaml")
+DEFAULT_PROFILES_PATH = Path("config/profiles.yaml")
 DEFAULT_DOTENV_PATH = Path(".env")
 DEGRADED_RELATION_TYPES = {"关联", "提及", "Link", "link", "related", "unknown", "未知"}
 STANDARD_ENTITY_TYPES = {"人物", "组织", "地点", "武功", "兵器", "物件", "事件", "概念", "生物"}
@@ -172,6 +173,7 @@ CANONICAL_ALIASES = {
     for group in ALIAS_GROUPS
     for alias in group
 }
+EVENT_RELATION_TYPES = {"影响", "因果", "传授", "敌对", "情感", "权谋", "牺牲", "结盟", "复仇", "发现"}
 
 
 @dataclass(frozen=True)
@@ -254,6 +256,23 @@ class RunSpec:
 def load_yaml(path: str | Path = DEFAULT_CONFIG_PATH) -> dict[str, Any]:
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f) or {}
+
+
+def load_analysis_profile(name: str = "default", path: str | Path = DEFAULT_PROFILES_PATH) -> dict[str, Any]:
+    data = load_yaml(path)
+    base = dict(data.get("default", {}))
+    if name == "default":
+        return base
+    domain = data.get(name, {})
+    merged = dict(base)
+    for key, value in domain.items():
+        if isinstance(value, list):
+            merged[key] = list(dict.fromkeys(base.get(key, []) + value))
+        elif isinstance(value, dict):
+            merged[key] = {**base.get(key, {}), **value}
+        else:
+            merged[key] = value
+    return merged
 
 
 class TokenUsageTracker:
@@ -884,6 +903,119 @@ def clean_graph_data(data: dict[str, Any]) -> dict[str, Any]:
             "dirty_relationship_count": len(dirty_relationships),
         },
     }
+
+
+def extract_key_events(graph_data: dict[str, Any], *, max_events: int = 50) -> list[dict[str, Any]]:
+    events = []
+    for index, rel in enumerate(graph_data.get("relationships", []), start=1):
+        rel_type = normalize_relation_type(rel.get("type", "关联"))
+        description = str(rel.get("description", "")).strip()
+        if rel_type not in EVENT_RELATION_TYPES and not description:
+            continue
+        source = str(rel.get("source", "")).strip()
+        target = str(rel.get("target", "")).strip()
+        events.append(
+            {
+                "id": f"event-{index:04d}",
+                "name": f"{source}-{rel_type}-{target}",
+                "event_type": rel_type,
+                "participants": [name for name in [source, target] if name],
+                "source_relation": {"source": source, "target": target, "type": rel_type},
+                "evidence": description,
+                "confidence": "medium" if description else "low",
+            }
+        )
+    return events[:max_events]
+
+
+def _matched_facets(text: str, facet_keywords: dict[str, list[str]]) -> list[str]:
+    matches = []
+    for facet, keywords in facet_keywords.items():
+        if any(keyword and keyword in text for keyword in keywords):
+            matches.append(facet)
+    return matches
+
+
+def _is_descriptor_keyword(keyword: str) -> bool:
+    keyword = str(keyword or "").strip()
+    descriptor_markers = ("少女", "美女", "夫人", "公主", "英雄", "君主", "人物", "角色", "女子", "女性", "男子")
+    if any(marker in keyword for marker in descriptor_markers):
+        return True
+    return len(keyword) >= 3
+
+
+def tag_analysis_facets(graph_data: dict[str, Any], profile: dict[str, Any]) -> dict[str, Any]:
+    facet_keywords = profile.get("facet_keywords", {})
+    facet_entity_types = profile.get("facet_entity_types", {})
+    entities = {}
+    for entity in graph_data.get("entities", []):
+        name = str(entity.get("name", "")).strip()
+        entity_type = str(entity.get("type", "")).strip()
+        description = str(entity.get("description", "")).strip()
+        matches = []
+        for facet, keywords in facet_keywords.items():
+            allowed_types = facet_entity_types.get(facet, [])
+            if allowed_types and entity_type not in allowed_types:
+                continue
+            name_hit = any(keyword and keyword == name for keyword in keywords)
+            description_hit = any(
+                keyword and keyword in description and _is_descriptor_keyword(keyword)
+                for keyword in keywords
+            )
+            type_hit = entity_type == "人物" and any(keyword and keyword in entity_type for keyword in keywords)
+            if name_hit or description_hit or type_hit:
+                matches.append(facet)
+        if name and matches:
+            entities[name] = matches
+
+    relationships = []
+    for rel in graph_data.get("relationships", []):
+        text = f"{rel.get('source', '')} {rel.get('target', '')} {rel.get('type', '')} {rel.get('description', '')}"
+        matches = _matched_facets(text, facet_keywords)
+        if matches:
+            relationships.append(
+                {
+                    "source": rel.get("source", ""),
+                    "target": rel.get("target", ""),
+                    "type": normalize_relation_type(rel.get("type", "")),
+                    "facets": matches,
+                }
+            )
+    return {"entities": entities, "relationships": relationships}
+
+
+def write_derived_view(
+    output_dir: str | Path,
+    facet: str,
+    graph_data: dict[str, Any],
+    facets_data: dict[str, Any],
+    events_data: dict[str, Any],
+) -> Path:
+    output_path = Path(output_dir) / f"{facet}.md"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    entity_map = {entity.get("name", ""): entity for entity in graph_data.get("entities", [])}
+    names = [
+        name
+        for name, tags in facets_data.get("entities", {}).items()
+        if facet in tags
+    ]
+    lines = [f"# {facet}", "", "## 相关实体"]
+    if names:
+        for name in names:
+            entity = entity_map.get(name, {})
+            lines.append(f"- **{name}** ({entity.get('type', '')}): {entity.get('description', '')}")
+    else:
+        lines.append("_暂无匹配实体。_")
+
+    lines.extend(["", "## 相关事件"])
+    event_lines = []
+    for event in events_data.get("events", []):
+        text = f"{event.get('name', '')} {event.get('event_type', '')} {event.get('evidence', '')}"
+        if any(name in text for name in names):
+            event_lines.append(f"- **{event.get('name', '')}**: {event.get('evidence', '')}")
+    lines.extend(event_lines or ["_暂无匹配事件。_"])
+    output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return output_path
 
 
 def compute_graph_quality_metrics(data: dict[str, Any]) -> dict[str, Any]:

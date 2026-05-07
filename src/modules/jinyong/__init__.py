@@ -17,13 +17,17 @@ from src.core.workbench import (
     clean_graph_data,
     estimate_text_tokens,
     estimate_usage_cost,
+    extract_key_events,
+    load_analysis_profile,
     load_graph_data,
     load_model_config,
     load_query_set,
     normalize_graph_data,
     read_json,
     validate_query_embedding_compatibility,
+    tag_analysis_facets,
     should_fallback_to_direct,
+    write_derived_view,
     write_json,
     write_report,
     write_run_comparison,
@@ -162,6 +166,49 @@ def normalize_graph(run_dir, input_path, output_path):
         "relationships: "
         f"{normalized['normalization']['input_relationships']} -> {normalized['normalization']['output_relationships']}"
     )
+
+
+@cli.command("extract-events")
+@click.option("--run-dir", type=click.Path(exists=True), required=True, help="研究运行目录")
+@click.option("--graph", "graph_path", type=click.Path(exists=True), default=None, help="覆盖图谱路径")
+@click.option("--output", "output_path", type=click.Path(), default=None, help="输出事件层 JSON 文件路径")
+def extract_events(run_dir, graph_path, output_path):
+    """从规范化图谱提取事件层"""
+    run_path = Path(run_dir)
+    graph_data = load_graph_data(graph_path or run_path / "graph.normalized.json")
+    events = extract_key_events(graph_data)
+    target = Path(output_path) if output_path else run_path / "events.json"
+    write_json(target, {"events": events})
+    click.echo(f"[jinyong] 事件层已保存: {target}")
+
+
+@cli.command("tag-facets")
+@click.option("--run-dir", type=click.Path(exists=True), required=True, help="研究运行目录")
+@click.option("--graph", "graph_path", type=click.Path(exists=True), default=None, help="覆盖图谱路径")
+@click.option("--profile", default="jinyong", help="分析画像名称")
+@click.option("--output", "output_path", type=click.Path(), default=None, help="输出分析标签 JSON 文件路径")
+def tag_facets(run_dir, graph_path, profile, output_path):
+    """为图谱实体和关系打分析标签"""
+    run_path = Path(run_dir)
+    graph_data = load_graph_data(graph_path or run_path / "graph.normalized.json")
+    profile_data = load_analysis_profile(profile)
+    facets = tag_analysis_facets(graph_data, profile_data)
+    target = Path(output_path) if output_path else run_path / "facets.json"
+    write_json(target, facets)
+    click.echo(f"[jinyong] 分析标签已保存: {target}")
+
+
+@cli.command("derive-view")
+@click.option("--run-dir", type=click.Path(exists=True), required=True, help="研究运行目录")
+@click.option("--facet", required=True, help="要生成的分析视图名称")
+def derive_view(run_dir, facet):
+    """根据事件层与分析标签生成派生视图"""
+    run_path = Path(run_dir)
+    graph_data = load_graph_data(run_path / "graph.normalized.json")
+    facets_data = read_json(run_path / "facets.json")
+    events_data = read_json(run_path / "events.json")
+    output = write_derived_view(run_path / "views", facet, graph_data, facets_data, events_data)
+    click.echo(f"[jinyong] 派生视图已保存: {output}")
 
 
 @cli.command("query")
