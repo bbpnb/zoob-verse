@@ -69,6 +69,13 @@ RELATION_TYPE_ALIASES = {
     "located_at": "出没",
     "appears_in": "出没",
     "appears in": "出没",
+    "appears": "出没",
+    "appear": "出没",
+    "appearance": "出没",
+    "resides_in": "出没",
+    "resides in": "出没",
+    "battled_at": "出没",
+    "battled at": "出没",
     "visited": "出没",
     "uses": "使用",
     "used": "使用",
@@ -100,21 +107,31 @@ RELATION_TYPE_ALIASES = {
     "associated with": "关联",
     "associates": "关联",
     "association": "关联",
-    "relation": "关联",
     "related_to": "关联",
     "related": "关联",
     "involved": "关联",
     "involves": "关联",
     "participated_in": "关联",
+    "participates_in": "关联",
     "part_of": "关联",
+    "cause": "因果",
+    "causes": "因果",
+    "causal": "因果",
     "caused_death": "因果",
     "influence": "影响",
     "influences": "影响",
+    "affects": "影响",
+    "affect": "影响",
     "taught": "传授",
     "taught_to": "传授",
     "commands": "权谋",
     "commanded": "权谋",
     "orchestrated_by": "权谋",
+    "appoints": "权谋",
+    "appointed": "权谋",
+    "creates": "影响",
+    "is_sent_to": "出没",
+    "belonging": "所属",
 }
 
 DEFAULT_QUERY_SET = [
@@ -1039,10 +1056,44 @@ def render_audit_markdown(title: str, issues: list[dict[str, Any]]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def audit_graph_data(graph_data: dict[str, Any]) -> dict[str, Any]:
+def _raw_entity_descriptions(raw_graph_data: dict[str, Any] | None) -> dict[str, list[str]]:
+    descriptions: dict[str, list[str]] = {}
+    if not raw_graph_data:
+        return descriptions
+    for entity in raw_graph_data.get("entities", []):
+        name = canonical_entity_name(entity.get("name", ""))
+        description = str(entity.get("description", "")).strip()
+        if name and description:
+            descriptions.setdefault(name, []).append(description)
+    return descriptions
+
+
+def _raw_relationship_descriptions(raw_graph_data: dict[str, Any] | None) -> dict[tuple[str, str, str], list[str]]:
+    descriptions: dict[tuple[str, str, str], list[str]] = {}
+    if not raw_graph_data:
+        return descriptions
+    for rel in raw_graph_data.get("relationships", []):
+        key = (
+            canonical_entity_name(rel.get("source", "")),
+            canonical_entity_name(rel.get("target", "")),
+            normalize_relation_type(rel.get("type", "")),
+        )
+        description = str(rel.get("description", "")).strip()
+        if all(key) and description:
+            descriptions.setdefault(key, []).append(description)
+    return descriptions
+
+
+def audit_graph_data(
+    graph_data: dict[str, Any],
+    *,
+    raw_graph_data: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     entities = graph_data.get("entities", [])
     relationships = graph_data.get("relationships", [])
     entity_names = {str(entity.get("name", "")).strip() for entity in entities if entity.get("name")}
+    raw_entity_desc = _raw_entity_descriptions(raw_graph_data)
+    raw_rel_desc = _raw_relationship_descriptions(raw_graph_data)
     issues = []
 
     for entity in entities:
@@ -1051,7 +1102,8 @@ def audit_graph_data(graph_data: dict[str, Any]) -> dict[str, Any]:
             issues.append({"kind": "empty_entity_name", "severity": "high", "entity": ""})
             continue
         if not str(entity.get("description", "")).strip():
-            issues.append({"kind": "empty_entity_description", "severity": "low", "entity": name})
+            kind = "filtered_entity_description" if raw_entity_desc.get(name) else "empty_entity_description"
+            issues.append({"kind": kind, "severity": "low", "entity": name})
         normalized_type = normalize_entity_type(entity.get("type", ""))
         if normalized_type not in STANDARD_ENTITY_TYPES:
             issues.append(
@@ -1074,7 +1126,12 @@ def audit_graph_data(graph_data: dict[str, Any]) -> dict[str, Any]:
         if rel_type in DEGRADED_RELATION_TYPES:
             issues.append({"kind": "generic_relationship_type", "severity": "medium", "source": source, "target": target})
         if not str(rel.get("description", "")).strip():
-            issues.append({"kind": "empty_relationship_description", "severity": "low", "source": source, "target": target})
+            kind = (
+                "filtered_relationship_description"
+                if raw_rel_desc.get((source, target, rel_type))
+                else "empty_relationship_description"
+            )
+            issues.append({"kind": kind, "severity": "low", "source": source, "target": target})
 
     return {
         "summary": {

@@ -196,6 +196,26 @@ def test_audit_graph_data_flags_quality_issues():
     assert "## Summary" in audit["markdown"]
 
 
+def test_audit_graph_data_distinguishes_normalized_empty_descriptions_from_raw_source():
+    from src.core.workbench import audit_graph_data
+
+    normalized = {
+        "entities": [{"name": "范蠡", "type": "人物", "description": ""}],
+        "relationships": [{"source": "范蠡", "target": "西施", "type": "情感", "description": ""}],
+    }
+    raw = {
+        "entities": [{"name": "范蠡", "type": "person", "description": "Fan Li, minister of Yue"}],
+        "relationships": [
+            {"source": "范蠡", "target": "西施", "type": "emotion", "description": "Fan Li loves Xi Shi"}
+        ],
+    }
+
+    audit = audit_graph_data(normalized, raw_graph_data=raw)
+
+    assert any(issue["kind"] == "filtered_entity_description" for issue in audit["issues"])
+    assert any(issue["kind"] == "filtered_relationship_description" for issue in audit["issues"])
+
+
 def test_audit_facets_data_flags_profile_type_violations():
     from src.core.workbench import audit_facets_data
 
@@ -541,6 +561,19 @@ def test_normalize_graph_data_merges_aliases_and_prefers_chinese_descriptions():
         not any(char.isascii() and char.isalpha() for char in item.get("description", ""))
         for item in normalized["entities"] + normalized["relationships"]
     )
+
+
+def test_normalize_relation_type_maps_common_english_lightrag_types():
+    from src.core.workbench import normalize_relation_type
+
+    assert normalize_relation_type("cause") == "因果"
+    assert normalize_relation_type("causes") == "因果"
+    assert normalize_relation_type("appears") == "出没"
+    assert normalize_relation_type("Appearance") == "出没"
+    assert normalize_relation_type("resides_in") == "出没"
+    assert normalize_relation_type("affects") == "影响"
+    assert normalize_relation_type("appoints") == "权谋"
+    assert normalize_relation_type("Belonging") == "所属"
 
 
 def test_report_writes_json_and_markdown(tmp_path):

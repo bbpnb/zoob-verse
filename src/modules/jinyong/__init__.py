@@ -220,8 +220,10 @@ def derive_view(run_dir, facet):
 def audit_graph(run_dir, graph_path, output_prefix):
     """审计图谱结构和质量问题"""
     run_path = Path(run_dir)
-    graph_data = load_graph_data(graph_path or run_path / "graph.normalized.json")
-    audit = audit_graph_data(graph_data)
+    graph_file = Path(graph_path) if graph_path else run_path / "graph.normalized.json"
+    graph_data = load_graph_data(graph_file)
+    raw_graph_data = load_graph_data(run_path / "graph.json") if (run_path / "graph.json").exists() else None
+    audit = audit_graph_data(graph_data, raw_graph_data=raw_graph_data)
     prefix = Path(output_prefix) if output_prefix else run_path / "audit.graph"
     json_path = Path(f"{prefix}.json")
     md_path = Path(f"{prefix}.md")
