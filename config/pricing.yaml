@@ -17,6 +17,12 @@ models:
     cache_hit_input_per_1m: 0.0028
     currency: USD
 
+  deepseek-v4-flash-zh-strict-bge-m3:
+    input_per_1m: 0.14
+    output_per_1m: 0.28
+    cache_hit_input_per_1m: 0.0028
+    currency: USD
+
   deepseek-v4-pro:
     input_per_1m: 0.435
     output_per_1m: 0.87

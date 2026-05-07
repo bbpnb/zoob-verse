@@ -89,6 +89,61 @@ Output:
 ]
 
 
+ZH_ENTITY_EXTRACTION_USER_PROMPT = """【任务】
+从下面输入文本中抽取中文实体和中文关系。
+
+【可用实体类型】
+[{entity_types}]
+
+【要求】
+1. 只输出抽取结果，不要输出解释、标题、Markdown 或 JSON。
+2. 每一行必须严格使用系统提示中的 entity/relation 格式。
+3. 实体名优先保留原文中文称呼。
+4. 实体类型、关系类型、描述内容必须使用简体中文。
+5. 最后一行必须输出 {completion_delimiter}。
+
+【输入文本】
+{input_text}
+"""
+
+
+ZH_ENTITY_CONTINUE_EXTRACTION_USER_PROMPT = """【任务】
+请根据上一轮抽取结果，补充遗漏或修正格式错误的中文实体和中文关系。
+
+【要求】
+1. 不要重复已经正确抽取的实体和关系。
+2. 只补充遗漏项或修正错误项。
+3. 每一行必须严格使用系统提示中的 entity/relation 格式。
+4. 实体类型、关系类型、描述内容必须使用简体中文。
+5. 如果没有需要补充的内容，只输出 {completion_delimiter}。
+
+【输入文本】
+{input_text}
+"""
+
+
+ZH_ENTITY_EXTRACTION_EXAMPLES = [
+    """<Entity_types>
+[{entity_types}]
+
+<Input Text>
+阿青在浣纱溪边遇到了范蠡。范蠡告诉她，越王勾践正在铸造纯钧剑。
+
+<Output>
+entity{tuple_delimiter}阿青{tuple_delimiter}人物{tuple_delimiter}牧羊少女，剑术极高
+entity{tuple_delimiter}范蠡{tuple_delimiter}人物{tuple_delimiter}越国大夫，参与灭吴大计
+entity{tuple_delimiter}浣纱溪{tuple_delimiter}地点{tuple_delimiter}阿青与范蠡相遇的溪边
+entity{tuple_delimiter}越王勾践{tuple_delimiter}人物{tuple_delimiter}越国君主，命人铸造名剑
+entity{tuple_delimiter}纯钧剑{tuple_delimiter}兵器{tuple_delimiter}越国铸造的名剑
+relation{tuple_delimiter}阿青{tuple_delimiter}浣纱溪{tuple_delimiter}出没{tuple_delimiter}阿青在浣纱溪边出现
+relation{tuple_delimiter}阿青{tuple_delimiter}范蠡{tuple_delimiter}影响{tuple_delimiter}阿青的剑术启发范蠡
+relation{tuple_delimiter}范蠡{tuple_delimiter}越王勾践{tuple_delimiter}所属{tuple_delimiter}范蠡是越王勾践的大夫
+relation{tuple_delimiter}越王勾践{tuple_delimiter}纯钧剑{tuple_delimiter}使用{tuple_delimiter}勾践命人铸造并使用名剑
+{completion_delimiter}
+""",
+]
+
+
 def load_config(config_path: str = str(DEFAULT_CONFIG_PATH), model_name: str = "deepseek-v4-flash"):
     """从 YAML 配置加载模型和 Provider 设置"""
     return load_model_config(config_path, model_name)
@@ -110,10 +165,7 @@ class LightragIndexer:
         self.usage_tracker = TokenUsageTracker()
         self.current_stage = "index"
 
-        # 覆盖 LightRAG 默认的提取 Prompt
-        PROMPTS["entity_extraction_system_prompt"] = self.cfg["prompt"]
-        PROMPTS["keywords_extraction"] = ZH_KEYWORDS_EXTRACTION_PROMPT
-        PROMPTS["keywords_extraction_examples"] = ZH_KEYWORDS_EXTRACTION_EXAMPLES
+        self._configure_lightrag_prompts()
 
         # 初始化 EmbeddingFunc
         self._provider_embed_func_obj = EmbeddingFunc(
@@ -129,13 +181,35 @@ class LightragIndexer:
             llm_model_func=self._provider_llm_func,
             embedding_func=self._provider_embed_func_obj,
             llm_model_name=self.cfg["llm_model"],
+            addon_params=self._build_addon_params(),
             embedding_batch_num=int(lightrag_cfg.get("embedding_batch_num", 5)),
             embedding_func_max_async=int(lightrag_cfg.get("embedding_func_max_async", 2)),
+            llm_model_max_async=int(lightrag_cfg.get("llm_model_max_async", 4)),
+            entity_extract_max_gleaning=int(lightrag_cfg.get("entity_extract_max_gleaning", 1)),
             default_llm_timeout=int(lightrag_cfg.get("default_llm_timeout", 300)),
             default_embedding_timeout=int(lightrag_cfg.get("default_embedding_timeout", 120)),
             max_parallel_insert=int(lightrag_cfg.get("max_parallel_insert", 1)),
         )
         self._storages_initialized = False
+
+    def _configure_lightrag_prompts(self) -> None:
+        """Inject Chinese prompts into LightRAG's extraction and query stages."""
+        PROMPTS["entity_extraction_system_prompt"] = self.cfg["prompt"]
+        PROMPTS["keywords_extraction"] = ZH_KEYWORDS_EXTRACTION_PROMPT
+        PROMPTS["keywords_extraction_examples"] = ZH_KEYWORDS_EXTRACTION_EXAMPLES
+
+        if self.cfg.get("prompt_version") == "v10_zh_graph_strict":
+            PROMPTS["entity_extraction_user_prompt"] = ZH_ENTITY_EXTRACTION_USER_PROMPT
+            PROMPTS["entity_continue_extraction_user_prompt"] = ZH_ENTITY_CONTINUE_EXTRACTION_USER_PROMPT
+            PROMPTS["entity_extraction_examples"] = ZH_ENTITY_EXTRACTION_EXAMPLES
+
+    def _build_addon_params(self) -> dict[str, object]:
+        if self.cfg.get("prompt_version") != "v10_zh_graph_strict":
+            return {}
+        return {
+            "language": "简体中文",
+            "entity_types": ["人物", "组织", "地点", "武功", "兵器", "物件", "事件", "概念", "生物"],
+        }
 
     async def _ensure_storages_initialized(self) -> None:
         if not self._storages_initialized:

@@ -63,6 +63,26 @@ def test_pricing_config_registers_deepseek_v4_pro():
     assert pricing["models"]["deepseek-v4-pro"]["output_per_1m"] > pricing["models"]["deepseek-v4-flash"]["output_per_1m"]
     assert pricing["models"]["deepseek-v4-flash-zh-schema"] == pricing["models"]["deepseek-v4-flash"]
     assert pricing["models"]["deepseek-v4-flash-zh-strict"] == pricing["models"]["deepseek-v4-flash"]
+    assert pricing["models"]["deepseek-v4-flash-zh-strict-bge-m3"] == pricing["models"]["deepseek-v4-flash"]
+
+
+def test_models_config_registers_siliconflow_bge_m3_embedding_profile():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+
+    provider = config["providers"]["siliconflow"]
+    assert provider["api_key_env"] == "SILICONFLOW_API_KEY"
+    assert provider["base_url"] == "https://api.siliconflow.cn/v1"
+    assert provider["embed_api_key_env"] == "SILICONFLOW_API_KEY"
+    assert provider["embed_base_url"] == "https://api.siliconflow.cn/v1"
+
+    model = config["models"]["deepseek-v4-flash-zh-strict-bge-m3"]
+    assert model["provider"] == "deepseek"
+    assert model["embed_provider"] == "siliconflow"
+    assert model["llm_model"] == "deepseek-v4-flash"
+    assert model["embed_model"] == "BAAI/bge-m3"
+    assert model["embed_dim"] == 1024
+    assert model["prompt_version"] == "v10_zh_graph_strict"
+    assert model["lightrag"]["embedding_func_max_async"] == 1
 
 
 def test_v10_prompt_removes_english_schema_placeholders():
@@ -917,6 +937,84 @@ def test_lightrag_indexer_can_inject_v10_strict_prompt(monkeypatch):
     assert indexer.cfg["prompt_version"] == "v10_zh_graph_strict"
     assert "只使用简体中文" in PROMPTS["entity_extraction_system_prompt"]
     assert "entity_description" not in PROMPTS["entity_extraction_system_prompt"]
+
+
+def test_lightrag_indexer_passes_chinese_addon_params_for_v10(monkeypatch):
+    import src.modules.jinyong.lightrag_indexer as module
+    from src.modules.jinyong.lightrag_indexer import LightragIndexer
+
+    class FakeEmbeddingFunc:
+        def __init__(self, *args, **kwargs):
+            pass
+
+    class FakeLightRAG:
+        def __init__(self, *args, **kwargs):
+            self.kwargs = kwargs
+
+    monkeypatch.setattr(module, "EmbeddingFunc", FakeEmbeddingFunc)
+    monkeypatch.setattr(module, "LightRAG", FakeLightRAG)
+
+    indexer = LightragIndexer(model_name="deepseek-v4-flash-zh-strict")
+
+    addon_params = indexer.rag.kwargs["addon_params"]
+    assert addon_params["language"] == "简体中文"
+    assert addon_params["entity_types"] == ["人物", "组织", "地点", "武功", "兵器", "物件", "事件", "概念", "生物"]
+
+
+def test_lightrag_indexer_passes_stability_lightrag_options(monkeypatch):
+    import src.modules.jinyong.lightrag_indexer as module
+    from src.modules.jinyong.lightrag_indexer import LightragIndexer
+
+    class FakeEmbeddingFunc:
+        def __init__(self, *args, **kwargs):
+            pass
+
+    class FakeLightRAG:
+        def __init__(self, *args, **kwargs):
+            self.kwargs = kwargs
+
+    monkeypatch.setattr(module, "EmbeddingFunc", FakeEmbeddingFunc)
+    monkeypatch.setattr(module, "LightRAG", FakeLightRAG)
+
+    indexer = LightragIndexer(model_name="deepseek-v4-flash-zh-strict-bge-m3")
+
+    assert indexer.rag.kwargs["llm_model_max_async"] == 1
+    assert indexer.rag.kwargs["entity_extract_max_gleaning"] == 0
+
+
+def test_lightrag_indexer_v10_overrides_full_extraction_prompt_stack():
+    from lightrag.prompt import PROMPTS
+
+    from src.modules.jinyong.lightrag_indexer import LightragIndexer
+
+    indexer = object.__new__(LightragIndexer)
+    indexer.cfg = {"prompt_version": "v10_zh_graph_strict", "prompt": "中文系统提示"}
+    indexer._configure_lightrag_prompts()
+
+    assert "中文系统提示" in PROMPTS["entity_extraction_system_prompt"]
+    assert "只输出抽取结果" in PROMPTS["entity_extraction_user_prompt"]
+    assert "补充遗漏" in PROMPTS["entity_continue_extraction_user_prompt"]
+    assert "entity{tuple_delimiter}阿青" in PROMPTS["entity_extraction_examples"][0]
+
+    combined = "\n".join(
+        [
+            PROMPTS["entity_extraction_system_prompt"],
+            PROMPTS["entity_extraction_user_prompt"],
+            PROMPTS["entity_continue_extraction_user_prompt"],
+            *PROMPTS["entity_extraction_examples"],
+        ]
+    )
+    forbidden_fragments = [
+        "Extract entities",
+        "Output Language",
+        "entity_description",
+        "relationship_description",
+        "Alex",
+        "Taylor",
+        "World Athletics",
+    ]
+    for fragment in forbidden_fragments:
+        assert fragment not in combined
 
 
 def test_lightrag_keyword_prompt_can_be_formatted():
