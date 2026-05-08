@@ -145,6 +145,17 @@ relation{tuple_delimiter}越王勾践{tuple_delimiter}纯钧剑{tuple_delimiter}
 ]
 
 
+def extract_chat_message_text(message) -> str:
+    """Return assistant text across OpenAI-compatible response variants."""
+    content = getattr(message, "content", None)
+    if content:
+        return content
+    reasoning_content = getattr(message, "reasoning_content", None)
+    if reasoning_content:
+        return reasoning_content
+    return ""
+
+
 def load_config(config_path: str = str(DEFAULT_CONFIG_PATH), model_name: str = "deepseek-v4-flash"):
     """从 YAML 配置加载模型和 Provider 设置"""
     return load_model_config(config_path, model_name)
@@ -261,7 +272,7 @@ class LightragIndexer:
                 stage=self.current_stage,
             )
         await client.close()
-        return resp.choices[0].message.content
+        return extract_chat_message_text(resp.choices[0].message)
 
     async def _provider_embed_func(self, texts: list[str]) -> np.ndarray:
         # 创建临时客户端以避免 pickling 问题

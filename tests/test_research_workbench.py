@@ -84,6 +84,23 @@ def test_models_config_registers_siliconflow_bge_m3_embedding_profile():
     assert model["prompt_version"] == "v10_zh_graph_strict"
     assert model["lightrag"]["embedding_func_max_async"] == 1
 
+    qwen_model = config["models"]["qwen3.5-35b-a3b-bge-m3"]
+    assert qwen_model["provider"] == "siliconflow"
+    assert qwen_model["embed_provider"] == "siliconflow"
+    assert qwen_model["llm_model"] == "Qwen/Qwen3.5-35B-A3B"
+    assert qwen_model["embed_model"] == "BAAI/bge-m3"
+    assert qwen_model["embed_dim"] == 1024
+    assert qwen_model["prompt_version"] == "v10_zh_graph_strict"
+    assert qwen_model["lightrag"]["entity_extract_max_gleaning"] == 0
+
+    glm_model = config["models"]["glm-4.5-air-bge-m3"]
+    assert glm_model["provider"] == "siliconflow"
+    assert glm_model["embed_provider"] == "siliconflow"
+    assert glm_model["llm_model"] == "zai-org/GLM-4.5-Air"
+    assert glm_model["embed_model"] == "BAAI/bge-m3"
+    assert glm_model["embed_dim"] == 1024
+    assert glm_model["prompt_version"] == "v10_zh_graph_strict"
+
 
 def test_require_api_key_uses_rerank_env_name():
     from src.core.workbench import require_api_key
@@ -1037,6 +1054,16 @@ def test_lightrag_indexer_configures_siliconflow_reranker(monkeypatch):
 
     assert indexer.rag.kwargs["rerank_model_func"] is not None
     assert indexer.rag.kwargs["min_rerank_score"] == 0.0
+
+
+def test_extract_chat_message_text_falls_back_to_reasoning_content():
+    from src.modules.jinyong.lightrag_indexer import extract_chat_message_text
+
+    class Message:
+        content = ""
+        reasoning_content = "模型可用"
+
+    assert extract_chat_message_text(Message()) == "模型可用"
 
 
 def test_lightrag_indexer_v10_overrides_full_extraction_prompt_stack():

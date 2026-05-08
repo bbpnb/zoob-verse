@@ -29,6 +29,16 @@ models:
     cache_hit_input_per_1m: 0.0028
     currency: USD
 
+  qwen3.5-35b-a3b-bge-m3:
+    input_per_1m: 0
+    output_per_1m: 0
+    currency: USD
+
+  glm-4.5-air-bge-m3:
+    input_per_1m: 0
+    output_per_1m: 0
+    currency: USD
+
   deepseek-v4-pro:
     input_per_1m: 0.435
     output_per_1m: 0.87
