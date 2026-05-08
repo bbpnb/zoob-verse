@@ -260,10 +260,12 @@ class LightragIndexer:
         messages.extend(history_messages)
         messages.append({"role": "user", "content": prompt})
 
+        chat_options = self.cfg.get("chat_options", {})
         resp = await client.chat.completions.create(
             model=self.cfg["llm_model"],
             messages=messages,
             temperature=0.1,
+            **chat_options,
         )
         if resp.usage:
             self.usage_tracker.add_llm_usage(

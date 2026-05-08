@@ -191,6 +191,17 @@ CANONICAL_ALIASES = {
     for alias in group
 }
 EVENT_RELATION_TYPES = {"影响", "因果", "传授", "敌对", "情感", "权谋", "牺牲", "结盟", "复仇", "发现"}
+CROSS_TOPIC_KEYWORDS = {
+    "女性角色": ["女", "少女", "侠女", "夫人", "公主", "阿青", "西施", "萧中慧", "任飞燕", "袁夫人"],
+    "兵器宝物": ["剑", "刀", "宝", "兵器", "武器", "竹棒", "鸳鸯刀", "鸳刀", "鸯刀", "名剑", "宝刀"],
+    "核心价值": ["无敌", "仁者", "侠义", "复仇", "权力", "情感", "牺牲", "忠义", "归隐", "道义"],
+}
+FEMALE_ROLE_NAME_KEYWORDS = {"阿青", "西施", "郑旦", "萧中慧", "任飞燕", "袁夫人", "杨夫人", "杨中慧", "五毒圣姑"}
+FEMALE_ROLE_SELF_KEYWORDS = {"少女", "侠女", "女子", "少妇", "夫人", "公主", "美女", "女侠", "姑娘", "圣姑"}
+FEMALE_ROLE_IDENTITY_PATTERNS = [
+    re.compile(rf"^(?:一位|一个|年轻的|骑[^，。；;,.]*的)?{keyword}")
+    for keyword in sorted(FEMALE_ROLE_SELF_KEYWORDS, key=len, reverse=True)
+]
 
 
 @dataclass(frozen=True)
@@ -539,6 +550,7 @@ def load_model_config(
         "prompt_version": prompt_version,
         "prompt": prompts[prompt_version],
         "description": model_cfg.get("description", ""),
+        "chat_options": model_cfg.get("chat_options", {}),
         "lightrag": model_cfg.get("lightrag", {}),
     }
 
@@ -1066,6 +1078,188 @@ def write_derived_view(
     lines.extend(event_lines or ["_暂无匹配事件。_"])
     output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return output_path
+
+
+def _read_run_metadata(run_path: Path) -> dict[str, Any]:
+    metadata_path = run_path / "metadata.json"
+    if metadata_path.exists():
+        return read_json(metadata_path)
+    parts = run_path.parts
+    return {
+        "module": "jinyong",
+        "corpus": parts[-5] if len(parts) >= 5 else run_path.name,
+        "model": parts[-4] if len(parts) >= 4 else "",
+        "method": parts[-3] if len(parts) >= 3 else "lightrag",
+        "run_id": run_path.name,
+    }
+
+
+def _load_run_graph_for_cross_corpus(run_path: Path) -> dict[str, Any]:
+    normalized_path = run_path / "graph.normalized.json"
+    graph_path = normalized_path if normalized_path.exists() else run_path / "graph.json"
+    return load_graph_data(graph_path)
+
+
+def build_cross_corpus_bundle(run_dirs: list[str | Path] | tuple[str | Path, ...]) -> dict[str, Any]:
+    sources = []
+    entities = []
+    relationships = []
+    for item in run_dirs:
+        run_path = Path(item)
+        metadata = _read_run_metadata(run_path)
+        corpus = metadata.get("corpus") or run_path.name
+        source = {
+            "corpus": corpus,
+            "run_dir": str(run_path),
+            "model": metadata.get("model", ""),
+            "method": metadata.get("method", ""),
+            "run_id": metadata.get("run_id", run_path.name),
+        }
+        sources.append(source)
+        graph_data = _load_run_graph_for_cross_corpus(run_path)
+        for entity in graph_data.get("entities", []):
+            entities.append(
+                {
+                    "corpus": corpus,
+                    "run_dir": str(run_path),
+                    "name": entity.get("name", ""),
+                    "type": entity.get("type", ""),
+                    "description": entity.get("description", ""),
+                }
+            )
+        for rel in graph_data.get("relationships", []):
+            relationships.append(
+                {
+                    "corpus": corpus,
+                    "run_dir": str(run_path),
+                    "source": rel.get("source", ""),
+                    "target": rel.get("target", ""),
+                    "type": normalize_relation_type(rel.get("type", "")),
+                    "description": rel.get("description", ""),
+                }
+            )
+    return {"sources": sources, "entities": entities, "relationships": relationships}
+
+
+def _cross_topic_keywords(topic: str) -> list[str]:
+    return CROSS_TOPIC_KEYWORDS.get(topic, [topic])
+
+
+def _matches_cross_topic(text: str, topic: str) -> bool:
+    keywords = _cross_topic_keywords(topic)
+    return any(keyword and keyword in text for keyword in keywords)
+
+
+def _entity_matches_cross_topic(entity: dict[str, Any], topic: str) -> bool:
+    name = str(entity.get("name", ""))
+    description = str(entity.get("description", ""))
+    text = f"{name} {entity.get('type', '')} {description}"
+    entity_type = str(entity.get("type", ""))
+    if topic == "女性角色":
+        first_clause = re.split(r"[，。；;,.]", description, maxsplit=1)[0]
+        return entity_type == "人物" and (
+            name in FEMALE_ROLE_NAME_KEYWORDS
+            or any(keyword in name for keyword in FEMALE_ROLE_SELF_KEYWORDS)
+            or any(pattern.search(first_clause) for pattern in FEMALE_ROLE_IDENTITY_PATTERNS)
+        )
+    if topic == "兵器宝物" and entity_type in {"兵器", "物件", "宝物"}:
+        return True
+    if topic == "兵器宝物" and entity_type not in {"兵器", "物件", "宝物", "概念"}:
+        return False
+    return _matches_cross_topic(text, topic)
+
+
+def derive_cross_corpus_view(bundle: dict[str, Any], topic: str) -> dict[str, Any]:
+    entities_by_corpus: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
+    relationships_by_corpus: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
+    selected_names_by_corpus: dict[str, set[str]] = collections.defaultdict(set)
+
+    for entity in bundle.get("entities", []):
+        if _entity_matches_cross_topic(entity, topic):
+            corpus = str(entity.get("corpus", ""))
+            item = {k: entity.get(k, "") for k in ["name", "type", "description", "run_dir"]}
+            entities_by_corpus[corpus].append(item)
+            selected_names_by_corpus[corpus].add(str(entity.get("name", "")))
+
+    topic_requires_relation_text_match = topic not in {"女性角色", "兵器宝物"}
+    for rel in bundle.get("relationships", []):
+        corpus = str(rel.get("corpus", ""))
+        text = f"{rel.get('source', '')} {rel.get('target', '')} {rel.get('type', '')} {rel.get('description', '')}"
+        source = str(rel.get("source", ""))
+        target = str(rel.get("target", ""))
+        if (
+            (
+                not topic_requires_relation_text_match
+                and (
+                    source in selected_names_by_corpus.get(corpus, set())
+                    or target in selected_names_by_corpus.get(corpus, set())
+                )
+            )
+            or _matches_cross_topic(text, topic)
+        ):
+            relationships_by_corpus[corpus].append(
+                {k: rel.get(k, "") for k in ["source", "target", "type", "description", "run_dir"]}
+            )
+
+    return {
+        "topic": topic,
+        "sources": bundle.get("sources", []),
+        "entities_by_corpus": dict(entities_by_corpus),
+        "relationships_by_corpus": dict(relationships_by_corpus),
+    }
+
+
+def render_cross_corpus_markdown(view: dict[str, Any]) -> str:
+    topic = view.get("topic", "")
+    lines = [f"# 跨作品视图：{topic}", ""]
+    if view.get("sources"):
+        lines.extend(["## 来源", ""])
+        for source in view.get("sources", []):
+            lines.append(
+                f"- **{source.get('corpus', '')}**: {source.get('model', '')} / {source.get('run_id', '')}"
+            )
+        lines.append("")
+
+    corpus_names = [
+        source.get("corpus", "")
+        for source in view.get("sources", [])
+        if source.get("corpus", "")
+    ]
+    for corpus in corpus_names:
+        lines.extend([f"## {corpus}", "", "### 相关实体"])
+        entities = view.get("entities_by_corpus", {}).get(corpus, [])
+        if entities:
+            for entity in entities[:30]:
+                lines.append(f"- **{entity.get('name', '')}** ({entity.get('type', '')}): {entity.get('description', '')}")
+        else:
+            lines.append("_暂无匹配实体。_")
+
+        lines.extend(["", "### 相关关系"])
+        relationships = view.get("relationships_by_corpus", {}).get(corpus, [])
+        if relationships:
+            for rel in relationships[:40]:
+                lines.append(
+                    f"- **{rel.get('source', '')} -> {rel.get('target', '')}** "
+                    f"({rel.get('type', '')}): {rel.get('description', '')}"
+                )
+        else:
+            lines.append("_暂无匹配关系。_")
+        lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_cross_corpus_view(output_dir: str | Path, bundle: dict[str, Any], topic: str) -> dict[str, Path]:
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    view = derive_cross_corpus_view(bundle, topic)
+    json_path = output_path / "cross_corpus.json"
+    markdown_path = output_path / f"{topic}.md"
+    payload = read_json(json_path) if json_path.exists() else {"bundle": bundle, "views": {}}
+    payload["bundle"] = bundle
+    payload.setdefault("views", {})[topic] = view
+    write_json(json_path, payload)
+    markdown_path.write_text(render_cross_corpus_markdown(view), encoding="utf-8")
+    return {"json": json_path, "markdown": markdown_path}
 
 
 def render_audit_markdown(title: str, issues: list[dict[str, Any]]) -> str:

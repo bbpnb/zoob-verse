@@ -102,6 +102,119 @@ def test_models_config_registers_siliconflow_bge_m3_embedding_profile():
     assert glm_model["prompt_version"] == "v10_zh_graph_strict"
 
 
+def test_models_config_registers_gemini25_pro_nothinking_bge_m3_profile():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+
+    model = config["models"]["gemini-2.5-pro-nothinking-bge-m3"]
+    assert model["provider"] == "xiaoai"
+    assert model["embed_provider"] == "siliconflow"
+    assert model["llm_model"] == "gemini-2.5-pro-nothinking"
+    assert model["embed_model"] == "BAAI/bge-m3"
+    assert model["embed_dim"] == 1024
+    assert model["prompt_version"] == "v10_zh_graph_strict"
+    assert model["lightrag"]["entity_extract_max_gleaning"] == 0
+    assert model["lightrag"]["llm_model_max_async"] == 1
+    assert model["chat_options"]["max_tokens"] == 8192
+
+
+def test_models_config_registers_claude_haiku45_bge_m3_profile():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+
+    model = config["models"]["claude-haiku-4.5-bge-m3"]
+    assert model["provider"] == "xiaoai"
+    assert model["embed_provider"] == "siliconflow"
+    assert model["llm_model"] == "claude-haiku-4-5-20251001"
+    assert model["embed_model"] == "BAAI/bge-m3"
+    assert model["embed_dim"] == 1024
+    assert model["prompt_version"] == "v10_zh_graph_strict"
+    assert model["lightrag"]["entity_extract_max_gleaning"] == 0
+    assert model["lightrag"]["llm_model_max_async"] == 1
+    assert "chat_options" not in model
+
+
+def test_models_config_registers_gpt5_nano_bge_m3_profile():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+
+    model = config["models"]["gpt-5-nano-bge-m3"]
+    assert model["provider"] == "xiaoai"
+    assert model["embed_provider"] == "siliconflow"
+    assert model["llm_model"] == "gpt-5-nano"
+    assert model["embed_model"] == "BAAI/bge-m3"
+    assert model["embed_dim"] == 1024
+    assert model["prompt_version"] == "v10_zh_graph_strict"
+    assert model["lightrag"]["entity_extract_max_gleaning"] == 0
+    assert model["lightrag"]["llm_model_max_async"] == 1
+    assert model["chat_options"]["reasoning_effort"] == "minimal"
+    assert model["chat_options"]["max_tokens"] == 4096
+
+
+def test_models_config_registers_gpt51_bge_m3_profile():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+
+    model = config["models"]["gpt-5.1-bge-m3"]
+    assert model["provider"] == "xiaoai"
+    assert model["embed_provider"] == "siliconflow"
+    assert model["llm_model"] == "gpt-5.1"
+    assert model["embed_model"] == "BAAI/bge-m3"
+    assert model["embed_dim"] == 1024
+    assert model["prompt_version"] == "v10_zh_graph_strict"
+    assert model["lightrag"]["entity_extract_max_gleaning"] == 0
+    assert model["lightrag"]["llm_model_max_async"] == 1
+    assert model["chat_options"]["reasoning_effort"] == "minimal"
+    assert model["chat_options"]["max_tokens"] == 8192
+
+
+def test_models_config_registers_doubao_flash_bge_m3_profile():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+
+    provider = config["providers"]["doubao"]
+    assert provider["api_key_env"] == "DOUBAO_API_KEY"
+    assert provider["base_url"] == "https://ark.cn-beijing.volces.com/api/v3"
+    assert provider["embed_api_key_env"] == "SILICONFLOW_API_KEY"
+    assert provider["embed_base_url"] == "https://api.siliconflow.cn/v1"
+
+    model = config["models"]["doubao-seed-1.6-flash-bge-m3"]
+    assert model["provider"] == "doubao"
+    assert model["embed_provider"] == "siliconflow"
+    assert model["llm_model"] == "doubao-seed-1-6-flash-250828"
+    assert model["embed_model"] == "BAAI/bge-m3"
+    assert model["embed_dim"] == 1024
+    assert model["prompt_version"] == "v10_zh_graph_strict"
+    assert model["lightrag"]["entity_extract_max_gleaning"] == 0
+    assert model["lightrag"]["llm_model_max_async"] == 1
+    assert model["chat_options"]["extra_body"] == {"thinking": {"type": "disabled"}}
+
+
+def test_models_config_registers_doubao_seed16_bge_m3_profile():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+
+    model = config["models"]["doubao-seed-1.6-bge-m3"]
+    assert model["provider"] == "doubao"
+    assert model["embed_provider"] == "siliconflow"
+    assert model["llm_model"] == "doubao-seed-1-6-251015"
+    assert model["embed_model"] == "BAAI/bge-m3"
+    assert model["embed_dim"] == 1024
+    assert model["prompt_version"] == "v10_zh_graph_strict"
+    assert model["lightrag"]["entity_extract_max_gleaning"] == 0
+    assert model["lightrag"]["llm_model_max_async"] == 1
+    assert model["chat_options"]["extra_body"] == {"thinking": {"type": "disabled"}}
+
+
+def test_models_config_registers_doubao_seed20_lite_bge_m3_profile():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+
+    model = config["models"]["doubao-seed-2.0-lite-bge-m3"]
+    assert model["provider"] == "doubao"
+    assert model["embed_provider"] == "siliconflow"
+    assert model["llm_model"] == "doubao-seed-2-0-lite-260428"
+    assert model["embed_model"] == "BAAI/bge-m3"
+    assert model["embed_dim"] == 1024
+    assert model["prompt_version"] == "v10_zh_graph_strict"
+    assert model["lightrag"]["entity_extract_max_gleaning"] == 0
+    assert model["lightrag"]["llm_model_max_async"] == 1
+    assert model["chat_options"]["extra_body"] == {"thinking": {"type": "disabled"}}
+
+
 def test_require_api_key_uses_rerank_env_name():
     from src.core.workbench import require_api_key
 
@@ -250,6 +363,137 @@ def test_write_derived_view_creates_facet_report(tmp_path):
 
     assert output.exists()
     assert "阿青" in output.read_text(encoding="utf-8")
+
+
+def test_build_cross_corpus_bundle_adds_run_provenance(tmp_path):
+    from src.core.workbench import RunSpec, build_cross_corpus_bundle, write_json
+
+    left = RunSpec("jinyong", "越女剑", "model-a", "lightrag", "left", tmp_path)
+    right = RunSpec("jinyong", "鸳鸯刀", "model-b", "lightrag", "right", tmp_path)
+    left.ensure_dirs()
+    right.ensure_dirs()
+    left.write_metadata()
+    right.write_metadata()
+    write_json(
+        left.run_dir / "graph.normalized.json",
+        {
+            "entities": [{"name": "阿青", "type": "人物", "description": "牧羊少女"}],
+            "relationships": [{"source": "阿青", "target": "竹棒", "type": "使用", "description": "阿青使用竹棒"}],
+        },
+    )
+    write_json(
+        right.run_dir / "graph.json",
+        {
+            "entities": [{"name": "萧中慧", "type": "人物", "description": "侠女"}],
+            "relationships": [{"source": "萧中慧", "target": "鸳鸯刀", "type": "争夺", "description": "萧中慧争夺鸳鸯刀"}],
+        },
+    )
+
+    bundle = build_cross_corpus_bundle([left.run_dir, right.run_dir])
+
+    assert [source["corpus"] for source in bundle["sources"]] == ["越女剑", "鸳鸯刀"]
+    assert bundle["entities"][0]["corpus"] == "越女剑"
+    assert bundle["entities"][0]["run_dir"] == str(left.run_dir)
+    assert bundle["relationships"][1]["corpus"] == "鸳鸯刀"
+    assert bundle["relationships"][1]["target"] == "鸳鸯刀"
+
+
+def test_cross_corpus_view_filters_topic_and_writes_markdown(tmp_path):
+    from src.core.workbench import derive_cross_corpus_view, write_cross_corpus_view
+
+    bundle = {
+        "sources": [
+            {"corpus": "越女剑", "run_dir": "runs/a", "model": "model-a"},
+            {"corpus": "鸳鸯刀", "run_dir": "runs/b", "model": "model-b"},
+        ],
+        "entities": [
+            {"corpus": "越女剑", "run_dir": "runs/a", "name": "阿青", "type": "人物", "description": "牧羊少女，剑术极高"},
+            {"corpus": "越女剑", "run_dir": "runs/a", "name": "竹棒", "type": "兵器", "description": "阿青使用的竹棒"},
+            {"corpus": "鸳鸯刀", "run_dir": "runs/b", "name": "萧中慧", "type": "人物", "description": "侠女，推动鸳鸯刀争夺"},
+            {"corpus": "鸳鸯刀", "run_dir": "runs/b", "name": "鸳鸯刀", "type": "兵器", "description": "刻有仁者无敌的宝刀"},
+        ],
+        "relationships": [
+            {"corpus": "越女剑", "run_dir": "runs/a", "source": "阿青", "target": "竹棒", "type": "使用", "description": "阿青用竹棒习得剑术"},
+            {"corpus": "鸳鸯刀", "run_dir": "runs/b", "source": "萧中慧", "target": "鸳鸯刀", "type": "争夺", "description": "萧中慧争夺鸳鸯刀"},
+        ],
+    }
+
+    female = derive_cross_corpus_view(bundle, "女性角色")
+    assert [item["name"] for item in female["entities_by_corpus"]["越女剑"]] == ["阿青"]
+    assert [item["name"] for item in female["entities_by_corpus"]["鸳鸯刀"]] == ["萧中慧"]
+
+    artifacts = derive_cross_corpus_view(bundle, "兵器宝物")
+    assert "竹棒" in [item["name"] for item in artifacts["entities_by_corpus"]["越女剑"]]
+    assert "鸳鸯刀" in [item["name"] for item in artifacts["entities_by_corpus"]["鸳鸯刀"]]
+
+    outputs = write_cross_corpus_view(tmp_path, bundle, "女性角色")
+    assert outputs["json"].exists()
+    assert outputs["markdown"].exists()
+    markdown = outputs["markdown"].read_text(encoding="utf-8")
+    assert "# 跨作品视图：女性角色" in markdown
+    assert "## 越女剑" in markdown
+    assert "阿青" in markdown
+
+
+def test_cross_corpus_view_accumulates_multiple_topics(tmp_path):
+    from src.core.workbench import write_cross_corpus_view
+
+    bundle = {
+        "sources": [{"corpus": "越女剑", "run_dir": "runs/a", "model": "model-a"}],
+        "entities": [
+            {"corpus": "越女剑", "run_dir": "runs/a", "name": "阿青", "type": "人物", "description": "牧羊少女"},
+            {"corpus": "越女剑", "run_dir": "runs/a", "name": "竹棒", "type": "兵器", "description": "阿青使用的竹棒"},
+        ],
+        "relationships": [],
+    }
+
+    write_cross_corpus_view(tmp_path, bundle, "女性角色")
+    write_cross_corpus_view(tmp_path, bundle, "兵器宝物")
+
+    payload = json.loads((tmp_path / "cross_corpus.json").read_text(encoding="utf-8"))
+    assert set(payload["views"]) == {"女性角色", "兵器宝物"}
+    assert (tmp_path / "女性角色.md").exists()
+    assert (tmp_path / "兵器宝物.md").exists()
+
+
+def test_cross_corpus_female_view_avoids_mentions_only_false_positives():
+    from src.core.workbench import derive_cross_corpus_view
+
+    bundle = {
+        "sources": [{"corpus": "越女剑", "run_dir": "runs/a", "model": "model-a"}],
+        "entities": [
+            {"corpus": "越女剑", "run_dir": "runs/a", "name": "范蠡", "type": "人物", "description": "越国大夫，曾观看少女阿青斗剑，深爱西施"},
+            {"corpus": "越女剑", "run_dir": "runs/a", "name": "西施", "type": "人物", "description": "越国美女"},
+            {"corpus": "越女剑", "run_dir": "runs/a", "name": "恶贼", "type": "人物", "description": "夤夜抢入女子房间，横施强暴"},
+            {"corpus": "越女剑", "run_dir": "runs/a", "name": "竹棒", "type": "兵器", "description": "阿青使用的竹棒"},
+        ],
+        "relationships": [],
+    }
+
+    view = derive_cross_corpus_view(bundle, "女性角色")
+
+    assert [item["name"] for item in view["entities_by_corpus"]["越女剑"]] == ["西施"]
+
+
+def test_cross_corpus_thematic_view_keeps_relationships_topic_relevant():
+    from src.core.workbench import derive_cross_corpus_view
+
+    bundle = {
+        "sources": [{"corpus": "鸳鸯刀", "run_dir": "runs/a", "model": "model-a"}],
+        "entities": [
+            {"corpus": "鸳鸯刀", "run_dir": "runs/a", "name": "萧中慧", "type": "人物", "description": "侠义心肠的女侠"},
+            {"corpus": "鸳鸯刀", "run_dir": "runs/a", "name": "鸳鸯刀", "type": "兵器", "description": "刻有仁者无敌"},
+        ],
+        "relationships": [
+            {"corpus": "鸳鸯刀", "run_dir": "runs/a", "source": "萧中慧", "target": "客店", "type": "出没", "description": "萧中慧夜宿客店"},
+            {"corpus": "鸳鸯刀", "run_dir": "runs/a", "source": "鸳鸯刀", "target": "仁者无敌", "type": "关联", "description": "刀中揭示仁者无敌"},
+        ],
+    }
+
+    view = derive_cross_corpus_view(bundle, "核心价值")
+
+    relationships = view["relationships_by_corpus"]["鸳鸯刀"]
+    assert [item["target"] for item in relationships] == ["仁者无敌"]
 
 
 def test_audit_graph_data_flags_quality_issues():
@@ -861,12 +1105,59 @@ def test_jinyong_cli_exposes_research_workbench_commands():
         "extract-events",
         "tag-facets",
         "derive-view",
+        "cross-view",
         "audit-graph",
         "audit-facets",
         "suggest-repairs",
         "direct-analyze",
     ]:
         assert command in result.output
+
+
+def test_cross_view_command_writes_cross_corpus_outputs(tmp_path):
+    from src.core.workbench import RunSpec, write_json
+
+    left = RunSpec("jinyong", "越女剑", "model-a", "lightrag", "left", tmp_path)
+    right = RunSpec("jinyong", "鸳鸯刀", "model-b", "lightrag", "right", tmp_path)
+    left.ensure_dirs()
+    right.ensure_dirs()
+    left.write_metadata()
+    right.write_metadata()
+    write_json(
+        left.run_dir / "graph.normalized.json",
+        {
+            "entities": [{"name": "阿青", "type": "人物", "description": "牧羊少女，剑术极高"}],
+            "relationships": [],
+        },
+    )
+    write_json(
+        right.run_dir / "graph.normalized.json",
+        {
+            "entities": [{"name": "萧中慧", "type": "人物", "description": "侠女"}],
+            "relationships": [],
+        },
+    )
+    output_dir = tmp_path / "cross"
+
+    result = CliRunner().invoke(
+        cli,
+        [
+            "cross-view",
+            "--run-dir",
+            str(left.run_dir),
+            "--run-dir",
+            str(right.run_dir),
+            "--topic",
+            "女性角色",
+            "--output-dir",
+            str(output_dir),
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert (output_dir / "cross_corpus.json").exists()
+    assert (output_dir / "女性角色.md").exists()
+    assert "跨作品视图已保存" in result.output
 
 
 def test_audit_graph_command_writes_audit_files(tmp_path):
@@ -1352,6 +1643,8 @@ def test_project_skill_documents_v1_cli_and_dotenv():
     assert "debug-query" in skill
     assert "retrieved entities" in skill
     assert "query model still matters" in skill
+    assert "cross-view" in skill
+    assert "cross-corpus" in skill
 
 
 def test_project_docs_record_graphrag_boundaries_and_debug_query_need():
@@ -1376,7 +1669,35 @@ def test_workflow_docs_are_primary_agent_entrypoint():
     assert "标准建图与质检" in workflows
     assert "查询与评估" in workflows
     assert "主题材料整理" in workflows
+    assert "跨作品主题研究" in workflows
     assert "模型与方法对比" in workflows
     assert "WORKFLOWS.md" in readme
     assert "WORKFLOWS.md" in project
     assert "WORKFLOWS.md" in skill
+
+
+def test_remote_worker_documentation_and_script_are_present():
+    workflows = Path("WORKFLOWS.md").read_text(encoding="utf-8")
+    decisions = Path("docs/decisions.md").read_text(encoding="utf-8")
+    skill = Path(".ai-skills/literary-knowledge-graph/SKILL.md").read_text(encoding="utf-8")
+    script = Path("scripts/run_remote_index.sh").read_text(encoding="utf-8")
+
+    assert "远端 worker" in workflows
+    assert "screen" in workflows
+    assert "rsync" in workflows
+    assert "远端 worker" in decisions
+    assert "root@hk.zoob.work" in decisions
+    assert "screen" in skill
+    assert "root@hk.zoob.work" in skill
+    assert "run_remote_index.sh" in script
+    assert "normalize-graph" in script
+    assert "audit-graph" in script
+    assert "visualize" in script
+    assert "report" in script
+
+
+def test_lightrag_optional_dependency_matches_actual_package():
+    pyproject = Path("pyproject.toml").read_text(encoding="utf-8")
+
+    assert "lightrag-hku" in pyproject
+    assert "lightrag-api" not in pyproject

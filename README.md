@@ -23,18 +23,18 @@ python -m src jinyong --help
 python -m src jinyong index \
   --novel src/modules/jinyong/data/raw/越女剑.txt \
   --corpus 越女剑 \
-  --model deepseek-v4-flash \
-  --run-name smoke
+  --model deepseek-v4-flash-zh-strict-bge-m3 \
+  --run-name yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 
 # 查询与报告
-python -m src jinyong eval --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
-python -m src jinyong report --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+python -m src jinyong eval --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 --query-model doubao-seed-1.6-bge-m3 --top-k 6 --chunk-top-k 4 --max-total-tokens 10000
+python -m src jinyong report --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 
 # 可选：从规范化图谱生成实验性辅助层
-python -m src jinyong normalize-graph --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
-python -m src jinyong extract-events --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
-python -m src jinyong tag-facets --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke --profile jinyong
-python -m src jinyong derive-view --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke --facet 女性角色
+python -m src jinyong normalize-graph --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
+python -m src jinyong extract-events --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
+python -m src jinyong tag-facets --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 --profile jinyong
+python -m src jinyong derive-view --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 --facet 女性角色
 
 # 长上下文对照
 python -m src jinyong direct-analyze \
@@ -55,6 +55,7 @@ python -m src jinyong direct-analyze \
 ## 约定
 
 - API Key 只通过 `.env` 提供，不提交明文。
+- 模型配置在 `config/models.yaml`。火山方舟豆包使用 OpenAI 兼容地址 `https://ark.cn-beijing.volces.com/api/v3`，模型名使用接口可用 ID，例如 `doubao-seed-1-6-flash-250828`，不是展示名 `Doubao-Seed-1.6-flash`。
 - `runs/` 保存标准实验输出。
 - 旧的一次性脚本已弃用，后续实验优先走 CLI。
 - `events.json`、`facets.json`、`views/` 是从 `graph.normalized.json` 派生出的研究材料，不是主图谱本体。

@@ -16,6 +16,7 @@ from src.core.workbench import (
     RunSpec,
     audit_facets_data,
     audit_graph_data,
+    build_cross_corpus_bundle,
     build_repair_suggestions,
     clean_graph_data,
     estimate_text_tokens,
@@ -31,6 +32,7 @@ from src.core.workbench import (
     tag_analysis_facets,
     should_fallback_to_direct,
     write_derived_view,
+    write_cross_corpus_view,
     write_json,
     write_report,
     write_run_comparison,
@@ -212,6 +214,18 @@ def derive_view(run_dir, facet):
     events_data = read_json(run_path / "events.json")
     output = write_derived_view(run_path / "views", facet, graph_data, facets_data, events_data)
     click.echo(f"[jinyong] 派生视图已保存: {output}")
+
+
+@cli.command("cross-view")
+@click.option("--run-dir", "run_dirs", multiple=True, type=click.Path(exists=True), required=True, help="要纳入跨作品视图的运行目录，可重复")
+@click.option("--topic", required=True, help="跨作品主题，例如：女性角色、兵器宝物、核心价值")
+@click.option("--output-dir", type=click.Path(), required=True, help="跨作品视图输出目录")
+def cross_view(run_dirs, topic, output_dir):
+    """从多个单作品图谱生成本地跨作品主题视图"""
+    bundle = build_cross_corpus_bundle(run_dirs)
+    outputs = write_cross_corpus_view(output_dir, bundle, topic)
+    click.echo(f"[jinyong] 跨作品视图已保存: {outputs['markdown']}")
+    click.echo(f"[jinyong] 跨作品数据已保存: {outputs['json']}")
 
 
 @cli.command("audit-graph")
@@ -529,6 +543,7 @@ def direct_analyze(novel, question, model, corpus, run_name, runs_root, config_p
             {"role": "user", "content": prompt},
         ],
         temperature=0.2,
+        **cfg.get("chat_options", {}),
     )
     answer = response.choices[0].message.content
     elapsed = round(time.perf_counter() - started, 3)

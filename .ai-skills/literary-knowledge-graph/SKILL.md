@@ -19,7 +19,9 @@ Before running commands, identify which workflow the user is asking for:
 - Standard build and quality check: index, normalize, audit, report.
 - Query and evaluation: query, eval, report, optional direct-analyze fallback.
 - Topic material preparation: extract-events, tag-facets, audit-facets, derive-view.
+- Cross-corpus topic research: cross-view over multiple existing run dirs.
 - Model or method comparison: run comparable experiments, audit/report/eval each, then compare-runs.
+- Remote worker long task: sync the current snapshot to `root@hk.zoob.work`, start `screen`, then pull `runs/` back after completion.
 
 For details, read `WORKFLOWS.md`. Use it as the operating map; commands are tools inside a workflow.
 
@@ -36,7 +38,7 @@ Secrets are read from local `.env`. Never print, inspect, or commit `.env`.
 ```bash
 cp .env.example .env
 # Fill only the needed keys, for example DEEPSEEK_API_KEY and XIAOAI_API_KEY.
-# Optional paid fallback keys: XIAOMIMO_API_KEY, DASHSCOPE_API_KEY, OPENROUTER_API_KEY.
+# Optional paid fallback keys: XIAOMIMO_API_KEY, DASHSCOPE_API_KEY, OPENROUTER_API_KEY, DOUBAO_API_KEY, SILICONFLOW_API_KEY.
 ```
 
 ## Main Workflow
@@ -47,24 +49,28 @@ Use short works such as `越女剑` or `鸳鸯刀` before longer corpora.
 python -m src jinyong index \
   --novel src/modules/jinyong/data/raw/越女剑.txt \
   --corpus 越女剑 \
-  --model deepseek-v4-flash \
-  --run-name smoke
+  --model deepseek-v4-flash-zh-strict-bge-m3 \
+  --run-name yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 
 python -m src jinyong eval \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
+  --query-model doubao-seed-1.6-bge-m3 \
+  --top-k 6 \
+  --chunk-top-k 4 \
+  --max-total-tokens 10000
 
 python -m src jinyong report \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 ```
 
 Quality gate after indexing:
 
 ```bash
 python -m src jinyong normalize-graph \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 
 python -m src jinyong audit-graph \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 ```
 
 Run outputs live under:
@@ -82,6 +88,7 @@ Important files:
 - `report.md`: human-readable quality report
 - `report.json`: machine-readable metrics
 - `events.json`, `facets.json`, `views/`: optional derived research materials, not the main graph
+- `cross_corpus.json`, `<topic>.md`: cross-corpus topic outputs created by `cross-view`
 - `cache/`: LightRAG cache
 
 ## Commands
@@ -89,7 +96,11 @@ Important files:
 ```bash
 # Ask one query against an existing run
 python -m src jinyong query \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
+  --query-model doubao-seed-1.6-bge-m3 \
+  --top-k 6 \
+  --chunk-top-k 4 \
+  --max-total-tokens 10000 \
   --mode local \
   "阿青的剑术源头是谁？"
 
@@ -103,15 +114,38 @@ python -m src jinyong direct-analyze \
 
 # Visualize a graph
 python -m src jinyong visualize \
-  --input runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke/graph.json \
-  --output runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke/graph.html
+  --input runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507/graph.normalized.json \
+  --output runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507/graph.html
+
+# Build a local cross-corpus topic view; does not call a model
+python -m src jinyong cross-view \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
+  --run-dir runs/jinyong/鸳鸯刀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuanyangdao-dsv4flash-v10-bgem3-20260508 \
+  --topic 女性角色 \
+  --output-dir runs/jinyong/cross/yuenvjian-yuanyangdao-20260508
 ```
+
+## Remote Worker
+
+Use the remote worker for long `index` jobs that should survive local laptop sleep, shutdown, SSH disconnects, or a new chat session. The current worker is `root@hk.zoob.work`, with project path `/root/code/zoob-verse`.
+
+```bash
+rsync -az --delete --exclude .git --exclude .venv --exclude runs ./ root@hk.zoob.work:/root/code/zoob-verse/
+rsync -az .env root@hk.zoob.work:/root/code/zoob-verse/.env
+ssh root@hk.zoob.work 'chmod 600 /root/code/zoob-verse/.env'
+ssh root@hk.zoob.work 'screen -ls'
+ssh root@hk.zoob.work 'tail -n 80 /root/code/zoob-verse/logs/<run-name>/index.log'
+```
+
+`scripts/run_remote_index.sh` is the reusable launcher. It runs `index`, `normalize-graph`, `audit-graph`, `visualize`, and `report`, writing logs to the supplied log directory. After a run finishes, pull the run directory back into local `runs/`, then clean remote logs and run output because the worker disk is limited.
 
 ## Model Guidance
 
-- `deepseek-v4-flash`: low-cost smoke test and baseline, not final quality default.
-- `gpt-4o`: stronger historical quality baseline for graph extraction.
-- `gpt-4o-mini`: cheap weak baseline.
+- `deepseek-v4-flash-zh-strict-bge-m3`: current preferred default index candidate.
+- `doubao-seed-1.6-bge-m3`: same-tier index/query comparison candidate.
+- `gpt-5.1-bge-m3`: high-recall quality baseline and local reinforcement model, not daily default.
+- Default query budget profile: `--top-k 6 --chunk-top-k 4 --max-total-tokens 10000`.
+- `rerank` is optional; prefer it for long works or scattered retrieval, not every short-work query.
 - `mimo-v2.5-pro` / `mimo-v2.5`: Xiaomi MiMo Token Plan through `https://token-plan-cn.xiaomimimo.com/v1`; aggressive extraction baseline, watch noise and token use.
 - DashScope Coding Plan models through `https://coding.dashscope.aliyuncs.com/v1`: `qwen3.6-plus`, `qwen3.5-plus`, `qwen3-coder-plus`, `glm-5`, `glm-4.7`, `kimi-k2.5`, `minimax-m2.5`.
 - Avoid expensive model comparisons without explicit user confirmation because LightRAG indexing can consume many tokens.
@@ -123,7 +157,7 @@ python -m src jinyong visualize \
 - Track token usage and estimated cost in metadata, query results, and reports whenever provider usage is available.
 - Rerank models are optional and should be configured explicitly before use.
 
-Keep embedding fixed when comparing LLMs, usually `text-embedding-3-large`, so model quality differences are easier to interpret.
+Keep embedding fixed when comparing LLMs, currently `BAAI/bge-m3`, so model quality differences are easier to interpret.
 
 ## Safety Rules
 

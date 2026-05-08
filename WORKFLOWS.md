@@ -8,8 +8,19 @@
 | --- | --- | --- |
 | 第一次处理一部作品，判断图谱能不能用 | 标准建图与质检 | `index` 会调用模型 |
 | 针对已有图谱提问或跑固定问题集 | 查询与评估 | `query/eval` 会调用查询模型 |
-| 整理某个主题的研究材料 | 主题材料整理 | 本地处理，不调用模型 |
+| 整理单部作品的主题研究材料 | 主题材料整理 | 本地处理，不调用模型 |
+| 汇总多部作品做跨作品主题浏览 | 跨作品主题研究 | 本地处理，不调用模型 |
 | 比较模型、prompt 或方法差异 | 模型与方法对比 | 通常会调用模型，需先确认成本 |
+| 处理中长篇索引长任务，避免本地电脑断开 | 远端 worker 长任务 | `index` 会调用模型 |
+
+## 当前默认路线
+
+- 默认 index 候选优先用 `deepseek-v4-flash-zh-strict-bge-m3`；`doubao-seed-1.6-bge-m3` 作为同级对照。
+- `gpt-5.1-bge-m3` 只作为高召回 / 高质量基准，不作为默认日常索引模型。
+- 默认 query 先用小预算 profile：`--top-k 6 --chunk-top-k 4 --max-total-tokens 10000`。
+- `rerank` 保留为可选项，不默认开启；长篇或候选过散时再加。
+- 后续长篇试验优先选《鸳鸯刀》。
+- `runs/` 只保留代表性结果和 summary 对比；过渡、失败、重复实验在结论写进文档后可以清理。
 
 ## 工作流 1：标准建图与质检
 
@@ -19,20 +30,24 @@
 python -m src jinyong index \
   --novel src/modules/jinyong/data/raw/越女剑.txt \
   --corpus 越女剑 \
-  --model deepseek-v4-flash \
-  --run-name smoke
+  --model deepseek-v4-flash-zh-strict-bge-m3 \
+  --run-name yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 
 python -m src jinyong normalize-graph \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 
 python -m src jinyong audit-graph \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 
 python -m src jinyong suggest-repairs \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 
 python -m src jinyong report \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
+
+python -m src jinyong visualize \
+  --input runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507/graph.normalized.json \
+  --output runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507/graph.html
 ```
 
 主要输出：
@@ -42,6 +57,7 @@ python -m src jinyong report \
 - `audit.graph.md|json`：质量问题清单
 - `repair.suggestions.md|json`：本地修复建议，不自动改图谱
 - `report.md|json`：指标、成本和查询汇总
+- `graph.html`：交互图谱，用于人工直观看结构、孤岛和重复节点
 
 何时停下来：如果 `audit.graph` 显示大量空描述、泛化关系或缺失实体引用，先修索引/prompt/清洗规则，不要急着做主题分析。
 
@@ -51,17 +67,25 @@ python -m src jinyong report \
 
 ```bash
 python -m src jinyong query \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
   --mode hybrid \
+  --query-model doubao-seed-1.6-bge-m3 \
+  --top-k 6 \
+  --chunk-top-k 4 \
+  --max-total-tokens 10000 \
   --debug \
   "阿青与范蠡的关系中有哪些容易被忽略的动机线索？"
 
 python -m src jinyong eval \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
+  --query-model doubao-seed-1.6-bge-m3 \
+  --top-k 6 \
+  --chunk-top-k 4 \
+  --max-total-tokens 10000 \
   --debug
 
 python -m src jinyong report \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 ```
 
 主要输出：
@@ -77,18 +101,18 @@ python -m src jinyong report \
 
 ```bash
 python -m src jinyong extract-events \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 
 python -m src jinyong tag-facets \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
   --profile jinyong
 
 python -m src jinyong audit-facets \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
   --profile jinyong
 
 python -m src jinyong derive-view \
-  --run-dir runs/jinyong/越女剑/deepseek-v4-flash/lightrag/smoke \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
   --facet 女性角色
 ```
 
@@ -101,7 +125,30 @@ python -m src jinyong derive-view \
 
 注意：这些是从 `graph.normalized.json` 派生的辅助材料，不是主图谱，也不是最终分析稿。
 
-## 工作流 4：模型与方法对比
+## 工作流 4：跨作品主题研究
+
+用途：把多个单作品图谱合并成一个本地跨作品视图，用于先判断“金庸宇宙”类问题值不值得继续加复杂度。
+
+```bash
+python -m src jinyong cross-view \
+  --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
+  --run-dir runs/jinyong/鸳鸯刀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuanyangdao-dsv4flash-v10-bgem3-20260508 \
+  --topic 女性角色 \
+  --output-dir runs/jinyong/cross/yuenvjian-yuanyangdao-20260508
+```
+
+主要输出：
+
+- `cross_corpus.json`：跨作品 bundle 与 topic 视图
+- `<topic>.md`：按作品分组的跨作品材料页
+
+注意：
+
+- 这是本地聚合，不重新建全局图谱。
+- 先围绕清楚的主题做原型，例如 `女性角色`、`兵器宝物`、`核心价值`。
+- 如果跨作品视图已经能支持研究问题，再考虑是否需要更重的全局 schema 或图数据库。
+
+## 工作流 5：模型与方法对比
 
 用途：比较不同模型、prompt、embedding 或方法的质量与成本。
 
@@ -111,6 +158,7 @@ python -m src jinyong derive-view \
 - 大索引前先确认模型、provider、语料、run name 和预计成本。
 - 每个 run 都先走标准建图与质检，再做 eval 和 compare。
 - 当前中文质量实验优先用 `deepseek-v4-flash-zh-strict` 对比旧的 `deepseek-v4-flash-zh-schema`。
+- 火山方舟豆包可用 `doubao-seed-1.6-flash-bge-m3`。方舟 OpenAI 兼容接口的 `model` 使用真实 ID `doubao-seed-1-6-flash-250828`；配置里通过 `chat_options.extra_body.thinking.type: disabled` 关闭 thinking，避免索引阶段产生大量推理 token。
 
 ```bash
 python -m src jinyong compare-runs \
@@ -122,6 +170,97 @@ python -m src jinyong compare-runs \
 主要输出：
 
 - `comparison.md|json`：结构指标、成本、同题答案对比
+
+## 工作流 6：远端 worker 长任务
+
+用途：把耗时较长的单部作品 index 放到云服务器上跑，避免本地电脑休眠、关机或聊天窗口中断导致任务丢失。当前远端 worker 是 `root@hk.zoob.work`，项目目录约定为 `/root/code/zoob-verse`。
+
+适用边界：
+
+- 适合 `index -> normalize-graph -> audit-graph -> visualize -> report` 这类长任务。
+- 远端磁盘有限，只把它当临时 worker；结果拉回本地后清理远端 run。
+- 当前项目仍在快速变化，短期采用 `rsync` 同步当前快照；等流程稳定后再切到 git tag / release。
+- `.env` 可以复制到用户自己的远端服务器，但任何 agent 都不能打印密钥内容。
+
+同步代码和配置：
+
+```bash
+rsync -az --delete \
+  --exclude .git \
+  --exclude .venv \
+  --exclude runs \
+  ./ root@hk.zoob.work:/root/code/zoob-verse/
+
+rsync -az .env root@hk.zoob.work:/root/code/zoob-verse/.env
+ssh root@hk.zoob.work 'chmod 600 /root/code/zoob-verse/.env'
+```
+
+远端首次准备环境：
+
+```bash
+ssh root@hk.zoob.work '
+  cd /root/code/zoob-verse &&
+  uv venv --python 3.11 .venv &&
+  .venv/bin/pip install -e ".[dev,graphrag]"
+'
+```
+
+启动长任务。`screen` 会让任务在 SSH 断开、本地关机或聊天 session 结束后继续运行：
+
+```bash
+ssh root@hk.zoob.work '
+  cd /root/code/zoob-verse &&
+  screen -dmS zoob-lianchengjue \
+    bash scripts/run_remote_index.sh \
+    连城诀 \
+    deepseek-v4-flash-zh-strict-bge-m3 \
+    lianchengjue-dsv4flash-v10-bgem3-20260509 \
+    src/modules/jinyong/data/raw/连城诀.txt \
+    logs/lianchengjue-dsv4flash-v10-bgem3-20260509
+'
+```
+
+跨 session 查询状态：
+
+```bash
+ssh root@hk.zoob.work 'screen -ls'
+ssh root@hk.zoob.work 'tail -n 80 /root/code/zoob-verse/logs/lianchengjue-dsv4flash-v10-bgem3-20260509/index.log'
+```
+
+拉回结果：
+
+```bash
+rsync -az \
+  root@hk.zoob.work:/root/code/zoob-verse/runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260509/ \
+  runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260509/
+```
+
+拉回后在本地补做查询评估；如果远端脚本已生成 `graph.html`，可视化命令只需在需要重建时运行：
+
+```bash
+python -m src jinyong visualize \
+  --input runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260509/graph.normalized.json \
+  --output runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260509/graph.html
+
+python -m src jinyong eval \
+  --run-dir runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260509 \
+  --query-model doubao-seed-1.6-bge-m3 \
+  --top-k 6 \
+  --chunk-top-k 4 \
+  --max-total-tokens 10000 \
+  --debug
+```
+
+确认本地结果完整后清理远端：
+
+```bash
+ssh root@hk.zoob.work '
+  rm -rf /root/code/zoob-verse/runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260509
+  rm -rf /root/code/zoob-verse/logs/lianchengjue-dsv4flash-v10-bgem3-20260509
+'
+```
+
+这个工作流可被其他聊天 session 或其他 AI agent 继续使用：只要它能 SSH 到同一台机器，就能用 `screen -ls` 和日志文件恢复上下文；最终产物仍以 `runs/` 目录为可复制的数据包。
 
 ## 命令角色速查
 
@@ -138,6 +277,7 @@ python -m src jinyong compare-runs \
 | `tag-facets` | 本地生成研究标签 |
 | `audit-facets` | 标签污染检查 |
 | `derive-view` | 生成主题材料页 |
+| `cross-view` | 生成跨作品主题视图 |
 | `direct-analyze` | 长上下文直读对照 |
 | `compare-runs` | 多 run 对比 |
 | `visualize` | 图谱 HTML 可视化 |
