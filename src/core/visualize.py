@@ -73,6 +73,17 @@ def visualize_graph(
         G.nodes[node]['size'] = size
         G.nodes[node]['font'] = {'size': font_size, 'color': 'white', 'face': 'arial', 'bold': True}
 
+    if not physics and G.number_of_nodes():
+        if G.number_of_nodes() == 1:
+            layout = {next(iter(G.nodes())): (0.0, 0.0)}
+        else:
+            layout = nx.spring_layout(G, seed=42, k=1.2 / max(1, G.number_of_nodes() ** 0.5))
+        for node, (x, y) in layout.items():
+            G.nodes[node]["x"] = float(x) * 1000
+            G.nodes[node]["y"] = float(y) * 1000
+            G.nodes[node]["fixed"] = False
+            G.nodes[node]["physics"] = False
+
     # 配置 pyvis 网络
     net = Network(
         height="800px",
@@ -115,7 +126,8 @@ def visualize_graph(
             "hover": true,
             "tooltipDelay": 200,
             "zoomView": true,
-            "dragView": true
+            "dragView": true,
+            "dragNodes": true
         },
         "physics": {
             "enabled": %s,

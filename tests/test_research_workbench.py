@@ -1632,6 +1632,38 @@ def test_visualize_graph_writes_valid_options_object(tmp_path):
     assert "var options = {{" not in html
 
 
+def test_visualize_graph_disables_physics_with_static_positions(tmp_path):
+    from src.core.visualize import visualize_graph
+
+    graph_path = tmp_path / "graph.json"
+    html_path = tmp_path / "graph.html"
+    graph_path.write_text(
+        json.dumps(
+            {
+                "entities": [
+                    {"name": "狄云", "type": "人物"},
+                    {"name": "丁典", "type": "人物"},
+                    {"name": "水笙", "type": "人物"},
+                ],
+                "relationships": [
+                    {"source": "狄云", "target": "丁典", "type": "关系"},
+                    {"source": "狄云", "target": "水笙", "type": "关系"},
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    visualize_graph(graph_path, html_path, physics=False)
+
+    html = html_path.read_text(encoding="utf-8")
+    assert '"enabled": false' in html
+    assert '"dragNodes": true' in html
+    assert '"x":' in html
+    assert '"y":' in html
+
+
 def test_clean_literary_text_removes_preface_and_boilerplate():
     from src.core.workbench import clean_literary_text
 
