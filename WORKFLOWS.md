@@ -7,6 +7,7 @@
 | 目标 | 使用工作流 | 是否调用模型 |
 | --- | --- | --- |
 | 第一次处理一部作品，判断图谱能不能用 | 标准建图与质检 | `index` 会调用模型 |
+| 处理长篇或来源噪声较多的原文 | 长篇预处理与索引 | `clean-text` 不调用模型，`index` 会调用模型 |
 | 针对已有图谱提问或跑固定问题集 | 查询与评估 | `query/eval` 会调用查询模型 |
 | 整理单部作品的主题研究材料 | 主题材料整理 | 本地处理，不调用模型 |
 | 汇总多部作品做跨作品主题浏览 | 跨作品主题研究 | 本地处理，不调用模型 |
@@ -19,7 +20,7 @@
 - `gpt-5.1-bge-m3` 只作为高召回 / 高质量基准，不作为默认日常索引模型。
 - 默认 query 先用小预算 profile：`--top-k 6 --chunk-top-k 4 --max-total-tokens 10000`。
 - `rerank` 保留为可选项，不默认开启；长篇或候选过散时再加。
-- 后续长篇试验优先选《鸳鸯刀》。
+- 长篇作品先走 `clean-text -> index -> normalize/audit/report -> 子图 visualize -> --query-profile longform eval`。
 - `runs/` 只保留代表性结果和 summary 对比；过渡、失败、重复实验在结论写进文档后可以清理。
 
 ## 工作流 1：标准建图与质检
@@ -61,7 +62,60 @@ python -m src jinyong visualize \
 
 何时停下来：如果 `audit.graph` 显示大量空描述、泛化关系或缺失实体引用，先修索引/prompt/清洗规则，不要急着做主题分析。
 
-## 工作流 2：查询与评估
+## 工作流 2：长篇预处理与索引
+
+用途：处理中长篇小说或从网络下载的文本。目标是先去掉下载站、网址、集合序言等明显噪声，再建图；长篇可视化默认看子图，不直接依赖全图 HTML。
+
+```bash
+python -m src jinyong clean-text \
+  --input src/modules/jinyong/data/raw/连城诀.txt \
+  --output data/cleaned/jinyong/连城诀.txt \
+  --report data/cleaned/jinyong/连城诀.cleaning.report.json
+
+python -m src jinyong index \
+  --novel data/cleaned/jinyong/连城诀.txt \
+  --corpus 连城诀 \
+  --model deepseek-v4-flash-zh-strict-bge-m3 \
+  --run-name lianchengjue-dsv4flash-v10-bgem3-clean-20260509
+
+python -m src jinyong normalize-graph \
+  --run-dir runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-clean-20260509
+
+python -m src jinyong audit-graph \
+  --run-dir runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-clean-20260509
+
+python -m src jinyong report \
+  --run-dir runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-clean-20260509
+```
+
+长篇图谱不要先打开全量 `graph.html` 判断质量。优先生成局部子图：
+
+```bash
+python -m src jinyong visualize \
+  --input runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-clean-20260509/graph.normalized.json \
+  --output runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-clean-20260509/subgraphs/狄云.h1.html \
+  --focus 狄云 \
+  --hops 1 \
+  --subgraph-output runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-clean-20260509/subgraphs/狄云.h1.json \
+  --disable-physics
+
+python -m src jinyong visualize \
+  --input runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-clean-20260509/graph.normalized.json \
+  --output runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-clean-20260509/subgraphs/top-degree-80.html \
+  --top-degree 80 \
+  --subgraph-output runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-clean-20260509/subgraphs/top-degree-80.json \
+  --disable-physics
+```
+
+主要输出：
+
+- `*.cleaning.report.json`：清洗规则、源编码、删减长度和样例
+- `subgraphs/*.json|html`：面向长篇人工检查的局部图
+- `report.md|json`：仍是结构指标和成本的主入口
+
+注意：清洗是前置质量控制，不是语义修复；不要用它删除正文中“看起来无关”的文学材料。
+
+## 工作流 3：查询与评估
 
 用途：检查图谱能否支撑具体文学问题，或跑固定问题集做横向比较。
 
@@ -88,14 +142,27 @@ python -m src jinyong report \
   --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507
 ```
 
+长篇作品默认使用 `longform` 查询 profile。它会降低图结构预算、强制采集 debug 检索数据，并在 `queries.json` 中记录正文 chunk 证据是否足够：
+
+```bash
+python -m src jinyong eval \
+  --run-dir runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260508 \
+  --query-set runs/jinyong/连城诀/query-set-lianchengjue-20260509.json \
+  --query-model doubao-seed-1.6-bge-m3 \
+  --query-profile longform
+```
+
 主要输出：
 
 - `queries.json`：问题、答案、模式、耗时、token、fallback 标记
 - `report.md|json`：查询结果和成本汇总
 
-注意：图谱提高证据召回和组织能力，但查询阶段仍依赖 LLM 综合能力。低置信答案可以再用 `direct-analyze` 做长上下文对照。
+注意：
 
-## 工作流 3：主题材料整理
+- 图谱提高证据召回和组织能力，但查询阶段仍依赖 LLM 综合能力。低置信答案可以再用 `direct-analyze` 做长上下文对照。
+- `evidence_status.status=not_collected` 表示本次没有采集 debug 检索数据；`insufficient_text_evidence` 才表示采集了但正文 chunk 不足。
+
+## 工作流 4：主题材料整理
 
 用途：把主图谱切成某个研究主题的材料页，例如女性角色、权力结构、宗教意象。
 
@@ -125,7 +192,7 @@ python -m src jinyong derive-view \
 
 注意：这些是从 `graph.normalized.json` 派生的辅助材料，不是主图谱，也不是最终分析稿。
 
-## 工作流 4：跨作品主题研究
+## 工作流 5：跨作品主题研究
 
 用途：把多个单作品图谱合并成一个本地跨作品视图，用于先判断“金庸宇宙”类问题值不值得继续加复杂度。
 
@@ -148,7 +215,7 @@ python -m src jinyong cross-view \
 - 先围绕清楚的主题做原型，例如 `女性角色`、`兵器宝物`、`核心价值`。
 - 如果跨作品视图已经能支持研究问题，再考虑是否需要更重的全局 schema 或图数据库。
 
-## 工作流 5：模型与方法对比
+## 工作流 6：模型与方法对比
 
 用途：比较不同模型、prompt、embedding 或方法的质量与成本。
 
@@ -171,7 +238,7 @@ python -m src jinyong compare-runs \
 
 - `comparison.md|json`：结构指标、成本、同题答案对比
 
-## 工作流 6：远端 worker 长任务
+## 工作流 7：远端 worker 长任务
 
 用途：把耗时较长的单部作品 index 放到云服务器上跑，避免本地电脑休眠、关机或聊天窗口中断导致任务丢失。当前远端 worker 是 `root@hk.zoob.work`，项目目录约定为 `/root/code/zoob-verse`。
 

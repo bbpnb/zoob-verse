@@ -20,6 +20,7 @@ from src.core.workbench import (
     estimate_text_tokens,
     graphml_to_graph_json,
     load_model_config,
+    read_literary_text,
     require_api_key,
     write_json,
 )
@@ -308,9 +309,9 @@ class LightragIndexer:
         await self._ensure_storages_initialized()
 
         print(f"=== 读取文本: {novel_path} ===")
-        with open(novel_path, "r", encoding="gbk") as f:
-            text = f.read()
-        print(f"文本长度: {len(text)} 字符")
+        source = read_literary_text(novel_path)
+        text = source["text"]
+        print(f"文本长度: {len(text)} 字符 (encoding={source['encoding']})")
 
         print("=== 开始索引 (这可能需要几分钟) ===")
         started = time.perf_counter()
@@ -358,6 +359,8 @@ class LightragIndexer:
         top_k: int | None = None,
         chunk_top_k: int | None = None,
         max_total_tokens: int | None = None,
+        max_entity_tokens: int | None = None,
+        max_relation_tokens: int | None = None,
         enable_rerank: bool = True,
     ):
         """查询图谱"""
@@ -373,16 +376,28 @@ class LightragIndexer:
                 query_param.chunk_top_k = chunk_top_k
             if max_total_tokens is not None:
                 query_param.max_total_tokens = max_total_tokens
+            if max_entity_tokens is not None:
+                query_param.max_entity_tokens = max_entity_tokens
+            if max_relation_tokens is not None:
+                query_param.max_relation_tokens = max_relation_tokens
             usage_before = self.usage_tracker.snapshot()
-            res = await self.rag.aquery(question, param=query_param)
+            if debug:
+                raw = await self.rag.aquery_llm(question, param=query_param)
+                llm_response = raw.get("llm_response", {})
+                res = llm_response.get("content", "")
+                debug_payload = raw.get("data", raw)
+            else:
+                res = await self.rag.aquery(question, param=query_param)
+                debug_payload = {}
             usage_delta = self.usage_tracker.diff(usage_before)
             if debug:
                 return {
                     "answer": res,
                     "debug": {
-                        "retrieved_entities": [],
-                        "retrieved_relationships": [],
-                        "retrieved_chunks": [],
+                        "retrieved_entities": debug_payload.get("entities", []),
+                        "retrieved_relationships": debug_payload.get("relationships", []),
+                        "retrieved_chunks": debug_payload.get("chunks", []),
+                        "metadata": raw.get("metadata", {}) if "raw" in locals() else {},
                     },
                     "token_usage": usage_delta,
                 }

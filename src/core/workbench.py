@@ -430,6 +430,25 @@ def should_fallback_to_direct(result: dict[str, Any], *, min_answer_chars: int =
     return {"should_fallback": bool(reasons), "reasons": reasons}
 
 
+def summarize_query_evidence(debug: dict[str, Any] | None, *, min_chunks: int = 1) -> dict[str, Any]:
+    debug = debug or {}
+    chunks = debug.get("retrieved_chunks") or debug.get("chunks") or []
+    entities = debug.get("retrieved_entities") or debug.get("entities") or []
+    relationships = debug.get("retrieved_relationships") or debug.get("relationships") or []
+    chunk_count = len(chunks)
+    if not debug:
+        status = "not_collected"
+    else:
+        status = "ok" if chunk_count >= min_chunks else "insufficient_text_evidence"
+    return {
+        "status": status,
+        "min_chunks": min_chunks,
+        "chunk_count": chunk_count,
+        "entity_count": len(entities),
+        "relationship_count": len(relationships),
+    }
+
+
 def summarize_query_usage(
     query_results: list[dict[str, Any]],
     pricing_path: str | Path = DEFAULT_PRICING_PATH,
@@ -910,6 +929,69 @@ def normalize_graph_data(data: dict[str, Any]) -> dict[str, Any]:
     return normalized
 
 
+def clean_literary_text(text: str, *, profile: str = "jinyong") -> dict[str, Any]:
+    """Clean raw literary text before indexing and report removed boilerplate."""
+    original_text = str(text or "")
+    working = original_text.replace("\r\n", "\n").replace("\r", "\n")
+    removed_sections: list[dict[str, Any]] = []
+
+    def remove_pattern(pattern: str, rule: str, value: str, *, flags: int = re.MULTILINE) -> str:
+        matches = list(re.finditer(pattern, value, flags=flags))
+        if matches:
+            removed_sections.extend(
+                {
+                    "rule": rule,
+                    "chars": match.end() - match.start(),
+                    "sample": match.group(0)[:120],
+                }
+                for match in matches
+            )
+        return re.sub(pattern, "", value, flags=flags)
+
+    working = remove_pattern(r"(?m)^.*https?://.*(?:\n|$)", "url_line", working)
+    working = remove_pattern(r"(?m)^.*(?:全本全集|更多资源下载|电子书仅供|请在下载24小时内删除|不得用作商业用途|购买正版).*(?:\n|$)", "download_boilerplate", working)
+    working = remove_pattern(r"(?m)^[-—=_]{6,}\s*$\n?", "separator", working)
+
+    if profile == "jinyong":
+        preface_match = re.search(r"金庸作品集[^\n]*序.*?(?=\n\s*(?:第[一二三四五六七八九十百零〇0-9]+[回章]|楔子|正文|[一二三四五六七八九十百零〇0-9]+、))", working, flags=re.DOTALL)
+        if preface_match:
+            removed_sections.append(
+                {
+                    "rule": "jinyong_collection_preface",
+                    "chars": preface_match.end() - preface_match.start(),
+                    "sample": preface_match.group(0)[:120],
+                }
+            )
+            working = working[: preface_match.start()] + working[preface_match.end() :]
+
+    working = re.sub(r"\n{3,}", "\n\n", working).strip() + "\n"
+    return {
+        "text": working,
+        "report": {
+            "profile": profile,
+            "original_length": len(original_text),
+            "cleaned_length": len(working),
+            "removed_sections": len(removed_sections),
+            "rules": dict(collections.Counter(item["rule"] for item in removed_sections)),
+            "removed_examples": removed_sections[:20],
+        },
+    }
+
+
+def read_literary_text(path: str | Path) -> dict[str, str]:
+    """Read source fiction text with a small deterministic encoding fallback."""
+    source = Path(path)
+    last_error: UnicodeDecodeError | None = None
+    for encoding in ("utf-8", "gbk"):
+        try:
+            return {"text": source.read_text(encoding=encoding), "encoding": encoding}
+        except UnicodeDecodeError as exc:
+            last_error = exc
+    if last_error:
+        raise last_error
+    return {"text": source.read_text(encoding="utf-8"), "encoding": "utf-8"}
+
+
 def clean_graph_data(data: dict[str, Any]) -> dict[str, Any]:
     entities = []
     relationships = []
@@ -963,6 +1045,87 @@ def clean_graph_data(data: dict[str, Any]) -> dict[str, Any]:
             "dirty_relationships": dirty_relationships[:50],
             "dirty_entity_count": len(dirty_entities),
             "dirty_relationship_count": len(dirty_relationships),
+        },
+    }
+
+
+def slice_graph_data(
+    graph_data: dict[str, Any],
+    *,
+    focus: str | None = None,
+    hops: int = 1,
+    top_degree: int | None = None,
+    component: str | None = None,
+    entity_type: str | None = None,
+    limit_nodes: int | None = None,
+) -> dict[str, Any]:
+    """Return a smaller graph view suitable for longform visualization."""
+    entities = graph_data.get("entities", [])
+    relationships = graph_data.get("relationships", [])
+    entity_map = {str(entity.get("name", "")): entity for entity in entities if entity.get("name")}
+
+    G = nx.Graph()
+    G.add_nodes_from(entity_map)
+    for rel in relationships:
+        source = str(rel.get("source", ""))
+        target = str(rel.get("target", ""))
+        if source and target:
+            G.add_edge(source, target)
+
+    selected: set[str] = set(entity_map)
+    if focus:
+        if focus not in G:
+            selected = set()
+        else:
+            selected = {focus}
+            frontier = {focus}
+            for _ in range(max(0, hops)):
+                next_frontier: set[str] = set()
+                for node in frontier:
+                    next_frontier.update(G.neighbors(node))
+                selected.update(next_frontier)
+                frontier = next_frontier
+
+    if component == "largest" and G.number_of_nodes():
+        components = sorted(nx.connected_components(G), key=len, reverse=True)
+        largest = set(components[0]) if components else set()
+        selected &= largest
+
+    if entity_type:
+        selected &= {
+            name
+            for name in selected
+            if str(entity_map.get(name, {}).get("type", "")) == entity_type
+        }
+
+    if top_degree is not None:
+        ranked = [name for name, _degree in sorted(G.degree(selected), key=lambda item: item[1], reverse=True)]
+        selected = set(ranked[: max(0, top_degree)])
+
+    if limit_nodes is not None and len(selected) > limit_nodes:
+        ranked = [name for name, _degree in sorted(G.degree(selected), key=lambda item: item[1], reverse=True)]
+        selected = set(ranked[: max(0, limit_nodes)])
+
+    sliced_entities = [entity for entity in entities if entity.get("name") in selected]
+    sliced_relationships = [
+        rel
+        for rel in relationships
+        if rel.get("source") in selected and rel.get("target") in selected
+    ]
+    return {
+        "entities": sliced_entities,
+        "relationships": sliced_relationships,
+        "subgraph": {
+            "focus": focus,
+            "hops": hops,
+            "top_degree": top_degree,
+            "component": component,
+            "entity_type": entity_type,
+            "limit_nodes": limit_nodes,
+            "input_entities": len(entities),
+            "input_relationships": len(relationships),
+            "output_entities": len(sliced_entities),
+            "output_relationships": len(sliced_relationships),
         },
     }
 

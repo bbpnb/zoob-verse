@@ -17,6 +17,7 @@ Use this skill to operate `/Users/zhenboyuan/code/mine/zoob-verse` through its C
 Before running commands, identify which workflow the user is asking for:
 
 - Standard build and quality check: index, normalize, audit, report.
+- Longform preprocessing: clean-text before index, then inspect subgraphs instead of full graph HTML.
 - Query and evaluation: query, eval, report, optional direct-analyze fallback.
 - Topic material preparation: extract-events, tag-facets, audit-facets, derive-view.
 - Cross-corpus topic research: cross-view over multiple existing run dirs.
@@ -44,6 +45,15 @@ cp .env.example .env
 ## Main Workflow
 
 Use short works such as `越女剑` or `鸳鸯刀` before longer corpora.
+
+For longform or downloaded raw text, clean first and index the cleaned UTF-8 file:
+
+```bash
+python -m src jinyong clean-text \
+  --input src/modules/jinyong/data/raw/连城诀.txt \
+  --output data/cleaned/jinyong/连城诀.txt \
+  --report data/cleaned/jinyong/连城诀.cleaning.report.json
+```
 
 ```bash
 python -m src jinyong index \
@@ -117,6 +127,15 @@ python -m src jinyong visualize \
   --input runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507/graph.normalized.json \
   --output runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507/graph.html
 
+# Long works: inspect focused subgraphs, with physics disabled
+python -m src jinyong visualize \
+  --input runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260508/graph.normalized.json \
+  --output runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260508/subgraphs/狄云.h1.html \
+  --focus 狄云 \
+  --hops 1 \
+  --subgraph-output runs/jinyong/连城诀/deepseek-v4-flash-zh-strict-bge-m3/lightrag/lianchengjue-dsv4flash-v10-bgem3-20260508/subgraphs/狄云.h1.json \
+  --disable-physics
+
 # Build a local cross-corpus topic view; does not call a model
 python -m src jinyong cross-view \
   --run-dir runs/jinyong/越女剑/deepseek-v4-flash-zh-strict-bge-m3/lightrag/yuenvjian-dsv4flash-v10-bgem3-stable-20260507 \
@@ -145,6 +164,8 @@ ssh root@hk.zoob.work 'tail -n 80 /root/code/zoob-verse/logs/<run-name>/index.lo
 - `doubao-seed-1.6-bge-m3`: same-tier index/query comparison candidate.
 - `gpt-5.1-bge-m3`: high-recall quality baseline and local reinforcement model, not daily default.
 - Default query budget profile: `--top-k 6 --chunk-top-k 4 --max-total-tokens 10000`.
+- Longform query profile: use `--query-profile longform` for medium/long novels. It applies smaller graph budgets, collects debug retrieval data, and records `evidence_status` in `queries.json`.
+- Treat `evidence_status.status=not_collected` as “debug retrieval was not collected,” not as low quality. Treat `insufficient_text_evidence` as a real warning for research answers.
 - `rerank` is optional; prefer it for long works or scattered retrieval, not every short-work query.
 - `mimo-v2.5-pro` / `mimo-v2.5`: Xiaomi MiMo Token Plan through `https://token-plan-cn.xiaomimimo.com/v1`; aggressive extraction baseline, watch noise and token use.
 - DashScope Coding Plan models through `https://coding.dashscope.aliyuncs.com/v1`: `qwen3.6-plus`, `qwen3.5-plus`, `qwen3-coder-plus`, `glm-5`, `glm-4.7`, `kimi-k2.5`, `minimax-m2.5`.

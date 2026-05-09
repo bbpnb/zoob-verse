@@ -7,7 +7,12 @@ import networkx as nx
 from pyvis.network import Network
 
 
-def visualize_graph(json_path: str | Path, output_path: str | Path) -> None:
+def visualize_graph(
+    json_path: str | Path,
+    output_path: str | Path,
+    *,
+    physics: bool = True,
+) -> None:
     """读取图谱 JSON，生成交互式 HTML 关系图。
 
     Args:
@@ -80,13 +85,14 @@ def visualize_graph(json_path: str | Path, output_path: str | Path) -> None:
     net.from_nx(G)
 
     # 物理引擎配置：让布局更自然
-    net.force_atlas_2based(
-        central_gravity=0.01,
-        gravity=-50,
-        spring_length=150,
-        spring_strength=0.1,
-        damping=0.4,
-    )
+    if physics:
+        net.force_atlas_2based(
+            central_gravity=0.01,
+            gravity=-50,
+            spring_length=150,
+            spring_strength=0.1,
+            damping=0.4,
+        )
 
     # 添加图例
     legend_items = []
@@ -112,7 +118,7 @@ def visualize_graph(json_path: str | Path, output_path: str | Path) -> None:
             "dragView": true
         },
         "physics": {
-            "enabled": true,
+            "enabled": %s,
             "forceAtlas2Based": {
                 "gravitationalConstant": -50,
                 "centralGravity": 0.01,
@@ -124,7 +130,7 @@ def visualize_graph(json_path: str | Path, output_path: str | Path) -> None:
             "solver": "forceAtlas2Based"
         }
     }
-    """)
+    """ % ("true" if physics else "false"))
 
     # 注入图例 HTML
     html_content = net.generate_html()

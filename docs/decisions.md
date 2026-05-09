@@ -288,3 +288,30 @@
 **边界**：
 - 远端 worker 解决的是执行持续性，不解决模型限流、provider 报错、prompt 质量或 schema 质量问题。
 - 查询评估和可视化可以在本地补做，避免远端保存过多中间结果。
+
+## 2026-05-09: 长篇作品工作流优化
+
+**决策**：长篇作品进入分析前增加轻量 `clean-text` 预处理；长篇图谱人工检查优先使用子图；长篇查询默认使用 `--query-profile longform` 采集检索证据并限制图结构预算。
+
+**理由**：
+- 《连城诀》首次完整索引后，全图约 `887` 个实体、`1239` 条关系，完整 `graph.html` 已经接近当前 pyvis 展示上限，打开慢且布局闪烁，不能再作为长篇质量判断的唯一入口。
+- 长篇 raw 文本里常见下载站、网址、合集序言等噪声，应在 index 前清掉，避免把无关文本建进图谱。
+- 长篇查询不能只看答案是否流畅；如果没有正文 chunk 证据，文学分析答案很容易变成“图结构摘要”而不是可审计研究结论。
+- 预算控制不是简单截断最终答案，而是通过 `top_k`、`chunk_top_k`、`max_entity_tokens`、`max_relation_tokens`、`max_total_tokens` 控制召回上下文构成。
+
+**当前实现**：
+- CLI：`python -m src jinyong clean-text --input raw.txt --output cleaned.txt --report cleaning.report.json`
+- CLI：`python -m src jinyong visualize --focus 狄云 --hops 1 --subgraph-output ... --disable-physics`
+- CLI：`python -m src jinyong visualize --top-degree 80 --disable-physics`
+- CLI：`python -m src jinyong eval --query-profile longform`
+- `queries.json` 记录 `evidence_status`。`not_collected` 表示本次没有采集 debug 检索数据；`insufficient_text_evidence` 表示已采集但正文 chunk 数不足。
+
+**边界**：
+- `clean-text` 只删除确定性噪声，不负责语义改写或删正文。
+- 子图是人工查看入口，不替代完整 `graph.normalized.json`。
+- `longform` profile 是默认保守起点；如果某类问题召回不足，再按问题类型调整，不把复杂检索策略一次性做重。
+
+**验证（《连城诀》既有 run）**：
+- 全图：`887` 实体、`1239` 关系，完整 `graph.html` 约 `753KB`，人工浏览明显吃力。
+- 子图：`水笙.h1` 为 `44` 节点 / `128` 边，适合人工查看；`狄云.h1` 为 `303` 节点 / `659` 边，仍偏大；`狄云.h1.limit80` 和 `top-degree-80` 都控制在 `80` 节点左右，更适合长篇浏览。
+- `--query-profile longform` 跑 7 个固定问题后，每题均得到 `5` 个正文 chunks，`evidence_status.status=ok`，比旧查询中出现 0 chunk 的情况更适合做可审计分析。

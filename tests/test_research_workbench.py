@@ -1483,6 +1483,8 @@ def test_eval_command_runs_default_query_set_with_existing_run(monkeypatch, tmp_
             top_k=None,
             chunk_top_k=None,
             max_total_tokens=None,
+            max_entity_tokens=None,
+            max_relation_tokens=None,
             enable_rerank=True,
         ):
             if debug:
@@ -1546,6 +1548,8 @@ def test_query_command_passes_query_budget_options(monkeypatch, tmp_path):
             top_k=None,
             chunk_top_k=None,
             max_total_tokens=None,
+            max_entity_tokens=None,
+            max_relation_tokens=None,
             enable_rerank=True,
         ):
             calls.append(
@@ -1597,12 +1601,12 @@ def test_query_command_passes_query_budget_options(monkeypatch, tmp_path):
         }
     ]
     queries = json.loads((run_dir / "queries.json").read_text(encoding="utf-8"))
-    assert queries[-1]["query_options"] == {
-        "top_k": 12,
-        "chunk_top_k": 4,
-        "max_total_tokens": 10000,
-        "enable_rerank": False,
-    }
+    assert queries[-1]["query_options"]["query_profile"] == "default"
+    assert queries[-1]["query_options"]["top_k"] == 12
+    assert queries[-1]["query_options"]["chunk_top_k"] == 4
+    assert queries[-1]["query_options"]["max_total_tokens"] == 10000
+    assert queries[-1]["query_options"]["enable_rerank"] is False
+    assert queries[-1]["evidence_status"]["status"] == "not_collected"
 
 
 def test_visualize_graph_writes_valid_options_object(tmp_path):
@@ -1626,6 +1630,323 @@ def test_visualize_graph_writes_valid_options_object(tmp_path):
     html = html_path.read_text(encoding="utf-8")
     assert "var options = {" in html
     assert "var options = {{" not in html
+
+
+def test_clean_literary_text_removes_preface_and_boilerplate():
+    from src.core.workbench import clean_literary_text
+
+    raw_text = (
+        "全本全集精校小说尽在：http://example.com\n"
+        "更多资源下载：http://example.com/x\n"
+        "金庸作品集新序\n"
+        "小说是写给人看的。\n"
+        "第一回  风雪惊变\n"
+        "正文第一段。\n"
+    )
+
+    result = clean_literary_text(raw_text, profile="jinyong")
+
+    assert "http://example.com" not in result["text"]
+    assert "金庸作品集新序" not in result["text"]
+    assert "第一回  风雪惊变" in result["text"]
+    assert result["report"]["removed_sections"] >= 1
+    assert result["report"]["original_length"] > result["report"]["cleaned_length"]
+
+
+def test_slice_graph_data_supports_focus_and_top_degree():
+    from src.core.workbench import slice_graph_data
+
+    graph = {
+        "entities": [
+            {"name": "狄云", "type": "人物", "description": "主角"},
+            {"name": "丁典", "type": "人物", "description": "狄云义兄"},
+            {"name": "戚芳", "type": "人物", "description": "师妹"},
+            {"name": "水笙", "type": "人物", "description": "雪谷人物"},
+            {"name": "雪谷", "type": "地点", "description": "地点"},
+        ],
+        "relationships": [
+            {"source": "狄云", "target": "丁典", "type": "关系", "description": "结义"},
+            {"source": "狄云", "target": "戚芳", "type": "关系", "description": "情感"},
+            {"source": "狄云", "target": "水笙", "type": "关系", "description": "相处"},
+            {"source": "水笙", "target": "雪谷", "type": "出没", "description": "在雪谷"},
+        ],
+    }
+
+    focus = slice_graph_data(graph, focus="狄云", hops=1)
+    assert {e["name"] for e in focus["entities"]} == {"狄云", "丁典", "戚芳", "水笙"}
+
+    top = slice_graph_data(graph, top_degree=2)
+    assert len(top["entities"]) == 2
+    assert any(entity["name"] == "狄云" for entity in top["entities"])
+
+
+def test_longform_query_profile_marks_evidence_status(monkeypatch, tmp_path):
+    run_dir = tmp_path / "jinyong" / "连城诀" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "fixture"
+    run_dir.mkdir(parents=True)
+    (run_dir / "metadata.json").write_text(
+        json.dumps(
+            {
+                "module": "jinyong",
+                "corpus": "连城诀",
+                "model": "deepseek-v4-flash-zh-strict-bge-m3",
+                "index_model": "deepseek-v4-flash-zh-strict-bge-m3",
+                "embedding_model": "BAAI/bge-m3",
+                "embedding_dim": 1024,
+                "method": "lightrag",
+                "run_id": "fixture",
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    (run_dir / "graph.json").write_text(
+        json.dumps(
+            {
+                "entities": [{"name": "狄云", "type": "人物"}],
+                "relationships": [{"source": "狄云", "target": "丁典", "type": "关系"}],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    calls = []
+
+    class FakeIndexer:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        async def query(
+            self,
+            question,
+            mode="local",
+            debug=False,
+            top_k=None,
+            chunk_top_k=None,
+            max_total_tokens=None,
+            max_entity_tokens=None,
+            max_relation_tokens=None,
+            enable_rerank=True,
+        ):
+            calls.append(
+                {
+                    "question": question,
+                    "mode": mode,
+                    "top_k": top_k,
+                    "chunk_top_k": chunk_top_k,
+                    "max_total_tokens": max_total_tokens,
+                    "enable_rerank": enable_rerank,
+                }
+            )
+            return {
+                "answer": "answer",
+                "debug": {"retrieved_entities": [{"name": "狄云"}], "retrieved_relationships": [], "retrieved_chunks": []},
+                "token_usage": {"prompt_tokens_estimate": 12},
+            }
+
+    import src.modules.jinyong as jinyong_cli
+
+    monkeypatch.setattr(jinyong_cli, "LightragIndexer", FakeIndexer)
+
+    query_set = tmp_path / "lianchengjue-query.json"
+    query_set.write_text(
+        json.dumps({"queries": [{"name": "主线关系", "question": "狄云和戚芳是什么关系？", "mode": "hybrid"}]}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    result = CliRunner().invoke(
+        cli,
+        [
+            "eval",
+            "--run-dir",
+            str(run_dir),
+            "--query-set",
+            str(query_set),
+            "--query-model",
+            "deepseek-v4-flash-zh-strict-bge-m3",
+            "--top-k",
+            "4",
+            "--chunk-top-k",
+            "6",
+            "--max-total-tokens",
+            "12000",
+            "--disable-rerank",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert calls == [
+        {
+            "question": "狄云和戚芳是什么关系？",
+            "mode": "hybrid",
+            "top_k": 4,
+            "chunk_top_k": 6,
+            "max_total_tokens": 12000,
+            "enable_rerank": False,
+        }
+    ]
+    queries = json.loads((run_dir / "queries.json").read_text(encoding="utf-8"))
+    assert queries[0]["query_options"]["query_profile"] == "default"
+    assert queries[0]["query_options"]["top_k"] == 4
+    assert queries[0]["query_options"]["chunk_top_k"] == 6
+    assert queries[0]["query_options"]["max_total_tokens"] == 12000
+    assert queries[0]["query_options"]["enable_rerank"] is False
+    assert queries[0]["evidence_status"]["status"] == "insufficient_text_evidence"
+    assert queries[0]["evidence_status"]["chunk_count"] == 0
+
+
+def test_query_profile_longform_applies_defaults(monkeypatch, tmp_path):
+    run_dir = tmp_path / "jinyong" / "连城诀" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "fixture"
+    run_dir.mkdir(parents=True)
+    (run_dir / "metadata.json").write_text(
+        json.dumps(
+            {
+                "module": "jinyong",
+                "corpus": "连城诀",
+                "model": "deepseek-v4-flash-zh-strict-bge-m3",
+                "index_model": "deepseek-v4-flash-zh-strict-bge-m3",
+                "embedding_model": "BAAI/bge-m3",
+                "embedding_dim": 1024,
+                "method": "lightrag",
+                "run_id": "fixture",
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    calls = []
+
+    class FakeIndexer:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        async def query(self, question, **kwargs):
+            calls.append({"question": question, **kwargs})
+            return {"answer": "answer", "debug": {"retrieved_chunks": [{"id": "c1"}, {"id": "c2"}, {"id": "c3"}]}}
+
+    import src.modules.jinyong as jinyong_cli
+
+    monkeypatch.setattr(jinyong_cli, "LightragIndexer", FakeIndexer)
+
+    result = CliRunner().invoke(
+        cli,
+        [
+            "query",
+            "狄云和水笙在雪谷中的关系如何变化？",
+            "--run-dir",
+            str(run_dir),
+            "--query-model",
+            "deepseek-v4-flash-zh-strict-bge-m3",
+            "--mode",
+            "hybrid",
+            "--query-profile",
+            "longform",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert calls[0]["top_k"] == 4
+    assert calls[0]["chunk_top_k"] == 6
+    assert calls[0]["max_total_tokens"] == 12000
+    assert calls[0]["max_entity_tokens"] == 2500
+    assert calls[0]["max_relation_tokens"] == 2500
+    assert calls[0]["enable_rerank"] is False
+    queries = json.loads((run_dir / "queries.json").read_text(encoding="utf-8"))
+    assert queries[-1]["query_options"]["query_profile"] == "longform"
+    assert queries[-1]["evidence_status"]["status"] == "ok"
+
+
+def test_clean_text_command_writes_cleaned_text_and_report(tmp_path):
+    raw = tmp_path / "raw.txt"
+    cleaned = tmp_path / "cleaned.txt"
+    report = tmp_path / "report.json"
+    raw.write_text(
+        "全本全集精校小说尽在：http://example.com\n"
+        "金庸作品集新序\n"
+        "小说是写给人看的。\n"
+        "第一回  风雪惊变\n"
+        "正文。\n",
+        encoding="gbk",
+    )
+
+    result = CliRunner().invoke(
+        cli,
+        ["clean-text", "--input", str(raw), "--output", str(cleaned), "--report", str(report)],
+    )
+
+    assert result.exit_code == 0
+    assert "第一回" in cleaned.read_text(encoding="utf-8")
+    payload = json.loads(report.read_text(encoding="utf-8"))
+    assert payload["removed_sections"] >= 1
+
+
+def test_clean_text_command_accepts_utf8_input(tmp_path):
+    raw = tmp_path / "raw-utf8.txt"
+    cleaned = tmp_path / "cleaned.txt"
+    report = tmp_path / "report.json"
+    raw.write_text(
+        "更多资源下载：http://example.com\n"
+        "第一回  大雪\n"
+        "狄云走进牢中。\n",
+        encoding="utf-8",
+    )
+
+    result = CliRunner().invoke(
+        cli,
+        ["clean-text", "--input", str(raw), "--output", str(cleaned), "--report", str(report)],
+    )
+
+    assert result.exit_code == 0
+    assert "狄云走进牢中" in cleaned.read_text(encoding="utf-8")
+    payload = json.loads(report.read_text(encoding="utf-8"))
+    assert payload["source_encoding"] == "utf-8"
+
+
+def test_visualize_command_can_write_focus_subgraph(tmp_path):
+    graph_path = tmp_path / "graph.json"
+    html_path = tmp_path / "focus.html"
+    subgraph_path = tmp_path / "focus.json"
+    graph_path.write_text(
+        json.dumps(
+            {
+                "entities": [
+                    {"name": "狄云", "type": "人物"},
+                    {"name": "丁典", "type": "人物"},
+                    {"name": "雪谷", "type": "地点"},
+                ],
+                "relationships": [
+                    {"source": "狄云", "target": "丁典", "type": "关系"},
+                    {"source": "丁典", "target": "雪谷", "type": "提及"},
+                ],
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+
+    result = CliRunner().invoke(
+        cli,
+        [
+            "visualize",
+            "--input",
+            str(graph_path),
+            "--output",
+            str(html_path),
+            "--focus",
+            "狄云",
+            "--hops",
+            "1",
+            "--subgraph-output",
+            str(subgraph_path),
+            "--disable-physics",
+        ],
+    )
+
+    assert result.exit_code == 0
+    subgraph = json.loads(subgraph_path.read_text(encoding="utf-8"))
+    assert {entity["name"] for entity in subgraph["entities"]} == {"狄云", "丁典"}
+    assert '"enabled": false' in html_path.read_text(encoding="utf-8")
 
 
 def test_project_skill_documents_v1_cli_and_dotenv():
@@ -1671,9 +1992,14 @@ def test_workflow_docs_are_primary_agent_entrypoint():
     assert "主题材料整理" in workflows
     assert "跨作品主题研究" in workflows
     assert "模型与方法对比" in workflows
+    assert "clean-text" in workflows
+    assert "--query-profile longform" in workflows
+    assert "--disable-physics" in workflows
     assert "WORKFLOWS.md" in readme
     assert "WORKFLOWS.md" in project
     assert "WORKFLOWS.md" in skill
+    assert "clean-text" in skill
+    assert "--query-profile longform" in skill
 
 
 def test_remote_worker_documentation_and_script_are_present():
@@ -1694,6 +2020,15 @@ def test_remote_worker_documentation_and_script_are_present():
     assert "audit-graph" in script
     assert "visualize" in script
     assert "report" in script
+
+
+def test_longform_workflow_decision_is_documented():
+    decisions = Path("docs/decisions.md").read_text(encoding="utf-8")
+
+    assert "长篇作品工作流优化" in decisions
+    assert "clean-text" in decisions
+    assert "子图" in decisions
+    assert "longform" in decisions
 
 
 def test_lightrag_optional_dependency_matches_actual_package():

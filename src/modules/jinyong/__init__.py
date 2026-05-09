@@ -19,6 +19,7 @@ from src.core.workbench import (
     build_cross_corpus_bundle,
     build_repair_suggestions,
     clean_graph_data,
+    clean_literary_text,
     estimate_text_tokens,
     estimate_usage_cost,
     extract_key_events,
@@ -26,11 +27,14 @@ from src.core.workbench import (
     load_graph_data,
     load_model_config,
     load_query_set,
+    read_literary_text,
     normalize_graph_data,
     read_json,
     validate_query_embedding_compatibility,
     tag_analysis_facets,
     should_fallback_to_direct,
+    slice_graph_data,
+    summarize_query_evidence,
     write_derived_view,
     write_cross_corpus_view,
     write_json,
@@ -44,6 +48,49 @@ from src.modules.jinyong.lightrag_indexer import LightragIndexer, index_run
 # CLI registration
 _module = JinyongModule(Path(__file__).parent)
 cli = _module.get_cli()
+
+
+QUERY_PROFILES = {
+    "default": {
+        "min_chunks": 1,
+    },
+    "longform": {
+        "top_k": 4,
+        "chunk_top_k": 6,
+        "max_total_tokens": 12000,
+        "max_entity_tokens": 2500,
+        "max_relation_tokens": 2500,
+        "min_chunks": 3,
+        "enable_rerank": False,
+    },
+}
+
+
+def _resolve_query_options(
+    profile_name: str,
+    *,
+    top_k: int | None,
+    chunk_top_k: int | None,
+    max_total_tokens: int | None,
+    disable_rerank: bool,
+) -> dict[str, object]:
+    options = dict(QUERY_PROFILES.get(profile_name, QUERY_PROFILES["default"]))
+    if top_k is not None:
+        options["top_k"] = top_k
+    if chunk_top_k is not None:
+        options["chunk_top_k"] = chunk_top_k
+    if max_total_tokens is not None:
+        options["max_total_tokens"] = max_total_tokens
+    if disable_rerank:
+        options["enable_rerank"] = False
+    options.setdefault("top_k", top_k)
+    options.setdefault("chunk_top_k", chunk_top_k)
+    options.setdefault("max_total_tokens", max_total_tokens)
+    options.setdefault("max_entity_tokens", None)
+    options.setdefault("max_relation_tokens", None)
+    options.setdefault("enable_rerank", not disable_rerank)
+    options["query_profile"] = profile_name
+    return options
 
 
 @cli.command("index")
@@ -123,15 +170,60 @@ def index(novel, corpus, model, index_model, method, run_name, runs_root, config
 @cli.command("visualize")
 @click.option("--input", "json_path", type=click.Path(exists=True), required=True, help="图谱 JSON 文件路径")
 @click.option("--output", type=click.Path(), default=None, help="输出 HTML 文件路径")
-def visualize(json_path, output):
+@click.option("--focus", default=None, help="只渲染指定节点的 ego 子图")
+@click.option("--hops", type=int, default=1, show_default=True, help="focus 子图跳数")
+@click.option("--top-degree", type=int, default=None, help="只渲染度数最高的 N 个节点")
+@click.option("--component", type=click.Choice(["largest"]), default=None, help="只渲染指定连通分量")
+@click.option("--entity-type", default=None, help="只保留指定实体类型")
+@click.option("--limit-nodes", type=int, default=None, help="子图最大节点数")
+@click.option("--subgraph-output", type=click.Path(), default=None, help="同时写出子图 JSON")
+@click.option("--disable-physics", is_flag=True, help="关闭 pyvis 物理引擎，适合长篇大图")
+def visualize(json_path, output, focus, hops, top_degree, component, entity_type, limit_nodes, subgraph_output, disable_physics):
     """将图谱 JSON 渲染为交互式 HTML 关系图"""
     if output is None:
         output = str(Path(json_path).with_suffix(".html"))
-    
+
+    graph_input = Path(json_path)
+    if any([focus, top_degree is not None, component, entity_type, limit_nodes is not None]):
+        graph_data = load_graph_data(graph_input)
+        subgraph = slice_graph_data(
+            graph_data,
+            focus=focus,
+            hops=hops,
+            top_degree=top_degree,
+            component=component,
+            entity_type=entity_type,
+            limit_nodes=limit_nodes,
+        )
+        subgraph_path = Path(subgraph_output) if subgraph_output else Path(output).with_suffix(".json")
+        write_json(subgraph_path, subgraph)
+        graph_input = subgraph_path
+        click.echo(f"[jinyong] 子图已保存: {subgraph_path}")
+
     click.echo(f"[jinyong] 开始可视化: {json_path}")
-    visualize_graph(json_path, output)
+    visualize_graph(graph_input, output, physics=not disable_physics)
     click.echo(f"[jinyong] 可视化完成: {output}")
     click.echo("[jinyong] 请在浏览器中打开该文件查看交互图谱。")
+
+
+@cli.command("clean-text")
+@click.option("--input", "input_path", type=click.Path(exists=True), required=True, help="原始文本路径")
+@click.option("--output", "output_path", type=click.Path(), required=True, help="清洗后文本路径")
+@click.option("--report", "report_path", type=click.Path(), default=None, help="清洗报告 JSON 路径")
+@click.option("--profile", default="jinyong", show_default=True, help="清洗 profile")
+def clean_text(input_path, output_path, report_path, profile):
+    """清洗原始文本，供 index 前使用"""
+    source = read_literary_text(input_path)
+    raw = source["text"]
+    result = clean_literary_text(raw, profile=profile)
+    result["report"]["source_encoding"] = source["encoding"]
+    output = Path(output_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(result["text"], encoding="utf-8")
+    report = Path(report_path) if report_path else output.with_suffix(".cleaning.report.json")
+    write_json(report, result["report"])
+    click.echo(f"[jinyong] 清洗文本已保存: {output}")
+    click.echo(f"[jinyong] 清洗报告已保存: {report}")
 
 
 @cli.command("clean-graph")
@@ -300,6 +392,7 @@ def suggest_repairs(run_dir, limit, output_prefix):
 @click.option("--top-k", type=int, default=None, help="实体/关系召回上限，默认使用 LightRAG 配置")
 @click.option("--chunk-top-k", type=int, default=None, help="文本 chunk 召回上限，默认使用 LightRAG 配置")
 @click.option("--max-total-tokens", type=int, default=None, help="查询上下文 token 总预算，默认使用 LightRAG 配置")
+@click.option("--query-profile", type=click.Choice(["default", "longform"]), default="default", show_default=True, help="查询参数预设")
 @click.option("--disable-rerank", is_flag=True, help="禁用查询阶段 rerank")
 @click.option("--debug", is_flag=True, help="保存召回调试字段")
 @click.option("--config", "config_path", type=click.Path(exists=True), default=str(DEFAULT_CONFIG_PATH))
@@ -312,6 +405,7 @@ def query(
     top_k,
     chunk_top_k,
     max_total_tokens,
+    query_profile,
     disable_rerank,
     debug,
     config_path,
@@ -331,17 +425,26 @@ def query(
         model_name=query_model_name,
         working_dir=run_path / "cache",
     )
+    query_options = _resolve_query_options(
+        query_profile,
+        top_k=top_k,
+        chunk_top_k=chunk_top_k,
+        max_total_tokens=max_total_tokens,
+        disable_rerank=disable_rerank,
+    )
 
     async def _run_query():
         started = time.perf_counter()
         result = await indexer.query(
             question,
             mode=mode,
-            debug=debug,
-            top_k=top_k,
-            chunk_top_k=chunk_top_k,
-            max_total_tokens=max_total_tokens,
-            enable_rerank=not disable_rerank,
+            debug=debug or query_profile == "longform",
+            top_k=query_options["top_k"],
+            chunk_top_k=query_options["chunk_top_k"],
+            max_total_tokens=query_options["max_total_tokens"],
+            max_entity_tokens=query_options["max_entity_tokens"],
+            max_relation_tokens=query_options["max_relation_tokens"],
+            enable_rerank=query_options["enable_rerank"],
         )
         return result, round(time.perf_counter() - started, 3)
 
@@ -355,6 +458,7 @@ def query(
         debug_payload = {}
         token_usage = {"prompt_tokens_estimate": estimate_text_tokens(question)}
     fallback = should_fallback_to_direct({"answer": answer, "debug": debug_payload})
+    evidence = summarize_query_evidence(debug_payload, min_chunks=int(query_options["min_chunks"]))
     existing = []
     queries_path = run_path / "queries.json"
     if queries_path.exists():
@@ -370,14 +474,18 @@ def query(
             "query_model": query_model_name,
             "route": "graph_low_confidence" if fallback["should_fallback"] else "graph_only",
             "fallback_reasons": fallback["reasons"],
+            "evidence_status": evidence,
             "query_options": {
-                "top_k": top_k,
-                "chunk_top_k": chunk_top_k,
-                "max_total_tokens": max_total_tokens,
-                "enable_rerank": not disable_rerank,
+                "query_profile": query_options["query_profile"],
+                "top_k": query_options["top_k"],
+                "chunk_top_k": query_options["chunk_top_k"],
+                "max_total_tokens": query_options["max_total_tokens"],
+                "max_entity_tokens": query_options["max_entity_tokens"],
+                "max_relation_tokens": query_options["max_relation_tokens"],
+                "enable_rerank": query_options["enable_rerank"],
             },
             "token_usage": token_usage,
-            "debug": debug_payload if debug else {},
+            "debug": debug_payload if (debug or query_profile == "longform") else {},
         }
     )
     write_json(queries_path, existing)
@@ -393,10 +501,11 @@ def query(
 @click.option("--top-k", type=int, default=None, help="实体/关系召回上限，默认使用 LightRAG 配置")
 @click.option("--chunk-top-k", type=int, default=None, help="文本 chunk 召回上限，默认使用 LightRAG 配置")
 @click.option("--max-total-tokens", type=int, default=None, help="查询上下文 token 总预算，默认使用 LightRAG 配置")
+@click.option("--query-profile", type=click.Choice(["default", "longform"]), default="default", show_default=True, help="查询参数预设")
 @click.option("--disable-rerank", is_flag=True, help="禁用查询阶段 rerank")
 @click.option("--debug", is_flag=True, help="保存召回调试字段")
 @click.option("--config", "config_path", type=click.Path(exists=True), default=str(DEFAULT_CONFIG_PATH))
-def eval_run(run_dir, query_set, model, query_model, top_k, chunk_top_k, max_total_tokens, disable_rerank, debug, config_path):
+def eval_run(run_dir, query_set, model, query_model, top_k, chunk_top_k, max_total_tokens, query_profile, disable_rerank, debug, config_path):
     """运行固定查询集并保存评估结果"""
     run_path = Path(run_dir)
     metadata = read_json(run_path / "metadata.json") if (run_path / "metadata.json").exists() else {}
@@ -413,6 +522,13 @@ def eval_run(run_dir, query_set, model, query_model, top_k, chunk_top_k, max_tot
         working_dir=run_path / "cache",
     )
     queries = load_query_set(query_set)
+    query_options = _resolve_query_options(
+        query_profile,
+        top_k=top_k,
+        chunk_top_k=chunk_top_k,
+        max_total_tokens=max_total_tokens,
+        disable_rerank=disable_rerank,
+    )
 
     async def _run_all():
         results = []
@@ -421,11 +537,13 @@ def eval_run(run_dir, query_set, model, query_model, top_k, chunk_top_k, max_tot
             result = await indexer.query(
                 item["question"],
                 mode=item.get("mode", "local"),
-                debug=debug,
-                top_k=top_k,
-                chunk_top_k=chunk_top_k,
-                max_total_tokens=max_total_tokens,
-                enable_rerank=not disable_rerank,
+                debug=debug or query_profile == "longform",
+                top_k=query_options["top_k"],
+                chunk_top_k=query_options["chunk_top_k"],
+                max_total_tokens=query_options["max_total_tokens"],
+                max_entity_tokens=query_options["max_entity_tokens"],
+                max_relation_tokens=query_options["max_relation_tokens"],
+                enable_rerank=query_options["enable_rerank"],
             )
             if isinstance(result, dict):
                 answer = result.get("answer", "")
@@ -436,6 +554,7 @@ def eval_run(run_dir, query_set, model, query_model, top_k, chunk_top_k, max_tot
                 debug_payload = {}
                 token_usage = {"prompt_tokens_estimate": estimate_text_tokens(item["question"])}
             fallback = should_fallback_to_direct({"answer": answer, "debug": debug_payload})
+            evidence = summarize_query_evidence(debug_payload, min_chunks=int(query_options["min_chunks"]))
             results.append(
                 {
                     **item,
@@ -445,14 +564,18 @@ def eval_run(run_dir, query_set, model, query_model, top_k, chunk_top_k, max_tot
                     "query_model": query_model_name,
                     "route": "graph_low_confidence" if fallback["should_fallback"] else "graph_only",
                     "fallback_reasons": fallback["reasons"],
+                    "evidence_status": evidence,
                     "query_options": {
-                        "top_k": top_k,
-                        "chunk_top_k": chunk_top_k,
-                        "max_total_tokens": max_total_tokens,
-                        "enable_rerank": not disable_rerank,
+                        "query_profile": query_options["query_profile"],
+                        "top_k": query_options["top_k"],
+                        "chunk_top_k": query_options["chunk_top_k"],
+                        "max_total_tokens": query_options["max_total_tokens"],
+                        "max_entity_tokens": query_options["max_entity_tokens"],
+                        "max_relation_tokens": query_options["max_relation_tokens"],
+                        "enable_rerank": query_options["enable_rerank"],
                     },
                     "token_usage": token_usage,
-                    "debug": debug_payload if debug else {},
+                    "debug": debug_payload if (debug or query_profile == "longform") else {},
                 }
             )
         return results
@@ -527,7 +650,7 @@ def direct_analyze(novel, question, model, corpus, run_name, runs_root, config_p
     corpus_name = corpus or Path(novel).stem
     spec = RunSpec("jinyong", corpus_name, model, "direct", run_name, Path(runs_root))
     spec.ensure_dirs()
-    text = Path(novel).read_text(encoding="gbk")
+    text = read_literary_text(novel)["text"]
     prompt = (
         "请基于下面的文学作品全文回答问题。要求：给出可用于内容选题的洞察，"
         "标注关键人物/事件/证据，不要编造文本之外的信息。\n\n"
