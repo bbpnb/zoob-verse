@@ -329,6 +329,56 @@ ssh root@hk.zoob.work '
 
 这个工作流可被其他聊天 session 或其他 AI agent 继续使用：只要它能 SSH 到同一台机器，就能用 `screen -ls` 和日志文件恢复上下文；最终产物仍以 `runs/` 目录为可复制的数据包。
 
+### 远端并行实验
+
+远端 worker 可以并行跑多个独立 index 进程，但当前 `root@hk.zoob.work` 只有 2G 级别内存，默认最多同时跑 2 路。不要在并行时提高单个模型 profile 的 `llm_model_max_async`、`embedding_func_max_async` 或 `max_parallel_insert`。
+
+并行时必须隔离：
+
+- `screen` 名称，例如 `zoob-smoke-deepseek`、`zoob-smoke-doubao`
+- `run_name`，例如 `smoke-deepseek-20260510`、`smoke-doubao-20260510`
+- `log_dir`，例如 `logs/smoke-deepseek-20260510`、`logs/smoke-doubao-20260510`
+- `model`，优先用不同 LLM provider；如果可能，也拆开 embedding provider
+
+已验证的轻量并行组合：
+
+- `deepseek-v4-flash-zh-strict-bge-m3`：DeepSeek LLM + SiliconFlow BGE-M3
+- `doubao-seed-1.6-openrouter-bge-m3`：Doubao LLM + OpenRouter `baai/bge-m3`
+
+OpenRouter 的 `baai/bge-m3` 返回 1024 维向量，可作为 BGE-M3 embedding 备选，适合在并行任务中减轻 SiliconFlow embedding 侧压力。
+
+启动示例：
+
+```bash
+ssh root@hk.zoob.work '
+  cd /root/code/zoob-verse &&
+  screen -dmS zoob-smoke-deepseek \
+    bash scripts/run_remote_index.sh \
+    越女剑 \
+    deepseek-v4-flash-zh-strict-bge-m3 \
+    smoke-deepseek-20260510 \
+    src/modules/jinyong/data/raw/越女剑.txt \
+    logs/smoke-deepseek-20260510 &&
+  screen -dmS zoob-smoke-doubao \
+    bash scripts/run_remote_index.sh \
+    越女剑 \
+    doubao-seed-1.6-openrouter-bge-m3 \
+    smoke-doubao-20260510 \
+    src/modules/jinyong/data/raw/越女剑.txt \
+    logs/smoke-doubao-20260510
+'
+```
+
+观察并行状态：
+
+```bash
+ssh root@hk.zoob.work 'screen -ls'
+ssh root@hk.zoob.work 'tail -n 80 /root/code/zoob-verse/logs/smoke-doubao-20260510/index.log'
+ssh root@hk.zoob.work 'free -h'
+```
+
+如果 available memory 长时间低于 100MB、swap 快速增长、日志停止推进或出现 provider 限流，应停止新增任务，只保留一路正式 index。
+
 ## 命令角色速查
 
 | 命令 | 角色 |

@@ -383,3 +383,25 @@
 - 只靠后处理能改善别名、重复、裁剪、关系归一和主题标签；如果重要信息在 index 阶段完全漏抽，应回到原文做局部补抽或 targeted extraction。
 
 **研究备忘**：详见 `docs/research/2026-05-10-entity-alignment-roadmap.md`。
+
+## 2026-05-10: 远端 worker 并行策略
+
+**决策**：允许远端 worker 最多同时跑 2 路独立 index 任务，但只作为受控并行，不把 2G 级别远端机器当成无限队列。
+
+**理由**：
+- `run_remote_index.sh` 的输出目录由 `corpus/model/run_name` 决定，日志由 `log_dir` 决定；只要 screen 名、run name 和 log dir 不重复，多个进程不会互相覆盖。
+- index 的本地 CPU 占用低，主要瓶颈在远端 LLM / embedding API 等待，适合有限并行。
+- 但远端内存较小，双路 smoke test 时 available memory 已接近 100MB；继续增加路数或提高单进程内部并发不稳。
+- DeepSeek 和 Doubao 可以分散 LLM provider 压力；OpenRouter 的 `baai/bge-m3` 已验证可返回 1024 维向量，可作为 BGE-M3 embedding 备选，减轻 SiliconFlow embedding 侧共享瓶颈。
+
+**执行原则**：
+- 并行任务必须使用独立 `screen` 名、`run_name` 和 `log_dir`。
+- 优先组合不同 provider，例如 DeepSeek + SiliconFlow embedding 与 Doubao + OpenRouter embedding。
+- 并行时保持 `llm_model_max_async=1`、`embedding_func_max_async=1`、`max_parallel_insert=1`。
+- 长篇正式任务优先 1 路；只有 smoke test 稳定且远端资源充足时，才加第 2 路。
+- 若日志停止推进、出现限流、available memory 长时间低于 100MB 或 swap 快速增长，应停止新增任务，必要时只保留一路。
+
+**当前验证**：
+- 新增模型 profile：`doubao-seed-1.6-openrouter-bge-m3`。
+- OpenRouter `baai/bge-m3` embedding 单独调用成功，返回 1024 维向量。
+- 远端双路 smoke test 已启动：`deepseek-v4-flash-zh-strict-bge-m3` 与 `doubao-seed-1.6-openrouter-bge-m3` 同时处理《越女剑》，两路均进入 chunk 抽取阶段。
