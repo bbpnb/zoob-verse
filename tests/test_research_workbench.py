@@ -200,6 +200,26 @@ def test_models_config_registers_doubao_seed16_bge_m3_profile():
     assert model["chat_options"]["extra_body"] == {"thinking": {"type": "disabled"}}
 
 
+def test_models_config_registers_doubao_seed16_openrouter_bge_m3_profile():
+    config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
+
+    provider = config["providers"]["openrouter"]
+    assert provider["embed_api_key_env"] == "OPENROUTER_API_KEY"
+    assert provider["embed_base_url"] == "https://openrouter.ai/api/v1"
+
+    model = config["models"]["doubao-seed-1.6-openrouter-bge-m3"]
+    assert model["provider"] == "doubao"
+    assert model["embed_provider"] == "openrouter"
+    assert model["llm_model"] == "doubao-seed-1-6-251015"
+    assert model["embed_model"] == "baai/bge-m3"
+    assert model["embed_dim"] == 1024
+    assert model["prompt_version"] == "v10_zh_graph_strict"
+    assert model["lightrag"]["entity_extract_max_gleaning"] == 0
+    assert model["lightrag"]["llm_model_max_async"] == 1
+    assert model["lightrag"]["embedding_func_max_async"] == 1
+    assert model["chat_options"]["extra_body"] == {"thinking": {"type": "disabled"}}
+
+
 def test_models_config_registers_doubao_seed20_lite_bge_m3_profile():
     config = yaml.safe_load(Path("config/models.yaml").read_text(encoding="utf-8"))
 
