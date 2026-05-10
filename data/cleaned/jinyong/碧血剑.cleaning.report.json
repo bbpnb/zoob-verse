@@ -1,0 +1,49 @@
+{
+  "profile": "jinyong",
+  "original_length": 462216,
+  "cleaned_length": 456725,
+  "removed_sections": 7,
+  "rules": {
+    "url_line": 4,
+    "download_boilerplate": 2,
+    "jinyong_collection_preface": 1
+  },
+  "removed_examples": [
+    {
+      "rule": "url_line",
+      "chars": 56,
+      "sample": "全本全集精校小说尽在：http://www.yimuhe.com/u/anglewing2620-1.html\n"
+    },
+    {
+      "rule": "url_line",
+      "chars": 32,
+      "sample": "更多资源下载：http://qqzone.ctdisk.com\n"
+    },
+    {
+      "rule": "url_line",
+      "chars": 56,
+      "sample": "全本全集精校小说尽在：http://www.yimuhe.com/u/anglewing2620-1.html\n"
+    },
+    {
+      "rule": "url_line",
+      "chars": 32,
+      "sample": "更多资源下载：http://qqzone.ctdisk.com\n"
+    },
+    {
+      "rule": "download_boilerplate",
+      "chars": 50,
+      "sample": "※声明：本电子书仅供读者预览,请在下载24小时内删除，不得用作商业用途；如果喜欢请购买正版图书！※\n"
+    },
+    {
+      "rule": "download_boilerplate",
+      "chars": 49,
+      "sample": "※声明：本电子书仅供读者预览,请在下载24小时内删除，不得用作商业用途；如果喜欢请购买正版图书！※"
+    },
+    {
+      "rule": "jinyong_collection_preface",
+      "chars": 5208,
+      "sample": "金庸作品集”新序\n　　小说是写给人看的。小说的内容是人。\n　　小说写一个人、几个人、一群人、或成千成万人的性格和感情。他们的性格和感情从横面的环境中反映出来，从纵面的遭遇中反映出来，从人与人之间的交往与关系中反映出来。长篇小说中似乎只有《鲁"
+    }
+  ],
+  "source_encoding": "gbk"
+}

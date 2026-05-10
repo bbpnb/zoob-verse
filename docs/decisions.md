@@ -405,3 +405,18 @@
 - 新增模型 profile：`doubao-seed-1.6-openrouter-bge-m3`。
 - OpenRouter `baai/bge-m3` embedding 单独调用成功，返回 1024 维向量。
 - 远端双路 smoke test 已启动：`deepseek-v4-flash-zh-strict-bge-m3` 与 `doubao-seed-1.6-openrouter-bge-m3` 同时处理《越女剑》，两路均进入 chunk 抽取阶段。
+
+## 2026-05-10: 候选 index 模型小样本结论
+
+**决策**：默认 index 仍保留 `deepseek-v4-flash-zh-strict-bge-m3` 与 `doubao-seed-1.6-bge-m3` 两条主路线；`doubao-seed-2-0-lite-260428`、`doubao-1-5-pro-32k-250115`、SiliconFlow `Pro/deepseek-ai/DeepSeek-V3.2` 均暂不进入长篇默认路线。
+
+**实测结论（《越女剑》小样本）**：
+- `doubao-seed-2.0-lite-bge-m3`：可完成索引，但泛关系率约 `15.12%`，明显高于 Doubao 1.6 与 DeepSeek v4 flash。
+- `doubao-1.5-pro-32k-bge-m3`：可完成索引，但泛关系率约 `30.18%`，关系表达偏泛，不推荐用于日常 index。
+- `deepseek-v3.2-pro-siliconflow-bge-m3`：可完成索引，规范化后约 `128` 节点 / `169` 边；孤岛率较低约 `12.03%`，但泛关系率约 `12.79%`，高于 DeepSeek v4 flash 与 Doubao 1.6，且小样本耗时约 `785.829s`。
+- SiliconFlow `deepseek-ai/DeepSeek-V4-Flash` 已通过连通性 smoke test，可作为备用 provider 路径，但尚未作为长篇默认路线。
+
+**理由**：
+- DeepSeek v4 flash 与 Doubao 1.6 在关系类型稳定性、成本/速度和长篇可用性之间仍是当前更稳的折中。
+- 新模型如果只是“能跑”，但泛关系率更高或耗时更长，对后续实体对齐、跨作品研究和证据化查询会增加后处理成本。
+- 后续模型试验应先用短篇小样本看 `generic_relation_rate`、`relation_degradation_rate`、孤岛率、耗时和主观关系质量；只有明显优于当前两条主路线时，才投入长篇完整 index。

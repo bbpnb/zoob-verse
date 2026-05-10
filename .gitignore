@@ -33,6 +33,7 @@ src/modules/*/data/processed/
 .lightrag/
 graphrag_output/
 runs/
+logs/
 
 # Jupyter
 .ipynb_checkpoints/
