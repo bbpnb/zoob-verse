@@ -50,3 +50,20 @@ python -m src jinyong direct-analyze
 - `docs/plans/`
 - `docs/research/`
 - `.ai-skills/literary-knowledge-graph/SKILL.md`
+
+### 当前阶段优先阅读
+
+如果当前任务与金庸 corpus、长篇建图、后处理或跨作品研究有关，优先阅读：
+
+1. `docs/research/2026-05-12-jinyong-corpus-handoff.md`
+2. `docs/research/2026-05-12-jinyong-corpus-scorecard.md`
+3. `docs/research/2026-05-12-postprocessing-roadmap.md`
+4. `docs/research/2026-05-10-index-model-lessons.md`
+5. `docs/research/2026-05-11-graph-query-principles.md`
+
+这些文档说明了：
+
+- 当前图谱处于什么阶段
+- 哪些经验已经稳定
+- 哪些问题仍待后处理
+- 下一步不该重复做什么
