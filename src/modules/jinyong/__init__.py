@@ -43,7 +43,11 @@ from src.core.workbench import (
 )
 from src.modules.jinyong.extract import JinyongModule
 from src.modules.jinyong.lightrag_indexer import LightragIndexer, index_run
-from src.modules.jinyong.postprocess import run_postprocess, run_global_people_layer
+from src.modules.jinyong.postprocess import (
+    run_postprocess,
+    run_global_people_layer,
+    run_export_corpus,
+)
 
 
 # CLI registration
@@ -746,3 +750,21 @@ def global_people(jinyong_root, output_dir):
     click.echo(f"  人物索引: {result['index_path']}")
     click.echo(f"  跨书候选: {result['crosswork_path']}")
     click.echo(f"  汇总摘要: {result['summary_path']}")
+
+
+@cli.command("export-corpus")
+@click.option("--jinyong-root", type=click.Path(exists=True), default="runs/jinyong", help="金庸全集 run 根目录")
+@click.option("--global-dir", type=click.Path(exists=True), default="runs/jinyong/_global", help="全局后处理产物目录")
+@click.option("--output-dir", type=click.Path(), default="artifacts/jinyong-v1", help="成果包输出目录")
+def export_corpus(jinyong_root, global_dir, output_dir):
+    """导出面向使用者的金庸图谱成果包。"""
+    result = run_export_corpus(jinyong_root, global_dir, output_dir)
+
+    click.echo(f"\n[jinyong] 成果包导出完成:")
+    click.echo(f"  输出目录: {result['output_dir']}")
+    click.echo(f"  作品数: {result['works_exported']}")
+    click.echo(f"  全局文件: {result['global_files_exported']}")
+    click.echo(f"\n[jinyong] 入口:")
+    click.echo(f"  Manifest: {result['manifest']}")
+    click.echo(f"  README: {result['readme']}")
+    click.echo(f"  查询手册: {result['query_playbook']}")

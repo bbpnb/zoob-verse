@@ -9,39 +9,30 @@ description: Use when operating zoob-verse to build, query, evaluate, report, or
 
 ## 模式 1：消费现有结果
 
-如果你只是想使用当前金庸图谱结果，不要先扫描整个 `runs/jinyong/`。按这个顺序进入：
+如果你只是想使用当前金庸图谱结果，不要先扫描整个 `runs/jinyong/` 或 `docs/research/`。按这个顺序进入：
 
 1. `docs/START_HERE_JINYONG.md`
-2. `runs/jinyong/_global/manifest.json`
-3. `runs/jinyong/_global/canonical_runs.json`
-4. `runs/jinyong/_global/global_people.index.json`
-5. `WORKFLOWS.md`
+2. `artifacts/jinyong-v1/README.md`
+3. `artifacts/jinyong-v1/manifest.json`
+4. `artifacts/jinyong-v1/examples/query_playbook.md`
 
-当前对外主入口是：
+当前对外主入口是成果包：
 
-- `runs/jinyong/_global/`
+- `artifacts/jinyong-v1/`
 
-把里面的产物分成三层来理解：
+使用者只需要理解：
 
-- `fact_like`
-  - `scorecard.json`
-  - `canonical_runs.json`
-  - `global_people.index.json`
-- `candidate_like`
-  - `global_people.crosswork_candidates.json`
-  - `noise_candidates.entities.json`
-  - `noise_candidates.relations.json`
-- `audit_like`
-  - `global_people.excluded_role_like.json`
-  - `global_people.survivor_audit.json`
-  - `noise_candidates.summary.json`
+- `works/<作品>/graph.json`：单书主图
+- `global/people.json`：全集人物索引
+- `global/crosswork_people.json`：跨书人物候选
+- `examples/query_playbook.md`：查询模板
 
 使用规则：
 
-- 单书问题：先用 `canonical_runs.json` 找权威 `run_dir`
-- 跨书人物问题：先看 `global_people.index.json`
-- 候选层和审计层不能直接当事实
-- 长篇优先看 `subgraphs/`、`report`、`query` 结果，不要依赖整图 `graph.html`
+- 单书问题：优先看 `works/<作品>/graph.json`
+- 跨书人物问题：优先看 `global/people.json`
+- 候选层不能直接当事实
+- 回答用户时不要解释工程文件、run 选择或后处理施工过程，除非用户专门问实现
 
 ## 模式 2：操作工作流
 
@@ -50,6 +41,15 @@ description: Use when operating zoob-verse to build, query, evaluate, report, or
 - `WORKFLOWS.md`
 
 它是操作地图。命令只是工作流里的工具。
+
+重新生成成果包：
+
+```bash
+python -m src jinyong export-corpus \
+  --jinyong-root runs/jinyong \
+  --global-dir runs/jinyong/_global \
+  --output-dir artifacts/jinyong-v1
+```
 
 跨作品主题材料用 `cross-view` / cross-corpus 工作流，但它仍是研究视图，不是最终全局知识库。
 

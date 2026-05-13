@@ -3601,3 +3601,40 @@ def test_summary_top_examples_from_audit(tmp_path):
     n = min(len(summary["top_survivor_audit_examples"]), len(audit["candidates"]))
     for i in range(n):
         assert summary["top_survivor_audit_examples"][i]["person_name"] == audit["candidates"][i]["person_name"]
+
+
+def test_export_corpus_creates_user_facing_package(tmp_path):
+    """成果包导出应隐藏 run 选择复杂度，生成稳定的用户入口。"""
+    from src.modules.jinyong.postprocess import (
+        run_postprocess,
+        run_global_people_layer,
+        run_export_corpus,
+    )
+
+    root = _setup_test_corpus(tmp_path)
+    global_dir = root / "_global"
+    run_postprocess(root, global_dir)
+    run_global_people_layer(root, global_dir)
+
+    output = tmp_path / "artifacts" / "jinyong-v1"
+    result = run_export_corpus(root, global_dir, output)
+
+    manifest_path = Path(result["manifest"])
+    assert manifest_path.exists()
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+
+    assert manifest["artifact_version"] == "jinyong-v1"
+    assert manifest["corpus"]["work_count"] == 2
+    assert manifest["usage"]["read_first"] == "README.md"
+    assert "canonical" not in (output / "README.md").read_text(encoding="utf-8")
+
+    for work in manifest["works"]:
+        assert work["graph"] is not None
+        assert work["report"] is not None
+        assert Path(work["graph"]).exists()
+        assert Path(work["report"]).exists()
+
+    assert (output / "global" / "people.json").exists()
+    assert (output / "global" / "crosswork_people.json").exists()
+    assert (output / "global" / "noise_summary.json").exists()
+    assert (output / "examples" / "query_playbook.md").exists()

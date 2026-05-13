@@ -5,6 +5,7 @@
 
 import json
 import re
+import shutil
 from datetime import datetime
 from pathlib import Path
 
@@ -1517,4 +1518,284 @@ def run_postprocess(
         "works_found": len(works),
         "entity_candidates": len(entity_output["candidates"]),
         "relation_candidates": len(relation_output["candidates"]),
+    }
+
+
+# ============================================================
+# Corpus export package
+# ============================================================
+
+_EXPORT_REQUIRED_GLOBAL_FILES = {
+    "scorecard.json": "global/scorecard.json",
+    "global_people.index.json": "global/people.json",
+    "global_people.summary.json": "global/people.summary.json",
+    "global_people.crosswork_candidates.json": "global/crosswork_people.json",
+    "global_people.survivor_audit.json": "global/people_title_audit.json",
+    "global_people.excluded_role_like.json": "global/excluded_people_labels.json",
+    "noise_candidates.summary.json": "global/noise_summary.json",
+}
+
+
+def _relative_or_same(path: Path) -> str:
+    try:
+        return str(path.relative_to(Path.cwd()))
+    except ValueError:
+        return str(path)
+
+
+def _copy_if_exists(src: Path, dst: Path) -> bool:
+    if not src.exists():
+        return False
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src, dst)
+    return True
+
+
+def _resolve_run_dir(run_dir: str | Path, jinyong_root: Path) -> Path:
+    path = Path(run_dir)
+    if path.exists() or path.is_absolute():
+        return path
+
+    candidates = [
+        Path.cwd() / path,
+        jinyong_root.parent.parent / path,
+        jinyong_root.parent / path,
+        jinyong_root / path,
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return path
+
+
+def _write_export_readme(output_dir: Path, manifest: dict) -> None:
+    lines = [
+        "# 金庸图谱数据包 v1",
+        "",
+        "这不是施工目录，而是从当前 `runs/jinyong/` 和 `_global` 后处理结果导出的可用数据包。",
+        "",
+        "## 适合做什么",
+        "",
+        "- 单部作品的人物、关系、地点、武功、物件等结构化检索",
+        "- 跨作品人物出现与疑似污染审查",
+        "- 文学分析问题的证据辅助",
+        "- 下游应用原型的数据输入",
+        "",
+        "## 不适合做什么",
+        "",
+        "- 直接当成绝对可靠的百科知识库",
+        "- 不经复核地做严格事实断言",
+        "- 用候选/审计文件直接替代人工判断",
+        "",
+        "## 目录",
+        "",
+        "```text",
+        "works/<作品>/graph.json      # 单书主图，来自 graph.normalized.json",
+        "works/<作品>/report.json     # 单书质量和 token 摘要",
+        "global/people.json           # 全局人物层主索引",
+        "global/crosswork_people.json # 跨书人物候选",
+        "global/noise_summary.json    # 噪声候选摘要",
+        "examples/query_playbook.md   # 可直接复用的问题模板",
+        "manifest.json                # 机器可读入口",
+        "```",
+        "",
+        "## 使用建议",
+        "",
+        "面向普通查询时，不需要理解原始 `runs/`、模型试验、主结果选择或后处理施工记录。优先用本数据包里的 `manifest.json`、`works/` 和 `global/`。",
+        "",
+        "回答文学问题时请区分三类内容：图谱直接支持的证据、基于证据的推断、证据不足的部分。",
+        "",
+        "## 当前规模",
+        "",
+        f"- 作品数：`{manifest['corpus']['work_count']}`",
+        f"- 节点数：`{manifest['corpus']['total_nodes']}`",
+        f"- 边数：`{manifest['corpus']['total_edges']}`",
+        f"- 全局人物：`{manifest['global_layers']['people']['total_people']}`",
+        f"- 跨书人物候选：`{manifest['global_layers']['crosswork_people']['total_candidates']}`",
+        "",
+    ]
+    (output_dir / "README.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+def _write_query_playbook(output_dir: Path) -> None:
+    content = """# 金庸图谱查询手册
+
+使用本数据包时，问题应该面向文学分析，而不是面向工程文件。
+
+## 通用回答格式
+
+```text
+请基于金庸图谱数据包回答下面的问题。回答要让普通读者能懂，不要解释工程过程。
+
+问题：...
+
+输出：
+1. 一句话结论
+2. 3-5 条关键证据
+3. 图谱直接支持了什么
+4. 哪些是基于证据的推断
+5. 哪些地方仍不确定
+```
+
+## 单书问题
+
+```text
+请基于《笑傲江湖》的图谱，分析令狐冲与岳不群的关系为什么不是简单的师徒决裂。
+```
+
+```text
+请基于《天龙八部》的图谱，比较乔峰、段誉、虚竹三人的武学获得路径和身份困境。
+```
+
+```text
+请基于《连城诀》的图谱，梳理狄云的关键地点迁移，以及每次迁移伴随的人物关系变化。
+```
+
+## 跨书问题
+
+```text
+请基于全局人物层，比较郭靖、杨过、张无忌三类主角的关系网络差异。
+```
+
+```text
+请基于全局人物层，审查韦小宝为什么会出现在多部非《鹿鼎记》作品里，区分真实引用和疑似污染。
+```
+
+```text
+请比较《射雕英雄传》《神雕侠侣》《倚天屠龙记》中郭靖、黄蓉、杨过的跨书出现方式。
+```
+
+## 主题问题
+
+```text
+请比较《书剑恩仇录》《碧血剑》《鹿鼎记》中秘密组织与个人选择之间的关系。
+```
+
+```text
+请找出金庸作品中由秘籍、兵器或宝物推动冲突的典型模式，并举出证据较强的例子。
+```
+
+```text
+请比较少林、武当、丐帮在不同作品里的组织功能：它们更像权力机构、道德象征，还是剧情连接器？
+```
+
+## 质量要求
+
+- 少讲“图谱怎么做”，多讲“文学上说明了什么”
+- 不要把候选层当事实
+- 证据弱就说弱
+- 不要为了高级而抽象
+"""
+    examples_dir = output_dir / "examples"
+    examples_dir.mkdir(parents=True, exist_ok=True)
+    (examples_dir / "query_playbook.md").write_text(content, encoding="utf-8")
+
+
+def run_export_corpus(
+    jinyong_root: str | Path = "runs/jinyong",
+    global_dir: str | Path = "runs/jinyong/_global",
+    output_dir: str | Path = "artifacts/jinyong-v1",
+) -> dict:
+    """导出面向使用者的金庸图谱成果包。
+
+    这个函数不修改原始 runs，只将当前主图和全局后处理结果收敛到
+    artifacts/jinyong-v1 这样的稳定目录。
+    """
+    jinyong_root = Path(jinyong_root)
+    global_dir = Path(global_dir)
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    canonical_path = global_dir / "canonical_runs.json"
+    scorecard = read_json(global_dir / "scorecard.json")
+    people_summary = read_json(global_dir / "global_people.summary.json")
+    crosswork = read_json(global_dir / "global_people.crosswork_candidates.json")
+
+    if canonical_path.exists():
+        source_works = read_json(canonical_path).get("works", [])
+    else:
+        source_works = [
+            {"novel": work["novel"], "run_dir": work["run_dir"]}
+            for work in scan_main_runs(jinyong_root, global_dir)
+        ]
+
+    exported_works = []
+    for item in source_works:
+        novel = item["novel"]
+        run_dir = _resolve_run_dir(item["run_dir"], jinyong_root)
+        work_dir = output_dir / "works" / novel
+        graph_src = run_dir / "graph.normalized.json"
+        if not graph_src.exists():
+            graph_src = run_dir / "graph.json"
+        report_src = run_dir / "report.json"
+
+        has_graph = _copy_if_exists(graph_src, work_dir / "graph.json")
+        has_report = _copy_if_exists(report_src, work_dir / "report.json")
+
+        exported_works.append({
+            "novel": novel,
+            "work_dir": _relative_or_same(work_dir),
+            "graph": _relative_or_same(work_dir / "graph.json") if has_graph else None,
+            "report": _relative_or_same(work_dir / "report.json") if has_report else None,
+            "source_run_dir": str(run_dir),
+            "has_graph": has_graph,
+            "has_report": has_report,
+        })
+
+    exported_global = {}
+    for src_name, dst_rel in _EXPORT_REQUIRED_GLOBAL_FILES.items():
+        src = global_dir / src_name
+        dst = output_dir / dst_rel
+        copied = _copy_if_exists(src, dst)
+        exported_global[src_name] = {
+            "exported": copied,
+            "path": _relative_or_same(dst) if copied else None,
+        }
+
+    manifest = {
+        "artifact_version": "jinyong-v1",
+        "generated_at": datetime.now().isoformat(),
+        "purpose": "clean_user_facing_jinyong_graph_package",
+        "source": {
+            "jinyong_root": str(jinyong_root),
+            "global_dir": str(global_dir),
+            "selection_policy": "source runs are used only as export inputs; consumers should use this package directly",
+        },
+        "corpus": {
+            "work_count": len(exported_works),
+            "total_nodes": scorecard.get("total_nodes", 0),
+            "total_edges": scorecard.get("total_edges", 0),
+            "total_tokens": scorecard.get("total_tokens", 0),
+        },
+        "works": exported_works,
+        "global_layers": {
+            "people": {
+                "path": "global/people.json",
+                "total_people": people_summary.get("total_people", 0),
+            },
+            "crosswork_people": {
+                "path": "global/crosswork_people.json",
+                "total_candidates": crosswork.get("total_candidates", 0),
+            },
+            "noise_summary": {
+                "path": "global/noise_summary.json",
+            },
+        },
+        "usage": {
+            "read_first": "README.md",
+            "query_templates": "examples/query_playbook.md",
+            "rule": "Use this package as the stable user-facing artifact; use runs/ only for maintenance and rebuilding.",
+        },
+    }
+    write_json(output_dir / "manifest.json", manifest)
+    _write_export_readme(output_dir, manifest)
+    _write_query_playbook(output_dir)
+
+    return {
+        "output_dir": str(output_dir),
+        "manifest": str(output_dir / "manifest.json"),
+        "readme": str(output_dir / "README.md"),
+        "query_playbook": str(output_dir / "examples" / "query_playbook.md"),
+        "works_exported": len(exported_works),
+        "global_files_exported": sum(1 for v in exported_global.values() if v["exported"]),
     }

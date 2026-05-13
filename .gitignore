@@ -34,6 +34,7 @@ src/modules/*/data/processed/
 graphrag_output/
 runs/
 logs/
+artifacts/
 
 # Jupyter
 .ipynb_checkpoints/
