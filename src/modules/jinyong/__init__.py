@@ -768,3 +768,4 @@ def export_corpus(jinyong_root, global_dir, output_dir):
     click.echo(f"  Manifest: {result['manifest']}")
     click.echo(f"  README: {result['readme']}")
     click.echo(f"  查询手册: {result['query_playbook']}")
+    click.echo(f"  分析样例: {result['sample_answers']}")

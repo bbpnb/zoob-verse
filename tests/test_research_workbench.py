@@ -3638,3 +3638,8 @@ def test_export_corpus_creates_user_facing_package(tmp_path):
     assert (output / "global" / "crosswork_people.json").exists()
     assert (output / "global" / "noise_summary.json").exists()
     assert (output / "examples" / "query_playbook.md").exists()
+    sample_answers = output / "examples" / "sample_answers.md"
+    assert sample_answers.exists()
+    sample_text = sample_answers.read_text(encoding="utf-8")
+    assert "一句话结论" in sample_text
+    assert "图谱直接支持" in sample_text
