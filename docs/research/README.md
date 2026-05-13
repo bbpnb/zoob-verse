@@ -11,6 +11,10 @@
 
 `docs/research/` 记录的是项目推进过程中的判断、试验、反思和阶段性总结。它们有复盘价值，但不应该要求普通使用者逐篇阅读。
 
+如果只想读一份融合后的总结，请先看：
+
+- `docs/narrative/jinyong-kg-project-retrospective.md`
+
 ## 推荐阅读顺序
 
 如果你要理解完整过程，按这个顺序读：
@@ -34,10 +38,4 @@
 
 ## 后续整理方向
 
-这些文件不建议继续无限增加。下一步更合理的是把它们融合成一份项目复盘：
-
-```text
-docs/narrative/jinyong-kg-project-retrospective.md
-```
-
-这份复盘应该讲清楚初衷、实验、成本、坑、后处理、偏航和最终的数据包化收敛。
+这些文件不建议继续无限增加。后续新增研究记录前，应优先判断能否更新 `docs/narrative/jinyong-kg-project-retrospective.md` 或 `artifacts/jinyong-v1/examples/`，避免继续堆散文档。

@@ -10,6 +10,12 @@
 
 `runs/`、`docs/research/`、`docs/plans/` 是施工现场和学习记录，不是日常使用入口。
 
+这里说的“不是日常使用入口”，不是说它们没用，也不是说要删除。它的意思是：
+
+- 做文学查询、下游应用或给其他 AI 使用时，默认只使用 `artifacts/jinyong-v1/`。
+- 要重跑图谱、修改后处理、追溯模型选择和成本教训时，再看 `runs/`、`docs/research/`、`docs/plans/`。
+- `docs/START_HERE_JINYONG.md` 只是路标。外部项目如果已经知道要用成果包，可以直接从 `artifacts/jinyong-v1/README.md` 开始。
+
 ## 当前成果是什么
 
 我们已经把金庸 15 部作品的主图谱和全局后处理结果，导出成一个相对干净的数据包：
@@ -107,6 +113,10 @@ python -m src jinyong export-corpus \
 - 项目复盘素材
 
 这些材料有学习和复盘价值，但不应该成为日常查询入口。
+
+如果你想理解整个项目为什么走到现在这个形态，请读：
+
+- `docs/narrative/jinyong-kg-project-retrospective.md`
 
 ## 下一步方向
 
