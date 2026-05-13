@@ -43,6 +43,7 @@ from src.core.workbench import (
 )
 from src.modules.jinyong.extract import JinyongModule
 from src.modules.jinyong.lightrag_indexer import LightragIndexer, index_run
+from src.modules.jinyong.postprocess import run_postprocess, run_global_people_layer
 
 
 # CLI registration
@@ -704,3 +705,44 @@ def analyze(method, from_entity, to_entity, graph):
     """分析知识图谱"""
     click.echo(f"[jinyong] 分析 ({method})...")
     click.echo("[jinyong] 分析功能开发中...")
+
+
+@cli.command("postprocess")
+@click.option("--jinyong-root", type=click.Path(exists=True), default="runs/jinyong", help="金庸全集 run 根目录")
+@click.option("--output-dir", type=click.Path(), default="runs/jinyong/_global", help="后处理产物输出目录")
+def postprocess(jinyong_root, output_dir):
+    """金庸全集后处理：生成全集索引、实体/关系噪声候选清单。
+
+    不修改单书原始图谱，所有产物写入独立的 _global 目录。
+    """
+    result = run_postprocess(jinyong_root, output_dir)
+
+    click.echo(f"\n[jinyong] 后处理完成:")
+    click.echo(f"  扫描作品: {result['works_found']} 部")
+    click.echo(f"  实体噪声候选: {result['entity_candidates']} 条")
+    click.echo(f"  关系噪声候选: {result['relation_candidates']} 条")
+    click.echo(f"\n[jinyong] 产物:")
+    click.echo(f"  Scorecard: {result['scorecard']}")
+    click.echo(f"  Scorecard (MD): {result['scorecard_md']}")
+    click.echo(f"  实体噪声: {result['entity_noise']}")
+    click.echo(f"  关系噪声: {result['relation_noise']}")
+    click.echo(f"  汇总摘要: {result['summary']}")
+
+
+@cli.command("global-people")
+@click.option("--jinyong-root", type=click.Path(exists=True), default="runs/jinyong", help="金庸全集 run 根目录")
+@click.option("--output-dir", type=click.Path(), default="runs/jinyong/_global", help="全局人物层输出目录")
+def global_people(jinyong_root, output_dir):
+    """构建金庸全集人物规范层 v1：人物索引、跨书候选分层、汇总摘要。
+
+    不修改单书原始图谱，所有产物写入独立的 _global 目录。
+    """
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    click.echo(f"\n[jinyong] 全局人物层构建完成:")
+    click.echo(f"  总人物数: {result['total_people']}")
+    click.echo(f"  跨书候选: {result['crosswork_candidates']} 条")
+    click.echo(f"\n[jinyong] 产物:")
+    click.echo(f"  人物索引: {result['index_path']}")
+    click.echo(f"  跨书候选: {result['crosswork_path']}")
+    click.echo(f"  汇总摘要: {result['summary_path']}")

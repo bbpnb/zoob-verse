@@ -2088,3 +2088,1516 @@ def test_lightrag_optional_dependency_matches_actual_package():
 
     assert "lightrag-hku" in pyproject
     assert "lightrag-api" not in pyproject
+
+
+# ============================================================
+# Postprocessing regression tests
+# ============================================================
+
+import json
+import shutil
+
+
+def _make_fake_run(run_dir: Path, *, nodes: int = 100, edges: int = 150,
+                   orphans: int = 10, model: str = "deepseek-v4-flash-zh-strict-bge-m3",
+                   run_id: str = "test-run-001", has_graph_html: bool = True,
+                   entities: list | None = None, relationships: list | None = None,
+                   completion_tokens: int = 50000, prompt_tokens: int = 40000):
+    """Helper: 创建一个 fake run 目录及必要产物。"""
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    report = {
+        "run": {"model": model, "run_id": run_id},
+        "metrics": {
+            "nodes": nodes,
+            "edges": edges,
+            "orphans": orphans,
+            "orphan_rate": orphans / max(nodes, 1),
+            "largest_component_nodes": nodes - orphans,
+            "largest_component_rate": (nodes - orphans) / max(nodes, 1),
+            "relation_degradation_rate": 0.12,
+            "average_degree": 2.0,
+            "quality": {"generic_relation_rate": 0.05},
+        },
+        "token_usage": {
+            "total_tokens": prompt_tokens + completion_tokens,
+            "prompt_tokens": prompt_tokens,
+            "completion_tokens": completion_tokens,
+        },
+    }
+    (run_dir / "report.json").write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
+
+    if has_graph_html:
+        (run_dir / "graph.html").write_text("<html></html>", encoding="utf-8")
+
+    graph = {
+        "entities": entities or [],
+        "relationships": relationships or [],
+    }
+    (run_dir / "graph.json").write_text(json.dumps(graph, ensure_ascii=False), encoding="utf-8")
+
+
+def _setup_test_corpus(tmp_path: Path) -> Path:
+    """创建一个包含两部作品的测试 corpus 结构。"""
+    jinyong_root = tmp_path / "jinyong"
+
+    # 作品 A：正式 run（节点多）
+    _make_fake_run(
+        jinyong_root / "书剑恩仇录" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shujian-dsv4flash-clean-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="shujian-dsv4flash-clean-20260509",
+        entities=[
+            {"name": "陈家洛", "type": "人物", "description": "红花会总舵主"},
+            {"name": "霍青桐", "type": "人物", "description": "翠羽黄衫"},
+            {"name": "拖雷", "type": "人物", "description": "蒙古王子"},  # 用于跨作品污染检测
+            {"name": "众人", "type": "人物", "description": ""},
+            {"name": "开封", "type": "地点", "description": "河南省会城市，北宋都城汴京"},
+        ],
+        relationships=[
+            {"source": "陈家洛", "target": "霍青桐", "type": "情感", "description": "相爱"},
+            {"source": "拖雷", "target": "陈家洛", "type": "关联", "description": "提到"},
+            {"source": "众人", "target": "陈家洛", "type": "关联", "description": ""},
+        ],
+    )
+
+    # 作品 A：smoke run（节点少，应被排除）
+    _make_fake_run(
+        jinyong_root / "书剑恩仇录" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shujian-smoke-20260511",
+        nodes=30, edges=40, orphans=5,
+        run_id="shujian-smoke-20260511",
+    )
+
+    # 作品 B：正式 run
+    _make_fake_run(
+        jinyong_root / "倚天屠龙记" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "yitian-dsv4flash-clean-20260509",
+        nodes=600, edges=900, orphans=80,
+        run_id="yitian-dsv4flash-clean-20260509",
+        entities=[
+            {"name": "张无忌", "type": "人物", "description": "明教教主"},
+            {"name": "赵敏", "type": "人物", "description": "汝阳王之女"},
+            {"name": "陈家洛", "type": "人物", "description": ""},  # 跨作品污染
+            {"name": "拖雷", "type": "人物", "description": ""},   # 跨作品污染
+            {"name": "某地", "type": "unknown_type", "description": ""},
+        ],
+        relationships=[
+            {"source": "张无忌", "target": "赵敏", "type": "情感", "description": "相爱；后来成婚"},
+            {"source": "陈家洛", "target": "张无忌", "type": "关联", "description": ""},
+            {"source": "拖雷", "target": "赵敏", "type": "提及", "description": "提到"},
+        ],
+    )
+
+    return jinyong_root
+
+
+def test_postprocess_canonical_run_selection_excludes_smoke(tmp_path):
+    """Fix 1: 验证 canonical run 选择排除 smoke run，选取正式 run。"""
+    from src.modules.jinyong.postprocess import scan_main_runs
+
+    jinyong_root = _setup_test_corpus(tmp_path)
+
+    # 不创建 canonical_runs.json，测试自动发现
+    works = scan_main_runs(jinyong_root, jinyong_root / "_global")
+
+    # 书剑恩仇录 应选取 clean run，不是 smoke
+    shujian = next(w for w in works if w["novel"] == "书剑恩仇录")
+    assert "smoke" not in shujian["run_id"]
+    assert "clean" in shujian["run_id"]
+    assert shujian["report"]["metrics"]["nodes"] == 500
+
+
+def test_postprocess_canonical_runs_json_priority(tmp_path):
+    """Fix 1: 验证 canonical_runs.json 优先级高于自动发现。"""
+    from src.modules.jinyong.postprocess import scan_main_runs
+
+    jinyong_root = _setup_test_corpus(tmp_path)
+    global_dir = jinyong_root / "_global"
+    global_dir.mkdir(parents=True, exist_ok=True)
+
+    # 创建一个指向不同 run 的 canonical_runs.json
+    canonical = {
+        "generated_at": "2026-05-12T00:00:00",
+        "corpus": "jinyong",
+        "works": [
+            {
+                "novel": "书剑恩仇录",
+                "run_dir": str(jinyong_root / "书剑恩仇录" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shujian-dsv4flash-clean-20260509"),
+            },
+            {
+                "novel": "倚天屠龙记",
+                "run_dir": str(jinyong_root / "倚天屠龙记" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "yitian-dsv4flash-clean-20260509"),
+            },
+        ],
+    }
+    (global_dir / "canonical_runs.json").write_text(json.dumps(canonical, ensure_ascii=False), encoding="utf-8")
+
+    works = scan_main_runs(jinyong_root, global_dir)
+
+    shujian = next(w for w in works if w["novel"] == "书剑恩仇录")
+    assert "clean" in shujian["run_id"]
+    assert "smoke" not in shujian["run_id"]
+
+
+def test_postprocess_has_graph_html_checks_graph_html(tmp_path):
+    """Fix 2: has_graph_html 应检查 graph.html，而非 GraphML 缓存。"""
+    from src.modules.jinyong.postprocess import build_scorecard
+
+    jinyong_root = _setup_test_corpus(tmp_path)
+
+    # 创建有 graph.html 但没有 graphml cache 的 run
+    work = {
+        "novel": "书剑恩仇录",
+        "model": "deepseek-v4",
+        "run_id": "test-001",
+        "run_dir": str(jinyong_root / "书剑恩仇录" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shujian-dsv4flash-clean-20260509"),
+        "report": (jinyong_root / "书剑恩仇录" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shujian-dsv4flash-clean-20260509" / "report.json").read_text(encoding="utf-8"),
+    }
+    import json as _json
+    work["report"] = _json.loads(work["report"])
+
+    scorecard = build_scorecard([work])
+    w = scorecard["works"][0]
+
+    assert w["has_graph_html"] is True
+    assert w["has_graphml_cache"] is False
+
+    # 测试没有 graph.html 的情况
+    no_html_dir = tmp_path / "no_html_run"
+    _make_fake_run(no_html_dir, has_graph_html=False)
+    work2 = {
+        "novel": "书剑恩仇录",
+        "model": "deepseek-v4",
+        "run_id": "test-002",
+        "run_dir": str(no_html_dir),
+        "report": json.loads((no_html_dir / "report.json").read_text(encoding="utf-8")),
+    }
+    scorecard2 = build_scorecard([work2])
+    assert scorecard2["works"][0]["has_graph_html"] is False
+
+
+def test_postprocess_entity_candidate_wrapper_schema(tmp_path):
+    """Fix 5: 候选文件应有 wrapper 结构，不是 bare list。"""
+    from src.modules.jinyong.postprocess import run_postprocess
+
+    jinyong_root = _setup_test_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+
+    result = run_postprocess(jinyong_root, output_dir)
+
+    entity_data = json.loads((output_dir / "noise_candidates.entities.json").read_text(encoding="utf-8"))
+    relation_data = json.loads((output_dir / "noise_candidates.relations.json").read_text(encoding="utf-8"))
+
+    # 验证 wrapper 字段
+    for data in [entity_data, relation_data]:
+        assert "generated_at" in data
+        assert "corpus" in data
+        assert data["corpus"] == "jinyong"
+        assert "candidate_type" in data
+        assert "total_candidates" in data
+        assert "source" in data
+        assert "candidates" in data
+        assert isinstance(data["candidates"], list)
+        assert data["total_candidates"] == len(data["candidates"])
+
+
+def test_postprocess_cross_corpus_pollution_detects_known_characters(tmp_path):
+    """Fix 3: 跨作品污染检测应至少找到一批候选。"""
+    from src.modules.jinyong.postprocess import run_postprocess, detect_cross_corpus_pollution, scan_main_runs
+
+    jinyong_root = _setup_test_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+
+    result = run_postprocess(jinyong_root, output_dir)
+
+    entity_data = json.loads((output_dir / "noise_candidates.entities.json").read_text(encoding="utf-8"))
+    pollution_candidates = [
+        c for c in entity_data["candidates"]
+        if "cross_corpus_pollution" in c["reason_codes"]
+    ]
+
+    assert len(pollution_candidates) >= 1, "应至少检测到跨作品污染候选"
+
+    # 验证 陈家洛 和 拖雷 被检测到（倚天中低 degree 出现）
+    names = {c["entity_name"] for c in pollution_candidates}
+    assert "陈家洛" in names, "陈家洛在倚天中出现应被标为污染"
+    assert "拖雷" in names, "拖雷在倚天中出现应被标为污染"
+
+    # 验证有正确的 home_novel
+    chenluo = next(c for c in pollution_candidates if c["entity_name"] == "陈家洛")
+    assert chenluo["home_novel"] == "书剑恩仇录"
+    assert chenluo["source_novel"] == "倚天屠龙记"
+
+
+def test_postprocess_low_research_value_no_false_positives_on_short_names(tmp_path):
+    """Fix 4: low_research_value 不应误伤合法短名（如地名）。"""
+    from src.modules.jinyong.postprocess import run_postprocess
+
+    jinyong_root = _setup_test_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+
+    result = run_postprocess(jinyong_root, output_dir)
+
+    entity_data = json.loads((output_dir / "noise_candidates.entities.json").read_text(encoding="utf-8"))
+    lrv_candidates = [
+        c for c in entity_data["candidates"]
+        if "low_research_value" in c["reason_codes"]
+    ]
+
+    # "开封" 有描述、是高价值类型(地点)，不应被标记
+    lrv_names = {c["entity_name"] for c in lrv_candidates}
+    assert "开封" not in lrv_names, "开封是合法地名，不应被标为低研究价值"
+
+    # "众人" 是泛称，如果是孤立的可能被标记，但这是 generic_name 规则，不是 low_research_value
+    # 验证 某地（unknown_type + 无描述）可能因为多个信号被标记，但这是合理的
+
+
+def test_postprocess_noise_candidate_fields(tmp_path):
+    """验证实体噪声候选包含 spec 要求的全部字段。"""
+    from src.modules.jinyong.postprocess import run_postprocess
+
+    jinyong_root = _setup_test_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+
+    result = run_postprocess(jinyong_root, output_dir)
+
+    entity_data = json.loads((output_dir / "noise_candidates.entities.json").read_text(encoding="utf-8"))
+    relation_data = json.loads((output_dir / "noise_candidates.relations.json").read_text(encoding="utf-8"))
+
+    # 实体候选字段
+    for c in entity_data["candidates"]:
+        assert "entity_name" in c
+        assert "entity_type" in c
+        assert "source_novel" in c
+        assert "run_id" in c
+        assert "degree" in c
+        assert "reason_codes" in c
+        assert "reason_text" in c
+        assert "suggested_action" in c
+        assert "evidence" in c
+
+    # 关系候选字段
+    for c in relation_data["candidates"]:
+        assert "source" in c
+        assert "target" in c
+        assert "relation_type" in c
+        assert "source_novel" in c
+        assert "run_id" in c
+        assert "reason_codes" in c
+        assert "reason_text" in c
+        assert "suggested_action" in c
+
+
+def test_postprocess_scorecard_total_nodes(tmp_path):
+    """验证 scorecard 的 total_nodes 是各作品节点之和。"""
+    from src.modules.jinyong.postprocess import run_postprocess
+
+    jinyong_root = _setup_test_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+
+    result = run_postprocess(jinyong_root, output_dir)
+
+    scorecard = json.loads((output_dir / "scorecard.json").read_text(encoding="utf-8"))
+
+    assert scorecard["total_works"] == 2
+    assert scorecard["total_nodes"] == 500 + 600  # 书剑 + 倚天
+    assert scorecard["total_edges"] == 800 + 900
+    assert scorecard["corpus"] == "jinyong"
+
+
+# ============================================================
+# Round 2: cross_corpus_pollution boundary tests
+# ============================================================
+
+def _setup_continuous_works_corpus(tmp_path: Path) -> Path:
+    """创建射雕↔神雕连续作品的最小测试 corpus。"""
+    jinyong_root = tmp_path / "jinyong_r2"
+
+    # 射雕英雄传：杨过低 degree 出现（少年时期，合法提及）
+    _make_fake_run(
+        jinyong_root / "射雕英雄传" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shediao-test-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="shediao-test-20260509",
+        entities=[
+            {"name": "郭靖", "type": "人物", "description": "男主角"},
+            {"name": "黄蓉", "type": "人物", "description": "女主角"},
+            {"name": "杨过", "type": "人物", "description": ""},  # 射雕末尾出现，合法提及
+            {"name": "穆念慈", "type": "人物", "description": "杨过之母"},
+        ],
+        relationships=[
+            {"source": "郭靖", "target": "黄蓉", "type": "情感", "description": "夫妻"},
+            {"source": "郭靖", "target": "穆念慈", "type": "提及", "description": "提到杨家后人"},
+            {"source": "穆念慈", "target": "杨过", "type": "提及", "description": "提及婴儿杨过"},
+        ],
+    )
+
+    # 神雕侠侣：杨过是主角（home），高 degree
+    _make_fake_run(
+        jinyong_root / "神雕侠侣" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shendiao-test-20260509",
+        nodes=600, edges=900, orphans=80,
+        run_id="shendiao-test-20260509",
+        entities=[
+            {"name": "杨过", "type": "人物", "description": "男主角，字改之"},
+            {"name": "小龙女", "type": "人物", "description": "女主角"},
+            {"name": "郭靖", "type": "人物", "description": "郭大侠"},
+            {"name": "黄蓉", "type": "人物", "description": "郭夫人"},
+        ],
+        relationships=[
+            {"source": "杨过", "target": "小龙女", "type": "情感", "description": "相爱"},
+            {"source": "杨过", "target": "郭靖", "type": "师徒", "description": "郭靖教导杨过"},
+            {"source": "杨过", "target": "黄蓉", "type": "关联", "description": "相识"},
+        ],
+    )
+
+    return jinyong_root
+
+
+def _setup_cross_works_corpus(tmp_path: Path) -> Path:
+    """创建跨作品 corpus：书剑（含陈家洛）+ 倚天（含陈家洛污染 + 拖雷污染）。"""
+    jinyong_root = tmp_path / "jinyong_r2_cross"
+
+    # 书剑恩仇录：陈家洛是主角
+    _make_fake_run(
+        jinyong_root / "书剑恩仇录" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shujian-cross-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="shujian-cross-20260509",
+        entities=[
+            {"name": "陈家洛", "type": "人物", "description": "红花会总舵主"},
+            {"name": "霍青桐", "type": "人物", "description": "翠羽黄衫"},
+            {"name": "拖雷", "type": "人物", "description": "蒙古王子，铁木真之子"},
+        ],
+        relationships=[
+            {"source": "陈家洛", "target": "霍青桐", "type": "情感", "description": "相爱"},
+            {"source": "陈家洛", "target": "拖雷", "type": "关联", "description": ""},
+        ],
+    )
+
+    # 倚天屠龙记：陈家洛、拖雷都是污染
+    _make_fake_run(
+        jinyong_root / "倚天屠龙记" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "yitian-cross-20260509",
+        nodes=600, edges=900, orphans=80,
+        run_id="yitian-cross-20260509",
+        entities=[
+            {"name": "张无忌", "type": "人物", "description": "男主角"},
+            {"name": "赵敏", "type": "人物", "description": "女主角"},
+            {"name": "陈家洛", "type": "人物", "description": ""},  # 污染
+            {"name": "拖雷", "type": "人物", "description": ""},    # 污染
+        ],
+        relationships=[
+            {"source": "张无忌", "target": "赵敏", "type": "情感", "description": "相爱"},
+            {"source": "陈家洛", "target": "张无忌", "type": "关联", "description": ""},
+            {"source": "拖雷", "target": "赵敏", "type": "提及", "description": "提到"},
+        ],
+    )
+
+    return jinyong_root
+
+
+def test_continuous_work_exemption_she_diao_shen_diao(tmp_path):
+    """Round 2 Fix 1: 射雕↔神雕是连续作品，杨过不应被标为污染。"""
+    from src.modules.jinyong.postprocess import detect_cross_corpus_pollution, scan_main_runs
+
+    jinyong_root = _setup_continuous_works_corpus(tmp_path)
+    global_dir = jinyong_root / "_global"
+    global_dir.mkdir(parents=True, exist_ok=True)
+
+    works = scan_main_runs(jinyong_root, global_dir)
+    pollution = detect_cross_corpus_pollution(works)
+
+    # 杨过不应被标为 cross_corpus_pollution
+    yangguo_in_shediao = [
+        c for c in pollution
+        if c["entity_name"] == "杨过" and c["source_novel"] == "射雕英雄传"
+    ]
+    assert len(yangguo_in_shediao) == 0, "杨过在射雕中是合法提及，不应标为污染"
+
+
+def test_continuous_work_exemption_xueshan_feihu(tmp_path):
+    """Round 2 Fix 1: 雪山飞狐↔飞狐外传是连续作品，应豁免。"""
+    from src.modules.jinyong.postprocess import detect_cross_corpus_pollution, scan_main_runs
+
+    jinyong_root = tmp_path / "jinyong_r2_xs"
+
+    # 雪山飞狐：胡斐是主角
+    _make_fake_run(
+        jinyong_root / "雪山飞狐" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "xueshan-test-20260509",
+        nodes=400, edges=600, orphans=40,
+        run_id="xueshan-test-20260509",
+        entities=[
+            {"name": "胡斐", "type": "人物", "description": "男主角"},
+            {"name": "苗人凤", "type": "人物", "description": "打遍天下无敌手"},
+            {"name": "程灵素", "type": "人物", "description": ""},  # 来自飞狐外传，但连续作品应豁免
+        ],
+        relationships=[
+            {"source": "胡斐", "target": "苗人凤", "type": "敌对", "description": "决斗"},
+            {"source": "程灵素", "target": "胡斐", "type": "关联", "description": ""},
+        ],
+    )
+
+    # 飞狐外传：程灵素是主角之一
+    _make_fake_run(
+        jinyong_root / "飞狐外传" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "feihu-test-20260509",
+        nodes=500, edges=700, orphans=50,
+        run_id="feihu-test-20260509",
+        entities=[
+            {"name": "胡斐", "type": "人物", "description": "男主角"},
+            {"name": "程灵素", "type": "人物", "description": "毒手药王弟子"},
+            {"name": "袁紫衣", "type": "人物", "description": "尼姑"},
+        ],
+        relationships=[
+            {"source": "胡斐", "target": "程灵素", "type": "情感", "description": "相爱"},
+            {"source": "胡斐", "target": "袁紫衣", "type": "情感", "description": "情愫"},
+        ],
+    )
+
+    works = scan_main_runs(jinyong_root, jinyong_root / "_global")
+    pollution = detect_cross_corpus_pollution(works)
+
+    # 程灵素在雪山飞狐中不应被标为污染（连续作品豁免）
+    cheng_in_xueshan = [
+        c for c in pollution
+        if c["entity_name"] == "程灵素" and c["source_novel"] == "雪山飞狐"
+    ]
+    assert len(cheng_in_xueshan) == 0, "程灵素在雪山飞狐中是连续作品提及，不应标为污染"
+
+
+def test_high_confidence_pollution_still_detected(tmp_path):
+    """Round 2 Fix 3: 陈家洛/拖雷 in 倚天 等高置信污染仍应被检出。"""
+    from src.modules.jinyong.postprocess import detect_cross_corpus_pollution, scan_main_runs
+
+    jinyong_root = _setup_cross_works_corpus(tmp_path)
+    global_dir = jinyong_root / "_global"
+    global_dir.mkdir(parents=True, exist_ok=True)
+
+    works = scan_main_runs(jinyong_root, global_dir)
+    pollution = detect_cross_corpus_pollution(works)
+
+    names = {c["entity_name"] for c in pollution}
+    assert "陈家洛" in names, "陈家洛 in 倚天 仍是高置信污染"
+    assert "拖雷" in names, "拖雷 in 倚天 仍是高置信污染"
+
+    # 验证 home_novel 正确
+    chenluo = next(c for c in pollution if c["entity_name"] == "陈家洛")
+    assert chenluo["source_novel"] == "倚天屠龙记"
+    assert chenluo["home_novel"] == "书剑恩仇录"
+
+
+def test_entity_noise_dedup_scope(tmp_path):
+    """Round 2 Fix 2: 去重粒度应为 (entity_name, source_novel)，不是全局名字级。"""
+    from src.modules.jinyong.postprocess import (
+        detect_cross_corpus_pollution,
+        detect_entity_noise,
+        scan_main_runs,
+    )
+
+    jinyong_root = _setup_cross_works_corpus(tmp_path)
+    global_dir = jinyong_root / "_global"
+    global_dir.mkdir(parents=True, exist_ok=True)
+
+    works = scan_main_runs(jinyong_root, global_dir)
+    cross_pollution = detect_cross_corpus_pollution(works)
+
+    # 陈家洛 in 倚天 是污染候选
+    assert any(
+        c["entity_name"] == "陈家洛" and c["source_novel"] == "倚天屠龙记"
+        for c in cross_pollution
+    )
+
+    # 关键断言：去重只作用于 (entity_name, source_novel) 级别
+    # (陈家洛, 倚天屠龙记) 被跳过，但 (陈家洛, 书剑恩仇录) 不应被跳过
+    poll_keys = {(c["entity_name"], c["source_novel"]) for c in cross_pollution}
+    assert ("陈家洛", "倚天屠龙记") in poll_keys
+    assert ("陈家洛", "书剑恩仇录") not in poll_keys, "书剑中的陈家洛不应被去重跳过"
+
+    # 进一步测试：构造一个场景，同名实体在 A 书被污染，B 书中有独立问题
+    jinyong_root2 = tmp_path / "jinyong_r2_dedup2"
+
+    # 越女剑：拖雷是污染（低 degree，非 home）
+    _make_fake_run(
+        jinyong_root2 / "越女剑" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "yuenü-dedup-20260509",
+        nodes=200, edges=300, orphans=20,
+        run_id="yuenü-dedup-20260509",
+        entities=[
+            {"name": "阿青", "type": "人物", "description": "越女剑主角"},
+            {"name": "拖雷", "type": "人物", "description": ""},  # 跨作品污染
+        ],
+        relationships=[
+            {"source": "阿青", "target": "拖雷", "type": "关联", "description": ""},
+        ],
+    )
+
+    # 白马啸西风：有另一个独立的问题实体
+    _make_fake_run(
+        jinyong_root2 / "白马啸西风" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "baima-dedup-20260509",
+        nodes=200, edges=300, orphans=20,
+        run_id="baima-dedup-20260509",
+        entities=[
+            {"name": "李文秀", "type": "人物", "description": "主角"},
+            {"name": "测试坏类型", "type": "weird_type_XYZ", "description": ""},  # bad_type
+        ],
+        relationships=[
+            {"source": "李文秀", "target": "测试坏类型", "type": "关联", "description": ""},
+        ],
+    )
+
+    works2 = scan_main_runs(jinyong_root2, jinyong_root2 / "_global")
+    cross_pollution2 = detect_cross_corpus_pollution(works2)
+    entity_candidates2 = detect_entity_noise(works2, cross_pollution2)
+
+    # 白马中的"测试坏类型"应能被检测到（bad_type），与越剑中的拖雷无关
+    test_entity = [
+        c for c in entity_candidates2
+        if c["entity_name"] == "测试坏类型" and c["source_novel"] == "白马啸西风"
+    ]
+    assert len(test_entity) >= 1, "白马中的测试实体应被检测到，不能被跨书去重屏蔽"
+
+
+# ============================================================
+# Round 3: Global People Layer v1 tests
+# ============================================================
+
+def _setup_people_layer_corpus(tmp_path: Path) -> Path:
+    """创建全局人物层测试 corpus：书剑 + 倚天 + 射雕 + 神雕。"""
+    jinyong_root = tmp_path / "jinyong_people"
+
+    # 书剑恩仇录：陈家洛是主角
+    _make_fake_run(
+        jinyong_root / "书剑恩仇录" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shujian-people-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="shujian-people-20260509",
+        entities=[
+            {"name": "陈家洛", "type": "人物", "description": "红花会总舵主，陈家洛是反清复明组织红花会的总舵主"},
+            {"name": "霍青桐", "type": "人物", "description": "翠羽黄衫，回部女英雄"},
+            {"name": "乾隆", "type": "人物", "description": "清朝皇帝"},
+        ],
+        relationships=[
+            {"source": "陈家洛", "target": "霍青桐", "type": "情感", "description": "相爱"},
+            {"source": "陈家洛", "target": "乾隆", "type": "关联", "description": "兄弟关系"},
+            {"source": "霍青桐", "target": "乾隆", "type": "关联", "description": ""},
+        ],
+    )
+
+    # 倚天屠龙记：陈家洛、拖雷是污染
+    _make_fake_run(
+        jinyong_root / "倚天屠龙记" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "yitian-people-20260509",
+        nodes=600, edges=900, orphans=80,
+        run_id="yitian-people-20260509",
+        entities=[
+            {"name": "张无忌", "type": "人物", "description": "明教教主，主角"},
+            {"name": "赵敏", "type": "人物", "description": "汝阳王之女，女主角"},
+            {"name": "陈家洛", "type": "人物", "description": ""},  # 污染
+            {"name": "拖雷", "type": "人物", "description": ""},   # 污染
+        ],
+        relationships=[
+            {"source": "张无忌", "target": "赵敏", "type": "情感", "description": "相爱"},
+            {"source": "张无忌", "target": "陈家洛", "type": "关联", "description": ""},
+            {"source": "拖雷", "target": "赵敏", "type": "提及", "description": "提到"},
+        ],
+    )
+
+    # 射雕英雄传：杨过低 degree 出现（少年提及）
+    _make_fake_run(
+        jinyong_root / "射雕英雄传" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shediao-people-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="shediao-people-20260509",
+        entities=[
+            {"name": "郭靖", "type": "人物", "description": "男主角，郭大侠"},
+            {"name": "黄蓉", "type": "人物", "description": "女主角"},
+            {"name": "杨过", "type": "人物", "description": ""},  # 合法提及
+            {"name": "拖雷", "type": "人物", "description": "蒙古王子，郭靖安答"},
+        ],
+        relationships=[
+            {"source": "郭靖", "target": "黄蓉", "type": "情感", "description": "夫妻"},
+            {"source": "郭靖", "target": "杨过", "type": "提及", "description": "提及杨家后人"},
+            {"source": "郭靖", "target": "拖雷", "type": "情感", "description": "安答"},
+        ],
+    )
+
+    # 神雕侠侣：杨过是主角
+    _make_fake_run(
+        jinyong_root / "神雕侠侣" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shendiao-people-20260509",
+        nodes=600, edges=900, orphans=80,
+        run_id="shendiao-people-20260509",
+        entities=[
+            {"name": "杨过", "type": "人物", "description": "男主角，字改之，神雕大侠"},
+            {"name": "小龙女", "type": "人物", "description": "女主角，古墓派传人"},
+            {"name": "郭靖", "type": "人物", "description": "郭大侠"},
+        ],
+        relationships=[
+            {"source": "杨过", "target": "小龙女", "type": "情感", "description": "相爱"},
+            {"source": "杨过", "target": "郭靖", "type": "师徒", "description": "郭靖教导杨过"},
+        ],
+    )
+
+    return jinyong_root
+
+
+def test_build_global_people_index_aggregates_same_name_across_works(tmp_path):
+    """Task 1: 验证同名人物在多作品中会被聚合。"""
+    from src.modules.jinyong.postprocess import build_global_people_index, scan_main_runs
+
+    jinyong_root = _setup_people_layer_corpus(tmp_path)
+    global_dir = jinyong_root / "_global"
+    global_dir.mkdir(parents=True, exist_ok=True)
+
+    works = scan_main_runs(jinyong_root, global_dir)
+    index, _, _ = build_global_people_index(works)
+
+    # 陈家洛出现在书剑和倚天
+    chen = next((p for p in index["people"] if p["person_name"] == "陈家洛"), None)
+    assert chen is not None, "陈家洛应在全局人物索引中"
+    assert chen["appearance_count"] >= 2, "陈家洛应出现在至少 2 部作品中"
+    assert "书剑恩仇录" in chen["appears_in_novels"]
+    assert "倚天屠龙记" in chen["appears_in_novels"]
+
+
+def test_continuous_work_shared_classification(tmp_path):
+    """Task 2: 连续作品共享人物应被分到 continuous_work_shared。"""
+    from src.modules.jinyong.postprocess import (
+        build_global_people_index,
+        classify_crosswork_people,
+        scan_main_runs,
+    )
+
+    jinyong_root = _setup_people_layer_corpus(tmp_path)
+    global_dir = jinyong_root / "_global"
+    global_dir.mkdir(parents=True, exist_ok=True)
+
+    works = scan_main_runs(jinyong_root, global_dir)
+    index, _, _ = build_global_people_index(works)
+    candidates = classify_crosswork_people(index)
+
+    # 杨过在射雕+神雕之间出现 -> continuous_work_shared
+    yangguo = next((c for c in candidates if c["person_name"] == "杨过"), None)
+    assert yangguo is not None, "杨过应在跨书候选中"
+    assert yangguo["candidate_kind"] == "continuous_work_shared", (
+        f"杨过应为 continuous_work_shared，实际为 {yangguo['candidate_kind']}"
+    )
+
+    # 郭靖在射雕+神雕之间出现 -> continuous_work_shared
+    guojing = next((c for c in candidates if c["person_name"] == "郭靖"), None)
+    assert guojing is not None, "郭靖应在跨书候选中"
+    assert guojing["candidate_kind"] == "continuous_work_shared"
+
+
+def test_cross_corpus_suspect_classification(tmp_path):
+    """Task 3: 高置信疑似污染应被分到 cross_corpus_suspect。"""
+    from src.modules.jinyong.postprocess import (
+        build_global_people_index,
+        classify_crosswork_people,
+        scan_main_runs,
+    )
+
+    jinyong_root = _setup_people_layer_corpus(tmp_path)
+    global_dir = jinyong_root / "_global"
+    global_dir.mkdir(parents=True, exist_ok=True)
+
+    works = scan_main_runs(jinyong_root, global_dir)
+    index, _, _ = build_global_people_index(works)
+    candidates = classify_crosswork_people(index)
+
+    # 陈家洛 in 倚天 -> cross_corpus_suspect
+    chenluo = next((c for c in candidates if c["person_name"] == "陈家洛"), None)
+    assert chenluo is not None, "陈家洛应在跨书候选中"
+    assert chenluo["candidate_kind"] == "cross_corpus_suspect", (
+        f"陈家洛 in 倚天应为 cross_corpus_suspect，实际为 {chenluo['candidate_kind']}"
+    )
+
+    # 拖雷 in 倚天 -> cross_corpus_suspect
+    tuolei = next((c for c in candidates if c["person_name"] == "拖雷"), None)
+    assert tuolei is not None, "拖雷应在跨书候选中"
+    assert tuolei["candidate_kind"] == "cross_corpus_suspect"
+
+
+def test_same_name_ambiguous_classification(tmp_path):
+    """Task 4: 同名歧义场景应被分到 same_name_ambiguous。"""
+    from src.modules.jinyong.postprocess import (
+        build_global_people_index,
+        classify_crosswork_people,
+        scan_main_runs,
+    )
+
+    jinyong_root = tmp_path / "jinyong_ambiguous"
+
+    # 作品 A：一个很短很泛的名字，信息不足
+    _make_fake_run(
+        jinyong_root / "越女剑" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "yuenü-amb-20260509",
+        nodes=100, edges=150, orphans=10,
+        run_id="yuenü-amb-20260509",
+        entities=[
+            {"name": "阿青", "type": "人物", "description": "越女剑主角"},
+            {"name": "老王", "type": "人物", "description": ""},  # 名字短泛，无描述
+        ],
+        relationships=[
+            {"source": "阿青", "target": "老王", "type": "关联", "description": ""},
+        ],
+    )
+
+    # 作品 B：同名"老王"，也无描述，邻居极少
+    _make_fake_run(
+        jinyong_root / "白马啸西风" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "baima-amb-20260509",
+        nodes=100, edges=150, orphans=10,
+        run_id="baima-amb-20260509",
+        entities=[
+            {"name": "李文秀", "type": "人物", "description": "白马啸西风主角"},
+            {"name": "老王", "type": "人物", "description": ""},  # 同名，无描述
+        ],
+        relationships=[
+            {"source": "李文秀", "target": "老王", "type": "关联", "description": ""},
+        ],
+    )
+
+    works = scan_main_runs(jinyong_root, jinyong_root / "_global")
+    index, _, _ = build_global_people_index(works)
+    candidates = classify_crosswork_people(index)
+
+    # "老王"在两部作品中都 degree 极低、无描述 -> same_name_ambiguous
+    laowang = next((c for c in candidates if c["person_name"] == "老王"), None)
+    assert laowang is not None, "老王应在跨书候选中"
+    assert laowang["candidate_kind"] == "same_name_ambiguous", (
+        f"老王应为 same_name_ambiguous，实际为 {laowang['candidate_kind']}"
+    )
+
+
+def test_global_people_outputs(tmp_path):
+    """Task 5: 验证运行后生成 3 个新 JSON 文件且 schema 合法。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _setup_people_layer_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    # 验证文件存在
+    assert Path(result["index_path"]).exists(), "global_people.index.json 应存在"
+    assert Path(result["crosswork_path"]).exists(), "global_people.crosswork_candidates.json 应存在"
+    assert Path(result["summary_path"]).exists(), "global_people.summary.json 应存在"
+    assert Path(result["excluded_path"]).exists(), "global_people.excluded_role_like.json 应存在"
+    assert Path(result["filter_summary_path"]).exists(), "global_people.filter_summary.json 应存在"
+
+    # 验证 index schema
+    import json as _json
+    index = _json.loads(Path(result["index_path"]).read_text(encoding="utf-8"))
+    assert "generated_at" in index
+    assert "corpus" in index
+    assert index["corpus"] == "jinyong"
+    assert "total_people" in index
+    assert "people" in index
+    assert isinstance(index["people"], list)
+
+    # 验证 people 条目字段
+    person = index["people"][0]
+    assert "person_name" in person
+    assert "appearance_count" in person
+    assert "appears_in_novels" in person
+    assert "home_novel_guess" in person
+    assert "appearances" in person
+    assert isinstance(person["appearances"], list)
+
+    # 验证 crosswork schema
+    crosswork = _json.loads(Path(result["crosswork_path"]).read_text(encoding="utf-8"))
+    assert "generated_at" in crosswork
+    assert "corpus" in crosswork
+    assert crosswork["corpus"] == "jinyong"
+    assert "total_candidates" in crosswork
+    assert "candidates" in crosswork
+
+    # 验证 crosswork 条目字段
+    candidate = crosswork["candidates"][0]
+    assert "person_name" in candidate
+    assert "appearance_count" in candidate
+    assert "home_novel_guess" in candidate
+    assert "source_novels" in candidate
+    assert "candidate_kind" in candidate
+    assert candidate["candidate_kind"] in {
+        "continuous_work_shared",
+        "cross_corpus_suspect",
+        "shared_reference_review",
+        "same_name_ambiguous",
+    }
+
+    # 验证 summary schema
+    summary = _json.loads(Path(result["summary_path"]).read_text(encoding="utf-8"))
+    assert "total_people" in summary
+    assert "single_work_people" in summary
+    assert "cross_work_people" in summary
+    assert "candidate_kind_counts" in summary
+
+
+def test_shared_reference_review_classification(tmp_path):
+    """额外测试：中等跨书出现应归入 shared_reference_review。"""
+    from src.modules.jinyong.postprocess import (
+        build_global_people_index,
+        classify_crosswork_people,
+        scan_main_runs,
+    )
+
+    jinyong_root = tmp_path / "jinyong_shared"
+
+    # 作品 A：某人高 degree
+    _make_fake_run(
+        jinyong_root / "鹿鼎记" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "luding-shared-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="luding-shared-20260509",
+        entities=[
+            {"name": "韦小宝", "type": "人物", "description": "主角，鹿鼎记"},
+            {"name": "康熙", "type": "人物", "description": "清朝皇帝，玄烨，与韦小宝自幼相识"},
+            {"name": "鳌拜", "type": "人物", "description": "权臣"},
+            {"name": "双儿", "type": "人物", "description": "韦小宝妻子"},
+        ],
+        relationships=[
+            {"source": "韦小宝", "target": "康熙", "type": "情感", "description": "君臣好友"},
+            {"source": "康熙", "target": "鳌拜", "type": "敌对", "description": "铲除鳌拜"},
+            {"source": "康熙", "target": "韦小宝", "type": "情感", "description": "好友"},
+        ],
+    )
+
+    # 作品 B：同名中等 degree 出现
+    _make_fake_run(
+        jinyong_root / "天龙八部" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "tianlong-shared-20260509",
+        nodes=600, edges=900, orphans=80,
+        run_id="tianlong-shared-20260509",
+        entities=[
+            {"name": "萧峰", "type": "人物", "description": "主角"},
+            {"name": "康熙", "type": "人物", "description": "清朝皇帝，历史人物，提及作为背景信息"},
+            {"name": "段誉", "type": "人物", "description": "大理世子"},
+        ],
+        relationships=[
+            {"source": "萧峰", "target": "段誉", "type": "情感", "description": "结拜"},
+            {"source": "萧峰", "target": "康熙", "type": "提及", "description": "提到"},  # 康熙 degree=1 in 天龙
+            {"source": "段誉", "target": "康熙", "type": "提及", "description": "提到"},  # 康熙 degree=2 in 天龙
+        ],
+    )
+
+    works = scan_main_runs(jinyong_root, jinyong_root / "_global")
+    index, _, _ = build_global_people_index(works)
+    candidates = classify_crosswork_people(index)
+
+    kangxi = next((c for c in candidates if c["person_name"] == "康熙"), None)
+    assert kangxi is not None, "康熙应在跨书候选中"
+    # 康熙在两个非连续作品中出现，degree 不低，有描述 -> shared_reference_review
+    assert kangxi["candidate_kind"] == "shared_reference_review", (
+        f"康熙应为 shared_reference_review，实际为 {kangxi['candidate_kind']}"
+    )
+
+
+# ============================================================
+# Round 4: Person admission filter tests
+# ============================================================
+
+def _make_people_layer_corpus(tmp_path: Path) -> Path:
+    """创建含混合人物层（高价值+角色+泛称）的 corpus。"""
+    jinyong_root = tmp_path / "jinyong_r4"
+
+    # 射雕英雄传
+    _make_fake_run(
+        jinyong_root / "射雕英雄传" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shediao-r4-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="shediao-r4-20260509",
+        entities=[
+            {"name": "郭靖", "type": "人物", "description": "男主角，郭大侠"},
+            {"name": "黄蓉", "type": "人物", "description": "女主角"},
+            {"name": "掌柜", "type": "人物", "description": "客栈老板"},  # 角色标签
+            {"name": "少年", "type": "人物", "description": ""},  # 泛称
+            {"name": "丫鬟", "type": "人物", "description": ""},  # 角色标签
+        ],
+        relationships=[
+            {"source": "郭靖", "target": "黄蓉", "type": "情感", "description": "夫妻"},
+            {"source": "掌柜", "target": "郭靖", "type": "关联", "description": ""},
+            {"source": "少年", "target": "黄蓉", "type": "关联", "description": ""},
+        ],
+    )
+
+    # 神雕侠侣
+    _make_fake_run(
+        jinyong_root / "神雕侠侣" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shendiao-r4-20260509",
+        nodes=600, edges=900, orphans=80,
+        run_id="shendiao-r4-20260509",
+        entities=[
+            {"name": "杨过", "type": "人物", "description": "男主角"},
+            {"name": "小龙女", "type": "人物", "description": "女主角"},
+            {"name": "郭靖", "type": "人物", "description": "郭大侠"},
+            {"name": "帮众", "type": "人物", "description": ""},  # 群体角色
+            {"name": "七袋弟子", "type": "人物", "description": ""},  # 群体角色
+            {"name": "和尚", "type": "人物", "description": ""},  # 角色标签
+        ],
+        relationships=[
+            {"source": "杨过", "target": "小龙女", "type": "情感", "description": "相爱"},
+            {"source": "杨过", "target": "郭靖", "type": "师徒", "description": "郭靖教导"},
+            {"source": "帮众", "target": "杨过", "type": "关联", "description": ""},
+        ],
+    )
+
+    # 鹿鼎记
+    _make_fake_run(
+        jinyong_root / "鹿鼎记" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "luding-r4-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="luding-r4-20260509",
+        entities=[
+            {"name": "韦小宝", "type": "人物", "description": "男主角，鹿鼎记主角"},
+            {"name": "公主", "type": "人物", "description": ""},  # 泛称/角色
+            {"name": "太监", "type": "人物", "description": ""},  # 角色标签
+            {"name": "店小二", "type": "人物", "description": ""},  # 角色标签
+            {"name": "少女", "type": "人物", "description": ""},  # 泛称
+        ],
+        relationships=[
+            {"source": "韦小宝", "target": "公主", "type": "关联", "description": ""},
+            {"source": "店小二", "target": "韦小宝", "type": "关联", "description": ""},
+        ],
+    )
+
+    return jinyong_root
+
+
+def test_role_like_labels_excluded_from_main_index(tmp_path):
+    """Round 4 测试 A: 角色标签不进入主人物层。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _make_people_layer_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    import json as _json
+    index = _json.loads(Path(result["index_path"]).read_text(encoding="utf-8"))
+    excluded = _json.loads(Path(result["excluded_path"]).read_text(encoding="utf-8"))
+
+    # 角色标签不应在主人物层
+    index_names = {p["person_name"] for p in index["people"]}
+    assert "掌柜" not in index_names, "掌柜不应进入主人物层"
+    assert "帮众" not in index_names, "帮众不应进入主人物层"
+    assert "七袋弟子" not in index_names, "七袋弟子不应进入主人物层"
+    assert "和尚" not in index_names, "和尚不应进入主人物层"
+
+    # 角色标签应在排除文件中
+    excluded_names = {e["person_name"] for e in excluded["excluded_people"]}
+    assert "掌柜" in excluded_names, "掌柜应出现在排除文件中"
+    assert "丫鬟" in excluded_names, "丫鬟应出现在排除文件中"
+    assert "帮众" in excluded_names, "帮众应出现在排除文件中"
+    assert "七袋弟子" in excluded_names, "七袋弟子应出现在排除文件中"
+
+
+def test_generic_person_labels_excluded_from_main_index(tmp_path):
+    """Round 4 测试 C: 泛称标签不进入主人物层。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _make_people_layer_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    import json as _json
+    index = _json.loads(Path(result["index_path"]).read_text(encoding="utf-8"))
+    excluded = _json.loads(Path(result["excluded_path"]).read_text(encoding="utf-8"))
+
+    index_names = {p["person_name"] for p in index["people"]}
+    assert "少年" not in index_names, "少年不应进入主人物层"
+    assert "少女" not in index_names, "少女不应进入主人物层"
+    assert "公主" not in index_names, "公主不应进入主人物层"
+    assert "太监" not in index_names, "太监不应进入主人物层"
+    assert "店小二" not in index_names, "店小二不应进入主人物层"
+
+    # 泛称应在排除文件中，rejected_layer 正确
+    generic_excluded = [e for e in excluded["excluded_people"] if e["rejected_layer"] == "generic_person_label"]
+    generic_names = {e["person_name"] for e in generic_excluded}
+    assert "少年" in generic_names, "少年应为 generic_person_label"
+    assert "少女" in generic_names, "少女应为 generic_person_label"
+
+
+def test_named_persons_still_enter_main_index(tmp_path):
+    """Round 4 测试 B: 高价值命名人物仍进入主人物层。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _make_people_layer_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    import json as _json
+    index = _json.loads(Path(result["index_path"]).read_text(encoding="utf-8"))
+    index_names = {p["person_name"]: p for p in index["people"]}
+
+    assert "郭靖" in index_names, "郭靖应进入主人物层"
+    assert "杨过" in index_names, "杨过应进入主人物层"
+    assert "韦小宝" in index_names, "韦小宝应进入主人物层"
+
+    # person_layer 应为 core_person 或 named_person
+    guojing = index_names["郭靖"]
+    assert guojing["person_layer"] in {"core_person", "named_person"}
+    weibao = index_names["韦小宝"]
+    assert weibao["person_layer"] in {"core_person", "named_person"}
+
+
+def test_crosswork_candidates_only_from_admitted(tmp_path):
+    """Round 4 测试 D: 跨书候选只基于过滤后主人物层。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _make_people_layer_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    import json as _json
+    crosswork = _json.loads(Path(result["crosswork_path"]).read_text(encoding="utf-8"))
+    crosswork_names = {c["person_name"] for c in crosswork["candidates"]}
+
+    # 角色/泛称不应在跨书候选中
+    assert "掌柜" not in crosswork_names, "掌柜不应进入跨书候选"
+    assert "少年" not in crosswork_names, "少年不应进入跨书候选"
+    assert "帮众" not in crosswork_names, "帮众不应进入跨书候选"
+
+    # 命名人物应仍在
+    # 郭靖在射雕+神雕出现，应进入跨书候选
+    assert "郭靖" in crosswork_names, "郭靖应在跨书候选中"
+
+
+def test_filter_summary_schema(tmp_path):
+    """Round 4 测试 E: 过滤摘要 schema 合法且总数自洽。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _make_people_layer_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    import json as _json
+    summary = _json.loads(Path(result["summary_path"]).read_text(encoding="utf-8"))
+    filter_summary = _json.loads(Path(result["filter_summary_path"]).read_text(encoding="utf-8"))
+
+    # 关键字段齐全
+    assert "input_person_like_entities" in filter_summary
+    assert "admitted_people" in filter_summary
+    assert "excluded_people" in filter_summary
+    assert "admitted_by_layer" in filter_summary
+    assert "excluded_by_layer" in filter_summary
+    assert "excluded_by_reason" in filter_summary
+    assert "example_excluded_names" in filter_summary
+
+    # 总数自洽: input = admitted + excluded
+    total_input = filter_summary["input_person_like_entities"]
+    total_admitted = filter_summary["admitted_people"]
+    total_excluded = filter_summary["excluded_people"]
+    assert total_input == total_admitted + total_excluded, (
+        f"input({total_input}) 应等于 admitted({total_admitted}) + excluded({total_excluded})"
+    )
+
+
+# ============================================================
+# Round 5: Pure title vs titled proper name boundary tests
+# ============================================================
+
+def test_pure_title_labels_excluded(tmp_path):
+    """Round 5 测试 A: 纯称谓节点被排除，rejected_layer == title_like_person_label。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _make_people_layer_corpus(tmp_path)
+    # 添加称谓类实体到某个作品
+    _make_fake_run(
+        jinyong_root / "碧血剑" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "bixue-title-20260509",
+        nodes=300, edges=500, orphans=30,
+        run_id="bixue-title-20260509",
+        entities=[
+            {"name": "袁承志", "type": "人物", "description": "男主角"},
+            {"name": "师父", "type": "人物", "description": "穆人清"},
+            {"name": "师母", "type": "人物", "description": ""},
+            {"name": "公子", "type": "人物", "description": "对袁承志的称呼"},
+            {"name": "夫人", "type": "人物", "description": ""},
+            {"name": "道人", "type": "人物", "description": ""},
+            {"name": "表妹", "type": "人物", "description": ""},
+            {"name": "婆婆", "type": "人物", "description": ""},
+            {"name": "大师哥", "type": "人物", "description": ""},
+            {"name": "小师妹", "type": "人物", "description": ""},
+            {"name": "皇帝", "type": "人物", "description": "崇祯皇帝"},
+        ],
+        relationships=[
+            {"source": "袁承志", "target": "师父", "type": "师徒", "description": "拜师"},
+            {"source": "袁承志", "target": "师母", "type": "关联", "description": ""},
+            {"source": "夫人", "target": "袁承志", "type": "关联", "description": ""},
+        ],
+    )
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    import json as _json
+    index = _json.loads(Path(result["index_path"]).read_text(encoding="utf-8"))
+    excluded = _json.loads(Path(result["excluded_path"]).read_text(encoding="utf-8"))
+
+    index_names = {p["person_name"] for p in index["people"]}
+
+    # 纯称谓不应在主人物层
+    for name in ["师父", "师母", "公子", "夫人", "道人"]:
+        assert name not in index_names, f"{name}不应进入主人物层"
+
+    # 纯称谓应在排除文件中，且 rejected_layer 正确
+    title_excluded = [e for e in excluded["excluded_people"] if e["rejected_layer"] == "title_like_person_label"]
+    title_names = {e["person_name"] for e in title_excluded}
+    for name in ["师父", "师母", "公子", "夫人", "道人"]:
+        assert name in title_names, f"{name}应为 title_like_person_label"
+
+
+def test_titled_proper_names_retained(tmp_path):
+    """Round 5 测试 B: 称谓化专名被保留。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _make_people_layer_corpus(tmp_path)
+    # 添加称谓化专名到某个作品
+    _make_fake_run(
+        jinyong_root / "书剑恩仇录" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shujian-titled-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="shujian-titled-20260509",
+        entities=[
+            {"name": "陈家洛", "type": "人物", "description": "红花会总舵主"},
+            {"name": "香香公主", "type": "人物", "description": "喀丝丽，回部第一美女"},
+            {"name": "王夫人", "type": "人物", "description": "李青萝"},
+            {"name": "灭绝师太", "type": "人物", "description": "峨眉派掌门"},
+            {"name": "一灯大师", "type": "人物", "description": "南帝"},
+        ],
+        relationships=[
+            {"source": "陈家洛", "target": "香香公主", "type": "关联", "description": "相识"},
+            {"source": "陈家洛", "target": "王夫人", "type": "关联", "description": ""},
+        ],
+    )
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    import json as _json
+    index = _json.loads(Path(result["index_path"]).read_text(encoding="utf-8"))
+    excluded = _json.loads(Path(result["excluded_path"]).read_text(encoding="utf-8"))
+
+    index_names = {p["person_name"] for p in index["people"]}
+    excluded_names = {e["person_name"] for e in excluded["excluded_people"]}
+
+    # 称谓化专名应进入主人物层
+    for name in ["香香公主", "王夫人", "灭绝师太", "一灯大师"]:
+        assert name in index_names, f"{name}应进入主人物层"
+        assert name not in excluded_names, f"{name}不应出现在排除文件中"
+
+
+def test_crosswork_candidates_no_pure_titles(tmp_path):
+    """Round 5 测试 C: 跨书候选中不再出现纯称谓样例。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _make_people_layer_corpus(tmp_path)
+    _make_fake_run(
+        jinyong_root / "侠客行" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "xiake-title-20260509",
+        nodes=300, edges=500, orphans=30,
+        run_id="xiake-title-20260509",
+        entities=[
+            {"name": "石破天", "type": "人物", "description": "男主角"},
+            {"name": "师父", "type": "人物", "description": ""},
+            {"name": "公子", "type": "人物", "description": ""},
+            {"name": "夫人", "type": "人物", "description": ""},
+            {"name": "道人", "type": "人物", "description": ""},
+        ],
+        relationships=[
+            {"source": "石破天", "target": "师父", "type": "师徒", "description": ""},
+            {"source": "夫人", "target": "石破天", "type": "关联", "description": ""},
+        ],
+    )
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    import json as _json
+    crosswork = _json.loads(Path(result["crosswork_path"]).read_text(encoding="utf-8"))
+    crosswork_names = {c["person_name"] for c in crosswork["candidates"]}
+
+    # 纯称谓不应在跨书候选中
+    for name in ["公子", "夫人", "师父", "道人"]:
+        assert name not in crosswork_names, f"{name}不应进入跨书候选"
+
+
+def test_survivor_audit_exists_and_valid(tmp_path):
+    """Round 5 测试 D: 幸存审计文件存在且 schema 合法。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    jinyong_root = _make_people_layer_corpus(tmp_path)
+    output_dir = jinyong_root / "_global"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    result = run_global_people_layer(jinyong_root, output_dir)
+
+    import json as _json
+    audit_path = Path(result["survivor_audit_path"])
+    assert audit_path.exists(), "global_people.survivor_audit.json 应存在"
+
+    audit = _json.loads(audit_path.read_text(encoding="utf-8"))
+
+    # 顶层字段齐全
+    assert "generated_at" in audit
+    assert "corpus" in audit
+    assert audit["corpus"] == "jinyong"
+    assert "total_candidates" in audit
+    assert "candidates" in audit
+    assert isinstance(audit["candidates"], list)
+
+    # 每条记录包含 matched_title_signals
+    if audit["candidates"]:
+        c = audit["candidates"][0]
+        assert "person_name" in c
+        assert "person_layer" in c
+        assert "appearance_count" in c
+        assert "appears_in_novels" in c
+        assert "matched_title_signals" in c
+        assert "suggested_review_reason" in c
+
+
+def test_title_boundary_exclude_vs_retain(tmp_path):
+    """Round 5 测试 E: 反例保留——夫人被排除但王夫人被保留，公子被排除但香香公主被保留，师父被排除但一灯大师被保留。"""
+    from src.modules.jinyong.postprocess import classify_person_admission
+
+    # 夫人 vs 王夫人
+    appearance = {"degree": 5, "description_length": 50, "neighbor_count": 3}
+    furen = classify_person_admission("夫人", [appearance])
+    assert not furen["admitted"], "夫人应被排除"
+    assert furen["person_layer"] == "title_like_person_label"
+
+    wang_furen = classify_person_admission("王夫人", [appearance])
+    assert wang_furen["admitted"], "王夫人应被保留"
+
+    # 公子 vs 香香公主
+    gongzi = classify_person_admission("公子", [appearance])
+    assert not gongzi["admitted"], "公子应被排除"
+    assert gongzi["person_layer"] == "title_like_person_label"
+
+    xiangxiang = classify_person_admission("香香公主", [appearance])
+    assert xiangxiang["admitted"], "香香公主应被保留"
+
+    # 师父 vs 一灯大师
+    shifu = classify_person_admission("师父", [appearance])
+    assert not shifu["admitted"], "师父应被排除"
+    assert shifu["person_layer"] == "title_like_person_label"
+
+    yideng = classify_person_admission("一灯大师", [appearance])
+    assert yideng["admitted"], "一灯大师应被保留"
+
+
+def test_pseudo_titled_labels_excluded(tmp_path):
+    """Round 6 测试 A: 伪专名称谓被排除。"""
+    from src.modules.jinyong.postprocess import (
+        classify_person_admission,
+        build_global_people_index,
+        classify_crosswork_people,
+    )
+
+    pseudo_titles = ["青年公子", "少年公子", "小郡主", "公主殿下", "两位师太", "太夫人", "公子爷"]
+    for name in pseudo_titles:
+        appearance = {"degree": 5, "description_length": 50, "source_novel": "射雕英雄传", "run_id": "test", "neighbor_count": 3}
+        result = classify_person_admission(name, [appearance])
+        assert not result["admitted"], f"{name}应被排除"
+        assert result["person_layer"] == "title_like_person_label", f"{name}应归入title_like_person_label"
+        assert "pseudo_titled_label" in result["reason_codes"], f"{name}应有pseudo_titled_label原因"
+
+
+def test_relationship_chain_label_excluded(tmp_path):
+    """Round 6 测试 B: 关系链式拼接被排除。"""
+    from src.modules.jinyong.postprocess import classify_person_admission
+
+    appearance = {"degree": 5, "description_length": 50, "source_novel": "射雕英雄传", "run_id": "test", "neighbor_count": 3}
+
+    result = classify_person_admission("马夫人父亲", [appearance])
+    assert not result["admitted"], "马夫人父亲应被排除"
+    assert result["person_layer"] == "title_like_person_label"
+    assert "pseudo_titled_label" in result["reason_codes"]
+
+
+def test_stable_titled_names_still_retained_round6(tmp_path):
+    """Round 6 测试 C: 稳定称谓化专名仍保留。"""
+    from src.modules.jinyong.postprocess import classify_person_admission
+
+    stable_names = ["香香公主", "建宁公主", "王夫人", "灭绝师太", "一灯大师", "莫大先生", "冲虚道长"]
+    appearance = {"degree": 5, "description_length": 50, "source_novel": "射雕英雄传", "run_id": "test", "neighbor_count": 3}
+
+    for name in stable_names:
+        result = classify_person_admission(name, [appearance])
+        assert result["admitted"], f"{name}应被保留"
+
+
+def _make_people_layer_corpus_v6(tmp_path) -> Path:
+    """构造最小 corpus 用于 round 6 端到端测试。"""
+    jinyong_root = tmp_path / "jinyong_v6"
+
+    _make_fake_run(
+        jinyong_root / "射雕英雄传" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shediao-v6-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="shediao-v6-20260509",
+        entities=[
+            {"name": "香香公主", "type": "人物", "description": "回部公主，美貌绝伦"},
+            {"name": "青年公子", "type": "人物", "description": "一位年轻公子"},
+            {"name": "马夫人父亲", "type": "人物", "description": "马夫人的父亲"},
+            {"name": "郭靖", "type": "人物", "description": "男主角，大侠"},
+        ],
+        relationships=[
+            {"source": "香香公主", "target": "陈家洛", "type": "关联"},
+            {"source": "青年公子", "target": "某人", "type": "关联"},
+            {"source": "郭靖", "target": "黄蓉", "type": "关联"},
+        ],
+    )
+
+    _make_fake_run(
+        jinyong_root / "神雕侠侣" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shendiao-v6-20260509",
+        nodes=600, edges=900, orphans=80,
+        run_id="shendiao-v6-20260509",
+        entities=[
+            {"name": "香香公主", "type": "人物", "description": "回部公主"},
+            {"name": "两位师太", "type": "人物", "description": "两位师太同行"},
+            {"name": "杨过", "type": "人物", "description": "男主角"},
+        ],
+        relationships=[
+            {"source": "香香公主", "target": "小龙女", "type": "关联"},
+            {"source": "杨过", "target": "小龙女", "type": "关联"},
+        ],
+    )
+
+    return jinyong_root
+
+
+def _make_people_layer_corpus_v7(tmp_path) -> Path:
+    """构造最小 corpus 用于 round 7 端到端测试（包含公子/王爷型条目）。"""
+    jinyong_root = tmp_path / "jinyong_v7"
+
+    _make_fake_run(
+        jinyong_root / "射雕英雄传" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shediao-v7-20260509",
+        nodes=500, edges=800, orphans=50,
+        run_id="shediao-v7-20260509",
+        entities=[
+            {"name": "香香公主", "type": "人物", "description": "回部公主，美貌绝伦"},
+            {"name": "慕容公子", "type": "人物", "description": "姑苏慕容氏公子"},
+            {"name": "沐王爷", "type": "人物", "description": "沐王府王爷"},
+            {"name": "郭靖", "type": "人物", "description": "男主角，大侠"},
+        ],
+        relationships=[
+            {"source": "香香公主", "target": "陈家洛", "type": "关联"},
+            {"source": "慕容公子", "target": "某人", "type": "关联"},
+            {"source": "沐王爷", "target": "某人", "type": "关联"},
+            {"source": "郭靖", "target": "黄蓉", "type": "关联"},
+        ],
+    )
+
+    _make_fake_run(
+        jinyong_root / "神雕侠侣" / "deepseek-v4-flash-zh-strict-bge-m3" / "lightrag" / "shendiao-v7-20260509",
+        nodes=600, edges=900, orphans=80,
+        run_id="shendiao-v7-20260509",
+        entities=[
+            {"name": "香香公主", "type": "人物", "description": "回部公主"},
+            {"name": "段公子", "type": "人物", "description": "大理段氏公子"},
+            {"name": "郑王爷", "type": "人物", "description": "郑氏王爷"},
+            {"name": "杨过", "type": "人物", "description": "男主角"},
+        ],
+        relationships=[
+            {"source": "香香公主", "target": "小龙女", "type": "关联"},
+            {"source": "段公子", "target": "某人", "type": "关联"},
+            {"source": "郑王爷", "target": "某人", "type": "关联"},
+            {"source": "杨过", "target": "小龙女", "type": "关联"},
+        ],
+    )
+
+    return jinyong_root
+
+
+def test_summary_audit_count_matches_audit_file(tmp_path):
+    """Round 7 测试 A: summary 与 audit 数量一致（单一事实来源）。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    root = _make_people_layer_corpus_v7(tmp_path)
+    out = root / "_out"
+    result = run_global_people_layer(str(root), str(out))
+
+    with open(result["summary_path"], encoding="utf-8") as f:
+        summary = json.load(f)
+    with open(result["survivor_audit_path"], encoding="utf-8") as f:
+        audit = json.load(f)
+
+    assert summary["survivor_audit_candidates"] == audit["total_candidates"], \
+        "summary的survivor_audit_candidates必须与audit的total_candidates一致"
+
+
+def test_gongzi_type_in_survivor_audit(tmp_path):
+    """Round 7 测试 B: 幸存的公子型条目进入审计。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    root = _make_people_layer_corpus_v7(tmp_path)
+    out = root / "_out"
+    result = run_global_people_layer(str(root), str(out))
+
+    # 确认仍在主人物层
+    with open(result["index_path"], encoding="utf-8") as f:
+        index = json.load(f)
+    indexed_names = {p["person_name"] for p in index["people"]}
+
+    for name in ["慕容公子", "段公子"]:
+        assert name in indexed_names, f"{name}应保留在主人物层"
+
+    # 确认进入审计
+    with open(result["survivor_audit_path"], encoding="utf-8") as f:
+        audit = json.load(f)
+    audit_names = {c["person_name"] for c in audit["candidates"]}
+
+    for name in ["慕容公子", "段公子"]:
+        assert name in audit_names, f"{name}应进入survivor_audit"
+
+
+def test_wangye_type_in_survivor_audit(tmp_path):
+    """Round 7 测试 C: 幸存的王爷型条目进入审计。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    root = _make_people_layer_corpus_v7(tmp_path)
+    out = root / "_out"
+    result = run_global_people_layer(str(root), str(out))
+
+    with open(result["survivor_audit_path"], encoding="utf-8") as f:
+        audit = json.load(f)
+    audit_names = {c["person_name"] for c in audit["candidates"]}
+
+    for name in ["沐王爷", "郑王爷"]:
+        assert name in audit_names, f"{name}应进入survivor_audit"
+
+
+def test_suffix_type_still_in_survivor_audit(tmp_path):
+    """Round 7 测试 D: 后缀型专名仍继续进入审计。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    root = _make_people_layer_corpus_v7(tmp_path)
+    out = root / "_out"
+    result = run_global_people_layer(str(root), str(out))
+
+    with open(result["survivor_audit_path"], encoding="utf-8") as f:
+        audit = json.load(f)
+    audit_names = {c["person_name"] for c in audit["candidates"]}
+
+    # 后缀型专名
+    assert "香香公主" in audit_names, "香香公主应进入survivor_audit"
+
+
+def test_summary_top_examples_from_audit(tmp_path):
+    """Round 7 测试 E: summary 的 top_survivor_audit_examples 来自 audit 结果。"""
+    from src.modules.jinyong.postprocess import run_global_people_layer
+
+    root = _make_people_layer_corpus_v7(tmp_path)
+    out = root / "_out"
+    result = run_global_people_layer(str(root), str(out))
+
+    with open(result["summary_path"], encoding="utf-8") as f:
+        summary = json.load(f)
+    with open(result["survivor_audit_path"], encoding="utf-8") as f:
+        audit = json.load(f)
+
+    # top examples 必须是 audit 的子集
+    summary_names = {e["person_name"] for e in summary["top_survivor_audit_examples"]}
+    audit_names = {c["person_name"] for c in audit["candidates"]}
+    assert summary_names.issubset(audit_names), \
+        "summary的top_survivor_audit_examples必须来自audit结果"
+
+    # 顺序也应一致（前N项）
+    n = min(len(summary["top_survivor_audit_examples"]), len(audit["candidates"]))
+    for i in range(n):
+        assert summary["top_survivor_audit_examples"][i]["person_name"] == audit["candidates"][i]["person_name"]
