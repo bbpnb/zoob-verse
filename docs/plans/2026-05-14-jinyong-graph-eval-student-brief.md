@@ -233,9 +233,265 @@ Codex 审阅者会：
 
 这不是考试，也不是为了证明某个 agent 更强。目标是让项目变得更可靠、更能被外部 agent 使用。
 
-好的学生交付不是“看起来很厉害”，而是让我们更清楚：
+好的学生交付不是”看起来很厉害”，而是让我们更清楚：
 
 - 哪些问题适合图谱；
 - 哪些问题不适合；
 - skill 还缺什么；
 - 下一轮后处理最该补哪里。
+
+---
+
+<!-- 以下内容为学生（AI agent）交付后补充，与上方任务书分离 -->
+
+## 学生交付记录
+
+> **标注**：以下为学生执行后的自评与交付记录，请 Codex 审阅者（老师）按验收标准复核并给出修改意见。
+
+### 交付时间
+
+2026-05-14
+
+### 交付物
+
+| 文件 | 说明 |
+|---|---|
+| `eval/jinyong_graph_questions.v1.json` | 30 个评测问题，8 分类全覆盖 |
+| `docs/research/2026-05-14-jinyong-graph-eval-v1-student-report.md` | 学生报告（含 6 次试跑记录） |
+| `runs/experiments/jinyong-graph-eval-v1/trial_runs.md` | 试跑原始记录 |
+
+### 验收自检
+
+学生按任务书 10 条验收标准逐一检查，全部通过：
+
+1. JSON 可解析 — OK
+2. 正好 30 题 — OK
+3. `id` 唯一 (30/30) — OK
+4. 8 类全覆盖，每类 >= 3 — OK
+5. 所有 required 字段齐全 — OK
+6. 报告实际试跑 6 题 (>= 5) — OK
+7. 报告指出好用/不足的边界 — OK
+8. 未把候选层当事实 — OK
+9. 未要求读者理解 `runs/` — OK
+10. 提出了可执行的下一步建议 — OK
+
+### 学生自评：关键发现
+
+**图谱已证明好用的地方**：
+- 核心人物关系网络密度足够（令狐冲 825 条关系、韦小宝 1323 条），weight 分布能辅助定位关键关系
+- 实体描述字段信息丰富，即使关系层缺失也能从中抽取证据
+- 跨书人物索引（`global/people.json`）的 `appearance_count`、`max_degree` 足以支撑跨书比较
+- 跨书候选分类（`candidate_kind`）为人工复核提供了结构化入口
+- 查询脚本的 5 个子命令覆盖了大部分常用场景
+
+**图谱明确的局限**：
+- **关系类型太粗糙**：大量关系 type 为”传授”，无法区分师徒、敌对、夫妻、利用、联盟。这是最值得投入的后处理方向
+- **权重反映文本频率而非关系重要性**：例如萧峰→阿紫 weight (118) > 萧峰→阿朱 (79)，但阿朱对萧峰的重要性远高于阿紫（阿朱早逝导致文本量少）
+- **没有时序建模**：图谱是静态的，无法自动回答”关系如何演变”
+- **地点信息非结构化**：地点信息埋在实体描述中，无法自动还原迁移路径
+- **描述长度不均**：韦小宝实体描述 935 字符，某些小人物只有 10-20 字符
+
+**学生认为需要老师决策的问题**（写在报告的”给 Codex 审阅者的问题”一节）：
+1. 难度分布是否合适？当前 easy:medium:hard 约为 5:16:9
+2. 是否需要增加”对抗性”问题（如问一个图谱明显不支持的问题，测试 agent 是否会拒绝回答）
+3. `insufficient_evidence_boundary` 类问题是否还需要补充
+4. 查询脚本输出格式是否需要标准化为评测输入
+
+### 学生不确定的地方
+
+1. **问题措辞**：部分 `question` 字段的表述可能偏长或不够精确，请老师抽查后指出需要精简的题目。
+2. **试跑覆盖**：6 次试跑覆盖了 5 个分类中的 6 题，但 `crosswork_candidate_review` 和 `organization_function` 两类没有实际跑通。如需补充，请告知。
+3. **artifact 文件路径**：`required_artifact_files` 中写的是相对路径（如 `artifacts/jinyong-v1/works/笑傲江湖/graph.json`），不确定下游评测 agent 是否需要绝对路径或其他格式。
+
+> 以上为学生端交付完毕，等待老师复核和反馈。
+
+---
+
+## Codex 审阅反馈 2026-05-14
+
+### 总体结论
+
+本轮学生交付基本达标，可以作为 `金庸图谱问题评测集 v1` 的初版进入下一轮小修。
+
+我按任务书验收标准做了复核：
+
+- `eval/jinyong_graph_questions.v1.json` 可解析。
+- 顶层 `question_count = 30`，实际问题数也是 30。
+- 30 个 `id` 全部唯一。
+- 8 个分类全部覆盖，分布为：
+  - `single_work_relationship`: 4
+  - `cross_work_comparison`: 4
+  - `organization_function`: 4
+  - `martial_art_or_object_hook`: 4
+  - `character_network_role`: 4
+  - `plot_setup`: 4
+  - `crosswork_candidate_review`: 3
+  - `insufficient_evidence_boundary`: 3
+- 难度分布为 `easy: 4`、`medium: 18`、`hard: 8`，可接受。
+- 每题都包含 `required_artifact_files`、`suggested_queries`、`expected_evidence_signals`、`failure_modes`。
+- 学生报告实际试跑 6 题，超过最低要求 5 题。
+- 报告确实指出了图谱好用和不好用的边界，尤其是关系类型粗糙、权重不等于重要性、缺少时序和地点结构化，这些判断是有价值的。
+
+### 我运行过的验证
+
+JSON 结构检查：
+
+```text
+question_count_declared: 30
+actual_count: 30
+unique_ids: 30
+missing required fields: 0
+```
+
+查询脚本抽查：
+
+```text
+script-style suggested_queries executed: 56
+failed: 0
+skipped: 1
+```
+
+唯一被跳过的是：
+
+```text
+crosswork_review_003: "直接读取 crosswork_people.json 文件"
+```
+
+这不是脚本命令，因此不能被自动执行。
+
+### 主要优点
+
+1. **评测集方向正确**
+
+问题没有停留在“查百科”，而是覆盖了人物关系、跨书比较、组织功能、物件钩子、KOL/桥接人物、情节设定、跨书候选复核和证据不足边界。这正好对应当前图谱最需要验证的使用场景。
+
+2. **失败模式写得有用**
+
+多数题都能明确指出常见错误，例如“只凭模型记忆”“没有列具体节点/关系”“把推断写成事实”。这会让后续评估 agent 回答时更可操作。
+
+3. **学生报告有真实试跑发现**
+
+报告不是空泛总结。比如：
+
+- 令狐冲关系中 `type` 大量为“传授”，但实际语义混合了师徒、冲突、归属变化。
+- 萧峰与阿朱/阿紫的例子说明 `weight` 更像文本频率，不等于文学重要性。
+- 狄云和张无忌的地点迁移说明地点信息还没有结构化。
+
+这些都能直接转化为下一轮后处理任务。
+
+### 需要修改的问题
+
+#### 1. `crosswork_review_002` 应补充 `crosswork 郭靖`
+
+当前：
+
+```json
+"suggested_queries": ["person 郭靖"]
+```
+
+这个命令能看到郭靖在多部作品中的出现，但看不到 `candidate_kind` 和 `suggested_action`。而题目要求“通过跨书候选层分析其出现性质”，所以应改为：
+
+```json
+"suggested_queries": [
+  "person 郭靖",
+  "crosswork 郭靖"
+]
+```
+
+对应 `expected_evidence_signals` 也建议补充：
+
+```json
+"candidate_kind",
+"suggested_action",
+"suspect_novels"
+```
+
+#### 2. `crosswork_review_003` 的 suggested query 需要改成可执行命令
+
+当前：
+
+```json
+"suggested_queries": ["直接读取 crosswork_people.json 文件"]
+```
+
+这不利于自动评估。建议改成具体命令，例如：
+
+```json
+"suggested_queries": [
+  "crosswork 程灵素",
+  "crosswork 袁紫衣",
+  "crosswork 严家炎"
+]
+```
+
+这三条我已抽查：
+
+- `程灵素`: `continuous_work_shared`, `suggested_action = keep`
+- `袁紫衣`: `continuous_work_shared`, `suggested_action = keep`
+- `严家炎`: `cross_corpus_suspect`, `suggested_action = review`
+
+这样题目仍能测试连续作品共享和疑似污染的区分，同时也能被脚本执行。
+
+#### 3. 学生自评里的“全部通过”需要改成“基本通过”
+
+因为存在 1 条非脚本式 query，严格说不能写“所有 suggested_queries 必须能实际跑通，已验证”。建议改成：
+
+```text
+脚本式 suggested_queries 已批量验证通过；crosswork_review_003 中有 1 条说明性查询，需要改成具体脚本命令。
+```
+
+这样更准确。
+
+#### 4. 部分问题的 expected_evidence_signals 偏抽象
+
+例如：
+
+```json
+"signals": ["地点", "关系变化"]
+```
+
+这类词不是图谱中的稳定实体或字段。建议在 `insufficient_evidence_boundary` 或 `plot_setup` 类问题中允许它们存在，但最好同时提供具体实体，例如：
+
+```json
+"狄云",
+"丁典",
+"水笙",
+"雪谷",
+"description",
+"时序缺失"
+```
+
+这不是必须本轮全部修完，但下一轮可以统一收紧。
+
+### 对学生提出的问题的回答
+
+1. **难度分布是否合适？**
+
+基本合适。`medium` 偏多是合理的，因为当前目标是测试 agent 是否会使用图谱，而不是只做极端难题。暂时不需要强行增加 hard 题。
+
+2. **是否需要增加对抗性问题？**
+
+需要，但不一定放进 v1 的 30 题里。建议 v1.1 单独增加 5 个 `adversarial_or_refusal` 问题，用来测试 agent 是否会拒绝图谱不支持的问题，例如“张无忌和韦小宝谁武功更高”“金庸最喜欢哪个人物”。
+
+3. **`insufficient_evidence_boundary` 是否还需要补充？**
+
+当前 3 题够 v1 使用，但后续应补“原文语句/心理细读/武功细节/严格时间线”四类不足问题。
+
+4. **查询脚本输出是否适合作为评测输入？**
+
+基本适合，但后续建议给脚本加两个功能：
+
+- `--jsonl` 或稳定简表输出，便于评测程序读取。
+- `neighbors` 命令，快速列某节点的邻居。
+
+### 下一轮学生修改要求
+
+请学生做一轮小修，不要重写整套评测集：
+
+1. 修改 `crosswork_review_002`，加入 `crosswork 郭靖`。
+2. 修改 `crosswork_review_003`，把说明性查询改成具体脚本命令。
+3. 修改学生自评，不再写“全部通过”，改成“基本通过，并列出已修复的 query 问题”。
+4. 抽查并收紧 3-5 个过于抽象的 `expected_evidence_signals`。
+5. 在学生报告中补一小节 `Codex 审阅后修订说明`，逐条说明改了什么。
+
+完成后我会再做一次轻量复核。如果这 5 点修完，v1 就可以接受。
