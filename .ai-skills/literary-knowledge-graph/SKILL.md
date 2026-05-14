@@ -1,6 +1,20 @@
 ---
 name: literary-knowledge-graph
+version: "0.2.0"
+author: "zoob-verse"
+license: "MIT"
 description: Use when answering, exploring, evaluating, or building with zoob-verse literary knowledge graph artifacts, especially 金庸 / Jinyong questions that should be grounded in artifacts/jinyong-v1 rather than answered from model memory alone.
+metadata:
+  short-description: Ground Jinyong literary analysis in local graph artifacts
+  hermes:
+    tags:
+      - literary-analysis
+      - knowledge-graph
+      - jinyong
+      - evidence-grounded-qa
+    related_skills: []
+    entrypoints:
+      - scripts/query_jinyong_graph.py
 ---
 
 # Literary Knowledge Graph Skill
@@ -74,17 +88,25 @@ If the script is unavailable, read the JSON files directly with a small Python s
 
 ## Installation Assumption
 
-This skill assumes the agent is operating at the repository root or another directory that contains:
+The query script can locate the artifact in several ways:
+
+1. explicit `--artifact /path/to/artifacts/jinyong-v1`
+2. environment variable `JINYONG_ARTIFACT_DIR=/path/to/artifacts/jinyong-v1`
+3. searching upward from the current working directory
+4. searching upward from this skill's script directory
+
+It expects to find:
 
 ```text
 artifacts/jinyong-v1/
 ```
 
-If that directory is missing, ask the user to provide or generate the artifact package. Do not fall back to unsupported claims from model memory while pretending to use the graph.
+If the artifact is missing, run `check` to diagnose and ask the user to provide or generate the artifact package. Do not fall back to unsupported claims from model memory while pretending to use the graph.
 
 Quick self-test after installation:
 
 ```bash
+python .ai-skills/literary-knowledge-graph/scripts/query_jinyong_graph.py check
 python .ai-skills/literary-knowledge-graph/scripts/query_jinyong_graph.py summary
 python .ai-skills/literary-knowledge-graph/scripts/query_jinyong_graph.py person 洪七公
 ```

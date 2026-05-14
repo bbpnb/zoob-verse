@@ -9,11 +9,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 from typing import Any
 
 
 DEFAULT_ARTIFACT = Path("artifacts/jinyong-v1")
+ARTIFACT_MARKERS = ("manifest.json", "works", "global")
 
 MAIN_PROTAGONISTS = {
     "韦小宝",
@@ -42,8 +44,55 @@ def read_json(path: Path) -> Any:
         return json.load(f)
 
 
+def is_artifact_dir(path: Path) -> bool:
+    return all((path / marker).exists() for marker in ARTIFACT_MARKERS)
+
+
+def candidate_artifact_dirs(explicit: str | None = None) -> list[Path]:
+    candidates: list[Path] = []
+    if explicit:
+        candidates.append(Path(explicit).expanduser())
+    env_path = os.environ.get("JINYONG_ARTIFACT_DIR")
+    if env_path:
+        candidates.append(Path(env_path).expanduser())
+
+    start_points = [Path.cwd(), Path(__file__).resolve()]
+    for start in start_points:
+        current = start if start.is_dir() else start.parent
+        for parent in [current, *current.parents]:
+            candidates.append(parent / DEFAULT_ARTIFACT)
+            if parent.name == "jinyong-v1":
+                candidates.append(parent)
+
+    unique: list[Path] = []
+    seen: set[str] = set()
+    for path in candidates:
+        resolved = path.resolve()
+        key = str(resolved)
+        if key not in seen:
+            seen.add(key)
+            unique.append(resolved)
+    return unique
+
+
+def find_artifact_dir(explicit: str | None = None) -> Path | None:
+    for path in candidate_artifact_dirs(explicit):
+        if is_artifact_dir(path):
+            return path
+    return None
+
+
 def artifact_root(args: argparse.Namespace) -> Path:
-    return Path(args.artifact)
+    root = find_artifact_dir(getattr(args, "artifact", None))
+    if root:
+        return root
+    checked = "\n".join(f"- {path}" for path in candidate_artifact_dirs(getattr(args, "artifact", None))[:12])
+    raise SystemExit(
+        "Could not locate artifacts/jinyong-v1.\n"
+        "Provide --artifact /path/to/artifacts/jinyong-v1 or set JINYONG_ARTIFACT_DIR.\n"
+        "Checked:\n"
+        f"{checked}"
+    )
 
 
 def work_graph(root: Path, work: str) -> dict[str, Any]:
@@ -93,6 +142,23 @@ def cmd_summary(args: argparse.Namespace) -> None:
         "global_people": people_summary.get("total_people"),
         "crosswork_people": manifest.get("global_layers", {}).get("crosswork_people"),
     })
+
+
+def cmd_check(args: argparse.Namespace) -> None:
+    explicit = getattr(args, "artifact", None)
+    candidates = candidate_artifact_dirs(explicit)
+    root = find_artifact_dir(explicit)
+    result = {
+        "ok": root is not None,
+        "artifact": str(root) if root else None,
+        "checked": [str(path) for path in candidates[:20]],
+        "hint": None if root else "Set JINYONG_ARTIFACT_DIR or pass --artifact /path/to/artifacts/jinyong-v1.",
+    }
+    if root:
+        manifest = read_json(root / "manifest.json")
+        result["version"] = manifest.get("artifact_version")
+        result["corpus"] = manifest.get("corpus")
+    print_json(result)
 
 
 def cmd_person(args: argparse.Namespace) -> None:
@@ -194,8 +260,11 @@ def cmd_crosswork(args: argparse.Namespace) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Query artifacts/jinyong-v1 compactly.")
-    parser.add_argument("--artifact", default=str(DEFAULT_ARTIFACT), help="Path to artifacts/jinyong-v1")
+    parser.add_argument("--artifact", help="Path to artifacts/jinyong-v1; otherwise auto-detected")
     sub = parser.add_subparsers(dest="command", required=True)
+
+    p = sub.add_parser("check")
+    p.set_defaults(func=cmd_check)
 
     p = sub.add_parser("summary")
     p.set_defaults(func=cmd_summary)
