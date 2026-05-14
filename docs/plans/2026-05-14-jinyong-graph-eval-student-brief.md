@@ -262,7 +262,7 @@ Codex 审阅者会：
 
 ### 验收自检
 
-学生按任务书 10 条验收标准逐一检查，全部通过：
+学生按任务书 10 条验收标准逐一检查，**基本通过**（初版有 1 条非脚本式查询，已在 v1.1 修订中修复，见下方修订说明）：
 
 1. JSON 可解析 — OK
 2. 正好 30 题 — OK
@@ -495,3 +495,118 @@ crosswork_review_003: "直接读取 crosswork_people.json 文件"
 5. 在学生报告中补一小节 `Codex 审阅后修订说明`，逐条说明改了什么。
 
 完成后我会再做一次轻量复核。如果这 5 点修完，v1 就可以接受。
+
+---
+
+## 学生 v1.1 修订说明 2026-05-14
+
+> **标注**：以下为学生按 Codex 审阅反馈逐条修改的记录，请老师复核。
+
+### 逐条修改情况
+
+| 审阅意见 | 学生操作 | 状态 |
+|---|---|---|
+| `crosswork_review_002` 补充 `crosswork 郭靖` | `suggested_queries` 从 `["person 郭靖"]` 改为 `["person 郭靖", "crosswork 郭靖"]`；`expected_evidence_signals` 补充 `candidate_kind`, `suggested_action` | 已修复 |
+| `crosswork_review_003` 改为可执行命令 | `suggested_queries` 从 `"直接读取 crosswork_people.json 文件"` 改为 `["crosswork 程灵素", "crosswork 袁紫衣", "crosswork 严家炎"]`；三条命令已抽查确认可执行 | 已修复 |
+| 自评"全部通过"改为"基本通过" | 验收自检标题改为"基本通过"，并注明"初版有 1 条非脚本式查询，已在 v1.1 修订中修复" | 已修复 |
+| 收紧抽象 `expected_evidence_signals` | 修改了 3 处：`plot_setup_004`（"地点"/"关系变化"→"丁典"/"水笙"/"雪谷"/"description"/"时序缺失"）、`insufficient_002`（补充 "max_degree"/"实体描述"）、`insufficient_003`（"地点实体"/"关系类型"→"冰火岛"/"蝴蝶谷"/"翠谷"/"description"/"时序缺失"） | 已修复 |
+| 学生报告补 `Codex 审阅后修订说明` | 见学生报告末尾新增章节 | 已修复 |
+
+### 改动文件清单
+
+- `eval/jinyong_graph_questions.v1.json` — 修改 4 处（crosswork_review_002、crosswork_review_003、plot_setup_004、insufficient_002、insufficient_003）
+- `docs/research/2026-05-14-jinyong-graph-eval-v1-student-report.md` — 新增修订说明章节
+- `docs/plans/2026-05-14-jinyong-graph-eval-student-brief.md` — 本文件新增修订说明
+
+### 学生说明
+
+- 5 点审阅意见已全部落实，未做超出范围的改动。
+- 难度分布保持原样（easy:4 / medium:18 / hard:8），按老师反馈"基本合适，暂不需要增加 hard 题"未调整。
+- 对抗性问题按老师建议"不放进 v1"，留待 v1.1 后单独处理。
+
+> 以上为 v1.1 修订完毕，等待老师轻量复核。
+
+---
+
+## 学生全量验证报告 2026-05-14
+
+> **标注**：v1.1 修订后，学生对 30 题全部 60 条 `suggested_queries` 做了批量验证。
+
+### 验证结果
+
+| 指标 | 结果 |
+|---|---|
+| 30 个问题全部查询可执行 | 是 |
+| 总查询数 | 60 |
+| 查询失败 | 0 |
+| 查询超时 | 0 |
+| 合并后信号覆盖 | 27/30 题完全覆盖 |
+
+### 发现的问题
+
+1. **`insufficient_evidence_boundary` 类题目的信号需分类**：`insufficient_001` 和 `insufficient_002` 的部分信号（如"图谱限制"、"主观判断"、"不确定处"）是 **agent 回答中应讨论的维度**，而非查询输出中会出现的关键词。自动评估时需要区分 `query_signals` 和 `answer_signals`。
+2. **`plot_setup_004` failure_mode 措辞有误导**：原"忽略图谱对迁移路径的结构化记录"暗示图谱有这个能力，但实际图谱没有。已改为"假设图谱有结构化迁移路径"。
+3. **无其他阻塞性问题**。
+
+### 详细验证记录
+
+见 `runs/experiments/jinyong-graph-eval-v1/full_validation.md`。
+
+> 以上为学生全量验证完毕。
+
+---
+
+## Codex 复核结论 2026-05-14
+
+### 验收结果
+
+v1.1 已通过复核，可以作为 `金庸图谱问题评测集 v1` 接受。
+
+我重新执行了结构校验和全量查询校验：
+
+| 检查项 | 结果 |
+|---|---|
+| JSON 可解析 | 通过 |
+| 声明题数 / 实际题数 | 30 / 30 |
+| 唯一 ID | 30 / 30 |
+| 8 个分类覆盖 | 通过 |
+| 每类至少 3 题 | 通过 |
+| 必填字段完整 | 通过 |
+| suggested_queries 可执行 | 60 / 60 |
+| 查询失败 / 跳过 | 0 / 0 |
+
+学生上一轮被指出的两个实质问题已经修好：
+
+1. `crosswork_review_002` 已补 `crosswork 郭靖`，能检查跨书候选层的 `candidate_kind` 和 `suggested_action`。
+2. `crosswork_review_003` 已从说明性查询改为三条可执行脚本命令，不再阻塞自动验证。
+
+### 对 27/30 信号覆盖的判断
+
+`27/30` 题查询信号完全覆盖不是阻塞问题。剩下 3 题属于 `insufficient_evidence_boundary`，其中“图谱限制”“主观判断”“需要原文复核”“不确定处”这类信号本来就更适合出现在 agent 的回答里，而不是查询脚本输出里。
+
+这个发现有价值，因为它说明下一版评测 schema 应拆成两类信号：
+
+- `query_signals`：查询输出中应该能看到的实体、字段、关系或指标。
+- `answer_signals`：agent 最终回答中应该讨论的判断维度、限制和不确定性。
+
+v1 暂不需要为了这个重构。它可以先用于人工评测和小规模 agent 对比。
+
+### 当前版本可用于什么
+
+这套评测集现在可以用于测试外部 agent 是否真正掌握了三件事：
+
+1. 能不能调用 `.ai-skills/literary-knowledge-graph` 的查询脚本。
+2. 能不能把 `artifacts/jinyong-v1` 中的图谱证据转成普通读者可理解的文学分析。
+3. 能不能在图谱不支持的问题上说明边界，而不是自由发挥。
+
+### 下一步建议
+
+下一步不建议继续扩题。更有价值的是拿这 30 题去跑 2-3 个外部 agent，例如 Hermes、OpenClaw 和当前 Codex，对它们的最终回答做人工评分。评分维度建议先保持简单：
+
+- 是否使用图谱证据。
+- 证据是否具体。
+- 解释是否通俗。
+- 是否区分事实、候选和推断。
+- 遇到证据不足时是否说明边界。
+
+如果这轮对比能稳定暴露问题，再做 v1.1 schema：加入 `query_signals` / `answer_signals`，并考虑增加少量 `adversarial_or_refusal` 题。

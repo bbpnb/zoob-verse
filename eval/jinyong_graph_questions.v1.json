@@ -1,0 +1,942 @@
+{
+  "version": "jinyong_graph_questions_v1",
+  "purpose": "Evaluate whether agents can use artifacts/jinyong-v1 for evidence-grounded literary analysis.",
+  "question_count": 30,
+  "questions": [
+    {
+      "id": "single_relation_001",
+      "category": "single_work_relationship",
+      "difficulty": "medium",
+      "question": "通过图谱分析《笑傲江湖》中令狐冲与岳不群为什么不是简单的师徒决裂。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/笑傲江湖/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 笑傲江湖 --name 令狐冲 --top 12",
+        "relations --work 笑傲江湖 --name 岳不群 --top 12"
+      ],
+      "expected_evidence_signals": [
+        "令狐冲",
+        "岳不群",
+        "风清扬",
+        "任我行",
+        "华山派"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭模型记忆讲伪君子",
+        "没有列出具体节点或关系",
+        "把推断写成确定事实"
+      ]
+    },
+    {
+      "id": "single_relation_002",
+      "category": "single_work_relationship",
+      "difficulty": "medium",
+      "question": "通过图谱分析《鹿鼎记》中韦小宝与康熙的多重身份关系如何演变。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/鹿鼎记/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 鹿鼎记 --name 韦小宝 --top 12"
+      ],
+      "expected_evidence_signals": [
+        "韦小宝",
+        "康熙",
+        "小玄子",
+        "小桂子",
+        "天地会"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只讲君臣关系而忽略朋友/师徒/主仆多重身份",
+        "没有引用图谱中的关系描述",
+        "混淆小说情节和图谱证据"
+      ]
+    },
+    {
+      "id": "single_relation_003",
+      "category": "single_work_relationship",
+      "difficulty": "easy",
+      "question": "通过图谱分析《天龙八部》中萧峰与阿朱的关系及其对萧峰身份危机的影响。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/天龙八部/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 天龙八部 --name 萧峰 --top 12"
+      ],
+      "expected_evidence_signals": [
+        "萧峰",
+        "阿朱",
+        "丐帮",
+        "契丹",
+        "段誉"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭模型记忆讲误杀阿朱",
+        "没有列出图谱中的具体关系",
+        "过度推测萧峰心理"
+      ]
+    },
+    {
+      "id": "single_relation_004",
+      "category": "single_work_relationship",
+      "difficulty": "hard",
+      "question": "通过图谱分析《射雕英雄传》中郭靖、黄蓉、欧阳锋三人的关系三角如何体现正邪对立与个人情感。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/射雕英雄传/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 射雕英雄传 --name 郭靖 --top 12",
+        "person 黄蓉",
+        "person 欧阳锋"
+      ],
+      "expected_evidence_signals": [
+        "郭靖",
+        "黄蓉",
+        "欧阳锋",
+        "丐帮",
+        "桃花岛"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲故事不引用图谱",
+        "忽略图谱中的关系权重或类型",
+        "把模型推断当作图谱事实"
+      ]
+    },
+    {
+      "id": "cross_work_001",
+      "category": "cross_work_comparison",
+      "difficulty": "medium",
+      "question": "通过全局人物层比较郭靖、杨过、张无忌三人的跨书出现方式有何不同。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/global/people.json"
+      ],
+      "suggested_queries": [
+        "person 郭靖",
+        "person 杨过",
+        "person 张无忌"
+      ],
+      "expected_evidence_signals": [
+        "郭靖",
+        "杨过",
+        "张无忌",
+        "appearance_count",
+        "max_degree"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭模型记忆讲射雕三部曲",
+        "没有引用 appearance_count 或 max_degree 数据",
+        "把跨书候选当确定事实"
+      ]
+    },
+    {
+      "id": "cross_work_002",
+      "category": "cross_work_comparison",
+      "difficulty": "medium",
+      "question": "通过图谱比较《碧血剑》《书剑恩仇录》《鹿鼎记》中反清主题的差异：个人选择、组织纪律和现实权力分别占多大比重。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/碧血剑/graph.json",
+        "artifacts/jinyong-v1/works/书剑恩仇录/graph.json",
+        "artifacts/jinyong-v1/works/鹿鼎记/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 碧血剑 --name 袁承志 --top 10",
+        "relations --work 书剑恩仇录 --name 陈家洛 --top 10",
+        "relations --work 鹿鼎记 --name 韦小宝 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "袁承志",
+        "陈家洛",
+        "韦小宝",
+        "天地会",
+        "红花会"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "脱离图谱讲文学评论",
+        "没有列出每部作品的具体证据",
+        "忽略《鹿鼎记》的反讽特质"
+      ]
+    },
+    {
+      "id": "cross_work_003",
+      "category": "cross_work_comparison",
+      "difficulty": "hard",
+      "question": "通过图谱比较少林、武当、丐帮在不同作品中的组织功能差异。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/global/people.json",
+        "artifacts/jinyong-v1/works/天龙八部/graph.json",
+        "artifacts/jinyong-v1/works/倚天屠龙记/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 天龙八部 --q 丐帮 --top 10",
+        "search --work 倚天屠龙记 --q 少林 --top 10",
+        "search --work 倚天屠龙记 --q 武当 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "少林",
+        "武当",
+        "丐帮",
+        "萧峰",
+        "张三丰"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆总结三大门派",
+        "没有引用具体作品中的图谱数据",
+        "混淆不同作品中的组织角色"
+      ]
+    },
+    {
+      "id": "cross_work_004",
+      "category": "cross_work_comparison",
+      "difficulty": "medium",
+      "question": "通过全局人物层找出洪七公、一灯、黄药师三人，比较他们在射雕三部曲中的跨书出现模式。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/global/people.json"
+      ],
+      "suggested_queries": [
+        "person 洪七公",
+        "person 一灯",
+        "person 黄药师"
+      ],
+      "expected_evidence_signals": [
+        "洪七公",
+        "一灯",
+        "黄药师",
+        "appearance_count",
+        "appears_in_novels"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只讲射雕人物不引用全局数据",
+        "没有比较 appearance_count 差异",
+        "把弱出现当强出现"
+      ]
+    },
+    {
+      "id": "org_function_001",
+      "category": "organization_function",
+      "difficulty": "medium",
+      "question": "通过图谱分析《鹿鼎记》中天地会的组织结构和叙事功能。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/鹿鼎记/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 鹿鼎记 --q 天地会 --top 10",
+        "relations --work 鹿鼎记 --name 陈近南 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "天地会",
+        "陈近南",
+        "青木堂",
+        "韦小宝",
+        "反清复明"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲天地会历史",
+        "没有引用图谱中的组织实体",
+        "忽略韦小宝与天地会的矛盾关系"
+      ]
+    },
+    {
+      "id": "org_function_002",
+      "category": "organization_function",
+      "difficulty": "medium",
+      "question": "通过图谱分析《笑傲江湖》中五岳剑派并派背后的权力博弈。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/笑傲江湖/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 笑傲江湖 --q 五岳 --top 10",
+        "person 岳不群",
+        "person 左冷禅"
+      ],
+      "expected_evidence_signals": [
+        "华山派",
+        "嵩山派",
+        "岳不群",
+        "左冷禅",
+        "恒山派"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲并派故事",
+        "没有列出图谱中的门派关系",
+        "忽略恒山派在并派中的特殊位置"
+      ]
+    },
+    {
+      "id": "org_function_003",
+      "category": "organization_function",
+      "difficulty": "easy",
+      "question": "通过图谱分析《天龙八部》中丐帮如何从'天下第一大帮'变成内部权力斗争的战场。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/天龙八部/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 天龙八部 --q 丐帮 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "丐帮",
+        "萧峰",
+        "降龙二十八掌",
+        "打狗棒法",
+        "洛阳"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭模型记忆讲萧峰身世",
+        "没有引用图谱中的丐帮实体描述",
+        "忽略降龙十八掌和打狗棒法的传承线索"
+      ]
+    },
+    {
+      "id": "org_function_004",
+      "category": "organization_function",
+      "difficulty": "hard",
+      "question": "通过图谱比较《书剑恩仇录》中的红花会和《鹿鼎记》中的天地会在组织结构和叙事功能上的异同。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/书剑恩仇录/graph.json",
+        "artifacts/jinyong-v1/works/鹿鼎记/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 书剑恩仇录 --q 红花会 --top 10",
+        "search --work 鹿鼎记 --q 天地会 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "红花会",
+        "天地会",
+        "陈家洛",
+        "陈近南",
+        "乾隆"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆比较两个组织",
+        "没有引用图谱中的实体描述",
+        "忽略乾隆与红花会的特殊关系"
+      ]
+    },
+    {
+      "id": "object_hook_001",
+      "category": "martial_art_or_object_hook",
+      "difficulty": "medium",
+      "question": "通过图谱分析《笑傲江湖》中辟邪剑谱如何成为故事发动机。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/笑傲江湖/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 笑傲江湖 --q 辟邪剑谱 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "辟邪剑谱",
+        "林平之",
+        "岳不群",
+        "福威镖局",
+        "袈裟"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲辟邪剑谱故事",
+        "没有列出图谱中争夺剑谱的多方势力",
+        "忽略剑谱载体（袈裟）的重要性"
+      ]
+    },
+    {
+      "id": "object_hook_002",
+      "category": "martial_art_or_object_hook",
+      "difficulty": "medium",
+      "question": "通过图谱分析《倚天屠龙记》中屠龙刀如何推动多方势力的冲突。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/倚天屠龙记/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 倚天屠龙记 --q 屠龙刀 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "屠龙刀",
+        "谢逊",
+        "俞岱岩",
+        "天鹰教",
+        "海沙派"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲屠龙刀故事",
+        "没有引用图谱中的多方争夺关系",
+        "把屠龙刀和倚天剑混为一谈"
+      ]
+    },
+    {
+      "id": "object_hook_003",
+      "category": "martial_art_or_object_hook",
+      "difficulty": "easy",
+      "question": "通过图谱分析《笑傲江湖》中独孤九剑对令狐冲武学路径和身份转变的影响。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/笑傲江湖/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 笑傲江湖 --q 独孤九剑 --top 10",
+        "relations --work 笑傲江湖 --name 令狐冲 --top 12"
+      ],
+      "expected_evidence_signals": [
+        "独孤九剑",
+        "令狐冲",
+        "风清扬",
+        "思过崖",
+        "以无招胜有招"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲独孤九剑",
+        "没有引用图谱中的传授关系",
+        "忽略风清扬作为传承者的关键角色"
+      ]
+    },
+    {
+      "id": "object_hook_004",
+      "category": "martial_art_or_object_hook",
+      "difficulty": "hard",
+      "question": "通过图谱找出金庸作品中由秘籍、兵器或宝物推动冲突的模式，并比较辟邪剑谱、屠龙刀、九阴真经三者的差异。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/笑傲江湖/graph.json",
+        "artifacts/jinyong-v1/works/倚天屠龙记/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 笑傲江湖 --q 辟邪剑谱 --top 10",
+        "search --work 倚天屠龙记 --q 屠龙刀 --top 10",
+        "search --q 九阴真经 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "辟邪剑谱",
+        "屠龙刀",
+        "九阴真经",
+        "争夺",
+        "冲突"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆比较三部秘籍",
+        "没有引用图谱中的具体争夺关系",
+        "忽略九阴真经的跨书出现特点"
+      ]
+    },
+    {
+      "id": "network_role_001",
+      "category": "character_network_role",
+      "difficulty": "medium",
+      "question": "通过图谱找两个不是主角但能算 KOL 的人物，并用图谱数据说明证据。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/global/people.json"
+      ],
+      "suggested_queries": [
+        "top-people --exclude-main --top 20"
+      ],
+      "expected_evidence_signals": [
+        "max_degree",
+        "top_neighbor_samples",
+        "appearance_count"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "选了主角当 KOL",
+        "没有引用 max_degree 或邻居数据",
+        "凭记忆选人不用图谱"
+      ]
+    },
+    {
+      "id": "network_role_002",
+      "category": "character_network_role",
+      "difficulty": "medium",
+      "question": "通过图谱分析《鹿鼎记》中陈近南如何同时连接天地会、郑成功势力和韦小宝三条线。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/鹿鼎记/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 鹿鼎记 --name 陈近南 --top 10",
+        "search --work 鹿鼎记 --q 陈近南 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "陈近南",
+        "天地会",
+        "韦小宝",
+        "总舵主"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲陈近南",
+        "没有引用图谱中的关系网络",
+        "忽略陈近南与韦小宝的师徒关系"
+      ]
+    },
+    {
+      "id": "network_role_003",
+      "category": "character_network_role",
+      "difficulty": "hard",
+      "question": "通过图谱分析《天龙八部》中段誉如何在大理皇族、逍遥派和江湖势力之间起桥接作用。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/天龙八部/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 天龙八部 --name 段誉 --top 12"
+      ],
+      "expected_evidence_signals": [
+        "段誉",
+        "大理国",
+        "北冥神功",
+        "六脉神剑",
+        "萧峰"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲段誉故事",
+        "没有分析图谱中的邻居分布",
+        "忽略段誉武学获得路径的特殊性"
+      ]
+    },
+    {
+      "id": "network_role_004",
+      "category": "character_network_role",
+      "difficulty": "medium",
+      "question": "通过图谱分析《笑傲江湖》中向问天如何作为令狐冲与日月神教之间的桥接人物。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/笑傲江湖/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 笑傲江湖 --name 向问天 --top 10",
+        "relations --work 笑傲江湖 --name 令狐冲 --top 12"
+      ],
+      "expected_evidence_signals": [
+        "向问天",
+        "令狐冲",
+        "任我行",
+        "梅庄",
+        "魔教"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲向问天",
+        "没有引用图谱中的桥接关系",
+        "忽略梅庄救援的关键情节"
+      ]
+    },
+    {
+      "id": "plot_setup_001",
+      "category": "plot_setup",
+      "difficulty": "medium",
+      "question": "通过图谱列出两个经典的吸引读者的情节设定（identity conflict、误认身份、被迫学武等），并说明图谱证据。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/global/people.json",
+        "artifacts/jinyong-v1/works/笑傲江湖/graph.json",
+        "artifacts/jinyong-v1/works/天龙八部/graph.json"
+      ],
+      "suggested_queries": [
+        "person 虚竹",
+        "person 林平之",
+        "search --work 笑傲江湖 --q 自宫 --top 5"
+      ],
+      "expected_evidence_signals": [
+        "林平之",
+        "虚竹",
+        "自宫",
+        "辟邪剑谱",
+        "逍遥派"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲情节",
+        "没有引用图谱中的实体描述",
+        "忽略图谱能提供的结构证据"
+      ]
+    },
+    {
+      "id": "plot_setup_002",
+      "category": "plot_setup",
+      "difficulty": "medium",
+      "question": "通过图谱分析《天龙八部》中'误认身份'这一叙事机制（如阿朱易容、段誉身世错位）如何推动情节。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/天龙八部/graph.json"
+      ],
+      "suggested_queries": [
+        "search --work 天龙八部 --q 易容 --top 10",
+        "person 阿朱",
+        "person 段誉"
+      ],
+      "expected_evidence_signals": [
+        "阿朱",
+        "段誉",
+        "易容",
+        "慕容复",
+        "段延庆"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲阿朱易容",
+        "没有引用图谱中的实体描述",
+        "忽略段誉身世错位的图谱证据"
+      ]
+    },
+    {
+      "id": "plot_setup_003",
+      "category": "plot_setup",
+      "difficulty": "hard",
+      "question": "通过图谱分析《笑傲江湖》中正邪对立框架如何被令狐冲的跨阵营关系所消解。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/笑傲江湖/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 笑傲江湖 --name 令狐冲 --top 12"
+      ],
+      "expected_evidence_signals": [
+        "令狐冲",
+        "魔教",
+        "任盈盈",
+        "恒山派",
+        "田伯光"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲正邪对立",
+        "没有列出令狐冲的跨阵营关系",
+        "把推断写成确定事实"
+      ]
+    },
+    {
+      "id": "plot_setup_004",
+      "category": "plot_setup",
+      "difficulty": "easy",
+      "question": "通过图谱分析《连城诀》中狄云的地点迁移如何伴随人物关系变化。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/连城诀/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 连城诀 --name 狄云 --top 12"
+      ],
+      "expected_evidence_signals": [
+        "狄云",
+        "丁典",
+        "水笙",
+        "雪谷",
+        "description",
+        "时序缺失"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "只凭记忆讲狄云故事",
+        "没有引用图谱中的地点关系",
+        "假设图谱有结构化迁移路径"
+      ]
+    },
+    {
+      "id": "crosswork_review_001",
+      "category": "crosswork_candidate_review",
+      "difficulty": "medium",
+      "question": "韦小宝出现在多部非《鹿鼎记》作品里，通过跨书人物候选层判断哪些是真实引用、哪些是疑似污染。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/global/crosswork_people.json"
+      ],
+      "suggested_queries": [
+        "crosswork 韦小宝"
+      ],
+      "expected_evidence_signals": [
+        "韦小宝",
+        "candidate_kind",
+        "non_home_appearances",
+        "degree"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "把所有跨书出现当事实",
+        "没有引用 degree 或 desc_len 判断强度",
+        "忽略 suggested_action 字段"
+      ]
+    },
+    {
+      "id": "crosswork_review_002",
+      "category": "crosswork_candidate_review",
+      "difficulty": "medium",
+      "question": "郭靖出现在《笑傲江湖》和《飞狐外传》中，通过跨书候选层分析其出现性质。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/global/crosswork_people.json"
+      ],
+      "suggested_queries": [
+        "person 郭靖",
+        "crosswork 郭靖"
+      ],
+      "expected_evidence_signals": [
+        "郭靖",
+        "appearance_count",
+        "source_novels",
+        "degree",
+        "candidate_kind",
+        "suggested_action"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "凭记忆讲郭靖跨书出现",
+        "没有引用 degree=1 的弱出现证据",
+        "把一句话提及当实质共享"
+      ]
+    },
+    {
+      "id": "crosswork_review_003",
+      "category": "crosswork_candidate_review",
+      "difficulty": "hard",
+      "question": "从跨书人物候选层中抽样审查 continuous_work_shared（如程灵素、袁紫衣）和 cross_corpus_suspect（如严家炎）两类，判断哪些应保留、哪些应排除。",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/global/crosswork_people.json"
+      ],
+      "suggested_queries": [
+        "crosswork 程灵素",
+        "crosswork 袁紫衣",
+        "crosswork 严家炎"
+      ],
+      "expected_evidence_signals": [
+        "candidate_kind",
+        "continuous_work_shared",
+        "cross_corpus_suspect",
+        "suggested_action"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "没有区分 candidate_kind 类型",
+        "把 suspect 类当事实处理",
+        "忽略 degree 和 desc_len 的判断价值"
+      ]
+    },
+    {
+      "id": "insufficient_001",
+      "category": "insufficient_evidence_boundary",
+      "difficulty": "medium",
+      "question": "通过图谱能否可靠判断《笑傲江湖》中令狐冲与任盈盈的感情发展有几个关键转折点？为什么？",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/笑傲江湖/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 笑傲江湖 --name 令狐冲 --top 12",
+        "search --work 笑傲江湖 --q 任盈盈 --top 10"
+      ],
+      "expected_evidence_signals": [
+        "令狐冲",
+        "任盈盈",
+        "关系描述",
+        "不确定处"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "硬编转折点数量",
+        "把关系描述当时间线",
+        "不说证据不足"
+      ]
+    },
+    {
+      "id": "insufficient_002",
+      "category": "insufficient_evidence_boundary",
+      "difficulty": "hard",
+      "question": "当前图谱能否可靠回答'金庸小说中哪个人物的命运最悲惨'？为什么不能？如果要回答需要什么额外数据？",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/global/people.json"
+      ],
+      "suggested_queries": [
+        "summary",
+        "top-people --exclude-main --top 20"
+      ],
+      "expected_evidence_signals": [
+        "图谱限制",
+        "主观判断",
+        "需要原文复核",
+        "max_degree",
+        "实体描述"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "硬选一个人物并给出理由",
+        "没有指出图谱的结构性局限",
+        "把模型偏好当图谱能力"
+      ]
+    },
+    {
+      "id": "insufficient_003",
+      "category": "insufficient_evidence_boundary",
+      "difficulty": "medium",
+      "question": "当前图谱能否精确还原《倚天屠龙记》中张无忌从冰火岛到蝴蝶谷到翠谷的完整地理迁移路径？如果不能，缺什么？",
+      "required_artifact_files": [
+        "artifacts/jinyong-v1/works/倚天屠龙记/graph.json"
+      ],
+      "suggested_queries": [
+        "relations --work 倚天屠龙记 --name 张无忌 --top 12",
+        "search --work 倚天屠龙记 --q 冰火岛 --top 5"
+      ],
+      "expected_evidence_signals": [
+        "张无忌",
+        "冰火岛",
+        "蝴蝶谷",
+        "翠谷",
+        "description",
+        "时序缺失"
+      ],
+      "answer_should_include": [
+        "简短结论",
+        "图谱证据",
+        "基于证据的解释",
+        "不确定处"
+      ],
+      "failure_modes": [
+        "凭记忆还原地理路径",
+        "没有指出图谱缺少时间维度和地理坐标",
+        "把关系描述中的地点当精确位置"
+      ]
+    }
+  ]
+}
