@@ -177,7 +177,7 @@ Expected: all tests pass.
 
 **Files:**
 - Runtime outputs under `runs/jinyong/cross/yuenvjian-yuanyangdao-20260508/`
-- Modify: `docs/decisions.md`
+- Modify: `docs/archive/decisions.md`
 
 **Step 1: Run prototype**
 
@@ -207,7 +207,7 @@ Check:
 
 **Step 3: Document decision**
 
-Update `docs/decisions.md` with the prototype status and whether it supports continuing toward “金庸宇宙”.
+Update `docs/archive/decisions.md` with the prototype status and whether it supports continuing toward “金庸宇宙”.
 
 **Step 4: Final verification**
 

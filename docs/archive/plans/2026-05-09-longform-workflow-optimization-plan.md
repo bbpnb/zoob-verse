@@ -75,7 +75,7 @@
 
 **Files:**
 - Runtime outputs under `runs/jinyong/连城诀/...`
-- Modify: `docs/decisions.md`
+- Modify: `docs/archive/decisions.md`
 
 **Steps:**
 1. Generate subgraphs from the existing run:

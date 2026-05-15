@@ -1,38 +1,46 @@
 # zoob-verse
 
-zoob-verse 是一个面向叙事文本的研究与应用工作台。它现在有两条主线：
+zoob-verse 是一个面向叙事文本的研究与应用工作台。
 
-1. **使用层**：把已经形成的数据成果和查询能力封装成稳定入口，例如 `artifacts/jinyong-v1/` 和 `.ai-skills/literary-knowledge-graph/`。这层面向外部 agent、下游应用和普通文学分析问题。
-2. **研究层**：探索如何为文学作品构建图谱、评估模型、控制成本、做后处理和形成方法论。这层包括 `runs/`、`src/`、`docs/research/`、`docs/plans/` 和 `WORKFLOWS.md`。
+它有两件事：
 
-金庸全集图谱是当前最完整的一套成果，但项目目标不局限于金庸，也不局限于图谱。未来可以继续扩展到其他文学作品、其他结构化方法和更具体的应用。
+- **做成果**：把已经整理好的数据和工具变成能直接使用的东西，例如 `artifacts/jinyong-v1/` 和 `.ai-skills/literary-knowledge-graph/`。
+- **做研究**：探索如何分析文学作品，包括建图、模型选择、成本控制、后处理、评测和未来其他作品。
 
-## 先读哪里
+金庸全集图谱是当前最完整的成果，但项目不只为了金庸，也不只限于图谱。
 
-- 想**使用现有金庸图谱成果**：读 [docs/START_HERE_JINYONG.md](docs/START_HERE_JINYONG.md)。
-- 想**让外部 AI agent 使用成果**：读 [.ai-skills/literary-knowledge-graph/SKILL.md](.ai-skills/literary-knowledge-graph/SKILL.md) 和 [artifacts/jinyong-v1/README.md](artifacts/jinyong-v1/README.md)。
-- 想**理解项目整体定位和目录职责**：读 [docs/PROJECT_MAP.md](docs/PROJECT_MAP.md)。
-- 想**重跑、开发或研究方法**：读 [WORKFLOWS.md](WORKFLOWS.md) 和 [PROJECT.md](PROJECT.md)。
+## 只看这几个
 
-## 当前核心成果
+多数时候只需要看：
 
-```text
-artifacts/jinyong-v1/
-```
+- `README.md`：项目入口，也就是本文。
+- `artifacts/jinyong-v1/README.md`：金庸图谱成果怎么用。
+- `.ai-skills/literary-knowledge-graph/SKILL.md`：外部 agent 怎么调用这套成果。
+- `WORKFLOWS.md`：需要重跑、开发、远端任务或模型实验时再看。
 
-这是面向使用者的金庸图谱数据包，包含 15 部作品的主图谱、全局人物索引、跨书候选和查询示例。普通查询和应用原型应优先使用它，而不是直接读取 `runs/`。
+历史过程、计划和研究记录统一放在 `docs/archive/`。它们可以追溯，但不是入口。
 
-```text
-.ai-skills/literary-knowledge-graph/
-```
+## 当前可用成果
 
-这是给外部 agent 安装和调用的 skill。它把 `artifacts/jinyong-v1` 的使用方式、证据边界和查询脚本封装起来，让 Hermes、OpenClaw 等 agent 能用图谱回答问题。
+- `artifacts/jinyong-v1/`：金庸 15 部作品图谱数据包，面向使用者和下游应用。
+- `.ai-skills/literary-knowledge-graph/`：给 Hermes、OpenClaw、Codex 等 agent 使用的 skill。
+- `eval/jinyong_graph_questions.v1.json`：30 题评测集，用来检查 agent 是否真的使用图谱证据。
 
-```text
-eval/jinyong_graph_questions.v1.json
-```
+普通查询、文学分析和应用原型都应该优先使用 `artifacts/jinyong-v1/`，不要直接从 `runs/` 开始。
 
-这是用于评测外部 agent 是否真正会使用图谱证据的 30 题评测集。
+## 目录说明
+
+| 路径 | 用途 |
+|---|---|
+| `artifacts/` | 已整理好的成果包 |
+| `.ai-skills/` | 给外部 agent 安装的 skill |
+| `eval/` | 固定评测题 |
+| `src/` | CLI 和核心代码 |
+| `config/` | 模型配置 |
+| `data/` | 清洗后的输入文本或小样本 |
+| `runs/` | 实验输出和重建来源，不是日常入口 |
+| `docs/archive/` | 历史计划、研究记录和复盘材料 |
+| `scripts/` | 少量工程脚本 |
 
 ## 开发环境
 
@@ -48,9 +56,9 @@ python -m src --help
 python -m src jinyong --help
 ```
 
-## 研究与建图主流程
+## 建图和研究
 
-以下命令用于研究层：建图、查询评估、报告和方法对比。它们可能调用模型并产生费用。只想使用现有成果时，不需要运行这些命令。
+下面命令会调用模型并可能产生费用。只想使用现有成果时，不需要运行它们。
 
 ```bash
 # 构建索引
@@ -75,19 +83,6 @@ python -m src jinyong direct-analyze \
   --novel src/modules/jinyong/data/raw/越女剑.txt \
   --question "阿青的剑术源头和人物动机有什么冷门解读？"
 ```
-
-## 文档入口
-
-- [docs/PROJECT_MAP.md](docs/PROJECT_MAP.md)
-- [docs/START_HERE_JINYONG.md](docs/START_HERE_JINYONG.md)
-- [WORKFLOWS.md](WORKFLOWS.md)
-- [PROJECT.md](PROJECT.md)
-- [ARCHITECTURE.md](ARCHITECTURE.md)
-- [docs/narrative/jinyong-kg-project-retrospective.md](docs/narrative/jinyong-kg-project-retrospective.md)
-- [docs/decisions.md](docs/decisions.md)
-- [docs/plans/](docs/plans/)
-- [docs/research/](docs/research/)
-- [.ai-skills/literary-knowledge-graph/SKILL.md](.ai-skills/literary-knowledge-graph/SKILL.md)
 
 ## 约定
 

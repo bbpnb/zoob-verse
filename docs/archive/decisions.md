@@ -146,12 +146,11 @@
 **决策**：重新收敛仓库文档职责，减少重复与冲突。
 
 **约定**：
-- `README.md`：使用入口
-- `PROJECT.md`：AI Agent 简报
-- `ARCHITECTURE.md`：当前架构说明
-- `docs/decisions.md`：稳定决策记录
-- `docs/plans/`：设计与实施计划
-- `docs/research/`：历史实验和对比报告
+- `README.md`：唯一的项目总入口
+- `WORKFLOWS.md`：重跑、远端任务、模型实验和维护操作手册
+- `artifacts/`：面向使用者和下游应用的成果包
+- `.ai-skills/`：给外部 agent 使用的能力封装
+- `docs/archive/`：历史计划、研究记录和复盘材料
 
 **理由**：
 - 避免多个文档描述同一件事但版本不一致

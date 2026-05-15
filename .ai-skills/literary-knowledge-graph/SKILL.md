@@ -157,7 +157,8 @@ Use graph files to build an evidence pack first. Judge value by:
 
 Only if the user asks to rebuild, rerun, evaluate, or export graph data, read:
 
-- `docs/START_HERE_JINYONG.md`
+- `README.md`
+- `artifacts/jinyong-v1/README.md`
 - `WORKFLOWS.md`
 - `src/modules/jinyong/postprocess.py`
 

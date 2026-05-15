@@ -2003,32 +2003,29 @@ def test_visualize_command_can_write_focus_subgraph(tmp_path):
 
 def test_project_skill_documents_v1_cli_and_dotenv():
     skill = Path(".ai-skills/literary-knowledge-graph/SKILL.md").read_text(encoding="utf-8")
+    workflows = Path("WORKFLOWS.md").read_text(encoding="utf-8")
 
     assert ".env" in skill
-    assert "python -m src jinyong eval" in skill
-    assert "--run-dir runs/jinyong" in skill
-    assert "python -m src jinyong direct-analyze" in skill
-    assert "runs/jinyong" in skill
-    assert "XIAOMIMO_API_KEY" in skill
-    assert "DASHSCOPE_API_KEY" in skill
-    assert "paid" in skill
+    assert "artifacts/jinyong-v1" in skill
+    assert "query_jinyong_graph.py" in skill
+    assert "paid" in skill.lower()
     assert "explicit user confirmation" in skill
-    assert "debug-query" in skill
-    assert "retrieved entities" in skill
-    assert "query model still matters" in skill
-    assert "cross-view" in skill
-    assert "cross-corpus" in skill
+    assert "python -m src jinyong eval" in workflows
+    assert "--run-dir runs/jinyong" in workflows
+    assert "direct-analyze" in workflows
+    assert "runs/jinyong" in workflows
+    assert "cross-view" in workflows
 
 
 def test_project_docs_record_graphrag_boundaries_and_debug_query_need():
-    architecture = Path("ARCHITECTURE.md").read_text(encoding="utf-8")
-    decisions = Path("docs/decisions.md").read_text(encoding="utf-8")
+    readme = Path("README.md").read_text(encoding="utf-8")
+    decisions = Path("docs/archive/decisions.md").read_text(encoding="utf-8")
     skill = Path(".ai-skills/literary-knowledge-graph/SKILL.md").read_text(encoding="utf-8")
 
-    assert "分层研究工作台" in architecture
-    assert "query model still matters" in skill
-    assert "debug-query" in skill
-    assert "retrieved entities" in skill
+    assert "研究与应用工作台" in readme
+    assert "docs/archive/" in readme
+    assert "artifacts/jinyong-v1" in skill
+    assert "graph evidence" in skill
     assert "2026-05-06: GraphRAG 查询机制与 debug-query 需求" in decisions
     assert "不是替代查询阶段 LLM 智力" in decisions
 
@@ -2036,7 +2033,6 @@ def test_project_docs_record_graphrag_boundaries_and_debug_query_need():
 def test_workflow_docs_are_primary_agent_entrypoint():
     workflows = Path("WORKFLOWS.md").read_text(encoding="utf-8")
     readme = Path("README.md").read_text(encoding="utf-8")
-    project = Path("PROJECT.md").read_text(encoding="utf-8")
     skill = Path(".ai-skills/literary-knowledge-graph/SKILL.md").read_text(encoding="utf-8")
 
     assert "标准建图与质检" in workflows
@@ -2048,16 +2044,15 @@ def test_workflow_docs_are_primary_agent_entrypoint():
     assert "--query-profile longform" in workflows
     assert "--disable-physics" in workflows
     assert "WORKFLOWS.md" in readme
-    assert "WORKFLOWS.md" in project
+    assert "artifacts/jinyong-v1/README.md" in readme
     assert "WORKFLOWS.md" in skill
-    assert "clean-text" in skill
-    assert "--query-profile longform" in skill
+    assert "artifacts/jinyong-v1" in skill
+    assert "query_jinyong_graph.py" in skill
 
 
 def test_remote_worker_documentation_and_script_are_present():
     workflows = Path("WORKFLOWS.md").read_text(encoding="utf-8")
-    decisions = Path("docs/decisions.md").read_text(encoding="utf-8")
-    skill = Path(".ai-skills/literary-knowledge-graph/SKILL.md").read_text(encoding="utf-8")
+    decisions = Path("docs/archive/decisions.md").read_text(encoding="utf-8")
     script = Path("scripts/run_remote_index.sh").read_text(encoding="utf-8")
 
     assert "远端 worker" in workflows
@@ -2065,8 +2060,6 @@ def test_remote_worker_documentation_and_script_are_present():
     assert "rsync" in workflows
     assert "远端 worker" in decisions
     assert "root@hk.zoob.work" in decisions
-    assert "screen" in skill
-    assert "root@hk.zoob.work" in skill
     assert "run_remote_index.sh" in script
     assert "normalize-graph" in script
     assert "audit-graph" in script
@@ -2075,7 +2068,7 @@ def test_remote_worker_documentation_and_script_are_present():
 
 
 def test_longform_workflow_decision_is_documented():
-    decisions = Path("docs/decisions.md").read_text(encoding="utf-8")
+    decisions = Path("docs/archive/decisions.md").read_text(encoding="utf-8")
 
     assert "长篇作品工作流优化" in decisions
     assert "clean-text" in decisions

@@ -279,7 +279,7 @@
 
 如果后续有其他 AI agent 接手，建议优先阅读：
 
-1. [docs/decisions.md](/Users/zhenboyuan/code/mine/zoob-verse/docs/decisions.md)
+1. [docs/archive/decisions.md](/Users/zhenboyuan/code/mine/zoob-verse/docs/archive/decisions.md)
 2. [docs/research/2026-05-10-index-model-lessons.md](/Users/zhenboyuan/code/mine/zoob-verse/docs/research/2026-05-10-index-model-lessons.md)
 3. [docs/research/2026-05-11-graph-query-principles.md](/Users/zhenboyuan/code/mine/zoob-verse/docs/research/2026-05-11-graph-query-principles.md)
 4. 本文档

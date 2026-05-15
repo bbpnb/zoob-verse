@@ -47,7 +47,7 @@
 2. `artifacts/jinyong-v1/examples/query_playbook.md`
 3. `artifacts/jinyong-v1/examples/sample_answers.md`
 4. `.ai-skills/literary-knowledge-graph/SKILL.md`
-5. `docs/narrative/jinyong-kg-project-retrospective.md`
+5. `docs/archive/narrative/jinyong-kg-project-retrospective.md`
 
 不要一开始读完整 `runs/`。
 
