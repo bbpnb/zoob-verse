@@ -1,42 +1,37 @@
 # Plans Index
 
-这个目录保存实现计划、整改 brief 和过程任务书。它是施工记录，不是使用入口。
+`docs/plans/` 是施工记录和任务书目录，不是日常使用入口。
 
-如果你只是想使用金庸图谱成果，请看：
+如果你只是想使用当前成果，请先看：
 
+- `docs/PROJECT_MAP.md`
 - `docs/START_HERE_JINYONG.md`
 - `artifacts/jinyong-v1/README.md`
 
-## 当前分类
+## 这里放什么
 
-早期架构与原型：
+这个目录保留以下材料：
 
-- `2026-05-07-layered-workbench-implementation-plan.md`
-- `2026-05-07-narrative-text-kg-layered-workbench-design.md`
-- `2026-05-08-cross-corpus-research-prototype-design.md`
-- `2026-05-08-cross-corpus-research-prototype-implementation-plan.md`
-- `2026-05-09-longform-workflow-optimization-plan.md`
+- 实现计划
+- 整改 brief
+- 学生任务书
+- 过程中的决策草案
 
-金庸后处理规格：
+它们的作用是可追溯，不是让普通使用者逐篇阅读。
 
-- `2026-05-12-jinyong-postprocessing-spec.md`
-- `2026-05-12-jinyong-postprocess-remediation-brief.md`
-- `2026-05-12-jinyong-postprocess-remediation-brief-round2.md`
+## 读到这里就够了
 
-全局人物层整改：
-
-- `2026-05-12-jinyong-global-people-layer-implementation-plan.md`
-- `2026-05-12-jinyong-global-people-layer-remediation-brief-round4.md`
-- `2026-05-12-jinyong-global-people-layer-remediation-brief-round5.md`
-- `2026-05-12-jinyong-global-people-layer-remediation-brief-round6.md`
-- `2026-05-12-jinyong-global-people-layer-remediation-brief-round7.md`
-
-## 保留原则
-
-这些计划文件保留为可追溯证据。日常使用不应该打开它们。
-
-如果要理解这些计划如何沉淀成当前项目形态，请读融合后的复盘：
+如果你想知道这些计划最后沉淀成了什么，直接读：
 
 - `docs/narrative/jinyong-kg-project-retrospective.md`
 
-后续如果要发布教程或复盘，应继续从这些文件提炼，而不是直接展示完整施工记录。
+如果你要继续做新任务，再按需打开具体 plan。不要把这里当成主导航。
+
+## 后续原则
+
+后续新增计划前先问自己两件事：
+
+1. 它是一次性施工记录，还是能沉淀成稳定成果？
+2. 如果能沉淀，能不能写进 `docs/narrative/`、`artifacts/` 或 `eval/`，而不是再加一份平行文档？
+
+能沉淀的，就不要继续扩写零散计划。
